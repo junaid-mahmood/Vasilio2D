@@ -9,6 +9,4 @@ Explore mysterious realms, collect power-ups and coins, and take on powerful bos
 - **Fast-Paced Combat** – Tight, responsive gameplay keeps every fight exciting.  
 - **Made in Godot** – Developed using GDScript for smooth and fluid action.  
 
-Do you have what it takes to conquer the realms?  
-
-Wishlist *Vasilio* now on Steam!  
+![logooo](https://github.com/user-attachments/assets/fae8741e-829f-4cfe-a185-85c56f52217b)
