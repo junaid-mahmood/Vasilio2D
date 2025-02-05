@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://dqxr4u6lnngq5"]
+[gd_scene load_steps=4 format=3 uid="uid://dqxr4u6lnngq5"]
 
 [ext_resource type="Texture2D" uid="uid://c5s2hrlt2ccgm" path="res://Blue.png" id="1_80kio"]
+[ext_resource type="Texture2D" uid="uid://d1ueuvhne7ip0" path="res://playButton.png" id="2_i3cmf"]
+[ext_resource type="Texture2D" uid="uid://bqocr8w08rxqi" path="res://settingsButton.png" id="3_j7sif"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -20,3 +22,46 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_80kio")
 stretch_mode = 1
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 416.0
+offset_top = 51.0
+offset_right = 730.0
+offset_bottom = 188.0
+theme_override_font_sizes/font_size = 100
+text = "Vasilio"
+
+[node name="TextureRect" type="TextureRect" parent="Label"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.216561
+anchor_top = 1.64964
+anchor_right = 0.353503
+anchor_bottom = 2.86861
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_i3cmf")
+expand_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect2" type="TextureRect" parent="Label"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.646497
+anchor_top = 1.75182
+anchor_right = 1.06369
+anchor_bottom = 2.70073
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_j7sif")
+expand_mode = 2
+metadata/_edit_use_anchors_ = true
