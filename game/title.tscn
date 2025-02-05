@@ -1,16 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://dqxr4u6lnngq5"]
+[gd_scene load_steps=5 format=3 uid="uid://dqxr4u6lnngq5"]
 
 [ext_resource type="Texture2D" uid="uid://c5s2hrlt2ccgm" path="res://Blue.png" id="1_80kio"]
+[ext_resource type="Script" path="res://title.gd" id="1_virn3"]
 [ext_resource type="Texture2D" uid="uid://d1ueuvhne7ip0" path="res://playButton.png" id="2_i3cmf"]
 [ext_resource type="Texture2D" uid="uid://bqocr8w08rxqi" path="res://settingsButton.png" id="3_j7sif"]
 
-[node name="Control" type="Control"]
+[node name="title" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_virn3")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 texture_filter = 1
@@ -32,36 +34,31 @@ offset_bottom = 188.0
 theme_override_font_sizes/font_size = 100
 text = "Vasilio"
 
-[node name="TextureRect" type="TextureRect" parent="Label"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = -0.216561
-anchor_top = 1.64964
-anchor_right = 0.353503
-anchor_bottom = 2.86861
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("2_i3cmf")
-expand_mode = 2
-metadata/_edit_use_anchors_ = true
+[node name="settingsButton" type="Button" parent="Label"]
+layout_mode = 0
+offset_left = 150.0
+offset_top = 176.0
+offset_right = 353.0
+offset_bottom = 379.0
+icon = ExtResource("3_j7sif")
+flat = true
+expand_icon = true
 
-[node name="TextureRect2" type="TextureRect" parent="Label"]
+[node name="playButton" type="Button" parent="Label"]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.646497
-anchor_top = 1.75182
-anchor_right = 1.06369
-anchor_bottom = 2.70073
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -296.0
+offset_top = 96.5
+offset_right = -75.0
+offset_bottom = 317.5
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("3_j7sif")
-expand_mode = 2
-metadata/_edit_use_anchors_ = true
+icon = ExtResource("2_i3cmf")
+flat = true
+expand_icon = true
+
+[connection signal="pressed" from="Label/playButton" to="." method="_on_play_button_pressed"]
