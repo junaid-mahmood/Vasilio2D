@@ -1,0 +1,102 @@
+[gd_scene load_steps=19 format=3 uid="uid://cx5teo60mirye"]
+
+[ext_resource type="Script" path="res://scripts/drone_or_smth.gd" id="1_3vtle"]
+[ext_resource type="Shader" path="res://scripts/player_hurt.gdshader" id="1_65r7j"]
+[ext_resource type="Texture2D" uid="uid://cpgvujlnq704b" path="res://assets/sprites/drone2.png" id="2_ccbs0"]
+[ext_resource type="Texture2D" uid="uid://h0tcasjdvre8" path="res://assets/sprites/drone3.png" id="3_xfavv"]
+[ext_resource type="Texture2D" uid="uid://bxithdlql2cdh" path="res://assets/sprites/drone4.png" id="4_1p72t"]
+[ext_resource type="Texture2D" uid="uid://dqr4osee1r060" path="res://assets/sprites/drone5.png" id="6_dhdt4"]
+[ext_resource type="Texture2D" uid="uid://c0y27ncibwjfr" path="res://assets/sprites/drone6.png" id="7_hnm45"]
+[ext_resource type="Texture2D" uid="uid://csvefujmotjx1" path="res://assets/sprites/drone7.png" id="8_dyrgs"]
+[ext_resource type="Texture2D" uid="uid://1e7d2kb28u0g" path="res://assets/sprites/drone8.png" id="9_a2joj"]
+[ext_resource type="Texture2D" uid="uid://bt11cqoc5rn6r" path="res://assets/sprites/drone9.png" id="10_ov30m"]
+[ext_resource type="Texture2D" uid="uid://cjxp5ryvmsfhe" path="res://assets/sprites/drone10.png" id="11_s05qd"]
+[ext_resource type="Texture2D" uid="uid://c7g7sjvb8lr5u" path="res://assets/sprites/drone12.png" id="12_8uh5h"]
+[ext_resource type="Texture2D" uid="uid://qupp473m68yx" path="res://assets/sprites/drone11.png" id="12_ls1yl"]
+[ext_resource type="Texture2D" uid="uid://baxrdxu2wrmn6" path="res://assets/sprites/drone13.png" id="14_85b0d"]
+[ext_resource type="Texture2D" uid="uid://dtls8loyl7b0h" path="res://assets/sprites/drone14.png" id="15_0mjem"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hq3c0"]
+shader = ExtResource("1_65r7j")
+shader_parameter/color = Color(255, 0, 0, 1)
+shader_parameter/amount = 0.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wcssa"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ccbs0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_xfavv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_1p72t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_dhdt4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_hnm45")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_dyrgs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_a2joj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_ov30m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_s05qd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_ov30m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_s05qd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_8uh5h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_ls1yl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_85b0d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_0mjem")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 15.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7spuc"]
+size = Vector2(4, 8)
+
+[node name="drone_or_smth" type="Area2D"]
+collision_layer = 32
+collision_mask = 5
+script = ExtResource("1_3vtle")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_hq3c0")
+sprite_frames = SubResource("SpriteFrames_wcssa")
+animation = &"idle"
+autoplay = "idle"
+frame = 13
+frame_progress = 0.927549
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_7spuc")
+
+[node name="up_down" type="Timer" parent="."]
+
+[node name="shoot" type="Timer" parent="."]
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="shoot" to="." method="_on_shoot_timeout"]

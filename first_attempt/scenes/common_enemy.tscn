@@ -1,0 +1,148 @@
+[gd_scene load_steps=18 format=3 uid="uid://cficuo1lgjbo8"]
+
+[ext_resource type="Script" path="res://scripts/common_enemy.gd" id="1_imwgm"]
+[ext_resource type="Texture2D" uid="uid://dpvmc5l2rm0i0" path="res://assets/sprites/slime_purple.png" id="1_qc86k"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d8j6w"]
+atlas = ExtResource("1_qc86k")
+region = Rect2(48, 48, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gtq6o"]
+atlas = ExtResource("1_qc86k")
+region = Rect2(0, 48, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dhxon"]
+atlas = ExtResource("1_qc86k")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jadml"]
+atlas = ExtResource("1_qc86k")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1jp6t"]
+atlas = ExtResource("1_qc86k")
+region = Rect2(0, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wai1u"]
+atlas = ExtResource("1_qc86k")
+region = Rect2(24, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5h4ax"]
+atlas = ExtResource("1_qc86k")
+region = Rect2(48, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mrtid"]
+atlas = ExtResource("1_qc86k")
+region = Rect2(72, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4uyor"]
+atlas = ExtResource("1_qc86k")
+region = Rect2(0, 48, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_24eyi"]
+atlas = ExtResource("1_qc86k")
+region = Rect2(24, 48, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ep58a"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d8j6w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gtq6o")
+}],
+"loop": true,
+"name": &"hurt",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dhxon")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jadml")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1jp6t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wai1u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5h4ax")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mrtid")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4uyor")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_24eyi")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_voie4"]
+size = Vector2(14, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kiice"]
+size = Vector2(20, 13)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aosuf"]
+size = Vector2(3, 3)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tobye"]
+size = Vector2(3, 3)
+
+[node name="Area2D" type="Area2D"]
+collision_layer = 32
+collision_mask = 5
+script = ExtResource("1_imwgm")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ep58a")
+animation = &"hurt"
+autoplay = "idle"
+frame_progress = 0.182636
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_voie4")
+
+[node name="hurt_timer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="border_area" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="border_area"]
+position = Vector2(0, 3.5)
+shape = SubResource("RectangleShape2D_kiice")
+
+[node name="right_cliff" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="right_cliff"]
+position = Vector2(11, 14)
+shape = SubResource("RectangleShape2D_aosuf")
+
+[node name="left_cliff" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="left_cliff"]
+position = Vector2(-11, 14)
+shape = SubResource("RectangleShape2D_tobye")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="hurt_timer" to="." method="_on_hurt_time_timeout"]
+[connection signal="body_entered" from="border_area" to="." method="_on_border_area_body_entered"]
+[connection signal="body_exited" from="right_cliff" to="." method="_on_right_cliff_body_exited"]
+[connection signal="body_exited" from="left_cliff" to="." method="_on_left_cliff_body_exited"]
