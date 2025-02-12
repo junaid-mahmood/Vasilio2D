@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://bhcliwxojkjp4"
-path="res://.godot/imported/RedBlockDemo-DOeY9.ttf-1ab476388fc3c657e659baf464b564d7.fontdata"
+path="res://.godot/imported/RedBlockDemo-DOeY9.ttf-528f853f679b3cc3186157272b74d936.fontdata"
 
 [deps]
 
-source_file="res://RedBlockDemo-DOeY9.ttf"
-dest_files=["res://.godot/imported/RedBlockDemo-DOeY9.ttf-1ab476388fc3c657e659baf464b564d7.fontdata"]
+source_file="res://assets/RedBlockDemo-DOeY9.ttf"
+dest_files=["res://.godot/imported/RedBlockDemo-DOeY9.ttf-528f853f679b3cc3186157272b74d936.fontdata"]
 
 [params]
 

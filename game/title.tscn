@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://dqxr4u6lnngq5"]
 
-[ext_resource type="Texture2D" uid="uid://c5s2hrlt2ccgm" path="res://Blue.png" id="1_80kio"]
+[ext_resource type="Texture2D" uid="uid://c5s2hrlt2ccgm" path="res://assets/Blue.png" id="1_80kio"]
 [ext_resource type="Script" path="res://title.gd" id="1_virn3"]
-[ext_resource type="Texture2D" uid="uid://d1ueuvhne7ip0" path="res://playButton.png" id="2_i3cmf"]
-[ext_resource type="FontFile" uid="uid://bhcliwxojkjp4" path="res://RedBlockDemo-DOeY9.ttf" id="3_h6hui"]
-[ext_resource type="Texture2D" uid="uid://bqocr8w08rxqi" path="res://settingsButton.png" id="3_j7sif"]
+[ext_resource type="Texture2D" uid="uid://d1ueuvhne7ip0" path="res://assets/playButton.png" id="2_i3cmf"]
+[ext_resource type="FontFile" uid="uid://bhcliwxojkjp4" path="res://assets/RedBlockDemo-DOeY9.ttf" id="3_h6hui"]
+[ext_resource type="Texture2D" uid="uid://bqocr8w08rxqi" path="res://assets/settingsButton.png" id="3_j7sif"]
 
 [node name="title" type="Control"]
 layout_mode = 3
