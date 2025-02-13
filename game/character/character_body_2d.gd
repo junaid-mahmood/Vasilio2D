@@ -3,6 +3,7 @@ extends CharacterBody2D
 signal shoot(pos, bool)
 var facing_right = true
 var coins := 0
+var weapon := true
 
 signal player_pos(pos)
 
@@ -13,6 +14,7 @@ const ACCELERATION = 3000.0
 const FRICTION = 2000.0
 const RECHARGE_RATE := 50.0 
 const SHOOT_COST := 20.0
+const SWORD_COST := 40.0
 const DOUBLE_JUMP_COST := 40.0
 
 @onready var sprite_2d: AnimatedSprite2D = $Sprite2D
@@ -32,12 +34,19 @@ func _physics_process(delta: float) -> void:
 	#check if game ends
 	if health_bar.value <= 0:
 		get_tree().quit()
+		
+	#check if changes weapon
+	if Input.is_action_just_pressed("switch"):
+		weapon = not weapon
+		
 	
 	
 	if progress_bar.value < 100:
 		progress_bar.value = min(progress_bar.value + RECHARGE_RATE * delta, 100)
 	
-	if abs(velocity.x) > 1:
+	if weapon == false:
+		sprite_2d.animation = "sword"
+	elif abs(velocity.x) > 1:
 		sprite_2d.animation = "running"
 	else:
 		sprite_2d.animation = "default"
@@ -59,8 +68,32 @@ func _physics_process(delta: float) -> void:
 			can_double_jump = false  # Prevent additional double jumps until landing
 
 	if Input.is_action_just_pressed("ui_select"):
-		progress_bar.value -= SHOOT_COST
-		shoot.emit(global_position, facing_right)
+		if weapon:
+			progress_bar.value -= SHOOT_COST
+			shoot.emit(global_position, facing_right)
+		else:
+			progress_bar.value -= SWORD_COST
+			sprite_2d.animation = 'sword'
+			var kill_radius: float = 70.0   
+			
+			for node in get_parent().get_children():
+				if node is Area2D and node.has_method("enemy_damage"):
+					var direction = node.global_position - global_position
+					var distance = direction.length()
+					if distance < kill_radius:
+						node.enemy_damage(50)
+			
+			
+			
+			
+
+
+
+
+
+
+
+
 
 	var direction := Input.get_axis("ui_left", "ui_right")
 	if direction != 0:
