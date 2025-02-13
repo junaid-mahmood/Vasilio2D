@@ -13,7 +13,6 @@ func _process(delta: float) -> void:
 	rayCast2D.target_position = dir_to_player * 80
 	rayCast2D.force_raycast_update()
 	var collision_object = rayCast2D.get_collider()
-	print(collision_object)
 	if collision_object == null and can_shoot:
 		enemy_shoot.emit(position, player_position)
 		can_shoot = false
