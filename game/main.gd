@@ -19,6 +19,7 @@ func _on_player_shoot(pos, facing_right):
 
 func _on_enemy_enemy_shoot(pos: Variant, player_pos: Variant) -> void:
 	var bullet = enemy_bullet_scene.instantiate()
+	pos.y -= 20
 	bullet.position = pos
 	var direction: Vector2 = (player_pos - pos).normalized()
 	bullet.velocity = direction * bullet.speed
