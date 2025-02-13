@@ -2,9 +2,10 @@ extends CharacterBody2D
 
 signal shoot(pos, bool)
 var facing_right = true
-
+var coins := 0
 
 signal player_pos(pos)
+
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
@@ -30,7 +31,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	#check if game ends
 	if health_bar.value <= 0:
-		queue_free()
+		get_tree().quit()
 	
 	
 	if progress_bar.value < 100:
@@ -82,7 +83,20 @@ func get_right_direc(direction):
 
 func player_damage(number):
 	health_bar.value -= number
+	var tween = create_tween()
+	tween.tween_property($Sprite2D, "material:shader_parameter/amount", 1.0, 0.1)
+	tween.tween_property($Sprite2D, "material:shader_parameter/amount", 0.0, 0.1)
 
 
 func _on_barrel_explo_damage(num: Variant) -> void:
 	player_damage(num)
+
+
+func coin_collected(num):
+	coins += num
+	$"+1".visible = true
+	$collect.start()
+
+
+func _on_collect_timeout() -> void:
+	$"+1".visible = false

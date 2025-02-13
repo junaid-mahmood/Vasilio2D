@@ -1,9 +1,16 @@
-[gd_scene load_steps=30 format=3 uid="uid://dqqc12rc88x6u"]
+[gd_scene load_steps=33 format=3 uid="uid://dqqc12rc88x6u"]
 
 [ext_resource type="Script" path="res://character/character_body_2d.gd" id="1_jmigi"]
 [ext_resource type="Texture2D" uid="uid://u5jcjlipv0um" path="res://assets/Jump (32x32).png" id="1_tvtrm"]
+[ext_resource type="Shader" path="res://player_hurt.gdshader" id="1_x1ujg"]
 [ext_resource type="Texture2D" uid="uid://cd8vrtukee532" path="res://assets/Idle (32x32).png" id="2_082ih"]
 [ext_resource type="Texture2D" uid="uid://xyur7cni8u7u" path="res://assets/Run (32x32).png" id="4_nfqut"]
+[ext_resource type="Texture2D" uid="uid://d2pqry6lxk8uh" path="res://assets/+1.png" id="5_xli75"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2gcdb"]
+shader = ExtResource("1_x1ujg")
+shader_parameter/color = Color(255, 0, 0, 1)
+shader_parameter/amount = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i75h1"]
 atlas = ExtResource("2_082ih")
@@ -194,11 +201,12 @@ height = 23.0
 [node name="CharacterBody2D" type="CharacterBody2D"]
 scale = Vector2(2, 2)
 collision_layer = 8
-collision_mask = 22
+collision_mask = 86
 script = ExtResource("1_jmigi")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
+material = SubResource("ShaderMaterial_2gcdb")
 position = Vector2(0, -10)
 scale = Vector2(0.71875, 0.765625)
 sprite_frames = SubResource("SpriteFrames_vnnyk")
@@ -211,3 +219,13 @@ position = Vector2(0, -9.5)
 shape = SubResource("CapsuleShape2D_tlywo")
 one_way_collision_margin = 0.0
 debug_color = Color(0.507274, 0.578912, 0, 0.42)
+
+[node name="+1" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(12.5, -23)
+scale = Vector2(0.556, 0.5)
+texture = ExtResource("5_xli75")
+
+[node name="collect" type="Timer" parent="."]
+
+[connection signal="timeout" from="collect" to="." method="_on_collect_timeout"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://bm2qaccjcy00b"]
+[gd_scene load_steps=13 format=4 uid="uid://bm2qaccjcy00b"]
 
 [ext_resource type="Texture2D" uid="uid://c5s2hrlt2ccgm" path="res://assets/Blue.png" id="1_4fmb2"]
 [ext_resource type="Script" path="res://main.gd" id="1_f8jqy"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://health_bar.gd" id="5_rhnuf"]
 [ext_resource type="PackedScene" uid="uid://8sco8kh0fk4w" path="res://enemy/enemy.tscn" id="8_cwafa"]
 [ext_resource type="PackedScene" uid="uid://cdkr5ypexve51" path="res://barrel/impasible.tscn" id="8_ln4fk"]
+[ext_resource type="PackedScene" uid="uid://caqfcrf27ytkv" path="res://coin/coin.tscn" id="10_4x0mx"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rkc28"]
 texture = ExtResource("2_i5v1g")
@@ -236,11 +237,11 @@ script = ExtResource("5_rhnuf")
 [node name="enemy" parent="." instance=ExtResource("8_cwafa")]
 position = Vector2(690, 378)
 
-[node name="StaticBody2D" parent="." instance=ExtResource("8_ln4fk")]
-position = Vector2(1041, 432)
+[node name="barrel" parent="." instance=ExtResource("4_5bejk")]
+position = Vector2(1042, 432)
 
-[node name="barrel" parent="StaticBody2D" instance=ExtResource("4_5bejk")]
-position = Vector2(1, 0)
+[node name="StaticBody2D" parent="." instance=ExtResource("8_ln4fk")]
+position = Vector2(1042, 432)
 
 [node name="Bullets" type="Node2D" parent="."]
 
@@ -253,8 +254,11 @@ scale = Vector2(0.5, 0.5)
 position_smoothing_enabled = true
 position_smoothing_speed = 20.0
 
+[node name="Area2D" parent="." instance=ExtResource("10_4x0mx")]
+position = Vector2(336, 459)
+
 [connection signal="enemy_shoot" from="enemy" to="." method="_on_enemy_enemy_shoot"]
-[connection signal="explo_damage" from="StaticBody2D/barrel" to="CharacterBody2D" method="_on_barrel_explo_damage"]
+[connection signal="explo_damage" from="barrel" to="CharacterBody2D" method="_on_barrel_explo_damage"]
 [connection signal="player_pos" from="CharacterBody2D" to="." method="_on_character_body_2d_player_pos"]
 [connection signal="player_pos" from="CharacterBody2D" to="enemy" method="_on_character_body_2d_player_pos"]
 [connection signal="shoot" from="CharacterBody2D" to="." method="_on_player_shoot"]

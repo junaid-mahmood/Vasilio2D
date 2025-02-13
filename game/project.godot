@@ -57,6 +57,8 @@ ui_down={
 2d_physics/layer_4="player"
 2d_physics/layer_5="wall"
 2d_physics/layer_6="enemy_bullet"
+2d_physics/layer_7="coin"
+2d_physics/layer_8="enemy"
 
 [rendering]
 
