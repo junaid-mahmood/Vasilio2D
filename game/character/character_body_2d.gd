@@ -1,5 +1,11 @@
 extends CharacterBody2D
 
+signal shoot(pos, bool)
+var facing_right = true
+
+
+signal player_pos(pos)
+
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 const ACCELERATION = 3000.0
@@ -21,7 +27,7 @@ func _ready() -> void:
 func shoot_particles() -> void:
 	if progress_bar.value >= SHOOT_COST and particles:
 		progress_bar.value -= SHOOT_COST
-		particles.position = sprite_2d.position + Vector2(0, -16)
+		particles.position = sprite_2d.position + Vector2(0, 0)
 		particles.direction = Vector2(-1, 0) if sprite_2d.flip_h else Vector2(1, 0)
 		particles.restart()
 		particles.emitting = true
@@ -52,7 +58,8 @@ func _physics_process(delta: float) -> void:
 			can_double_jump = false  # Prevent additional double jumps until landing
 
 	if Input.is_action_just_pressed("ui_select"):
-		shoot_particles()
+		progress_bar.value -= SHOOT_COST
+		shoot.emit(global_position, facing_right)
 
 	var direction := Input.get_axis("ui_left", "ui_right")
 	if direction != 0:
@@ -62,6 +69,17 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, FRICTION * delta)
 	move_and_slide()
+	get_right_direc(direction)
 	
 	if velocity.x != 0:
 		sprite_2d.flip_h = velocity.x < 0
+		
+	emit_signal("player_pos", position)
+		
+func get_right_direc(direction):
+	if direction != 0:
+		facing_right = direction >= 0
+
+func player_damage(number):
+	print('damage')
+	pass
