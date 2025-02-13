@@ -16,23 +16,23 @@ const DOUBLE_JUMP_COST := 40.0
 
 @onready var sprite_2d: AnimatedSprite2D = $Sprite2D
 @onready var progress_bar: ProgressBar = get_node("../CanvasLayer/JumpBar")
-@onready var particles: CPUParticles2D = $CPUParticles2D
+@onready var health_bar: ProgressBar = get_node("../CanvasLayer/HealthBar")
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var can_double_jump := false  # New variable to track double jump availability
 
 func _ready() -> void:
 	progress_bar.max_value = 100
 	progress_bar.value = 100
+	health_bar.max_value = 100
+	health_bar.value = 100
 
-func shoot_particles() -> void:
-	if progress_bar.value >= SHOOT_COST and particles:
-		progress_bar.value -= SHOOT_COST
-		particles.position = sprite_2d.position + Vector2(0, 0)
-		particles.direction = Vector2(-1, 0) if sprite_2d.flip_h else Vector2(1, 0)
-		particles.restart()
-		particles.emitting = true
 
 func _physics_process(delta: float) -> void:
+	#check if game ends
+	if health_bar.value <= 0:
+		queue_free()
+	
+	
 	if progress_bar.value < 100:
 		progress_bar.value = min(progress_bar.value + RECHARGE_RATE * delta, 100)
 	
@@ -81,5 +81,8 @@ func get_right_direc(direction):
 		facing_right = direction >= 0
 
 func player_damage(number):
-	print('damage')
-	pass
+	health_bar.value -= number
+
+
+func _on_barrel_explo_damage(num: Variant) -> void:
+	player_damage(num)

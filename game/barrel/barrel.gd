@@ -4,7 +4,7 @@ extends Area2D
 
 var damage := 0
 
-signal explo_damage(int)
+signal explo_damage(num)
 
 func _on_area_entered(area: Area2D) -> void:
 	area.queue_free()
@@ -43,11 +43,11 @@ func apply_explosion_impulse():
 		elif node is CharacterBody2D:
 			var direction = node.global_position - global_position
 			var distance = direction.length()
-			if distance < 20:
+			if distance < 60:
 				emit_signal("explo_damage", 200)
-			elif distance < 25:
+			elif distance < 90:
 				emit_signal("explo_damage", 99)
-			elif distance < 30:
+			elif distance < 110:
 				emit_signal("explo_damage", 60)
-			elif distance < 50:
+			elif distance < 140:
 				emit_signal("explo_damage", 40)

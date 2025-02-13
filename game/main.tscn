@@ -252,4 +252,5 @@ position = Vector2(690, 378)
 [connection signal="player_pos" from="CharacterBody2D" to="." method="_on_character_body_2d_player_pos"]
 [connection signal="player_pos" from="CharacterBody2D" to="enemy" method="_on_character_body_2d_player_pos"]
 [connection signal="shoot" from="CharacterBody2D" to="." method="_on_player_shoot"]
+[connection signal="explo_damage" from="barrel" to="CharacterBody2D" method="_on_barrel_explo_damage"]
 [connection signal="enemy_shoot" from="enemy" to="." method="_on_enemy_enemy_shoot"]
