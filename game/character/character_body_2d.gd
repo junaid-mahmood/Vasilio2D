@@ -6,7 +6,7 @@ var coins := 0
 var weapon := true
 
 signal player_pos(pos)
-
+signal new_coin(coins)
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
@@ -82,10 +82,6 @@ func _physics_process(delta: float) -> void:
 					var distance = direction.length()
 					if distance < kill_radius:
 						node.enemy_damage(50)
-			
-			
-			
-			
 
 
 
@@ -127,6 +123,7 @@ func _on_barrel_explo_damage(num: Variant) -> void:
 
 func coin_collected(num):
 	coins += num
+	emit_signal("new_coin", coins)
 	$"+1".visible = true
 	$collect.start()
 

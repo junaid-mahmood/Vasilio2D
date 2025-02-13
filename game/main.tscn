@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://bm2qaccjcy00b"]
+[gd_scene load_steps=14 format=4 uid="uid://bm2qaccjcy00b"]
 
 [ext_resource type="Texture2D" uid="uid://c5s2hrlt2ccgm" path="res://assets/Blue.png" id="1_4fmb2"]
 [ext_resource type="Script" path="res://main.gd" id="1_f8jqy"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://buq6m0boebfrh" path="res://barrel/barrel.tscn" id="4_5bejk"]
 [ext_resource type="Script" path="res://jump_bar.gd" id="4_l3lgs"]
 [ext_resource type="Script" path="res://health_bar.gd" id="5_rhnuf"]
+[ext_resource type="PackedScene" uid="uid://copjurvsoieqm" path="res://coin/coinui.tscn" id="6_j4v6r"]
 [ext_resource type="PackedScene" uid="uid://8sco8kh0fk4w" path="res://enemy/enemy.tscn" id="8_cwafa"]
 [ext_resource type="PackedScene" uid="uid://cdkr5ypexve51" path="res://barrel/impasible.tscn" id="8_ln4fk"]
 [ext_resource type="PackedScene" uid="uid://caqfcrf27ytkv" path="res://coin/coin.tscn" id="10_4x0mx"]
@@ -254,11 +255,20 @@ scale = Vector2(0.5, 0.5)
 position_smoothing_enabled = true
 position_smoothing_speed = 20.0
 
-[node name="Area2D" parent="." instance=ExtResource("10_4x0mx")]
+[node name="CanvasLayer" type="CanvasLayer" parent="CharacterBody2D"]
+
+[node name="coinui" parent="CharacterBody2D/CanvasLayer" instance=ExtResource("6_j4v6r")]
+offset_left = 980.0
+offset_top = 112.0
+offset_right = 1020.0
+offset_bottom = 150.0
+
+[node name="Coin" parent="." instance=ExtResource("10_4x0mx")]
 position = Vector2(336, 459)
 
 [connection signal="enemy_shoot" from="enemy" to="." method="_on_enemy_enemy_shoot"]
 [connection signal="explo_damage" from="barrel" to="CharacterBody2D" method="_on_barrel_explo_damage"]
+[connection signal="new_coin" from="CharacterBody2D" to="CharacterBody2D/CanvasLayer/coinui" method="_on_character_body_2d_new_coin"]
 [connection signal="player_pos" from="CharacterBody2D" to="." method="_on_character_body_2d_player_pos"]
 [connection signal="player_pos" from="CharacterBody2D" to="enemy" method="_on_character_body_2d_player_pos"]
 [connection signal="shoot" from="CharacterBody2D" to="." method="_on_player_shoot"]

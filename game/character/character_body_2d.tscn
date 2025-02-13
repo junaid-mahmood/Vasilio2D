@@ -246,7 +246,7 @@ scale = Vector2(0.71875, 0.765625)
 sprite_frames = SubResource("SpriteFrames_vnnyk")
 animation = &"sword"
 autoplay = "default"
-frame_progress = 0.71464
+frame_progress = 0.528826
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -9.5)
