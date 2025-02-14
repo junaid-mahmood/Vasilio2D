@@ -3,15 +3,12 @@ extends CharacterBody2D
 signal shoot(pos, bool)
 var facing_right = true
 var coins := 0
-var weapon = 1
-var can_shoot := true
-var has_gun = false
-var bow_ani = false
+#var weapon := true
+
 
 
 signal player_pos(pos)
 signal new_coin(coins)
-signal shoot_bow(pos, facing_right)
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
@@ -42,26 +39,15 @@ func _physics_process(delta: float) -> void:
 		
 	#check if changes weapon
 	if Input.is_action_just_pressed("switch"):
-		if weapon == 1:
-			weapon = 2
-		elif weapon == 2:
-			weapon = 3
-		elif weapon == 3:
-			weapon = 1
-			
-		if weapon == 3 and !has_gun:
-			weapon = 1
+		Global.weapon = not Global.weapon
 		
 	
 	
 	if progress_bar.value < 100:
 		progress_bar.value = min(progress_bar.value + RECHARGE_RATE * delta, 100)
-	if bow_ani:
-		sprite_2d.animation = "bow_shoot"
-	elif weapon == 2:
+	
+	if Global.weapon == false:
 		sprite_2d.animation = "sword"
-	elif weapon == 3:
-		sprite_2d.animation = "bow"
 	elif abs(velocity.x) > 1:
 		sprite_2d.animation = "running"
 	else:
@@ -84,30 +70,27 @@ func _physics_process(delta: float) -> void:
 			can_double_jump = false  # Prevent additional double jumps until landing
 
 	if Input.is_action_just_pressed("ui_select"):
-		if weapon == 1 and can_shoot:
+		if Global.weapon:
 			progress_bar.value -= SHOOT_COST
 			shoot.emit(global_position, facing_right)
-			can_shoot = false
-			$shot.start()
-		elif weapon == 2:
-			#sword
+		else:
 			progress_bar.value -= SWORD_COST
 			sprite_2d.animation = 'sword'
 			var kill_radius: float = 70.0   
+			
 			for node in get_parent().get_children():
 				if node is Area2D and node.has_method("enemy_damage"):
 					var direction = node.global_position - global_position
 					var distance = direction.length()
 					if distance < kill_radius:
-						node.enemy_damage(60)
-		elif weapon == 3 and can_shoot:
-			progress_bar.value -= 40
-			$bow_delay.start()
-			can_shoot = false
-			$shot.start()
-			$bow_shot_ani.start()
-			bow_ani = true
-			
+						node.enemy_damage(50)
+
+
+
+
+
+
+
 
 
 	var direction := Input.get_axis("ui_left", "ui_right")
@@ -136,6 +119,9 @@ func player_damage(number):
 	tween.tween_property($Sprite2D, "material:shader_parameter/amount", 0.0, 0.1)
 
 
+func _on_barrel_explo_damage(num: Variant) -> void:
+	player_damage(num)
+
 
 func coin_collected(num):
 	coins += num
@@ -146,38 +132,3 @@ func coin_collected(num):
 
 func _on_collect_timeout() -> void:
 	$"+1".visible = false
-
-
-
-
-
-func _on_shot_timeout() -> void:
-	can_shoot = true
-
-
-#barrel damage
-func _on_barrel_2_explo_damage(num: Variant) -> void:
-	player_damage(num)
-
-func _on_barrel_3_explo_damage(num: Variant) -> void:
-	player_damage(num)
-
-func _on_barrel_4_explo_damage(num: Variant) -> void:
-	player_damage(num)
-
-func _on_barrel_5_explo_damage(num: Variant) -> void:
-	player_damage(num)
-
-func _on_barrel_6_explo_damage(num: Variant) -> void:
-	player_damage(num)
-
-func _on_barrel_explo_damage(num: Variant) -> void:
-	player_damage(num)
-
-
-func _on_bow_shot_ani_timeout() -> void:
-	bow_ani = false
-	
-
-func _on_bow_delay_timeout() -> void:
-	shoot_bow.emit(global_position, facing_right)
