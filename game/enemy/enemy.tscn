@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://8sco8kh0fk4w"]
+[gd_scene load_steps=9 format=3 uid="uid://8sco8kh0fk4w"]
 
 [ext_resource type="Script" path="res://enemy/enemy.gd" id="1_alyje"]
 [ext_resource type="Shader" path="res://player_hurt.gdshader" id="2_78o4u"]
 [ext_resource type="Texture2D" uid="uid://u5jcjlipv0um" path="res://assets/Jump (32x32).png" id="2_el7aq"]
+[ext_resource type="Script" path="res://enemy/left_ray_climb.gd" id="4_esxiu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1iufc"]
 shader = ExtResource("2_78o4u")
@@ -48,11 +49,12 @@ shape = SubResource("RectangleShape2D_t2rb7")
 
 [node name="right_ray_climb" type="RayCast2D" parent="."]
 target_position = Vector2(11, 0)
-collision_mask = 16
+collision_mask = 8
 
 [node name="left_ray_climb" type="RayCast2D" parent="."]
 target_position = Vector2(-10, 0)
-collision_mask = 16
+collision_mask = 8
+script = ExtResource("4_esxiu")
 
 [node name="ray_shoot" type="RayCast2D" parent="."]
 collision_mask = 22
@@ -61,5 +63,6 @@ script = SubResource("GDScript_l025t")
 [node name="shoot" type="Timer" parent="."]
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="left_climb" from="left_ray_climb" to="." method="_on_left_ray_climb_left_climb"]
 [connection signal="is_smth_on_path" from="ray_shoot" to="." method="_on_ray_shoot_is_smth_on_path"]
 [connection signal="timeout" from="shoot" to="." method="_on_shoot_timeout"]

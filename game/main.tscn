@@ -241,7 +241,7 @@ position = Vector2(690, 378)
 [node name="barrel" parent="." instance=ExtResource("4_5bejk")]
 position = Vector2(1042, 432)
 
-[node name="StaticBody2D" parent="." instance=ExtResource("8_ln4fk")]
+[node name="rigiddbody" parent="." instance=ExtResource("8_ln4fk")]
 position = Vector2(1042, 432)
 
 [node name="Bullets" type="Node2D" parent="."]

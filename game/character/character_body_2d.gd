@@ -5,6 +5,8 @@ var facing_right = true
 var coins := 0
 var weapon := true
 
+
+
 signal player_pos(pos)
 signal new_coin(coins)
 
