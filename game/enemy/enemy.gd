@@ -47,20 +47,5 @@ func _on_area_entered(area: Area2D) -> void:
 
 
 func _on_left_ray_climb_left_climb(nope: Variant, if_is: Variant) -> void:
-	var if_is_climbing = {
-		0: true,
-		1: true
-	}
-	if_is = int(if_is)
 
-	if if_is == 0 or if_is == 1:
-		if_is_climbing[if_is] = nope
-	
-	var climbing = false
-	for value in if_is_climbing.values():
-		if value:
-			climbing = true
-			break
-	print(if_is_climbing)
-	
 	
