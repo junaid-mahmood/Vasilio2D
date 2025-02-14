@@ -26,7 +26,7 @@ signal is_smth_on_path(bool)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	if is_colliding():
 		emit_signal(\"is_smth_on_path\", true)
 	else:
@@ -35,7 +35,6 @@ func _process(_delta: float) -> void:
 
 [node name="enemy" type="Area2D"]
 material = SubResource("ShaderMaterial_1iufc")
-scale = Vector2(1.3, 1.3)
 collision_layer = 128
 collision_mask = 20
 script = ExtResource("1_alyje")
@@ -50,14 +49,12 @@ position = Vector2(0.5, -14)
 shape = SubResource("RectangleShape2D_t2rb7")
 
 [node name="right_ray_climb" type="RayCast2D" parent="."]
-position = Vector2(0, -2)
-target_position = Vector2(13, 0)
+target_position = Vector2(11, 0)
 collision_mask = 16
 script = ExtResource("4_rb17k")
 
 [node name="left_ray_climb" type="RayCast2D" parent="."]
-position = Vector2(0, -2)
-target_position = Vector2(-12, 0)
+target_position = Vector2(-10, 0)
 collision_mask = 16
 script = ExtResource("4_esxiu")
 
@@ -67,13 +64,8 @@ script = SubResource("GDScript_l025t")
 
 [node name="shoot" type="Timer" parent="."]
 
-[node name="bow_shot_ani" type="Timer" parent="."]
-wait_time = 0.5
-
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="right_climb" from="right_ray_climb" to="." method="_on_right_ray_climb_right_climb"]
 [connection signal="left_climb" from="left_ray_climb" to="." method="_on_left_ray_climb_left_climb"]
 [connection signal="is_smth_on_path" from="ray_shoot" to="." method="_on_ray_shoot_is_smth_on_path"]
 [connection signal="timeout" from="shoot" to="." method="_on_shoot_timeout"]
-[connection signal="timeout" from="bow_shot_ani" to="." method="_on_bow_shot_ani_timeout"]

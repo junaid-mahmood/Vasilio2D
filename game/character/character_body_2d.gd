@@ -3,7 +3,9 @@ extends CharacterBody2D
 signal shoot(pos, bool)
 var facing_right = true
 var coins := 0
-var weapon := true
+#var weapon := true
+var is_invulnerable := false
+const INVULNERABILITY_TIME := 1.0
 
 
 
@@ -35,18 +37,18 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	#check if game ends
 	if health_bar.value <= 0:
-		get_tree().quit()
+		game_over()
 		
 	#check if changes weapon
 	if Input.is_action_just_pressed("switch"):
-		weapon = not weapon
+		Global.weapon = not Global.weapon
 		
 	
 	
 	if progress_bar.value < 100:
 		progress_bar.value = min(progress_bar.value + RECHARGE_RATE * delta, 100)
 	
-	if weapon == false:
+	if Global.weapon == false:
 		sprite_2d.animation = "sword"
 	elif abs(velocity.x) > 1:
 		sprite_2d.animation = "running"
@@ -70,7 +72,7 @@ func _physics_process(delta: float) -> void:
 			can_double_jump = false  # Prevent additional double jumps until landing
 
 	if Input.is_action_just_pressed("ui_select"):
-		if weapon:
+		if Global.weapon:
 			progress_bar.value -= SHOOT_COST
 			shoot.emit(global_position, facing_right)
 		else:
@@ -113,10 +115,21 @@ func get_right_direc(direction):
 		facing_right = direction >= 0
 
 func player_damage(number):
+	if is_invulnerable:
+		return
 	health_bar.value -= number
 	var tween = create_tween()
 	tween.tween_property($Sprite2D, "material:shader_parameter/amount", 1.0, 0.1)
 	tween.tween_property($Sprite2D, "material:shader_parameter/amount", 0.0, 0.1)
+		
+	is_invulnerable = true
+	await get_tree().create_timer(INVULNERABILITY_TIME).timeout
+	is_invulnerable = false
+
+
+func game_over() -> void:
+	print("Game Over!")
+	get_tree().reload_current_scene()
 
 
 func _on_barrel_explo_damage(num: Variant) -> void:
