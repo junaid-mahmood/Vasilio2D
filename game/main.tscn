@@ -1,11 +1,11 @@
 [gd_scene load_steps=9 format=4 uid="uid://bm2qaccjcy00b"]
 
-[ext_resource type="Texture2D" uid="uid://c5s2hrlt2ccgm" path="res://Blue.png" id="1_4fmb2"]
-[ext_resource type="Texture2D" uid="uid://dpjfl8jiimvx3" path="res://Terrain (16x16).png" id="2_i5v1g"]
+[ext_resource type="Texture2D" uid="uid://c5s2hrlt2ccgm" path="res://assets/Blue.png" id="1_4fmb2"]
+[ext_resource type="Texture2D" uid="uid://dpjfl8jiimvx3" path="res://assets/Terrain (16x16).png" id="2_i5v1g"]
 [ext_resource type="PackedScene" uid="uid://dqqc12rc88x6u" path="res://character/character_body_2d.tscn" id="3_tac4o"]
 [ext_resource type="Script" path="res://jump_bar.gd" id="4_l3lgs"]
 [ext_resource type="Script" path="res://health_bar.gd" id="5_rhnuf"]
-[ext_resource type="PackedScene" uid="uid://hfwkr20fkan5" path="res://Enemy/enemy.tscn" id="6_sdhad"]
+[ext_resource type="PackedScene" uid="uid://hfwkr20fkan5" path="res://enemy/enemy.tscn" id="6_sdhad"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rkc28"]
 texture = ExtResource("2_i5v1g")

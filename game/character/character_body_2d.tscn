@@ -1,9 +1,9 @@
 [gd_scene load_steps=32 format=3 uid="uid://dqqc12rc88x6u"]
 
 [ext_resource type="Script" path="res://character/player.gd" id="1_ioup7"]
-[ext_resource type="Texture2D" uid="uid://u5jcjlipv0um" path="res://Jump (32x32).png" id="1_tvtrm"]
-[ext_resource type="Texture2D" uid="uid://cd8vrtukee532" path="res://Idle (32x32).png" id="2_082ih"]
-[ext_resource type="Texture2D" uid="uid://xyur7cni8u7u" path="res://Run (32x32).png" id="4_nfqut"]
+[ext_resource type="Texture2D" uid="uid://u5jcjlipv0um" path="res://assets/Jump (32x32).png" id="1_tvtrm"]
+[ext_resource type="Texture2D" uid="uid://cd8vrtukee532" path="res://assets/Idle (32x32).png" id="2_082ih"]
+[ext_resource type="Texture2D" uid="uid://xyur7cni8u7u" path="res://assets/Run (32x32).png" id="4_nfqut"]
 [ext_resource type="Script" path="res://character/cpu_player.gd" id="5_ncqmj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i75h1"]

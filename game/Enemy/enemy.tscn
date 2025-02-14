@@ -1,12 +1,12 @@
 [gd_scene load_steps=66 format=3 uid="uid://hfwkr20fkan5"]
 
-[ext_resource type="Script" path="res://Enemy/enemy.gd" id="2_0aei0"]
-[ext_resource type="Texture2D" uid="uid://6gpqnejur0qj" path="res://Enemy/attack.png" id="2_o5qeq"]
-[ext_resource type="Script" path="res://Enemy/cpu_enemy.gd" id="3_q0uyu"]
-[ext_resource type="Texture2D" uid="uid://u4yelrfsfuh3" path="res://Enemy/death.png" id="3_u52hl"]
-[ext_resource type="Texture2D" uid="uid://bcn7wjbh0a08f" path="res://Enemy/EnemyIdle.png" id="3_v0aem"]
-[ext_resource type="Texture2D" uid="uid://dflm7lleeu3vd" path="res://Enemy/hurt.png" id="4_a6axg"]
-[ext_resource type="Texture2D" uid="uid://wgtppxcxw4jr" path="res://Enemy/run.png" id="6_enve8"]
+[ext_resource type="Script" path="res://enemy/enemy.gd" id="2_0aei0"]
+[ext_resource type="Texture2D" uid="uid://6gpqnejur0qj" path="res://enemy/attack.png" id="2_o5qeq"]
+[ext_resource type="Script" path="res://enemy/cpu_enemy.gd" id="3_q0uyu"]
+[ext_resource type="Texture2D" uid="uid://u4yelrfsfuh3" path="res://enemy/death.png" id="3_u52hl"]
+[ext_resource type="Texture2D" uid="uid://bcn7wjbh0a08f" path="res://enemy/EnemyIdle.png" id="3_v0aem"]
+[ext_resource type="Texture2D" uid="uid://dflm7lleeu3vd" path="res://enemy/hurt.png" id="4_a6axg"]
+[ext_resource type="Texture2D" uid="uid://wgtppxcxw4jr" path="res://enemy/run.png" id="6_enve8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mldmq"]
 atlas = ExtResource("2_o5qeq")
