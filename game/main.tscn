@@ -1,18 +1,24 @@
+
 [gd_scene load_steps=22 format=4 uid="uid://bm2qaccjcy00b"]
 
 
 [ext_resource type="Texture2D" uid="uid://c5s2hrlt2ccgm" path="res://Blue.png" id="1_4fmb2"]
 [ext_resource type="Texture2D" uid="uid://dpjfl8jiimvx3" path="res://Terrain (16x16).png" id="2_i5v1g"]
 [ext_resource type="Texture2D" uid="uid://cbkql87n3ipnc" path="res://block.png" id="3_scnf6"]
+
+
 [ext_resource type="PackedScene" uid="uid://dqqc12rc88x6u" path="res://character/character_body_2d.tscn" id="3_tac4o"]
+[ext_resource type="PackedScene" uid="uid://buq6m0boebfrh" path="res://barrel/barrel.tscn" id="4_5bejk"]
 [ext_resource type="Script" path="res://jump_bar.gd" id="4_l3lgs"]
 [ext_resource type="Texture2D" uid="uid://c25ogtxetuxo0" path="res://chain.png" id="4_pl1md"]
 [ext_resource type="Texture2D" uid="uid://dy7twkmy73820" path="res://platform_large.png" id="5_hd58f"]
 [ext_resource type="Script" path="res://health_bar.gd" id="5_rhnuf"]
+
 [ext_resource type="Texture2D" uid="uid://dd7d5m6dqgylc" path="res://platform_small.png" id="6_nfxbb"]
 [ext_resource type="Texture2D" uid="uid://chsu6xkaf2md8" path="res://torch.png" id="7_cijpc"]
 [ext_resource type="Texture2D" uid="uid://dwgsl6gwrmxpa" path="res://torch_backgound.png" id="8_h83iy"]
 [ext_resource type="Texture2D" uid="uid://bpr60nwsbbsqs" path="res://tilemap.png" id="9_hnuy7"]
+
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rkc28"]
 texture = ExtResource("2_i5v1g")
@@ -23,7 +29,9 @@ texture = ExtResource("2_i5v1g")
 2:0/0 = 0
 2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 3:0/0 = 0
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 4:0/0 = 0
+4:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 6:0/0 = 0
 7:0/0 = 0
 8:0/0 = 0
@@ -39,10 +47,13 @@ texture = ExtResource("2_i5v1g")
 0:1/0 = 0
 0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 2:1/0 = 0
 2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 3:1/0 = 0
+3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 4:1/0 = 0
+4:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 6:1/0 = 0
 7:1/0 = 0
 8:1/0 = 0
@@ -270,7 +281,9 @@ texture_region_size = Vector2i(32, 32)
 2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16.2812, -16, 15.9961, -16.0469, 16.1562, 4.9375, -16.0938, 5)
 
 [sub_resource type="TileSet" id="TileSet_c5u5g"]
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 25
+physics_layer_0/collision_mask = 31
+physics_layer_1/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_rkc28")
 sources/1 = SubResource("TileSetAtlasSource_rumvp")
 sources/2 = SubResource("TileSetAtlasSource_nf75j")
@@ -280,7 +293,8 @@ sources/5 = SubResource("TileSetAtlasSource_fo3t5")
 sources/6 = SubResource("TileSetAtlasSource_kkd0k")
 sources/7 = SubResource("TileSetAtlasSource_253kd")
 
-[node name="Node" type="Node"]
+[node name="Node" type="Node2D"]
+script = ExtResource("1_f8jqy")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 texture_filter = 1
@@ -305,15 +319,6 @@ use_parent_material = true
 scale = Vector2(2, 2)
 tile_map_data = PackedByteArray("AAAAABMAAAAAAAEAAAAAABIAAAAAAAEAAAAAABEAAAAAAAEAAAAAABAAAAAAAAEAAAAAAA8AAAAAAAEAAAAAAA4AAAAAAAEAAAAAAA0AAAAAAAEAAAAAAAwAAAAAAAEAAAAAAAsAAAAAAAEAAAAAAAoAAAAAAAEAAAAAAAkAAAAAAAEAAAAAAAgAAAAAAAEAAAAAAAcAAAAAAAEAAAAAAAYAAAAAAAEAAAAAAAUAAAAAAAEAAAAAAAQAAAAAAAEAAAAAAAMAAAAAAAEAAAAAAAIAAAAAAAEAAAAAAAEAAAAAAAEAAAAAAAAAAAAAAAEAAAAjAAAAAAAAAAEAAAAjAAEAAAAAAAEAAAAjAAIAAAAAAAEAAAAjAAMAAAAAAAEAAAAjAAQAAAAAAAEAAAAjAAUAAAAAAAEAAAAjAAYAAAAAAAEAAAAjAAcAAAAAAAEAAAAjAAgAAAAAAAEAAAAjAAkAAAAAAAEAAAAjAAoAAAAAAAEAAAAjAAsAAAAAAAEAAAAjAAwAAAAAAAEAAAAjAA0AAAAAAAEAAAAjAA4AAAAAAAEAAAAjAA8AAAAAAAEAAAAjABAAAAAAAAEAAAAjABEAAAAAAAEAAAAjABIAAAAAAAEAAAAjABMAAAACAAAAAAAiABMAAAABAAAAAAAhABMAAAABAAAAAAAgABMAAAABAAAAAAAfABMAAAABAAAAAAAeABMAAAABAAAAAAAdABMAAAABAAAAAAAcABMAAAABAAAAAAAbABMAAAABAAAAAAAaABMAAAABAAAAAAAZABMAAAABAAAAAAAYABMAAAABAAAAAAAXABMAAAABAAAAAAAWABMAAAABAAAAAAAVABMAAAABAAAAAAAUABMAAAABAAAAAAATABMAAAABAAAAAAASABMAAAABAAAAAAARABMAAAABAAAAAAAQABMAAAABAAAAAAAPABMAAAABAAAAAAAOABMAAAABAAAAAAANABMAAAABAAAAAAAMABMAAAABAAAAAAALABMAAAABAAAAAAABABMAAAABAAAAAAACABMAAAABAAAAAAADABMAAAABAAAAAAAEABMAAAABAAAAAAAFABMAAAABAAAAAAAGABMAAAABAAAAAAAHABMAAAABAAAAAAAIABMAAAABAAAAAAAJABMAAAABAAAAAAAKABMAAAABAAAAAAAWAAUABwAFAAAAAAAYAAUABwADAAAAAAAaAAUABwADAAAAAAAcAAUABwADAAAAAAAeAAUABwAGAAAAAAAOABEAAAACAAEAAAAOABIAAAACAAEAAAAKABEABwAAAAAAAAACAA8ABwACAAAAAAAEAA8ABwADAAAAAAAGAA8ABwAEAAAAAAAaABEABwACAAAAAAAcABEABwADAAAAAAAeABEABwAEAAAAAAAgAA8ABwAFAAAAAAAiAA8ABwAGAAAAAAAbAA0ABwAEAAAAAAAZAA0ABwADAAAAAAAXAA0ABwADAAAAAAAVAA0ABwACAAAAAAARAAsABwAGAAAAAAAPAAsABwAFAAAAAAAMAAkABwAAAAAAAAAHAAkABwAAAAAAAAACAAkABwAAAAAAAAAUAAgABwACAAAAAAAWAAgABwADAAAAAAAYAAgABwAEAAAAAAAPAAQABwAEAAAAAAASAAQABwAAAAAAAAANAAQABwADAAAAAAALAAQABwADAAAAAAAJAAQABwADAAAAAAAHAAQABwADAAAAAAAFAAQABwADAAAAAAADAAQABwADAAAAAAABAAQABwAFAAAAAAARABAABwAHAAAAAAAXABAABwAHAAAAAAAEAAwABwAHAAAAAAAQAAgABwAHAAAAAAADAAEABwAHAAAAAAAJAAEABwAHAAAAAAAOAAEABwAHAAAAAAAWAA4ABwABAAAAAAAWABAABwABAAAAAAAWABIABwABAAAAAAAbAA8ABwABAAAAAAABAAAAAAABAAAAAAACAAAAAAABAAAAAAADAAAAAAABAAAAAAAEAAAAAAABAAAAAAAFAAAAAAABAAAAAAAGAAAAAAABAAAAAAAHAAAAAAABAAAAAAAIAAAAAAABAAAAAAAJAAAAAAABAAAAAAAKAAAAAAABAAAAAAALAAAAAAABAAAAAAAMAAAAAAABAAAAAAANAAAAAAABAAAAAAAOAAAAAAABAAAAAAAPAAAAAAABAAAAAAAQAAAAAAABAAAAAAARAAAAAAABAAAAAAASAAAAAAABAAAAAAATAAAAAAABAAAAAAAUAAAAAAABAAAAAAAVAAAAAAABAAAAAAAWAAAAAAABAAAAAAAXAAAAAAABAAAAAAAYAAAAAAABAAAAAAAZAAAAAAABAAAAAAAaAAAAAAABAAAAAAAbAAAAAAABAAAAAAAcAAAAAAABAAAAAAAdAAAAAAABAAAAAAAeAAAAAAABAAAAAAAiAAAAAAABAAAAAAAhAAAAAAABAAAAAAAgAAAAAAABAAAAAAAfAAAAAAABAAAAAAA=")
 tile_set = SubResource("TileSet_c5u5g")
-
-[node name="CharacterBody2D" parent="." instance=ExtResource("3_tac4o")]
-position = Vector2(-134, 11)
-
-[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
-position = Vector2(102.5, 276)
-scale = Vector2(0.5, 0.5)
-position_smoothing_enabled = true
-position_smoothing_speed = 20.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -342,3 +347,43 @@ offset_bottom = 85.0
 grow_horizontal = 0
 show_percentage = false
 script = ExtResource("5_rhnuf")
+
+[node name="EnemyBullets" type="Node2D" parent="."]
+
+[node name="enemy" parent="." instance=ExtResource("8_cwafa")]
+position = Vector2(690, 378)
+
+[node name="barrel" parent="." instance=ExtResource("4_5bejk")]
+position = Vector2(1042, 432)
+
+[node name="rigiddbody" parent="." instance=ExtResource("8_ln4fk")]
+position = Vector2(1042, 432)
+
+[node name="Bullets" type="Node2D" parent="."]
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("3_tac4o")]
+position = Vector2(84, 609)
+
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
+position = Vector2(0.5, -7)
+scale = Vector2(0.5, 0.5)
+position_smoothing_enabled = true
+position_smoothing_speed = 20.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="CharacterBody2D"]
+
+[node name="coinui" parent="CharacterBody2D/CanvasLayer" instance=ExtResource("6_j4v6r")]
+offset_left = 980.0
+offset_top = 112.0
+offset_right = 1020.0
+offset_bottom = 150.0
+
+[node name="Coin" parent="." instance=ExtResource("10_4x0mx")]
+position = Vector2(336, 459)
+
+[connection signal="enemy_shoot" from="enemy" to="." method="_on_enemy_enemy_shoot"]
+[connection signal="explo_damage" from="barrel" to="CharacterBody2D" method="_on_barrel_explo_damage"]
+[connection signal="new_coin" from="CharacterBody2D" to="CharacterBody2D/CanvasLayer/coinui" method="_on_character_body_2d_new_coin"]
+[connection signal="player_pos" from="CharacterBody2D" to="." method="_on_character_body_2d_player_pos"]
+[connection signal="player_pos" from="CharacterBody2D" to="enemy" method="_on_character_body_2d_player_pos"]
+[connection signal="shoot" from="CharacterBody2D" to="." method="_on_player_shoot"]

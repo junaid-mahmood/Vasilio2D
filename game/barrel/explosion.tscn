@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://dlu36pbm8o00n"]
+
+[sub_resource type="Curve" id="Curve_l6rqb"]
+_data = [Vector2(0.00278552, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.246479), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="CPUParticles2D" type="CPUParticles2D"]
+emitting = false
+amount = 200
+lifetime = 0.4
+one_shot = true
+explosiveness = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 150.0
+initial_velocity_max = 250.0
+scale_amount_min = 4.0
+scale_amount_max = 9.0
+scale_amount_curve = SubResource("Curve_l6rqb")

@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://buq6m0boebfrh"]
+
+[ext_resource type="Script" path="res://barrel/barrel.gd" id="1_51w24"]
+[ext_resource type="Texture2D" uid="uid://orykd4r38ct8" path="res://assets/barrel.png" id="2_oam7c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bfbac"]
+size = Vector2(16, 16)
+
+[node name="barrel" type="Area2D"]
+script = ExtResource("1_51w24")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-2.38419e-07, 0)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_oam7c")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_bfbac")

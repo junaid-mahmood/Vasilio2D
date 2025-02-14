@@ -1,0 +1,68 @@
+[gd_scene load_steps=9 format=3 uid="uid://8sco8kh0fk4w"]
+
+[ext_resource type="Script" path="res://enemy/enemy.gd" id="1_alyje"]
+[ext_resource type="Shader" path="res://player_hurt.gdshader" id="2_78o4u"]
+[ext_resource type="Texture2D" uid="uid://u5jcjlipv0um" path="res://assets/Jump (32x32).png" id="2_el7aq"]
+[ext_resource type="Script" path="res://enemy/left_ray_climb.gd" id="4_esxiu"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1iufc"]
+shader = ExtResource("2_78o4u")
+shader_parameter/color = Color(255, 0, 0, 1)
+shader_parameter/amount = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cdxep"]
+shader = ExtResource("2_78o4u")
+shader_parameter/color = Color(255, 0, 0, 1)
+shader_parameter/amount = 0.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t2rb7"]
+size = Vector2(19, 28)
+
+[sub_resource type="GDScript" id="GDScript_l025t"]
+script/source = "extends RayCast2D
+
+signal is_smth_on_path(bool)
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	if is_colliding():
+		emit_signal(\"is_smth_on_path\", true)
+	else:
+		emit_signal(\"is_smth_on_path\", false)
+"
+
+[node name="enemy" type="Area2D"]
+material = SubResource("ShaderMaterial_1iufc")
+collision_layer = 128
+collision_mask = 20
+script = ExtResource("1_alyje")
+
+[node name="Jump(32x32)" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_cdxep")
+position = Vector2(1, -16)
+texture = ExtResource("2_el7aq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, -14)
+shape = SubResource("RectangleShape2D_t2rb7")
+
+[node name="right_ray_climb" type="RayCast2D" parent="."]
+target_position = Vector2(11, 0)
+collision_mask = 8
+
+[node name="left_ray_climb" type="RayCast2D" parent="."]
+target_position = Vector2(-10, 0)
+collision_mask = 8
+script = ExtResource("4_esxiu")
+
+[node name="ray_shoot" type="RayCast2D" parent="."]
+collision_mask = 22
+script = SubResource("GDScript_l025t")
+
+[node name="shoot" type="Timer" parent="."]
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="left_climb" from="left_ray_climb" to="." method="_on_left_ray_climb_left_climb"]
+[connection signal="is_smth_on_path" from="ray_shoot" to="." method="_on_ray_shoot_is_smth_on_path"]
+[connection signal="timeout" from="shoot" to="." method="_on_shoot_timeout"]
