@@ -57,8 +57,6 @@ func enemy_damage(num):
 
 
 
-func on_area_enetered(area: Area2D):
-	print('enetered')
 
 
 func _on_left_ray_climb_left_climb(nope: Variant) -> void:
@@ -70,11 +68,11 @@ func _on_right_ray_climb_right_climb(nope2: Variant) -> void:
 	climb_r = nope2
 
 
-func _on_body_entered(body: Node2D) -> void:
-	if body.has_method("_this_is_bow"):
+
+
+
+func _on_area_entered(area: Area2D) -> void:
+	if area.has_method("_this_is_bow"):
 		enemy_damage(40)
-		print("bow")
-	elif body.has_method("_this_is_bullet"):
+	elif area.has_method("_this_is_bullet"):
 		enemy_damage(10)
-		print('bullet')
-	print(body)
