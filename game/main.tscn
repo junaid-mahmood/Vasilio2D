@@ -294,7 +294,7 @@ sources/6 = SubResource("TileSetAtlasSource_kkd0k")
 sources/7 = SubResource("TileSetAtlasSource_253kd")
 
 [node name="Node" type="Node2D"]
-script = ExtResource("1_f8jqy")
+script = ExtResource("1_f8jqy")]
 
 [node name="TextureRect" type="TextureRect" parent="."]
 texture_filter = 1
