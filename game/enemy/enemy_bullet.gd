@@ -11,5 +11,5 @@ func _process(delta):
 
 func _on_body_entered(body: Node2D) -> void:
 	if 'player_damage' in body:
-		body.player_damage(1)
+		body.player_damage(20)
 	queue_free()

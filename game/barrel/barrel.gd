@@ -26,21 +26,8 @@ func apply_explosion_impulse():
 	var impulse_power: float = 200.0
 	
 	for node in get_parent().get_children():
-		if node is RigidBody2D:
-			var direction = node.global_position - global_position
-			var distance = direction.length()
 
-			if distance < kill_radius:
-				node.queue_free()
-			elif distance < push_radius:
-				node.apply_central_impulse(direction.normalized() * impulse_power)
-				
-		elif node is Area2D or node is StaticBody2D:
-			var direction = node.global_position - global_position
-			var distance = direction.length()
-			if distance < kill_radius:
-				node.queue_free()
-		elif node is CharacterBody2D:
+		if node is CharacterBody2D:
 			var direction = node.global_position - global_position
 			var distance = direction.length()
 			if distance < 60:
@@ -51,3 +38,16 @@ func apply_explosion_impulse():
 				emit_signal("explo_damage", 60)
 			elif distance < 140:
 				emit_signal("explo_damage", 40)
+		elif node is RigidBody2D:
+			var direction = node.global_position - global_position
+			var distance = direction.length()
+			if distance < kill_radius:
+				node.queue_free()
+			elif distance < push_radius:
+				node.apply_central_impulse(direction.normalized() * impulse_power)
+		elif node is Area2D or node is StaticBody2D:
+			var direction = node.global_position - global_position
+			var distance = direction.length()
+			if distance < kill_radius:
+				node.queue_free()
+				

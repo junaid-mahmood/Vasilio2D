@@ -14,5 +14,5 @@ func _ready():
 func _on_body_entered(_body: Node2D) -> void:
 	queue_free()
 
-func _this_is_bullet():
+func _this_is_bow():
 	pass

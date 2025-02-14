@@ -7,8 +7,9 @@
 size = Vector2(32, 32)
 
 [node name="barrel" type="Area2D"]
-collision_layer = 15
-collision_mask = 15
+scale = Vector2(0.8, 0.8)
+collision_layer = 2
+collision_mask = 4
 script = ExtResource("1_51w24")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

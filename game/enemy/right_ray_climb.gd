@@ -2,7 +2,7 @@ extends RayCast2D
 
 signal right_climb(nope2)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if is_colliding():
 		emit_signal("right_climb", false)
 	else:
