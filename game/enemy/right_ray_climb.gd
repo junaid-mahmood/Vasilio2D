@@ -1,8 +1,9 @@
 extends RayCast2D
 
+signal right_climb(nope2)
 
 func _process(delta: float) -> void:
 	if is_colliding():
-		emit_signal("left_climb", 1, true)
+		emit_signal("right_climb", false)
 	else:
-		emit_signal("left_climb", 1, false)
+		emit_signal("right_climb", true)

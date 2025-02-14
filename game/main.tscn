@@ -344,7 +344,6 @@ script = ExtResource("5_rhnuf")
 
 [node name="enemy" parent="." instance=ExtResource("8_cwafa")]
 position = Vector2(763, 400)
-if_in_radius = null
 
 [node name="barrel" parent="." instance=ExtResource("4_5bejk")]
 position = Vector2(88, 448)
