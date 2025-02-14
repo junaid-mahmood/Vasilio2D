@@ -11,5 +11,5 @@ func _ready():
 	$Sprite2D.flip_h = direction < 0
 
 
-func _on_body_entered(body: Node2D) -> void:
+func _on_body_entered(_body: Node2D) -> void:
 	queue_free()

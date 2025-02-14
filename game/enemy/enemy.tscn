@@ -26,7 +26,7 @@ signal is_smth_on_path(bool)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if is_colliding():
 		emit_signal(\"is_smth_on_path\", true)
 	else:
