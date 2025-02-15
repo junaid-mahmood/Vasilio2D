@@ -18,7 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://cdkr5ypexve51" path="res://barrel/impasible.tscn" id="8_ln4fk"]
 [ext_resource type="Texture2D" uid="uid://bpr60nwsbbsqs" path="res://tilemap.png" id="9_hnuy7"]
 [ext_resource type="PackedScene" uid="uid://caqfcrf27ytkv" path="res://coin/coin.tscn" id="10_4x0mx"]
-[ext_resource type="PackedScene" path="res://hotbar.tscn" id="13_rs547"]
+[ext_resource type="PackedScene" uid="uid://sihy1oiiv6bj" path="res://hotbar.tscn" id="13_rs547"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rkc28"]
 texture = ExtResource("2_i5v1g")
