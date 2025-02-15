@@ -132,8 +132,7 @@ func game_over() -> void:
 	get_tree().reload_current_scene()
 
 
-func _on_barrel_explo_damage(num: Variant) -> void:
-	player_damage(num)
+
 
 
 func coin_collected(num):
@@ -145,3 +144,15 @@ func coin_collected(num):
 
 func _on_collect_timeout() -> void:
 	$"+1".visible = false
+
+
+func _on_barrel_2_explo_damage(num: Variant) -> void:
+	player_damage(num)
+
+
+func _on_barrel_3_explo_damage(num: Variant) -> void:
+	player_damage(num)
+
+
+func _on_barrel_explo_damage(num: Variant) -> void:
+	player_damage(num)
