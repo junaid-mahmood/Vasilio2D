@@ -145,3 +145,11 @@ func coin_collected(num):
 
 func _on_collect_timeout() -> void:
 	$"+1".visible = false
+
+
+func _on_barrel_2_explo_damage(num: Variant) -> void:
+	player_damage(num)
+
+
+func _on_barrel_3_explo_damage(num: Variant) -> void:
+	player_damage(num)

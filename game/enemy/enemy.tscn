@@ -480,7 +480,7 @@ collision_mask = 16
 script = ExtResource("4_esxiu")
 
 [node name="ray_shoot" type="RayCast2D" parent="."]
-collision_mask = 22
+collision_mask = 18
 script = SubResource("GDScript_l025t")
 
 [node name="shoot" type="Timer" parent="."]

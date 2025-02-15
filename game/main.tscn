@@ -376,9 +376,59 @@ offset_bottom = 150.0
 [node name="Coin" parent="." instance=ExtResource("10_4x0mx")]
 position = Vector2(337, 505)
 
+[node name="barrel2" parent="." instance=ExtResource("4_5bejk")]
+position = Vector2(866, 131)
+
+[node name="StaticBody2D" parent="." instance=ExtResource("8_ln4fk")]
+position = Vector2(866, 131)
+
+[node name="barrel3" parent="." instance=ExtResource("4_5bejk")]
+position = Vector2(250, 99)
+
+[node name="StaticBody2D2" parent="." instance=ExtResource("8_ln4fk")]
+position = Vector2(250, 99)
+
+[node name="Area2D" parent="." instance=ExtResource("10_4x0mx")]
+position = Vector2(90, 92)
+
+[node name="Area2D2" parent="." instance=ExtResource("10_4x0mx")]
+position = Vector2(188, 89)
+
+[node name="Area2D3" parent="." instance=ExtResource("10_4x0mx")]
+position = Vector2(320, 90)
+
+[node name="Area2D4" parent="." instance=ExtResource("10_4x0mx")]
+position = Vector2(395, 250)
+
+[node name="Area2D5" parent="." instance=ExtResource("10_4x0mx")]
+position = Vector2(242, 255)
+
+[node name="Area2D6" parent="." instance=ExtResource("10_4x0mx")]
+position = Vector2(80, 250)
+
+[node name="Area2D7" parent="." instance=ExtResource("10_4x0mx")]
+position = Vector2(936, 121)
+
+[node name="Area2D8" parent="." instance=ExtResource("10_4x0mx")]
+position = Vector2(1094, 439)
+
+[node name="Area2D9" parent="." instance=ExtResource("10_4x0mx")]
+position = Vector2(840, 376)
+
+[node name="Area2D10" parent="." instance=ExtResource("10_4x0mx")]
+position = Vector2(714, 374)
+
+[node name="Area2D11" parent="." instance=ExtResource("10_4x0mx")]
+position = Vector2(856, 508)
+
+[node name="Area2D12" parent="." instance=ExtResource("10_4x0mx")]
+position = Vector2(131, 450)
+
 [connection signal="enemy_shoot" from="enemy" to="." method="_on_enemy_enemy_shoot"]
 [connection signal="explo_damage" from="barrel" to="CharacterBody2D" method="_on_barrel_explo_damage"]
 [connection signal="new_coin" from="CharacterBody2D" to="CharacterBody2D/CanvasLayer/coinui" method="_on_character_body_2d_new_coin"]
 [connection signal="player_pos" from="CharacterBody2D" to="." method="_on_character_body_2d_player_pos"]
 [connection signal="player_pos" from="CharacterBody2D" to="enemy" method="_on_character_body_2d_player_pos"]
 [connection signal="shoot" from="CharacterBody2D" to="." method="_on_player_shoot"]
+[connection signal="explo_damage" from="barrel2" to="CharacterBody2D" method="_on_barrel_2_explo_damage"]
+[connection signal="explo_damage" from="barrel3" to="CharacterBody2D" method="_on_barrel_3_explo_damage"]
