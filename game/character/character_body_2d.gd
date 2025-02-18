@@ -7,10 +7,11 @@ var coins := 0
 var is_invulnerable := false
 const INVULNERABILITY_TIME := 1.0
 
-
+var shield := false
 
 signal player_pos(pos)
 signal new_coin(coins)
+signal has_shield(shield)
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
@@ -38,6 +39,11 @@ func _physics_process(delta: float) -> void:
 	#check if game ends
 	if health_bar.value <= 0:
 		game_over()
+		
+	if Input.is_action_just_pressed("shield"):
+		shield = not shield
+		emit_signal("has_shield", shield)
+		
 		
 	#check if changes weapon
 	if Input.is_action_just_pressed("switch"):
@@ -70,22 +76,23 @@ func _physics_process(delta: float) -> void:
 			velocity.y = JUMP_VELOCITY * 1.1
 			progress_bar.value -= DOUBLE_JUMP_COST
 			can_double_jump = false  # Prevent additional double jumps until landing
-
+	
 	if Input.is_action_just_pressed("ui_select"):
-		if Global.weapon:
-			progress_bar.value -= SHOOT_COST
-			shoot.emit(global_position, facing_right)
-		else:
-			progress_bar.value -= SWORD_COST
-			sprite_2d.animation = 'sword'
-			var kill_radius: float = 70.0   
-			
-			for node in get_parent().get_children():
-				if node is Area2D and node.has_method("enemy_damage"):
-					var direction = node.global_position - global_position
-					var distance = direction.length()
-					if distance < kill_radius:
-						node.enemy_damage(50)
+		if not shield:
+			if Global.weapon:
+				progress_bar.value -= SHOOT_COST
+				shoot.emit(global_position, facing_right)
+			else:
+				progress_bar.value -= SWORD_COST
+				sprite_2d.animation = 'sword'
+				var kill_radius: float = 70.0   
+				
+				for node in get_parent().get_children():
+					if node is Area2D and node.has_method("enemy_damage"):
+						var direction = node.global_position - global_position
+						var distance = direction.length()
+						if distance < kill_radius:
+							node.enemy_damage(50)
 
 
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://dqqc12rc88x6u"]
+[gd_scene load_steps=60 format=3 uid="uid://dqqc12rc88x6u"]
 
 [ext_resource type="Script" path="res://character/character_body_2d.gd" id="1_jmigi"]
 [ext_resource type="Texture2D" uid="uid://u5jcjlipv0um" path="res://assets/Jump (32x32).png" id="1_tvtrm"]
@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://xyur7cni8u7u" path="res://assets/Run (32x32).png" id="4_nfqut"]
 [ext_resource type="Texture2D" uid="uid://d2pqry6lxk8uh" path="res://assets/+1.png" id="5_xli75"]
 [ext_resource type="Texture2D" uid="uid://cdk5mpytif2ha" path="res://assets/sword_slash_ani.png" id="6_vw6pp"]
+[ext_resource type="Texture2D" uid="uid://cplpcndjs0bib" path="res://assets/shield_side.png" id="10_dn688"]
+[ext_resource type="Script" path="res://character/shield.gd" id="10_lqt7r"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2gcdb"]
 shader = ExtResource("1_x1ujg")
@@ -362,6 +364,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p26uj"]
 size = Vector2(20.25, 20)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qr0ja"]
+size = Vector2(3, 19)
+
 [node name="CharacterBody2D" type="CharacterBody2D"]
 scale = Vector2(2, 2)
 collision_layer = 8
@@ -405,6 +410,18 @@ one_shot = true
 [node name="bow_delay" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
+
+[node name="shield" type="Area2D" parent="."]
+script = ExtResource("10_lqt7r")
+
+[node name="Sprite2D" type="Sprite2D" parent="shield"]
+position = Vector2(19, -11)
+scale = Vector2(-0.6, -0.6)
+texture = ExtResource("10_dn688")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="shield"]
+position = Vector2(19, -11.5)
+shape = SubResource("RectangleShape2D_qr0ja")
 
 [connection signal="timeout" from="collect" to="." method="_on_collect_timeout"]
 [connection signal="timeout" from="shot" to="." method="_on_shot_timeout"]
