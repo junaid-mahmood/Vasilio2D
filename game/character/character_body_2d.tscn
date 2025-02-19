@@ -365,7 +365,7 @@ animations = [{
 size = Vector2(20.25, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qr0ja"]
-size = Vector2(3, 19)
+size = Vector2(3, 32.5)
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 scale = Vector2(2, 2)
@@ -412,6 +412,8 @@ wait_time = 0.5
 one_shot = true
 
 [node name="shield" type="Area2D" parent="."]
+collision_layer = 256
+collision_mask = 32
 script = ExtResource("10_lqt7r")
 
 [node name="Sprite2D" type="Sprite2D" parent="shield"]
@@ -420,10 +422,13 @@ scale = Vector2(-0.6, -0.6)
 texture = ExtResource("10_dn688")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="shield"]
-position = Vector2(19, -11.5)
+position = Vector2(19, -9.25)
 shape = SubResource("RectangleShape2D_qr0ja")
 
+[connection signal="has_shield" from="." to="shield" method="_on_character_body_2d_has_shield"]
 [connection signal="timeout" from="collect" to="." method="_on_collect_timeout"]
 [connection signal="timeout" from="shot" to="." method="_on_shot_timeout"]
 [connection signal="timeout" from="bow_shot_ani" to="." method="_on_bow_shot_ani_timeout"]
 [connection signal="timeout" from="bow_delay" to="." method="_on_bow_delay_timeout"]
+[connection signal="area_entered" from="shield" to="shield" method="_on_area_entered"]
+[connection signal="body_entered" from="shield" to="shield" method="_on_body_entered"]

@@ -33,6 +33,7 @@ func _ready() -> void:
 	progress_bar.value = 100
 	health_bar.max_value = 100
 	health_bar.value = 100
+	$shield/Sprite2D.visible = shield
 
 
 func _physics_process(delta: float) -> void:
@@ -43,6 +44,9 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("shield"):
 		shield = not shield
 		emit_signal("has_shield", shield)
+		$shield/Sprite2D.visible = shield
+		
+	
 		
 		
 	#check if changes weapon

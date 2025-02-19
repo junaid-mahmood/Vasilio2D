@@ -73,6 +73,7 @@ shield={
 2d_physics/layer_6="enemy_bullet"
 2d_physics/layer_7="coin"
 2d_physics/layer_8="enemy"
+2d_physics/layer_9="shield"
 
 [rendering]
 
