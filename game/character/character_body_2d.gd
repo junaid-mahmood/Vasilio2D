@@ -8,10 +8,13 @@ var is_invulnerable := false
 const INVULNERABILITY_TIME := 1.0
 
 var shield := false
+var DISTANCE_SHIELD := 40
+var shield_body
 
 signal player_pos(pos)
 signal new_coin(coins)
 signal has_shield(shield)
+signal pla_pos_shield(new_pos)
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
@@ -28,25 +31,40 @@ const DOUBLE_JUMP_COST := 40.0
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var can_double_jump := false  # New variable to track double jump availability
 
+
 func _ready() -> void:
 	progress_bar.max_value = 100
 	progress_bar.value = 100
 	health_bar.max_value = 100
 	health_bar.value = 100
-	$shield/Sprite2D.visible = shield
+	
+	var parent = get_parent()
+	shield_body = parent.get_node("shield") as StaticBody2D
+	shield_body.visible = shield
 
 
 func _physics_process(delta: float) -> void:
 	#check if game ends
 	if health_bar.value <= 0:
 		game_over()
-		
+	
+	
+	#direct shield angle towards mouse
+	var centered_global_position = global_position
+	centered_global_position.y -= 20
+	centered_global_position.x += 9
+	var mouse_pos = get_global_mouse_position()
+	var direc_to_mouse = (mouse_pos - centered_global_position).normalized()
+	var angle_radians = atan2(direc_to_mouse.y, direc_to_mouse.x)
+	var shield_pos = centered_global_position + Vector2(cos(angle_radians), sin(angle_radians)) * DISTANCE_SHIELD
+	emit_signal("pla_pos_shield", shield_pos)
+	if angle_radians:
+		shield_body.rotation = angle_radians
+	
 	if Input.is_action_just_pressed("shield"):
 		shield = not shield
+		shield_body.visible = shield
 		emit_signal("has_shield", shield)
-		$shield/Sprite2D.visible = shield
-		
-	
 		
 		
 	#check if changes weapon
@@ -97,12 +115,6 @@ func _physics_process(delta: float) -> void:
 						var distance = direction.length()
 						if distance < kill_radius:
 							node.enemy_damage(50)
-
-
-
-
-
-
 
 
 
