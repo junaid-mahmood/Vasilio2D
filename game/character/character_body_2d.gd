@@ -10,6 +10,8 @@ const INVULNERABILITY_TIME := 1.0
 var shield := false
 var DISTANCE_SHIELD := 40
 var shield_body
+var weapon_counter := 0
+var weapons = ["gun", "sword", "shield"]
 
 signal player_pos(pos)
 signal new_coin(coins)
@@ -61,22 +63,27 @@ func _physics_process(delta: float) -> void:
 	if angle_radians:
 		shield_body.rotation = angle_radians
 	
-	if Input.is_action_just_pressed("shield"):
-		shield = not shield
-		shield_body.visible = shield
-		emit_signal("has_shield", shield)
+	if Global.weapon == 'shield':
+		shield_body.visible = true
+		emit_signal("has_shield", true)
+	else:
+		shield_body.visible = false
+		emit_signal("has_shield", false)
 		
 		
 	#check if changes weapon
 	if Input.is_action_just_pressed("switch"):
-		Global.weapon = not Global.weapon
+		weapon_counter += 1
+		if weapon_counter > 2:
+			weapon_counter = 0
+		Global.weapon = weapons[weapon_counter]
 		
 	
 	
 	if progress_bar.value < 100:
 		progress_bar.value = min(progress_bar.value + RECHARGE_RATE * delta, 100)
 	
-	if Global.weapon == false:
+	if Global.weapon == 'sword':
 		sprite_2d.animation = "sword"
 	elif abs(velocity.x) > 1:
 		sprite_2d.animation = "running"
@@ -100,21 +107,20 @@ func _physics_process(delta: float) -> void:
 			can_double_jump = false  # Prevent additional double jumps until landing
 	
 	if Input.is_action_just_pressed("ui_select"):
-		if not shield:
-			if Global.weapon:
-				progress_bar.value -= SHOOT_COST
-				shoot.emit(global_position, facing_right)
-			else:
-				progress_bar.value -= SWORD_COST
-				sprite_2d.animation = 'sword'
-				var kill_radius: float = 70.0   
+		if Global.weapon == 'gun':
+			progress_bar.value -= SHOOT_COST
+			shoot.emit(global_position, facing_right)
+		elif Global.weapon == 'sword':
+			progress_bar.value -= SWORD_COST
+			sprite_2d.animation = 'sword'
+			var kill_radius: float = 70.0   
 				
-				for node in get_parent().get_children():
-					if node is Area2D and node.has_method("enemy_damage"):
-						var direction = node.global_position - global_position
-						var distance = direction.length()
-						if distance < kill_radius:
-							node.enemy_damage(50)
+			for node in get_parent().get_children():
+				if node is Area2D and node.has_method("enemy_damage"):
+					var direction = node.global_position - global_position
+					var distance = direction.length()
+					if distance < kill_radius:
+						node.enemy_damage(50)
 
 
 
