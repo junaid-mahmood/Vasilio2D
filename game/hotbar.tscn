@@ -1,0 +1,76 @@
+[gd_scene load_steps=8 format=3 uid="uid://cs6f7obcw4n15"]
+
+[ext_resource type="Script" path="res://hotbar.gd" id="1_btnhd"]
+[ext_resource type="Texture2D" uid="uid://bcjh7vdw2tong" path="res://assets/sword.png" id="1_ugqnj"]
+[ext_resource type="Texture2D" uid="uid://b8hv7wpsfed5a" path="res://assets/bow.png" id="2_urx0p"]
+[ext_resource type="Script" path="res://button.gd" id="3_gp4ik"]
+[ext_resource type="Texture2D" uid="uid://orykd4r38ct8" path="res://assets/barrel.png" id="4_cdrlw"]
+[ext_resource type="Script" path="res://button_2.gd" id="5_8erhq"]
+[ext_resource type="Script" path="res://button_4.gd" id="8_5c8lv"]
+
+[node name="hotbar" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_btnhd")
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -64.0
+offset_top = 50.0
+offset_right = 64.0
+offset_bottom = 90.0
+grow_horizontal = 2
+columns = 10
+
+[node name="Button" type="Button" parent="GridContainer"]
+layout_mode = 2
+focus_mode = 1
+icon = ExtResource("1_ugqnj")
+script = ExtResource("3_gp4ik")
+
+[node name="Label" type="Label" parent="GridContainer/Button"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 45.0
+offset_right = 34.0
+offset_bottom = 68.0
+text = "Q"
+
+[node name="Button2" type="Button" parent="GridContainer"]
+layout_mode = 2
+focus_mode = 1
+icon = ExtResource("2_urx0p")
+script = ExtResource("5_8erhq")
+
+[node name="Label2" type="Label" parent="GridContainer/Button2"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 44.0
+offset_right = 33.0
+offset_bottom = 67.0
+text = "E"
+
+[node name="Button3" type="Button" parent="GridContainer"]
+layout_mode = 2
+focus_mode = 1
+icon = ExtResource("4_cdrlw")
+script = ExtResource("8_5c8lv")
+
+[node name="Label3" type="Label" parent="GridContainer/Button3"]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 44.0
+offset_right = 37.0
+offset_bottom = 67.0
+text = "R"
+
+[connection signal="pressed" from="GridContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="GridContainer/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="GridContainer/Button3" to="." method="_on_button_3_pressed"]

@@ -1,20 +1,15 @@
-<<<<<<< Updated upstream
-[gd_scene load_steps=31 format=3 uid="uid://dqqc12rc88x6u"]
-=======
-[gd_scene load_steps=59 format=3 uid="uid://dqqc12rc88x6u"]
->>>>>>> Stashed changes
+[gd_scene load_steps=58 format=3 uid="uid://dqqc12rc88x6u"]
 
 [ext_resource type="Script" path="res://character/character_body_2d.gd" id="1_jmigi"]
 [ext_resource type="Texture2D" uid="uid://u5jcjlipv0um" path="res://assets/Jump (32x32).png" id="1_tvtrm"]
+[ext_resource type="Shader" path="res://player_hurt.gdshader" id="1_x1ujg"]
 [ext_resource type="Texture2D" uid="uid://cd8vrtukee532" path="res://assets/Idle (32x32).png" id="2_082ih"]
+[ext_resource type="Texture2D" uid="uid://bud2yd45g2eq4" path="res://assets/run_bow.png" id="3_lm1os"]
+[ext_resource type="Texture2D" uid="uid://bynstvyqs33bi" path="res://assets/bowshoot.png" id="4_ggqaj"]
 [ext_resource type="Texture2D" uid="uid://xyur7cni8u7u" path="res://assets/Run (32x32).png" id="4_nfqut"]
-<<<<<<< Updated upstream
-[ext_resource type="Script" path="res://cpu_particles_2d.gd" id="5_1svh7"]
-=======
 [ext_resource type="Texture2D" uid="uid://d2pqry6lxk8uh" path="res://assets/+1.png" id="5_xli75"]
 [ext_resource type="Texture2D" uid="uid://cdk5mpytif2ha" path="res://assets/sword_slash_ani.png" id="6_vw6pp"]
 [ext_resource type="Texture2D" uid="uid://b8hv7wpsfed5a" path="res://assets/bow.png" id="10_fsuu6"]
-[ext_resource type="Texture2D" uid="uid://bes3v5dx7ufcv" path="res://character/heart.png" id="11_mq2tx"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2gcdb"]
 shader = ExtResource("1_x1ujg")
@@ -88,7 +83,6 @@ region = Rect2(96, 0, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_dtxix"]
 atlas = ExtResource("4_ggqaj")
 region = Rect2(128, 0, 32, 32)
->>>>>>> Stashed changes
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i75h1"]
 atlas = ExtResource("2_082ih")
@@ -182,8 +176,85 @@ region = Rect2(320, 0, 32, 32)
 atlas = ExtResource("4_nfqut")
 region = Rect2(352, 0, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_t0g2h"]
+atlas = ExtResource("6_vw6pp")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i5ov3"]
+atlas = ExtResource("6_vw6pp")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o6c7d"]
+atlas = ExtResource("6_vw6pp")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tnx80"]
+atlas = ExtResource("6_vw6pp")
+region = Rect2(96, 0, 32, 32)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_vnnyk"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_unb5s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1tgs7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1fyi0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b7j7f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7eij2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l3dv5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rmum7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_is3vh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_334yk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4p7ir")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4lbki")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rux3o")
+}],
+"loop": true,
+"name": &"bow",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7kjl0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3khtt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_su1ti")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5x6t7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dtxix")
+}],
+"loop": true,
+"name": &"bow_shoot",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_i75h1")
@@ -270,8 +341,6 @@ animations = [{
 "loop": true,
 "name": &"running",
 "speed": 15.0
-<<<<<<< Updated upstream
-=======
 }, {
 "frames": [{
 "duration": 1.0,
@@ -289,47 +358,32 @@ animations = [{
 "loop": false,
 "name": &"sword",
 "speed": 15.0
->>>>>>> Stashed changes
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tlywo"]
-radius = 9.0
-height = 23.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p26uj"]
+size = Vector2(20.25, 20)
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 scale = Vector2(2, 2)
+collision_layer = 8
+collision_mask = 86
 script = ExtResource("1_jmigi")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-position = Vector2(100, 276)
+material = SubResource("ShaderMaterial_2gcdb")
+position = Vector2(5, -12)
 scale = Vector2(0.71875, 0.765625)
 sprite_frames = SubResource("SpriteFrames_vnnyk")
+animation = &"sword"
 autoplay = "default"
-<<<<<<< Updated upstream
-frame_progress = 0.17059
-=======
->>>>>>> Stashed changes
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(100, 277.5)
-shape = SubResource("CapsuleShape2D_tlywo")
+position = Vector2(5.375, -9.5)
+shape = SubResource("RectangleShape2D_p26uj")
 one_way_collision_margin = 0.0
 debug_color = Color(0.507274, 0.578912, 0, 0.42)
 
-<<<<<<< Updated upstream
-[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
-modulate = Color(0, 0, 0, 1)
-emitting = false
-local_coords = true
-spread = 51.25
-initial_velocity_min = 100.0
-initial_velocity_max = 200.0
-scale_amount_min = 5.0
-scale_amount_max = 8.0
-color = Color(0, 0, 0, 1)
-script = ExtResource("5_1svh7")
-=======
 [node name="+1" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(12.5, -23)
@@ -341,11 +395,6 @@ visible = false
 position = Vector2(31, -10.5)
 scale = Vector2(0.824875, 0.84375)
 texture = ExtResource("10_fsuu6")
-
-[node name="heart" type="Sprite2D" parent="."]
-position = Vector2(32.5, -27)
-scale = Vector2(0.0454376, 0.048875)
-texture = ExtResource("11_mq2tx")
 
 [node name="collect" type="Timer" parent="."]
 
@@ -367,4 +416,3 @@ one_shot = true
 [connection signal="timeout" from="shot" to="." method="_on_shot_timeout"]
 [connection signal="timeout" from="bow_shot_ani" to="." method="_on_bow_shot_ani_timeout"]
 [connection signal="timeout" from="bow_delay" to="." method="_on_bow_delay_timeout"]
->>>>>>> Stashed changes

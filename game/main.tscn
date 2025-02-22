@@ -1,18 +1,45 @@
+<<<<<<< Updated upstream
 [gd_scene load_steps=22 format=4 uid="uid://bm2qaccjcy00b"]
 
 
 [ext_resource type="Texture2D" uid="uid://c5s2hrlt2ccgm" path="res://Blue.png" id="1_4fmb2"]
 [ext_resource type="Texture2D" uid="uid://dpjfl8jiimvx3" path="res://Terrain (16x16).png" id="2_i5v1g"]
 [ext_resource type="Texture2D" uid="uid://cbkql87n3ipnc" path="res://block.png" id="3_scnf6"]
+=======
+[gd_scene load_steps=20 format=4 uid="uid://bm2qaccjcy00b"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_f8jqy"]
+[ext_resource type="Texture2D" uid="uid://dpjfl8jiimvx3" path="res://assets/Terrain (16x16).png" id="2_i5v1g"]
+>>>>>>> Stashed changes
 [ext_resource type="PackedScene" uid="uid://dqqc12rc88x6u" path="res://character/character_body_2d.tscn" id="3_tac4o"]
 [ext_resource type="Script" path="res://jump_bar.gd" id="4_l3lgs"]
-[ext_resource type="Texture2D" uid="uid://c25ogtxetuxo0" path="res://chain.png" id="4_pl1md"]
-[ext_resource type="Texture2D" uid="uid://dy7twkmy73820" path="res://platform_large.png" id="5_hd58f"]
 [ext_resource type="Script" path="res://health_bar.gd" id="5_rhnuf"]
+<<<<<<< Updated upstream
 [ext_resource type="Texture2D" uid="uid://dd7d5m6dqgylc" path="res://platform_small.png" id="6_nfxbb"]
 [ext_resource type="Texture2D" uid="uid://chsu6xkaf2md8" path="res://torch.png" id="7_cijpc"]
 [ext_resource type="Texture2D" uid="uid://dwgsl6gwrmxpa" path="res://torch_backgound.png" id="8_h83iy"]
 [ext_resource type="Texture2D" uid="uid://bpr60nwsbbsqs" path="res://tilemap.png" id="9_hnuy7"]
+=======
+[ext_resource type="PackedScene" uid="uid://copjurvsoieqm" path="res://coin/coinui.tscn" id="6_j4v6r"]
+[ext_resource type="PackedScene" uid="uid://8sco8kh0fk4w" path="res://enemy/enemy.tscn" id="8_cwafa"]
+[ext_resource type="PackedScene" uid="uid://cdkr5ypexve51" path="res://barrel/impasible.tscn" id="8_ln4fk"]
+[ext_resource type="Texture2D" uid="uid://bpr60nwsbbsqs" path="res://tilemap.png" id="9_hnuy7"]
+[ext_resource type="PackedScene" uid="uid://caqfcrf27ytkv" path="res://coin/coin.tscn" id="10_4x0mx"]
+[ext_resource type="Texture2D" uid="uid://p7x4x15hptbq" path="res://assets/wall.png" id="11_600aq"]
+[ext_resource type="PackedScene" uid="uid://cs6f7obcw4n15" path="res://hotbar.tscn" id="13_rs547"]
+[ext_resource type="Script" path="res://coins.gd" id="14_qowx2"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_soobv"]
+texture = ExtResource("11_600aq")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+1:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_3j4nn"]
+sources/0 = SubResource("TileSetAtlasSource_soobv")
+>>>>>>> Stashed changes
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rkc28"]
 texture = ExtResource("2_i5v1g")
@@ -169,60 +196,6 @@ texture = ExtResource("2_i5v1g")
 19:10/0 = 0
 20:10/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rumvp"]
-texture = ExtResource("3_scnf6")
-0:0/0 = 0
-1:0/0 = 0
-0:1/0 = 0
-1:1/0 = 0
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nf75j"]
-texture = ExtResource("4_pl1md")
-0:0/0 = 0
-1:0/0 = 0
-0:1/0 = 0
-1:1/0 = 0
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_80cyw"]
-texture = ExtResource("5_hd58f")
-0:0/0 = 0
-1:0/0 = 0
-2:0/0 = 0
-3:0/0 = 0
-4:0/0 = 0
-5:0/0 = 0
-0:1/0 = 0
-1:1/0 = 0
-2:1/0 = 0
-3:1/0 = 0
-4:1/0 = 0
-5:1/0 = 0
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_siyqr"]
-texture = ExtResource("6_nfxbb")
-0:0/0 = 0
-1:0/0 = 0
-2:0/0 = 0
-3:0/0 = 0
-0:1/0 = 0
-1:1/0 = 0
-2:1/0 = 0
-3:1/0 = 0
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fo3t5"]
-texture = ExtResource("7_cijpc")
-0:0/0 = 0
-1:0/0 = 0
-0:1/0 = 0
-1:1/0 = 0
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kkd0k"]
-texture = ExtResource("8_h83iy")
-0:0/0 = 0
-1:0/0 = 0
-0:1/0 = 0
-1:1/0 = 0
-
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_253kd"]
 texture = ExtResource("9_hnuy7")
 texture_region_size = Vector2i(32, 32)
@@ -272,16 +245,11 @@ texture_region_size = Vector2i(32, 32)
 [sub_resource type="TileSet" id="TileSet_c5u5g"]
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_rkc28")
-sources/1 = SubResource("TileSetAtlasSource_rumvp")
-sources/2 = SubResource("TileSetAtlasSource_nf75j")
-sources/3 = SubResource("TileSetAtlasSource_80cyw")
-sources/4 = SubResource("TileSetAtlasSource_siyqr")
-sources/5 = SubResource("TileSetAtlasSource_fo3t5")
-sources/6 = SubResource("TileSetAtlasSource_kkd0k")
 sources/7 = SubResource("TileSetAtlasSource_253kd")
 
 [node name="Node" type="Node"]
 
+<<<<<<< Updated upstream
 [node name="TextureRect" type="TextureRect" parent="."]
 texture_filter = 1
 anchors_preset = 15
@@ -293,6 +261,9 @@ texture = ExtResource("1_4fmb2")
 stretch_mode = 1
 
 [node name="TileMap" type="TileMap" parent="."]
+=======
+[node name="wall" type="TileMapLayer" parent="."]
+>>>>>>> Stashed changes
 visible = false
 texture_filter = 1
 scale = Vector2(2, 2)
@@ -342,3 +313,112 @@ offset_bottom = 85.0
 grow_horizontal = 0
 show_percentage = false
 script = ExtResource("5_rhnuf")
+<<<<<<< Updated upstream
+=======
+
+[node name="hotbar" parent="CanvasLayer" instance=ExtResource("13_rs547")]
+
+[node name="EnemyBullets" type="Node2D" parent="."]
+
+[node name="enemy" parent="." instance=ExtResource("8_cwafa")]
+material = null
+position = Vector2(768, 373)
+
+[node name="barrel" parent="." instance=ExtResource("4_5bejk")]
+position = Vector2(77, 450)
+
+[node name="Bullets" type="Node2D" parent="."]
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("3_tac4o")]
+position = Vector2(84, 609)
+
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
+position = Vector2(0.5, -7)
+scale = Vector2(0.5, 0.5)
+position_smoothing_enabled = true
+position_smoothing_speed = 20.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="CharacterBody2D"]
+
+[node name="coinui" parent="CharacterBody2D/CanvasLayer" instance=ExtResource("6_j4v6r")]
+offset_left = 980.0
+offset_top = 112.0
+offset_right = 1020.0
+offset_bottom = 150.0
+
+[node name="barrel2" parent="." instance=ExtResource("4_5bejk")]
+position = Vector2(866, 131)
+
+[node name="StaticBody2D" parent="." instance=ExtResource("8_ln4fk")]
+position = Vector2(866, 131)
+
+[node name="barrel3" parent="." instance=ExtResource("4_5bejk")]
+position = Vector2(250, 99)
+
+[node name="StaticBody2D2" parent="." instance=ExtResource("8_ln4fk")]
+position = Vector2(250, 99)
+
+[node name="Coins" type="Node" parent="."]
+script = ExtResource("14_qowx2")
+
+[node name="Area2D" parent="Coins" instance=ExtResource("10_4x0mx")]
+position = Vector2(90, 92)
+scale = Vector2(1.5, 1.5)
+
+[node name="Area2D2" parent="Coins" instance=ExtResource("10_4x0mx")]
+position = Vector2(188, 89)
+scale = Vector2(1.5, 1.5)
+
+[node name="Area2D3" parent="Coins" instance=ExtResource("10_4x0mx")]
+position = Vector2(320, 90)
+scale = Vector2(1.5, 1.5)
+
+[node name="Area2D4" parent="Coins" instance=ExtResource("10_4x0mx")]
+position = Vector2(395, 250)
+scale = Vector2(1.5, 1.5)
+
+[node name="Area2D5" parent="Coins" instance=ExtResource("10_4x0mx")]
+position = Vector2(242, 255)
+scale = Vector2(1.5, 1.5)
+
+[node name="Area2D6" parent="Coins" instance=ExtResource("10_4x0mx")]
+position = Vector2(80, 250)
+scale = Vector2(1.5, 1.5)
+
+[node name="Area2D7" parent="Coins" instance=ExtResource("10_4x0mx")]
+position = Vector2(936, 121)
+scale = Vector2(1.5, 1.5)
+
+[node name="Area2D8" parent="Coins" instance=ExtResource("10_4x0mx")]
+position = Vector2(1094, 439)
+scale = Vector2(1.5, 1.5)
+
+[node name="Area2D9" parent="Coins" instance=ExtResource("10_4x0mx")]
+position = Vector2(840, 376)
+scale = Vector2(1.5, 1.5)
+
+[node name="Area2D10" parent="Coins" instance=ExtResource("10_4x0mx")]
+position = Vector2(714, 374)
+scale = Vector2(1.5, 1.5)
+
+[node name="Area2D11" parent="Coins" instance=ExtResource("10_4x0mx")]
+position = Vector2(856, 508)
+scale = Vector2(1.5, 1.5)
+
+[node name="Area2D12" parent="Coins" instance=ExtResource("10_4x0mx")]
+position = Vector2(131, 450)
+scale = Vector2(1.5, 1.5)
+
+[node name="Coin" parent="Coins" instance=ExtResource("10_4x0mx")]
+position = Vector2(337, 505)
+scale = Vector2(1.5, 1.5)
+
+[connection signal="enemy_shoot" from="enemy" to="." method="_on_enemy_enemy_shoot"]
+[connection signal="explo_damage" from="barrel" to="CharacterBody2D" method="_on_barrel_explo_damage"]
+[connection signal="new_coin" from="CharacterBody2D" to="CharacterBody2D/CanvasLayer/coinui" method="_on_character_body_2d_new_coin"]
+[connection signal="player_pos" from="CharacterBody2D" to="." method="_on_character_body_2d_player_pos"]
+[connection signal="player_pos" from="CharacterBody2D" to="enemy" method="_on_character_body_2d_player_pos"]
+[connection signal="shoot" from="CharacterBody2D" to="." method="_on_player_shoot"]
+[connection signal="explo_damage" from="barrel2" to="CharacterBody2D" method="_on_barrel_2_explo_damage"]
+[connection signal="explo_damage" from="barrel3" to="CharacterBody2D" method="_on_barrel_3_explo_damage"]
+>>>>>>> Stashed changes
