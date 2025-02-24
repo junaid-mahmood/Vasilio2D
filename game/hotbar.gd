@@ -13,12 +13,12 @@ func _process(delta: float) -> void:
 
 
 func _on_button_pressed() -> void:
-	Global.weapon = false
+	Global.weapon = 'sword'
 
 
 func _on_button_2_pressed() -> void:
-	Global.weapon = true
+	Global.weapon = 'gun'
 
 
 func _on_button_3_pressed() -> void:
-	Global.weapon = false
+	Global.weapon = 'shield'

@@ -7,10 +7,16 @@ var coins := 0
 var is_invulnerable := false
 const INVULNERABILITY_TIME := 1.0
 
-
+var shield := false
+var DISTANCE_SHIELD := 40
+var shield_body
+var weapon_counter := 0
+var weapons = ["gun", "sword", "shield"]
 
 signal player_pos(pos)
 signal new_coin(coins)
+signal has_shield(shield)
+signal pla_pos_shield(new_pos)
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
@@ -27,28 +33,57 @@ const DOUBLE_JUMP_COST := 40.0
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var can_double_jump := false  # New variable to track double jump availability
 
+
 func _ready() -> void:
 	progress_bar.max_value = 100
 	progress_bar.value = 100
 	health_bar.max_value = 100
 	health_bar.value = 100
+	
+	var parent = get_parent()
+	shield_body = parent.get_node("shield") as StaticBody2D
+	shield_body.visible = shield
 
 
 func _physics_process(delta: float) -> void:
 	#check if game ends
 	if health_bar.value <= 0:
 		game_over()
+	
+	
+	#direct shield angle towards mouse
+	var centered_global_position = global_position
+	centered_global_position.y -= 20
+	centered_global_position.x += 9
+	var mouse_pos = get_global_mouse_position()
+	var direc_to_mouse = (mouse_pos - centered_global_position).normalized()
+	var angle_radians = atan2(direc_to_mouse.y, direc_to_mouse.x)
+	var shield_pos = centered_global_position + Vector2(cos(angle_radians), sin(angle_radians)) * DISTANCE_SHIELD
+	emit_signal("pla_pos_shield", shield_pos)
+	if angle_radians:
+		shield_body.rotation = angle_radians
+	
+	if Global.weapon == 'shield':
+		shield_body.visible = true
+		emit_signal("has_shield", true)
+	else:
+		shield_body.visible = false
+		emit_signal("has_shield", false)
+		
 		
 	#check if changes weapon
 	if Input.is_action_just_pressed("switch"):
-		Global.weapon = not Global.weapon
+		weapon_counter += 1
+		if weapon_counter > 2:
+			weapon_counter = 0
+		Global.weapon = weapons[weapon_counter]
 		
 	
 	
 	if progress_bar.value < 100:
 		progress_bar.value = min(progress_bar.value + RECHARGE_RATE * delta, 100)
 	
-	if Global.weapon == false:
+	if Global.weapon == 'sword':
 		sprite_2d.animation = "sword"
 	elif abs(velocity.x) > 1:
 		sprite_2d.animation = "running"
@@ -70,28 +105,22 @@ func _physics_process(delta: float) -> void:
 			velocity.y = JUMP_VELOCITY * 1.1
 			progress_bar.value -= DOUBLE_JUMP_COST
 			can_double_jump = false  # Prevent additional double jumps until landing
-
+	
 	if Input.is_action_just_pressed("ui_select"):
-		if Global.weapon:
+		if Global.weapon == 'gun':
 			progress_bar.value -= SHOOT_COST
 			shoot.emit(global_position, facing_right)
-		else:
+		elif Global.weapon == 'sword':
 			progress_bar.value -= SWORD_COST
 			sprite_2d.animation = 'sword'
 			var kill_radius: float = 70.0   
-			
+				
 			for node in get_parent().get_children():
 				if node is Area2D and node.has_method("enemy_damage"):
 					var direction = node.global_position - global_position
 					var distance = direction.length()
 					if distance < kill_radius:
 						node.enemy_damage(50)
-
-
-
-
-
-
 
 
 

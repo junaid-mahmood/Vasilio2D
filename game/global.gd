@@ -1,3 +1,3 @@
 extends Node
 
-var weapon := true
+var weapon := 'gun'
