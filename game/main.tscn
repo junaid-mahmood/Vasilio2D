@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=4 uid="uid://bm2qaccjcy00b"]
+[gd_scene load_steps=35 format=4 uid="uid://bm2qaccjcy00b"]
 
 [ext_resource type="Texture2D" uid="uid://c5s2hrlt2ccgm" path="res://assets/Blue.png" id="1_4fmb2"]
 [ext_resource type="Script" path="res://main.gd" id="1_f8jqy"]
@@ -21,22 +21,8 @@
 [ext_resource type="Texture2D" uid="uid://p7x4x15hptbq" path="res://assets/wall.png" id="11_600aq"]
 [ext_resource type="Texture2D" uid="uid://dd3oaupd8a0hf" path="res://castle.png" id="12_xcw0y"]
 [ext_resource type="PackedScene" uid="uid://sihy1oiiv6bj" path="res://hotbar.tscn" id="13_rs547"]
-
-
-[ext_resource type="PackedScene" uid="uid://3gv7m7vuesrc" path="res://character/shield.tscn" id="20_utmrd"]
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_soobv"]
-texture = ExtResource("11_600aq")
-texture_region_size = Vector2i(32, 32)
-0:0/0 = 0
-1:0/0 = 0
-0:1/0 = 0
-1:1/0 = 0
-
-[sub_resource type="TileSet" id="TileSet_3j4nn"]
-sources/0 = SubResource("TileSetAtlasSource_soobv")
-
 [ext_resource type="PackedScene" uid="uid://jnlfurofofr7" path="res://torch.tscn" id="21_fl64f"]
+[ext_resource type="PackedScene" path="res://character/shield.tscn" id="23_c7wmr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rkc28"]
 texture = ExtResource("2_i5v1g")
@@ -498,8 +484,7 @@ texture = ExtResource("12_xcw0y")
 [sub_resource type="TileSet" id="TileSet_c5u5g"]
 physics_layer_0/collision_layer = 25
 physics_layer_0/collision_mask = 31
-physics_layer_1/collision_layer = 25
-physics_layer_1/collision_mask = 31
+physics_layer_1/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_rkc28")
 sources/1 = SubResource("TileSetAtlasSource_rumvp")
 sources/2 = SubResource("TileSetAtlasSource_nf75j")
@@ -576,10 +561,6 @@ show_percentage = false
 script = ExtResource("5_rhnuf")
 
 [node name="hotbar" parent="CanvasLayer" instance=ExtResource("13_rs547")]
-offset_left = -14.0
-offset_top = 39.0
-offset_right = -14.0
-offset_bottom = 39.0
 
 [node name="EnemyBullets" type="Node2D" parent="."]
 
@@ -593,6 +574,9 @@ position = Vector2(88, 448)
 position = Vector2(88, 447)
 
 [node name="Bullets" type="Node2D" parent="."]
+
+[node name="shield" parent="." instance=ExtResource("23_c7wmr")]
+position = Vector2(128, 588)
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("3_tac4o")]
 position = Vector2(84, 609)
@@ -614,42 +598,6 @@ offset_bottom = 150.0
 [node name="Coin" parent="." instance=ExtResource("10_4x0mx")]
 position = Vector2(337, 505)
 
-[node name="Area2D" parent="Coin" instance=ExtResource("10_4x0mx")]
-position = Vector2(-247, -413)
-
-[node name="Area2D2" parent="Coin" instance=ExtResource("10_4x0mx")]
-position = Vector2(-149, -416)
-
-[node name="Area2D3" parent="Coin" instance=ExtResource("10_4x0mx")]
-position = Vector2(-17, -415)
-
-[node name="Area2D4" parent="Coin" instance=ExtResource("10_4x0mx")]
-position = Vector2(58, -255)
-
-[node name="Area2D5" parent="Coin" instance=ExtResource("10_4x0mx")]
-position = Vector2(-95, -250)
-
-[node name="Area2D6" parent="Coin" instance=ExtResource("10_4x0mx")]
-position = Vector2(-257, -255)
-
-[node name="Area2D7" parent="Coin" instance=ExtResource("10_4x0mx")]
-position = Vector2(599, -384)
-
-[node name="Area2D8" parent="Coin" instance=ExtResource("10_4x0mx")]
-position = Vector2(757, -66)
-
-[node name="Area2D9" parent="Coin" instance=ExtResource("10_4x0mx")]
-position = Vector2(503, -129)
-
-[node name="Area2D10" parent="Coin" instance=ExtResource("10_4x0mx")]
-position = Vector2(377, -131)
-
-[node name="Area2D11" parent="Coin" instance=ExtResource("10_4x0mx")]
-position = Vector2(519, 3)
-
-[node name="Area2D12" parent="Coin" instance=ExtResource("10_4x0mx")]
-position = Vector2(-206, -55)
-
 [node name="barrel2" parent="." instance=ExtResource("4_5bejk")]
 position = Vector2(866, 131)
 
@@ -662,8 +610,41 @@ position = Vector2(250, 99)
 [node name="StaticBody2D2" parent="." instance=ExtResource("8_ln4fk")]
 position = Vector2(250, 99)
 
-[node name="shield" parent="." instance=ExtResource("20_utmrd")]
-position = Vector2(126, 591)
+[node name="Area2D" parent="." instance=ExtResource("10_4x0mx")]
+position = Vector2(90, 92)
+
+[node name="Area2D2" parent="." instance=ExtResource("10_4x0mx")]
+position = Vector2(188, 89)
+
+[node name="Area2D3" parent="." instance=ExtResource("10_4x0mx")]
+position = Vector2(320, 90)
+
+[node name="Area2D4" parent="." instance=ExtResource("10_4x0mx")]
+position = Vector2(395, 250)
+
+[node name="Area2D5" parent="." instance=ExtResource("10_4x0mx")]
+position = Vector2(242, 255)
+
+[node name="Area2D6" parent="." instance=ExtResource("10_4x0mx")]
+position = Vector2(80, 250)
+
+[node name="Area2D7" parent="." instance=ExtResource("10_4x0mx")]
+position = Vector2(936, 121)
+
+[node name="Area2D8" parent="." instance=ExtResource("10_4x0mx")]
+position = Vector2(1094, 439)
+
+[node name="Area2D9" parent="." instance=ExtResource("10_4x0mx")]
+position = Vector2(840, 376)
+
+[node name="Area2D10" parent="." instance=ExtResource("10_4x0mx")]
+position = Vector2(714, 374)
+
+[node name="Area2D11" parent="." instance=ExtResource("10_4x0mx")]
+position = Vector2(856, 508)
+
+[node name="Area2D12" parent="." instance=ExtResource("10_4x0mx")]
+position = Vector2(131, 450)
 
 [node name="Torch" parent="." instance=ExtResource("21_fl64f")]
 position = Vector2(144, 400)
@@ -805,7 +786,6 @@ position = Vector2(1008, -1487)
 
 [connection signal="enemy_shoot" from="enemy" to="." method="_on_enemy_enemy_shoot"]
 [connection signal="explo_damage" from="barrel" to="CharacterBody2D" method="_on_barrel_explo_damage"]
-[connection signal="has_shield" from="CharacterBody2D" to="shield" method="_on_character_body_2d_has_shield"]
 [connection signal="new_coin" from="CharacterBody2D" to="CharacterBody2D/CanvasLayer/coinui" method="_on_character_body_2d_new_coin"]
 [connection signal="pla_pos_shield" from="CharacterBody2D" to="shield" method="_on_character_body_2d_pla_pos_shield"]
 [connection signal="player_pos" from="CharacterBody2D" to="." method="_on_character_body_2d_player_pos"]
