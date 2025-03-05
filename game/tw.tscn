@@ -1,0 +1,129 @@
+[gd_scene load_steps=7 format=3 uid="uid://k03fmaqddqni"]
+
+[ext_resource type="Texture2D" uid="uid://fsor74keuwd5" path="res://door.png" id="1_4je1w"]
+
+[sub_resource type="GDScript" id="GDScript_ufypy"]
+script/source = "extends Node
+
+@onready var light = $PointLight2D2
+@onready var door = $Door
+
+var area
+var player_in_range = false
+
+func _ready() -> void:
+	if light:
+		print(\"Light found!\")
+		setup_light()
+	else:
+		print(\"ERROR: PointLight2D2 not found!\")
+	
+	# Create detection area
+	setup_detection_area()
+
+func setup_light():
+	light.color = Color(0.2, 0.5, 1.0)  # Bright blue
+	light.energy = 2.0
+	light.enabled = true
+	
+	var img = Image.new()
+	img.create(64, 64, false, Image.FORMAT_RGBA8)
+	var center = Vector2(32, 32)
+	var radius = 32
+	
+	for x in range(64):
+		for y in range(64):
+			var dist = center.distance_to(Vector2(x, y))
+			if dist < radius:
+				var alpha = 1.0 - (dist / radius)
+				img.set_pixel(x, y, Color(1, 1, 1, alpha))
+	
+	var tex = ImageTexture.create_from_image(img)
+	light.texture = tex
+	light.texture_scale = 4.0
+
+func setup_detection_area():
+	area = Area2D.new()
+	var collision = CollisionShape2D.new()
+	var shape = RectangleShape2D.new()
+	
+	# Set size based on door sprite if possible
+	var size = Vector2(100, 100)
+	if door and door is Sprite2D and door.texture:
+		size = door.texture.get_size()
+	
+	shape.size = size
+	collision.shape = shape
+	area.add_child(collision)
+	add_child(area)
+	
+	# Connect the signal
+	area.connect(\"body_entered\", _on_area_body_entered)
+	print(\"Detection area created\")
+
+func _process(delta: float) -> void:
+	if light:
+		var time = Time.get_ticks_msec() / 100.0
+		light.energy = 0.5 + 3.5 * abs(sin(time))
+		
+	# Check for player input when in range
+	if player_in_range and Input.is_action_just_pressed(\"ui_accept\"):
+		print(\"Player activated door! Changing scene...\")
+		get_tree().change_scene_to_file(\"res://ss.tscn\")
+
+func _on_area_body_entered(body):
+	if body.is_in_group(\"player\"):
+		print(\"Player entered door area\")
+		player_in_range = true
+		
+		# You can also change scene immediately on touch if preferred
+		print(\"Player touched door! Changing scene...\")
+		get_tree().change_scene_to_file(\"res://ss.tscn\")
+"
+
+[sub_resource type="Animation" id="Animation_6j87o"]
+resource_name = "new_animation"
+loop_mode = 1
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yxgrc"]
+_data = {
+"new_animation": SubResource("Animation_6j87o")
+}
+
+[sub_resource type="Gradient" id="Gradient_oavwo"]
+colors = PackedColorArray(1, 0.6, 0.2, 1, 1, 0.6, 0.2, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_dl6wk"]
+gradient = SubResource("Gradient_oavwo")
+width = 300
+height = 300
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.9, 0.1)
+
+[node name="Node" type="Node"]
+process_thread_group = 2
+process_thread_group_order = 0
+process_thread_messages = 3
+script = SubResource("GDScript_ufypy")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_yxgrc")
+}
+
+[node name="Door" type="Sprite2D" parent="."]
+position = Vector2(229, 536)
+scale = Vector2(0.40124, 0.401332)
+texture = ExtResource("1_4je1w")
+
+[node name="PointLight2D2" type="PointLight2D" parent="."]
+position = Vector2(0, -2)
+color = Color(1, 0.6, 0.2, 1)
+energy = 1.2
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 1.0
+texture = SubResource("GradientTexture2D_dl6wk")

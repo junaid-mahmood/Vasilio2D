@@ -1,33 +1,31 @@
-[gd_scene load_steps=37 format=4 uid="uid://bm2qaccjcy00b"]
+[gd_scene load_steps=35 format=4 uid="uid://dgrbwxhjrp5gd"]
 
-[ext_resource type="Texture2D" uid="uid://c5s2hrlt2ccgm" path="res://assets/Blue.png" id="1_4fmb2"]
-[ext_resource type="Script" path="res://main.gd" id="1_f8jqy"]
-[ext_resource type="Texture2D" uid="uid://dpjfl8jiimvx3" path="res://assets/Terrain (16x16).png" id="2_i5v1g"]
-[ext_resource type="PackedScene" uid="uid://k03fmaqddqni" path="res://tw.tscn" id="3_7nh2x"]
-[ext_resource type="Texture2D" uid="uid://cbkql87n3ipnc" path="res://block.png" id="3_scnf6"]
-[ext_resource type="PackedScene" uid="uid://dqqc12rc88x6u" path="res://character/character_body_2d.tscn" id="3_tac4o"]
-[ext_resource type="PackedScene" uid="uid://buq6m0boebfrh" path="res://barrel/barrel.tscn" id="4_5bejk"]
-[ext_resource type="Script" path="res://jump_bar.gd" id="4_l3lgs"]
-[ext_resource type="Texture2D" uid="uid://c25ogtxetuxo0" path="res://chain.png" id="4_pl1md"]
-[ext_resource type="Texture2D" uid="uid://dy7twkmy73820" path="res://platform_large.png" id="5_hd58f"]
-[ext_resource type="Script" path="res://health_bar.gd" id="5_rhnuf"]
-[ext_resource type="PackedScene" uid="uid://copjurvsoieqm" path="res://coin/coinui.tscn" id="6_j4v6r"]
-[ext_resource type="Texture2D" uid="uid://dd7d5m6dqgylc" path="res://platform_small.png" id="6_nfxbb"]
-[ext_resource type="Texture2D" uid="uid://chsu6xkaf2md8" path="res://torch.png" id="7_cijpc"]
-[ext_resource type="PackedScene" uid="uid://8sco8kh0fk4w" path="res://enemy/enemy.tscn" id="8_cwafa"]
-[ext_resource type="Texture2D" uid="uid://dwgsl6gwrmxpa" path="res://torch_backgound.png" id="8_h83iy"]
-[ext_resource type="PackedScene" uid="uid://cdkr5ypexve51" path="res://barrel/impasible.tscn" id="8_ln4fk"]
-[ext_resource type="Texture2D" uid="uid://bpr60nwsbbsqs" path="res://tilemap.png" id="9_hnuy7"]
-[ext_resource type="PackedScene" uid="uid://caqfcrf27ytkv" path="res://coin/coin.tscn" id="10_4x0mx"]
-[ext_resource type="Texture2D" uid="uid://p7x4x15hptbq" path="res://assets/wall.png" id="11_600aq"]
-[ext_resource type="Texture2D" uid="uid://dd3oaupd8a0hf" path="res://castle.png" id="12_xcw0y"]
-[ext_resource type="PackedScene" uid="uid://sihy1oiiv6bj" path="res://hotbar.tscn" id="13_rs547"]
-[ext_resource type="PackedScene" uid="uid://jnlfurofofr7" path="res://torch.tscn" id="21_fl64f"]
-[ext_resource type="PackedScene" uid="uid://cj0neh7rr8bi" path="res://character/shield.tscn" id="23_c7wmr"]
-[ext_resource type="PackedScene" uid="uid://busogtbhjs2b8" path="res://door.tscn" id="24_ho2ud"]
+[ext_resource type="Script" path="res://main.gd" id="1_4htlh"]
+[ext_resource type="PackedScene" uid="uid://busogtbhjs2b8" path="res://door.tscn" id="2_0uwiw"]
+[ext_resource type="PackedScene" uid="uid://k03fmaqddqni" path="res://tw.tscn" id="3_35l5m"]
+[ext_resource type="Texture2D" uid="uid://c5s2hrlt2ccgm" path="res://assets/Blue.png" id="4_5lft7"]
+[ext_resource type="Texture2D" uid="uid://dpjfl8jiimvx3" path="res://assets/Terrain (16x16).png" id="5_4u6tb"]
+[ext_resource type="Texture2D" uid="uid://cbkql87n3ipnc" path="res://block.png" id="6_s4eyn"]
+[ext_resource type="Texture2D" uid="uid://c25ogtxetuxo0" path="res://chain.png" id="7_pd4x4"]
+[ext_resource type="Texture2D" uid="uid://dy7twkmy73820" path="res://platform_large.png" id="8_eywha"]
+[ext_resource type="Texture2D" uid="uid://dd7d5m6dqgylc" path="res://platform_small.png" id="9_47j2w"]
+[ext_resource type="Texture2D" uid="uid://chsu6xkaf2md8" path="res://torch.png" id="10_idyxg"]
+[ext_resource type="Texture2D" uid="uid://dwgsl6gwrmxpa" path="res://torch_backgound.png" id="11_bwq23"]
+[ext_resource type="Texture2D" uid="uid://bpr60nwsbbsqs" path="res://tilemap.png" id="12_2jwkt"]
+[ext_resource type="Texture2D" uid="uid://p7x4x15hptbq" path="res://assets/wall.png" id="13_p6nij"]
+[ext_resource type="Texture2D" uid="uid://dd3oaupd8a0hf" path="res://castle.png" id="14_8cfyh"]
+[ext_resource type="Script" path="res://jump_bar.gd" id="15_r4y7e"]
+[ext_resource type="Script" path="res://health_bar.gd" id="16_vato0"]
+[ext_resource type="PackedScene" uid="uid://sihy1oiiv6bj" path="res://hotbar.tscn" id="17_8xi7l"]
+[ext_resource type="PackedScene" uid="uid://8sco8kh0fk4w" path="res://enemy/enemy.tscn" id="18_jsks7"]
+[ext_resource type="PackedScene" uid="uid://buq6m0boebfrh" path="res://barrel/barrel.tscn" id="19_ssqa3"]
+[ext_resource type="PackedScene" uid="uid://cdkr5ypexve51" path="res://barrel/impasible.tscn" id="20_dsj50"]
+[ext_resource type="PackedScene" uid="uid://cj0neh7rr8bi" path="res://character/shield.tscn" id="21_tj7cw"]
+[ext_resource type="PackedScene" uid="uid://dqqc12rc88x6u" path="res://character/character_body_2d.tscn" id="22_18gu2"]
+[ext_resource type="PackedScene" uid="uid://copjurvsoieqm" path="res://coin/coinui.tscn" id="23_mf2gt"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rkc28"]
-texture = ExtResource("2_i5v1g")
+texture = ExtResource("5_4u6tb")
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 1:0/0 = 0
@@ -187,21 +185,21 @@ texture = ExtResource("2_i5v1g")
 20:10/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rumvp"]
-texture = ExtResource("3_scnf6")
+texture = ExtResource("6_s4eyn")
 0:0/0 = 0
 1:0/0 = 0
 0:1/0 = 0
 1:1/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nf75j"]
-texture = ExtResource("4_pl1md")
+texture = ExtResource("7_pd4x4")
 0:0/0 = 0
 1:0/0 = 0
 0:1/0 = 0
 1:1/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_80cyw"]
-texture = ExtResource("5_hd58f")
+texture = ExtResource("8_eywha")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -216,7 +214,7 @@ texture = ExtResource("5_hd58f")
 5:1/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_siyqr"]
-texture = ExtResource("6_nfxbb")
+texture = ExtResource("9_47j2w")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -227,21 +225,21 @@ texture = ExtResource("6_nfxbb")
 3:1/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fo3t5"]
-texture = ExtResource("7_cijpc")
+texture = ExtResource("10_idyxg")
 0:0/0 = 0
 1:0/0 = 0
 0:1/0 = 0
 1:1/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kkd0k"]
-texture = ExtResource("8_h83iy")
+texture = ExtResource("11_bwq23")
 0:0/0 = 0
 1:0/0 = 0
 0:1/0 = 0
 1:1/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_253kd"]
-texture = ExtResource("9_hnuy7")
+texture = ExtResource("12_2jwkt")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16.2812, -16, 15.9961, -16.0469, 16.1562, 4.9375, -16.0938, 5)
@@ -287,7 +285,7 @@ texture_region_size = Vector2i(32, 32)
 2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16.2812, -16, 15.9961, -16.0469, 16.1562, 4.9375, -16.0938, 5)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vjkel"]
-texture = ExtResource("11_600aq")
+texture = ExtResource("13_p6nij")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 1:0/0 = 0
@@ -295,7 +293,7 @@ texture_region_size = Vector2i(32, 32)
 1:1/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7s18o"]
-texture = ExtResource("12_xcw0y")
+texture = ExtResource("14_8cfyh")
 1:0/0 = 0
 2:0/0 = 0
 3:0/0 = 0
@@ -501,18 +499,18 @@ sources/9 = SubResource("TileSetAtlasSource_7s18o")
 [node name="Node" type="Node2D"]
 self_modulate = Color(0, 0, 0, 1)
 texture_filter = 1
-script = ExtResource("1_f8jqy")
+script = ExtResource("1_4htlh")
 
-[node name="Node" parent="." instance=ExtResource("24_ho2ud")]
+[node name="Node" parent="." instance=ExtResource("2_0uwiw")]
 
-[node name="Node2" parent="." instance=ExtResource("3_7nh2x")]
+[node name="Node2" parent="." instance=ExtResource("3_35l5m")]
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = 8.0
 offset_top = -1632.0
 offset_right = 1141.0
 offset_bottom = 624.0
-color = Color(0.106505, 0.000117367, 0.306458, 1)
+color = Color(0.616225, 0.568938, 1, 1)
 
 [node name="TextureRect" type="TextureRect" parent="."]
 texture_filter = 1
@@ -521,7 +519,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_4fmb2")
+texture = ExtResource("4_5lft7")
 stretch_mode = 1
 
 [node name="TileLayer" type="TileMapLayer" parent="."]
@@ -551,7 +549,7 @@ offset_right = -105.0
 offset_bottom = 58.0
 grow_horizontal = 0
 show_percentage = false
-script = ExtResource("4_l3lgs")
+script = ExtResource("15_r4y7e")
 
 [node name="HealthBar" type="ProgressBar" parent="CanvasLayer"]
 texture_filter = 1
@@ -564,9 +562,9 @@ offset_right = -70.0
 offset_bottom = 85.0
 grow_horizontal = 0
 show_percentage = false
-script = ExtResource("5_rhnuf")
+script = ExtResource("16_vato0")
 
-[node name="hotbar" parent="CanvasLayer" instance=ExtResource("13_rs547")]
+[node name="hotbar" parent="CanvasLayer" instance=ExtResource("17_8xi7l")]
 offset_left = 74.0
 offset_top = -72.0
 offset_right = 74.0
@@ -574,21 +572,21 @@ offset_bottom = -72.0
 
 [node name="EnemyBullets" type="Node2D" parent="."]
 
-[node name="enemy" parent="." instance=ExtResource("8_cwafa")]
+[node name="enemy" parent="." instance=ExtResource("18_jsks7")]
 position = Vector2(762, 380)
 
-[node name="barrel" parent="." instance=ExtResource("4_5bejk")]
+[node name="barrel" parent="." instance=ExtResource("19_ssqa3")]
 position = Vector2(88, 448)
 
-[node name="rigiddbody" parent="." instance=ExtResource("8_ln4fk")]
+[node name="rigiddbody" parent="." instance=ExtResource("20_dsj50")]
 position = Vector2(88, 447)
 
 [node name="Bullets" type="Node2D" parent="."]
 
-[node name="shield" parent="." instance=ExtResource("23_c7wmr")]
+[node name="shield" parent="." instance=ExtResource("21_tj7cw")]
 position = Vector2(128, 588)
 
-[node name="CharacterBody2D" parent="." instance=ExtResource("3_tac4o")]
+[node name="CharacterBody2D" parent="." instance=ExtResource("22_18gu2")]
 position = Vector2(84, 609)
 
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
@@ -599,200 +597,11 @@ position_smoothing_speed = 20.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="CharacterBody2D"]
 
-[node name="coinui" parent="CharacterBody2D/CanvasLayer" instance=ExtResource("6_j4v6r")]
+[node name="coinui" parent="CharacterBody2D/CanvasLayer" instance=ExtResource("23_mf2gt")]
 offset_left = 980.0
 offset_top = 112.0
 offset_right = 1020.0
 offset_bottom = 150.0
-
-[node name="Coin" parent="." instance=ExtResource("10_4x0mx")]
-position = Vector2(337, 505)
-
-[node name="barrel2" parent="." instance=ExtResource("4_5bejk")]
-position = Vector2(866, 131)
-
-[node name="StaticBody2D" parent="." instance=ExtResource("8_ln4fk")]
-position = Vector2(866, 131)
-
-[node name="barrel3" parent="." instance=ExtResource("4_5bejk")]
-position = Vector2(250, 99)
-
-[node name="StaticBody2D2" parent="." instance=ExtResource("8_ln4fk")]
-position = Vector2(250, 99)
-
-[node name="Area2D" parent="." instance=ExtResource("10_4x0mx")]
-position = Vector2(90, 92)
-
-[node name="Area2D2" parent="." instance=ExtResource("10_4x0mx")]
-position = Vector2(188, 89)
-
-[node name="Area2D3" parent="." instance=ExtResource("10_4x0mx")]
-position = Vector2(320, 90)
-
-[node name="Area2D4" parent="." instance=ExtResource("10_4x0mx")]
-position = Vector2(395, 250)
-
-[node name="Area2D5" parent="." instance=ExtResource("10_4x0mx")]
-position = Vector2(242, 255)
-
-[node name="Area2D6" parent="." instance=ExtResource("10_4x0mx")]
-position = Vector2(80, 250)
-
-[node name="Area2D7" parent="." instance=ExtResource("10_4x0mx")]
-position = Vector2(936, 121)
-
-[node name="Area2D8" parent="." instance=ExtResource("10_4x0mx")]
-position = Vector2(1094, 439)
-
-[node name="Area2D9" parent="." instance=ExtResource("10_4x0mx")]
-position = Vector2(840, 376)
-
-[node name="Area2D10" parent="." instance=ExtResource("10_4x0mx")]
-position = Vector2(714, 374)
-
-[node name="Area2D11" parent="." instance=ExtResource("10_4x0mx")]
-position = Vector2(856, 508)
-
-[node name="Area2D12" parent="." instance=ExtResource("10_4x0mx")]
-position = Vector2(131, 450)
-
-[node name="Torch" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(144, 400)
-
-[node name="Torch2" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(560, 528)
-
-[node name="Torch3" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(752, 528)
-
-[node name="Torch4" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(528, 272)
-
-[node name="Torch5" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(240, 240)
-
-[node name="Torch6" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(112, 48)
-
-[node name="Torch7" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(304, 48)
-
-[node name="Torch8" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(464, 48)
-
-[node name="Torch9" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(784, -16)
-
-[node name="Torch10" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(912, -16)
-
-[node name="Torch11" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(1072, -112)
-
-[node name="Torch12" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(624, -112)
-
-[node name="Torch13" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(368, -112)
-
-[node name="Torch14" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(208, -176)
-
-[node name="Torch15" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(368, -272)
-
-[node name="Torch16" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(976, -240)
-
-[node name="Torch17" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(688, -304)
-
-[node name="Torch18" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(144, -432)
-
-[node name="Torch19" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(240, -432)
-
-[node name="Torch20" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(592, -464)
-
-[node name="Torch21" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(720, -464)
-
-[node name="Torch22" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(1072, -496)
-
-[node name="Torch23" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(944, -528)
-
-[node name="Torch24" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(784, -592)
-
-[node name="Torch25" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(624, -657)
-
-[node name="Torch26" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(272, -688)
-
-[node name="Torch27" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(368, -688)
-
-[node name="Torch28" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(208, -816)
-
-[node name="Torch29" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(656, -784)
-
-[node name="Torch30" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(880, -848)
-
-[node name="Torch31" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(1008, -847)
-
-[node name="Torch32" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(80, -1007)
-
-[node name="Torch33" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(528, -1072)
-
-[node name="Torch34" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(784, -1072)
-
-[node name="Torch35" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(976, -1072)
-
-[node name="Torch36" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(208, -1200)
-
-[node name="Torch37" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(784, -1296)
-
-[node name="Torch38" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(592, -1296)
-
-[node name="Torch39" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(400, -1296)
-
-[node name="Torch40" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(80, -1392)
-
-[node name="Torch41" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(208, -1488)
-
-[node name="Torch42" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(368, -1488)
-
-[node name="Torch43" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(528, -1487)
-
-[node name="Torch44" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(688, -1488)
-
-[node name="Torch45" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(848, -1488)
-
-[node name="Torch46" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(1008, -1487)
 
 [connection signal="enemy_shoot" from="enemy" to="." method="_on_enemy_enemy_shoot"]
 [connection signal="explo_damage" from="barrel" to="CharacterBody2D" method="_on_barrel_explo_damage"]
@@ -801,5 +610,3 @@ position = Vector2(1008, -1487)
 [connection signal="player_pos" from="CharacterBody2D" to="." method="_on_character_body_2d_player_pos"]
 [connection signal="player_pos" from="CharacterBody2D" to="enemy" method="_on_character_body_2d_player_pos"]
 [connection signal="shoot" from="CharacterBody2D" to="." method="_on_player_shoot"]
-[connection signal="explo_damage" from="barrel2" to="CharacterBody2D" method="_on_barrel_2_explo_damage"]
-[connection signal="explo_damage" from="barrel3" to="CharacterBody2D" method="_on_barrel_3_explo_damage"]

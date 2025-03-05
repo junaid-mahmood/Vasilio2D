@@ -40,11 +40,11 @@ _data = {
 "default": SubResource("Animation_wcigo")
 }
 
-[sub_resource type="Gradient" id="Gradient_oavwo"]
+[sub_resource type="Gradient" id="Gradient_wo4vw"]
 colors = PackedColorArray(1, 0.6, 0.2, 1, 1, 0.6, 0.2, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_75csw"]
-gradient = SubResource("Gradient_oavwo")
+gradient = SubResource("Gradient_wo4vw")
 width = 300
 height = 300
 fill = 1
