@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://k03fmaqddqni"]
+[gd_scene load_steps=9 format=3 uid="uid://birjbl7d2hpf5"]
 
 [ext_resource type="Texture2D" uid="uid://fsor74keuwd5" path="res://door.png" id="1_4je1w"]
+[ext_resource type="Script" uid="uid://c1mc1l2irefmd" path="res://area_2d.gd" id="1_htnub"]
 
 [sub_resource type="GDScript" id="GDScript_ufypy"]
 script/source = "extends Node
@@ -81,25 +82,29 @@ func _on_area_body_entered(body):
 		get_tree().change_scene_to_file(\"res://ss.tscn\")
 "
 
+[sub_resource type="Gradient" id="Gradient_htnub"]
+colors = PackedColorArray(1, 0.6, 0.2, 1, 1, 0.6, 0.2, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_aa25p"]
+gradient = SubResource("Gradient_htnub")
+width = 300
+height = 308
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.9, 0.1)
+metadata/_snap_enabled = true
+
 [sub_resource type="Animation" id="Animation_6j87o"]
 resource_name = "new_animation"
 loop_mode = 1
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yxgrc"]
 _data = {
-"new_animation": SubResource("Animation_6j87o")
+&"new_animation": SubResource("Animation_6j87o")
 }
 
-[sub_resource type="Gradient" id="Gradient_oavwo"]
-colors = PackedColorArray(1, 0.6, 0.2, 1, 1, 0.6, 0.2, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_dl6wk"]
-gradient = SubResource("Gradient_oavwo")
-width = 300
-height = 300
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(0.9, 0.1)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_npwcn"]
+size = Vector2(80, 141.5)
 
 [node name="Node" type="Node"]
 process_thread_group = 2
@@ -107,23 +112,34 @@ process_thread_group_order = 0
 process_thread_messages = 3
 script = SubResource("GDScript_ufypy")
 
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(233, 533)
+scale = Vector2(0.40124, 0.401332)
+color = Color(0.700333, 0.862456, 1, 1)
+energy = 1.2
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 1.0
+texture = SubResource("GradientTexture2D_aa25p")
+texture_scale = 5.28
+
 [node name="Timer" type="Timer" parent="."]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_yxgrc")
+&"": SubResource("AnimationLibrary_yxgrc")
 }
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(-1.52588e-05, 0)
+scale = Vector2(1, 1)
+script = ExtResource("1_htnub")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(232, 535)
+shape = SubResource("RectangleShape2D_npwcn")
 
 [node name="Door" type="Sprite2D" parent="."]
 position = Vector2(229, 536)
 scale = Vector2(0.40124, 0.401332)
 texture = ExtResource("1_4je1w")
-
-[node name="PointLight2D2" type="PointLight2D" parent="."]
-position = Vector2(0, -2)
-color = Color(1, 0.6, 0.2, 1)
-energy = 1.2
-shadow_enabled = true
-shadow_filter = 1
-shadow_filter_smooth = 1.0
-texture = SubResource("GradientTexture2D_dl6wk")

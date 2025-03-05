@@ -1,31 +1,28 @@
-[gd_scene load_steps=35 format=4 uid="uid://dgrbwxhjrp5gd"]
+[gd_scene load_steps=32 format=4 uid="uid://cngewq4vcofbt"]
 
-[ext_resource type="Script" path="res://main.gd" id="1_4htlh"]
-[ext_resource type="PackedScene" uid="uid://busogtbhjs2b8" path="res://door.tscn" id="2_0uwiw"]
-[ext_resource type="PackedScene" uid="uid://k03fmaqddqni" path="res://tw.tscn" id="3_35l5m"]
-[ext_resource type="Texture2D" uid="uid://c5s2hrlt2ccgm" path="res://assets/Blue.png" id="4_5lft7"]
-[ext_resource type="Texture2D" uid="uid://dpjfl8jiimvx3" path="res://assets/Terrain (16x16).png" id="5_4u6tb"]
-[ext_resource type="Texture2D" uid="uid://cbkql87n3ipnc" path="res://block.png" id="6_s4eyn"]
-[ext_resource type="Texture2D" uid="uid://c25ogtxetuxo0" path="res://chain.png" id="7_pd4x4"]
-[ext_resource type="Texture2D" uid="uid://dy7twkmy73820" path="res://platform_large.png" id="8_eywha"]
-[ext_resource type="Texture2D" uid="uid://dd7d5m6dqgylc" path="res://platform_small.png" id="9_47j2w"]
-[ext_resource type="Texture2D" uid="uid://chsu6xkaf2md8" path="res://torch.png" id="10_idyxg"]
-[ext_resource type="Texture2D" uid="uid://dwgsl6gwrmxpa" path="res://torch_backgound.png" id="11_bwq23"]
-[ext_resource type="Texture2D" uid="uid://bpr60nwsbbsqs" path="res://tilemap.png" id="12_2jwkt"]
-[ext_resource type="Texture2D" uid="uid://p7x4x15hptbq" path="res://assets/wall.png" id="13_p6nij"]
-[ext_resource type="Texture2D" uid="uid://dd3oaupd8a0hf" path="res://castle.png" id="14_8cfyh"]
-[ext_resource type="Script" path="res://jump_bar.gd" id="15_r4y7e"]
-[ext_resource type="Script" path="res://health_bar.gd" id="16_vato0"]
-[ext_resource type="PackedScene" uid="uid://sihy1oiiv6bj" path="res://hotbar.tscn" id="17_8xi7l"]
-[ext_resource type="PackedScene" uid="uid://8sco8kh0fk4w" path="res://enemy/enemy.tscn" id="18_jsks7"]
-[ext_resource type="PackedScene" uid="uid://buq6m0boebfrh" path="res://barrel/barrel.tscn" id="19_ssqa3"]
-[ext_resource type="PackedScene" uid="uid://cdkr5ypexve51" path="res://barrel/impasible.tscn" id="20_dsj50"]
-[ext_resource type="PackedScene" uid="uid://cj0neh7rr8bi" path="res://character/shield.tscn" id="21_tj7cw"]
-[ext_resource type="PackedScene" uid="uid://dqqc12rc88x6u" path="res://character/character_body_2d.tscn" id="22_18gu2"]
-[ext_resource type="PackedScene" uid="uid://copjurvsoieqm" path="res://coin/coinui.tscn" id="23_mf2gt"]
+[ext_resource type="Script" uid="uid://di6camdvfumij" path="res://main.gd" id="1_7mylh"]
+[ext_resource type="Texture2D" uid="uid://c5s2hrlt2ccgm" path="res://assets/Blue.png" id="2_3k4dh"]
+[ext_resource type="Texture2D" uid="uid://dpjfl8jiimvx3" path="res://assets/Terrain (16x16).png" id="3_idpoe"]
+[ext_resource type="Texture2D" uid="uid://cbkql87n3ipnc" path="res://block.png" id="4_ggudo"]
+[ext_resource type="Texture2D" uid="uid://c25ogtxetuxo0" path="res://chain.png" id="5_y2jff"]
+[ext_resource type="Texture2D" uid="uid://dy7twkmy73820" path="res://platform_large.png" id="6_545ku"]
+[ext_resource type="Texture2D" uid="uid://dd7d5m6dqgylc" path="res://platform_small.png" id="7_cfvhu"]
+[ext_resource type="Texture2D" uid="uid://chsu6xkaf2md8" path="res://torch.png" id="8_sl2u6"]
+[ext_resource type="Texture2D" uid="uid://dwgsl6gwrmxpa" path="res://torch_backgound.png" id="9_fug78"]
+[ext_resource type="Texture2D" uid="uid://bpr60nwsbbsqs" path="res://tilemap.png" id="10_lh3ue"]
+[ext_resource type="Texture2D" uid="uid://p7x4x15hptbq" path="res://assets/wall.png" id="11_nv8dg"]
+[ext_resource type="Texture2D" uid="uid://dd3oaupd8a0hf" path="res://castle.png" id="12_wooj1"]
+[ext_resource type="Script" uid="uid://cjkx8e0pqklfw" path="res://jump_bar.gd" id="13_1i48b"]
+[ext_resource type="Script" uid="uid://bqhhrylu0173q" path="res://health_bar.gd" id="14_uhfm4"]
+[ext_resource type="PackedScene" uid="uid://sihy1oiiv6bj" path="res://hotbar.tscn" id="15_00gqm"]
+[ext_resource type="PackedScene" uid="uid://buq6m0boebfrh" path="res://barrel/barrel.tscn" id="17_lphq7"]
+[ext_resource type="PackedScene" uid="uid://cdkr5ypexve51" path="res://barrel/impasible.tscn" id="18_ttoml"]
+[ext_resource type="PackedScene" uid="uid://cj0neh7rr8bi" path="res://character/shield.tscn" id="19_ocb40"]
+[ext_resource type="PackedScene" uid="uid://dqqc12rc88x6u" path="res://character/character_body_2d.tscn" id="20_86mrq"]
+[ext_resource type="PackedScene" uid="uid://copjurvsoieqm" path="res://coin/coinui.tscn" id="21_wrkgn"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rkc28"]
-texture = ExtResource("5_4u6tb")
+texture = ExtResource("3_idpoe")
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 1:0/0 = 0
@@ -185,21 +182,21 @@ texture = ExtResource("5_4u6tb")
 20:10/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rumvp"]
-texture = ExtResource("6_s4eyn")
+texture = ExtResource("4_ggudo")
 0:0/0 = 0
 1:0/0 = 0
 0:1/0 = 0
 1:1/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nf75j"]
-texture = ExtResource("7_pd4x4")
+texture = ExtResource("5_y2jff")
 0:0/0 = 0
 1:0/0 = 0
 0:1/0 = 0
 1:1/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_80cyw"]
-texture = ExtResource("8_eywha")
+texture = ExtResource("6_545ku")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -214,7 +211,7 @@ texture = ExtResource("8_eywha")
 5:1/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_siyqr"]
-texture = ExtResource("9_47j2w")
+texture = ExtResource("7_cfvhu")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -225,21 +222,21 @@ texture = ExtResource("9_47j2w")
 3:1/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fo3t5"]
-texture = ExtResource("10_idyxg")
+texture = ExtResource("8_sl2u6")
 0:0/0 = 0
 1:0/0 = 0
 0:1/0 = 0
 1:1/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kkd0k"]
-texture = ExtResource("11_bwq23")
+texture = ExtResource("9_fug78")
 0:0/0 = 0
 1:0/0 = 0
 0:1/0 = 0
 1:1/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_253kd"]
-texture = ExtResource("12_2jwkt")
+texture = ExtResource("10_lh3ue")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16.2812, -16, 15.9961, -16.0469, 16.1562, 4.9375, -16.0938, 5)
@@ -285,7 +282,7 @@ texture_region_size = Vector2i(32, 32)
 2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16.2812, -16, 15.9961, -16.0469, 16.1562, 4.9375, -16.0938, 5)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vjkel"]
-texture = ExtResource("13_p6nij")
+texture = ExtResource("11_nv8dg")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 1:0/0 = 0
@@ -293,7 +290,7 @@ texture_region_size = Vector2i(32, 32)
 1:1/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7s18o"]
-texture = ExtResource("14_8cfyh")
+texture = ExtResource("12_wooj1")
 1:0/0 = 0
 2:0/0 = 0
 3:0/0 = 0
@@ -499,18 +496,15 @@ sources/9 = SubResource("TileSetAtlasSource_7s18o")
 [node name="Node" type="Node2D"]
 self_modulate = Color(0, 0, 0, 1)
 texture_filter = 1
-script = ExtResource("1_4htlh")
-
-[node name="Node" parent="." instance=ExtResource("2_0uwiw")]
-
-[node name="Node2" parent="." instance=ExtResource("3_35l5m")]
+script = ExtResource("1_7mylh")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = 8.0
 offset_top = -1632.0
 offset_right = 1141.0
 offset_bottom = 624.0
-color = Color(0.616225, 0.568938, 1, 1)
+color = Color(0.50953, 0.277493, 0, 1)
+metadata/_edit_use_anchors_ = true
 
 [node name="TextureRect" type="TextureRect" parent="."]
 texture_filter = 1
@@ -519,8 +513,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("4_5lft7")
+texture = ExtResource("2_3k4dh")
 stretch_mode = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="TileLayer" type="TileMapLayer" parent="."]
 texture_filter = 1
@@ -549,7 +544,7 @@ offset_right = -105.0
 offset_bottom = 58.0
 grow_horizontal = 0
 show_percentage = false
-script = ExtResource("15_r4y7e")
+script = ExtResource("13_1i48b")
 
 [node name="HealthBar" type="ProgressBar" parent="CanvasLayer"]
 texture_filter = 1
@@ -562,31 +557,30 @@ offset_right = -70.0
 offset_bottom = 85.0
 grow_horizontal = 0
 show_percentage = false
-script = ExtResource("16_vato0")
+script = ExtResource("14_uhfm4")
 
-[node name="hotbar" parent="CanvasLayer" instance=ExtResource("17_8xi7l")]
+[node name="hotbar" parent="CanvasLayer" instance=ExtResource("15_00gqm")]
 offset_left = 74.0
 offset_top = -72.0
 offset_right = 74.0
 offset_bottom = -72.0
+rotation = 0.000340638
 
 [node name="EnemyBullets" type="Node2D" parent="."]
 
-[node name="enemy" parent="." instance=ExtResource("18_jsks7")]
-position = Vector2(762, 380)
-
-[node name="barrel" parent="." instance=ExtResource("19_ssqa3")]
+[node name="barrel" parent="." instance=ExtResource("17_lphq7")]
 position = Vector2(88, 448)
 
-[node name="rigiddbody" parent="." instance=ExtResource("20_dsj50")]
+[node name="rigiddbody" parent="." instance=ExtResource("18_ttoml")]
 position = Vector2(88, 447)
 
 [node name="Bullets" type="Node2D" parent="."]
 
-[node name="shield" parent="." instance=ExtResource("21_tj7cw")]
+[node name="shield" parent="." instance=ExtResource("19_ocb40")]
 position = Vector2(128, 588)
+rotation = 0.0937665
 
-[node name="CharacterBody2D" parent="." instance=ExtResource("22_18gu2")]
+[node name="CharacterBody2D" parent="." instance=ExtResource("20_86mrq")]
 position = Vector2(84, 609)
 
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
@@ -597,16 +591,14 @@ position_smoothing_speed = 20.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="CharacterBody2D"]
 
-[node name="coinui" parent="CharacterBody2D/CanvasLayer" instance=ExtResource("23_mf2gt")]
+[node name="coinui" parent="CharacterBody2D/CanvasLayer" instance=ExtResource("21_wrkgn")]
 offset_left = 980.0
 offset_top = 112.0
 offset_right = 1020.0
 offset_bottom = 150.0
 
-[connection signal="enemy_shoot" from="enemy" to="." method="_on_enemy_enemy_shoot"]
 [connection signal="explo_damage" from="barrel" to="CharacterBody2D" method="_on_barrel_explo_damage"]
 [connection signal="new_coin" from="CharacterBody2D" to="CharacterBody2D/CanvasLayer/coinui" method="_on_character_body_2d_new_coin"]
 [connection signal="pla_pos_shield" from="CharacterBody2D" to="shield" method="_on_character_body_2d_pla_pos_shield"]
 [connection signal="player_pos" from="CharacterBody2D" to="." method="_on_character_body_2d_player_pos"]
-[connection signal="player_pos" from="CharacterBody2D" to="enemy" method="_on_character_body_2d_player_pos"]
 [connection signal="shoot" from="CharacterBody2D" to="." method="_on_player_shoot"]

@@ -3,7 +3,6 @@ extends CharacterBody2D
 signal shoot(pos, bool)
 var facing_right = true
 var coins := 0
-#var weapon := true
 var is_invulnerable := false
 const INVULNERABILITY_TIME := 1.0
 
@@ -31,8 +30,7 @@ const DOUBLE_JUMP_COST := 40.0
 @onready var progress_bar: ProgressBar = get_node("../CanvasLayer/JumpBar")
 @onready var health_bar: ProgressBar = get_node("../CanvasLayer/HealthBar")
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-var can_double_jump := false  # New variable to track double jump availability
-
+var can_double_jump := false
 
 func _ready() -> void:
 	progress_bar.max_value = 100
@@ -44,14 +42,12 @@ func _ready() -> void:
 	shield_body = parent.get_node("shield") as StaticBody2D
 	shield_body.visible = shield
 
-
 func _physics_process(delta: float) -> void:
-	#check if game ends
 	if health_bar.value <= 0:
 		game_over()
 	
+	check_door_collision()
 	
-	#direct shield angle towards mouse
 	var centered_global_position = global_position
 	centered_global_position.y -= 20
 	centered_global_position.x += 9
@@ -70,15 +66,11 @@ func _physics_process(delta: float) -> void:
 		shield_body.visible = false
 		emit_signal("has_shield", false)
 		
-		
-	#check if changes weapon
 	if Input.is_action_just_pressed("switch"):
 		weapon_counter += 1
 		if weapon_counter > 2:
 			weapon_counter = 0
 		Global.weapon = weapons[weapon_counter]
-		
-	
 	
 	if progress_bar.value < 100:
 		progress_bar.value = min(progress_bar.value + RECHARGE_RATE * delta, 100)
@@ -90,7 +82,6 @@ func _physics_process(delta: float) -> void:
 	else:
 		sprite_2d.animation = "default"
 		
-	# Reset double jump when touching the ground
 	if is_on_floor():
 		can_double_jump = true
 	
@@ -104,7 +95,7 @@ func _physics_process(delta: float) -> void:
 		elif can_double_jump and progress_bar.value >= DOUBLE_JUMP_COST:
 			velocity.y = JUMP_VELOCITY * 1.1
 			progress_bar.value -= DOUBLE_JUMP_COST
-			can_double_jump = false  # Prevent additional double jumps until landing
+			can_double_jump = false
 	
 	if Input.is_action_just_pressed("ui_select"):
 		if Global.weapon == 'gun':
@@ -122,8 +113,6 @@ func _physics_process(delta: float) -> void:
 					if distance < kill_radius:
 						node.enemy_damage(50)
 
-
-
 	var direction := Input.get_axis("ui_left", "ui_right")
 	if direction != 0:
 		if (direction < 0 and velocity.x > 0) or (direction > 0 and velocity.x < 0):
@@ -138,6 +127,38 @@ func _physics_process(delta: float) -> void:
 		sprite_2d.flip_h = velocity.x < 0
 		
 	emit_signal("player_pos", position)
+
+func check_door_collision():
+	for node in get_tree().get_nodes_in_group("doors"):
+		if node is Area2D:
+			var door_pos = node.global_position
+			var distance = global_position.distance_to(door_pos)
+			if distance < 50:
+				print("Player has touched the door!")
+				return
+	
+	var doors = get_tree().get_nodes_in_group("door")
+	for door in doors:
+		if door is Area2D:
+			var distance = global_position.distance_to(door.global_position)
+			if distance < 50:
+				print("Player has touched the door!")
+				return
+				
+	var specific_door = get_node_or_null("../Door")
+	if specific_door:
+		var distance = global_position.distance_to(specific_door.global_position)
+		if distance < 50:
+			print("Player has touched the Door node!")
+			return
+			
+	var all_areas = get_tree().get_nodes_in_group("Area2D")
+	for area in all_areas:
+		if "door" in area.name.to_lower():
+			var distance = global_position.distance_to(area.global_position)
+			if distance < 50:
+				print("Player has touched a door-like area!")
+				return
 		
 func get_right_direc(direction):
 	if direction != 0:
@@ -155,14 +176,9 @@ func player_damage(number):
 	await get_tree().create_timer(INVULNERABILITY_TIME).timeout
 	is_invulnerable = false
 
-
 func game_over() -> void:
 	print("Game Over!")
 	get_tree().reload_current_scene()
-
-
-
-
 
 func coin_collected(num):
 	coins += num
@@ -170,18 +186,14 @@ func coin_collected(num):
 	$"+1".visible = true
 	$collect.start()
 
-
 func _on_collect_timeout() -> void:
 	$"+1".visible = false
-
 
 func _on_barrel_2_explo_damage(num: Variant) -> void:
 	player_damage(num)
 
-
 func _on_barrel_3_explo_damage(num: Variant) -> void:
 	player_damage(num)
-
 
 func _on_barrel_explo_damage(num: Variant) -> void:
 	player_damage(num)
