@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://b2iijrv4a5h80"]
+
+[ext_resource type="Script" path="res://tarzan/tarzan.gd" id="1_bf6xn"]
+[ext_resource type="Texture2D" uid="uid://c1stof3usra12" path="res://icon.svg" id="2_iufoq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_38lwh"]
+radius = 18.5068
+
+[node name="tarzan" type="CharacterBody2D"]
+script = ExtResource("1_bf6xn")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_iufoq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, -0.5)
+shape = SubResource("CircleShape2D_38lwh")
+
+[node name="grapple" type="RayCast2D" parent="."]
+target_position = Vector2(0, 150)

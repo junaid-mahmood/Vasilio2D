@@ -1,22 +1,15 @@
 extends CharacterBody2D
 
-signal shoot(pos, bool)
 var facing_right = true
 var coins := 0
-#var weapon := true
+
 var is_invulnerable := false
 const INVULNERABILITY_TIME := 1.0
 
-var shield := false
 var DISTANCE_SHIELD := 40
 var shield_body
 var weapon_counter := 0
 var weapons = ["gun", "sword", "shield"]
-
-signal player_pos(pos)
-signal new_coin(coins)
-signal has_shield(shield)
-signal pla_pos_shield(new_pos)
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
@@ -31,7 +24,7 @@ const DOUBLE_JUMP_COST := 40.0
 @onready var progress_bar: ProgressBar = get_node("../CanvasLayer/JumpBar")
 @onready var health_bar: ProgressBar = get_node("../CanvasLayer/HealthBar")
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-var can_double_jump := false  # New variable to track double jump availability
+var can_double_jump := false
 
 
 func _ready() -> void:
@@ -42,10 +35,11 @@ func _ready() -> void:
 	
 	var parent = get_parent()
 	shield_body = parent.get_node("shield") as StaticBody2D
-	shield_body.visible = shield
+	shield_body.visible = false
 
 
 func _physics_process(delta: float) -> void:
+
 	#check if game ends
 	if health_bar.value <= 0:
 		game_over()
@@ -59,18 +53,19 @@ func _physics_process(delta: float) -> void:
 	var direc_to_mouse = (mouse_pos - centered_global_position).normalized()
 	var angle_radians = atan2(direc_to_mouse.y, direc_to_mouse.x)
 	var shield_pos = centered_global_position + Vector2(cos(angle_radians), sin(angle_radians)) * DISTANCE_SHIELD
-	emit_signal("pla_pos_shield", shield_pos)
+	shield_body.position = shield_pos
 	if angle_radians:
 		shield_body.rotation = angle_radians
 	
-	if Global.weapon == 'shield':
-		shield_body.visible = true
-		emit_signal("has_shield", true)
-	else:
+	if Global.weapon != 'shield':
 		shield_body.visible = false
-		emit_signal("has_shield", false)
-		
-		
+		Global.has_shield = false
+	else:
+		shield_body.visible = true
+		Global.has_shield = true
+
+
+
 	#check if changes weapon
 	if Input.is_action_just_pressed("switch"):
 		weapon_counter += 1
@@ -85,7 +80,7 @@ func _physics_process(delta: float) -> void:
 	
 	if Global.weapon == 'sword':
 		sprite_2d.animation = "sword"
-	elif abs(velocity.x) > 1:
+	elif abs(velocity.x) > 1 and not Global.dead:
 		sprite_2d.animation = "running"
 	else:
 		sprite_2d.animation = "default"
@@ -109,7 +104,7 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_select"):
 		if Global.weapon == 'gun':
 			progress_bar.value -= SHOOT_COST
-			shoot.emit(global_position, facing_right)
+			Global.shoot = [true, global_position, facing_right]
 		elif Global.weapon == 'sword':
 			progress_bar.value -= SWORD_COST
 			sprite_2d.animation = 'sword'
@@ -123,7 +118,7 @@ func _physics_process(delta: float) -> void:
 						node.enemy_damage(50)
 
 
-
+	
 	var direction := Input.get_axis("ui_left", "ui_right")
 	if direction != 0:
 		if (direction < 0 and velocity.x > 0) or (direction > 0 and velocity.x < 0):
@@ -131,13 +126,14 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, direction * SPEED, ACCELERATION * delta)
 	else:
 		velocity.x = move_toward(velocity.x, 0, FRICTION * delta)
-	move_and_slide()
+	if not Global.dead:
+		move_and_slide()
+		if velocity.x != 0:
+			sprite_2d.flip_h = velocity.x < 0
 	get_right_direc(direction)
 	
-	if velocity.x != 0:
-		sprite_2d.flip_h = velocity.x < 0
 		
-	emit_signal("player_pos", position)
+	Global.player_position = position
 		
 func get_right_direc(direction):
 	if direction != 0:
@@ -157,8 +153,11 @@ func player_damage(number):
 
 
 func game_over() -> void:
-	print("Game Over!")
+	Global.dead = true
+	Global.coins_collected = 0
+	await get_tree().create_timer(3.0).timeout
 	get_tree().reload_current_scene()
+	Global.dead = false
 
 
 
@@ -166,7 +165,7 @@ func game_over() -> void:
 
 func coin_collected(num):
 	coins += num
-	emit_signal("new_coin", coins)
+	Global.coins_collected = coins
 	$"+1".visible = true
 	$collect.start()
 

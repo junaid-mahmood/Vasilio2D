@@ -2,37 +2,72 @@ extends Node
 
 const bullet_scene: PackedScene = preload("res://character/bullet.tscn")
 const enemy_bullet_scene: PackedScene = preload("res://enemy/enemy_bullet.tscn")
-const bullet_bow_scene: PackedScene = preload("res://bow/bow_bullet.tscn")
+const portal_bullet_scene: PackedScene = preload("res://teleport/portal.tscn")
+
+var player_character
 
 
 
-func _on_player_shoot(pos, facing_right):
-	var bullet = bullet_scene.instantiate()
-	var direction = 1 if facing_right else -1
-	bullet.direction = direction
-	$Bullets.add_child(bullet)
-	pos.y -= 20
-	bullet.position = pos + Vector2(6 * direction, 0)
+func _ready() -> void:
+	if Global.player == 'tarzan':
+		player_character = load("res://tarzan/tarzan.tscn").instantiate() 
+		player_character.position = Vector2(79, 600)
+		
+	elif Global.player == 'classic':
+		player_character = load("res://character/character_body_2d.tscn").instantiate()
+		player_character.position = Vector2(79, 611)
+		
+	elif Global.player == 'scientist':
+		player_character = load("res://teleport/teleport.tscn").instantiate()
+		player_character.position = Vector2(79, 600)
+	
+	add_child(player_character)
 
 
-
-
-
-func _on_enemy_enemy_shoot(pos: Variant, player_pos: Variant) -> void:
-	var bullet = enemy_bullet_scene.instantiate()
-	pos.y -= 20
-	bullet.position = pos
-	var direction: Vector2 = (player_pos - pos).normalized()
-	bullet.velocity = direction * bullet.speed
-	bullet.rotation = direction.angle()
-	$EnemyBullets.add_child(bullet)
-
-
-
-func _on_character_body_2d_shoot_bow(pos: Variant, facing_right: Variant) -> void:
-	var bullet = bullet_bow_scene.instantiate()
-	var direction = 1 if facing_right else -1
-	bullet.direction = direction
-	$BowBullets.add_child(bullet)
-	pos.y -= 20
-	bullet.position = pos + Vector2(6 * direction, 0)
+func _process(delta: float) -> void:
+	if Global.shoot[0]:
+		var pos = Global.shoot[1]
+		var facing_right = Global.shoot[2]
+		var bullet = bullet_scene.instantiate()
+		var direction = 1 if facing_right else -1
+		bullet.direction = direction
+		$Bullets.add_child(bullet)
+		pos.y -= 20
+		bullet.position = pos + Vector2(6 * direction, 0)
+		Global.shoot[0] = false
+		
+	if Global.enemy_shoot[0]:
+		var pos = Global.enemy_shoot[1]
+		var player_pos = Global.enemy_shoot[2]
+		var en_bullet = enemy_bullet_scene.instantiate()
+		pos.y -= 20
+		en_bullet.position = pos
+		var direction: Vector2 = (player_pos - pos).normalized()
+		en_bullet.velocity = direction * en_bullet.speed
+		en_bullet.rotation = direction.angle()
+		$EnemyBullets.add_child(en_bullet)
+		Global.enemy_shoot[0] = false
+		
+	if Global.shoot_portal[0]:
+		await get_tree().create_timer(1)
+		var pos = Global.shoot_portal[1]
+		var portal_bullet = portal_bullet_scene.instantiate()
+		var direction := Vector2.ZERO
+		if Global.portals == 1:
+			direction = (Global.portal1 - pos).normalized()
+			
+		elif Global.portals == 2:
+			direction = (Global.portal2 - pos).normalized()
+			
+			
+		
+		portal_bullet.position = pos
+		portal_bullet.velocity = direction * portal_bullet.speed
+		portal_bullet.rotation = direction.angle()
+		if Global.portals == 1:
+			portal_bullet.set_pos = Global.portal1
+		else:
+			portal_bullet.set_pos = Global.portal2
+		$EnemyBullets.add_child(portal_bullet)
+		Global.shoot_portal[0] = false
+		

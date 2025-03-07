@@ -21,8 +21,8 @@
 [ext_resource type="Texture2D" uid="uid://dd3oaupd8a0hf" path="res://castle.png" id="12_xcw0y"]
 [ext_resource type="PackedScene" uid="uid://sihy1oiiv6bj" path="res://hotbar.tscn" id="13_rs547"]
 [ext_resource type="PackedScene" uid="uid://jnlfurofofr7" path="res://torch.tscn" id="21_fl64f"]
+[ext_resource type="PackedScene" uid="uid://b2iijrv4a5h80" path="res://tarzan/tarzan.tscn" id="23_6egcs"]
 [ext_resource type="PackedScene" uid="uid://cj0neh7rr8bi" path="res://character/shield.tscn" id="23_c7wmr"]
-[ext_resource type="Script" path="res://canvas_modulate.gd" id="23_h8c7e"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rkc28"]
 texture = ExtResource("2_i5v1g")
@@ -582,7 +582,6 @@ position = Vector2(88, 447)
 [node name="Bullets" type="Node2D" parent="."]
 
 [node name="shield" parent="." instance=ExtResource("23_c7wmr")]
-visible = false
 position = Vector2(128, 588)
 
 [node name="Coin" parent="." instance=ExtResource("10_4x0mx")]
@@ -774,7 +773,5 @@ position = Vector2(848, -1488)
 [node name="Torch46" parent="." instance=ExtResource("21_fl64f")]
 position = Vector2(1008, -1487)
 
-[node name="CanvasModulate" type="CanvasModulate" parent="."]
-visible = false
-color = Color(0.605601, 0.0997618, 0.253805, 1)
-script = ExtResource("23_h8c7e")
+[node name="tarzan" parent="." instance=ExtResource("23_6egcs")]
+position = Vector2(86, 587)

@@ -4,12 +4,25 @@ extends Area2D
 
 var damage := 0
 
+var Player
+
 signal explo_damage(num)
+
+func _ready() -> void:
+	if Global.player == 'tarzan':
+		Player = get_node("res://tarzan/tarzan.tscn")
+		
+	elif Global.player == 'classic':
+		Player = get_node("res://character/character_body_2d.tscn")
+		
+	elif Global.player == 'scientist':
+		Player = get_node("res://teleport/teleport.tscn")
 
 func _on_area_entered(area: Area2D) -> void:
 	area.queue_free()
 	spawn_explosion()
 	apply_explosion_impulse()
+
 
 func spawn_explosion():
 	var explosion_instance = explosion.instantiate()

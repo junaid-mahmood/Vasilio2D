@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://ck081yu4vn1ii"]
+
+[ext_resource type="Script" path="res://teleport/teleport.gd" id="1_dxo33"]
+[ext_resource type="Texture2D" uid="uid://c1stof3usra12" path="res://icon.svg" id="1_vgxyn"]
+[ext_resource type="Texture2D" uid="uid://d2pqry6lxk8uh" path="res://assets/+1.png" id="3_2owyh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8ue7p"]
+size = Vector2(25, 26)
+
+[node name="teleport" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 86
+script = ExtResource("1_dxo33")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_vgxyn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_8ue7p")
+
+[node name="+1" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(12.5, -23)
+scale = Vector2(1.112, 1)
+texture = ExtResource("3_2owyh")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, 3)
+position_smoothing_enabled = true
+position_smoothing_speed = 20.0
+
+[node name="collect" type="Timer" parent="."]
+
+[node name="portal_pos" type="RayCast2D" parent="."]
