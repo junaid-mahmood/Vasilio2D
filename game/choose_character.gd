@@ -11,6 +11,11 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed('ui_up'):
 		Global.player = characters[counter]
 		get_tree().change_scene_to_file("res://main.tscn")
+		
+		
+	if characters[counter] == 'scientist':
+		get_node("scientist").position.y += sin(Time.get_ticks_msec() / 200) * delta * 100
+		
 
 
 

@@ -64,7 +64,7 @@ size = Vector2(12, 12)
 
 [node name="portal" type="Area2D"]
 collision_layer = 32
-collision_mask = 280
+collision_mask = 16
 script = ExtResource("1_71nra")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
