@@ -26,7 +26,7 @@ var portal2 = Vector2.ZERO
 var can_teleport := true
 var can_teleport_timer := true
 
-@onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var sprite_2d: AnimatedSprite2D = $Sprite2D
 @onready var progress_bar: ProgressBar = get_node("../CanvasLayer/JumpBar")
 @onready var health_bar: ProgressBar = get_node("../CanvasLayer/HealthBar")
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -41,6 +41,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	
 
 	
 	Global.player_position = position
@@ -127,6 +128,7 @@ func handle_normal_movement(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, FRICTION * delta)
 	
+
 	if not is_on_floor():
 		velocity.y += gravity * delta
 		
