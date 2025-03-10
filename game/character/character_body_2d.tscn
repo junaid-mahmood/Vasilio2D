@@ -1,14 +1,18 @@
-[gd_scene load_steps=57 format=3 uid="uid://dqqc12rc88x6u"]
+[gd_scene load_steps=61 format=3 uid="uid://dqqc12rc88x6u"]
 
-[ext_resource type="Script" path="res://character/character_body_2d.gd" id="1_jmigi"]
+[ext_resource type="Script" uid="uid://d2lw5iem5frny" path="res://character/character_body_2d.gd" id="1_jmigi"]
 [ext_resource type="Texture2D" uid="uid://u5jcjlipv0um" path="res://assets/Jump (32x32).png" id="1_tvtrm"]
-[ext_resource type="Shader" path="res://player_hurt.gdshader" id="1_x1ujg"]
+[ext_resource type="Shader" uid="uid://drgsxu4i1toe6" path="res://player_hurt.gdshader" id="1_x1ujg"]
 [ext_resource type="Texture2D" uid="uid://cd8vrtukee532" path="res://assets/Idle (32x32).png" id="2_082ih"]
 [ext_resource type="Texture2D" uid="uid://bud2yd45g2eq4" path="res://assets/run_bow.png" id="3_lm1os"]
 [ext_resource type="Texture2D" uid="uid://bynstvyqs33bi" path="res://assets/bowshoot.png" id="4_ggqaj"]
 [ext_resource type="Texture2D" uid="uid://xyur7cni8u7u" path="res://assets/Run (32x32).png" id="4_nfqut"]
 [ext_resource type="Texture2D" uid="uid://d2pqry6lxk8uh" path="res://assets/+1.png" id="5_xli75"]
 [ext_resource type="Texture2D" uid="uid://cdk5mpytif2ha" path="res://assets/sword_slash_ani.png" id="6_vw6pp"]
+[ext_resource type="AudioStream" uid="uid://dpcmp15cl5y66" path="res://assets/jump2.mp3" id="10_kh1pa"]
+[ext_resource type="AudioStream" uid="uid://5whmn2iweuu" path="res://assets/jump1.mp3" id="10_ur0en"]
+[ext_resource type="AudioStream" uid="uid://b80ia8mh5ewkd" path="res://assets/shoot.mp3" id="12_d6kbl"]
+[ext_resource type="PackedScene" uid="uid://cj0neh7rr8bi" path="res://character/shield.tscn" id="13_d52ud"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2gcdb"]
 shader = ExtResource("1_x1ujg")
@@ -406,10 +410,22 @@ one_shot = true
 wait_time = 0.5
 one_shot = true
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(5.5, -11)
-position_smoothing_enabled = true
-position_smoothing_speed = 20.0
+
+[node name="Jump1" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_ur0en")
+autoplay = true
+
+[node name="Jump2" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_kh1pa")
+autoplay = true
+
+[node name="Shoot" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_d6kbl")
+
+[node name="shield" parent="." instance=ExtResource("13_d52ud")]
+position = Vector2(22, -10.5)
+scale = Vector2(0.5, 0.5)
+
 
 [connection signal="timeout" from="collect" to="." method="_on_collect_timeout"]
 [connection signal="timeout" from="shot" to="." method="_on_shot_timeout"]

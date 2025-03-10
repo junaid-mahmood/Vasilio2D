@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://buq6m0boebfrh"]
 
-[ext_resource type="Script" path="res://barrel/barrel.gd" id="1_51w24"]
+[ext_resource type="Script" uid="uid://bqkhgetiyhp2i" path="res://barrel/barrel.gd" id="1_51w24"]
 [ext_resource type="Texture2D" uid="uid://orykd4r38ct8" path="res://assets/barrel.png" id="2_oam7c"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bfbac"]

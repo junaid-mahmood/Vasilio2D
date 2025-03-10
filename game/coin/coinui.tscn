@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://copjurvsoieqm"]
 
-[ext_resource type="Script" path="res://coin/coinui.gd" id="1_g58u6"]
+[ext_resource type="Script" uid="uid://bva0i3fsr0h1s" path="res://coin/coinui.gd" id="1_g58u6"]
 [ext_resource type="Texture2D" uid="uid://nbrko6rhg7kg" path="res://assets/vecteezy_pixel-art-play-button_8506353.png" id="2_xxk6k"]
 
 [node name="coinui" type="Control"]
