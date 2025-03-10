@@ -7,7 +7,6 @@ var is_invulnerable := false
 const INVULNERABILITY_TIME := 1.0
 
 var DISTANCE_SHIELD := 40
-@onready var shield_body: StaticBody2D = $shield
 var weapons = ["gun", "sword", "shield"]
 
 const SPEED = 300.0
@@ -23,13 +22,13 @@ const DOUBLE_JUMP_COST := 40.0
 @onready var progress_bar: ProgressBar = get_node("../CanvasLayer/JumpBar")
 @onready var health_bar: ProgressBar = get_node("../CanvasLayer/HealthBar")
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-var can_double_jump := false
 
 
 var can_double_jump := false
 var jump_timer := 0.0
 var recently_jumped := false
 var weapon_counter := 0
+var shield_body
 
 func _ready() -> void:
 	progress_bar.max_value = 100
@@ -134,8 +133,7 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_select"):
 		if Global.weapon == 'gun':
 			progress_bar.value -= SHOOT_COST
-
-      $Shoot.play()
+			$Shoot.play()
 			Global.shoot = [true, global_position, facing_right]
 
 		elif Global.weapon == 'sword':

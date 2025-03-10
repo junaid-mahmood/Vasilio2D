@@ -1,6 +1,6 @@
 [gd_scene load_steps=61 format=3 uid="uid://b2iijrv4a5h80"]
 
-[ext_resource type="Script" path="res://tarzan/tarzan.gd" id="1_bf6xn"]
+[ext_resource type="Script" uid="uid://dvqy76tj4t1d6" path="res://tarzan/tarzan.gd" id="1_bf6xn"]
 [ext_resource type="Texture2D" uid="uid://xib07mdv3g51" path="res://assets/yellowNinja - Death.png" id="2_2sfi3"]
 [ext_resource type="Texture2D" uid="uid://brheyatr5xmch" path="res://assets/yellowNinja - Whitehit.png" id="3_gg88p"]
 [ext_resource type="Texture2D" uid="uid://dlvrbju6uutqv" path="res://assets/yellowNinja - idle.png" id="4_muhvn"]
