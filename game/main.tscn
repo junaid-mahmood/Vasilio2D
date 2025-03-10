@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=4 uid="uid://bm2qaccjcy00b"]
+[gd_scene load_steps=37 format=4 uid="uid://bm2qaccjcy00b"]
 
 [ext_resource type="Texture2D" uid="uid://c5s2hrlt2ccgm" path="res://assets/Blue.png" id="1_4fmb2"]
 [ext_resource type="Script" path="res://main.gd" id="1_f8jqy"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://buq6m0boebfrh" path="res://barrel/barrel.tscn" id="4_5bejk"]
 [ext_resource type="Script" path="res://jump_bar.gd" id="4_l3lgs"]
 [ext_resource type="Texture2D" uid="uid://c25ogtxetuxo0" path="res://chain.png" id="4_pl1md"]
+[ext_resource type="Texture2D" uid="uid://dk2t7b7l5fq35" path="res://jungle_tileset.png" id="5_5mysn"]
 [ext_resource type="Texture2D" uid="uid://dy7twkmy73820" path="res://platform_large.png" id="5_hd58f"]
 [ext_resource type="Script" path="res://health_bar.gd" id="5_rhnuf"]
 [ext_resource type="PackedScene" uid="uid://copjurvsoieqm" path="res://coin/coinui.tscn" id="6_j4v6r"]
@@ -22,7 +23,7 @@
 [ext_resource type="Texture2D" uid="uid://dd3oaupd8a0hf" path="res://castle.png" id="12_xcw0y"]
 [ext_resource type="PackedScene" uid="uid://sihy1oiiv6bj" path="res://hotbar.tscn" id="13_rs547"]
 [ext_resource type="PackedScene" uid="uid://jnlfurofofr7" path="res://torch.tscn" id="21_fl64f"]
-[ext_resource type="PackedScene" path="res://character/shield.tscn" id="23_c7wmr"]
+[ext_resource type="PackedScene" uid="uid://cj0neh7rr8bi" path="res://character/shield.tscn" id="23_c7wmr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rkc28"]
 texture = ExtResource("2_i5v1g")
@@ -190,6 +191,38 @@ texture = ExtResource("3_scnf6")
 1:0/0 = 0
 0:1/0 = 0
 1:1/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_v3y1d"]
+texture = ExtResource("5_5mysn")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:1/0 = 0
+1:0/0 = 0
+1:1/0 = 0
+2:0/0 = 0
+2:1/0 = 0
+3:0/0 = 0
+3:1/0 = 0
+4:0/0 = 0
+4:1/0 = 0
+5:0/0 = 0
+5:1/0 = 0
+6:0/0 = 0
+6:1/0 = 0
+7:0/0 = 0
+7:1/0 = 0
+8:0/0 = 0
+8:1/0 = 0
+9:0/0 = 0
+9:1/0 = 0
+10:0/0 = 0
+10:1/0 = 0
+11:0/0 = 0
+11:1/0 = 0
+12:0/0 = 0
+12:1/0 = 0
+13:0/0 = 0
+13:1/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nf75j"]
 texture = ExtResource("4_pl1md")
@@ -495,6 +528,8 @@ sources/6 = SubResource("TileSetAtlasSource_kkd0k")
 sources/7 = SubResource("TileSetAtlasSource_253kd")
 sources/8 = SubResource("TileSetAtlasSource_vjkel")
 sources/9 = SubResource("TileSetAtlasSource_7s18o")
+sources/14 = SubResource("TileSetAtlasSource_v3y1d")
+tile_proxies/coords_level = [[10, Vector2i(0, 0)], [14, Vector2i(0, 0)], [10, Vector2i(0, 1)], [14, Vector2i(0, 1)], [10, Vector2i(1, 0)], [14, Vector2i(1, 0)], [10, Vector2i(1, 1)], [14, Vector2i(1, 1)], [11, Vector2i(0, 0)], [14, Vector2i(2, 0)], [11, Vector2i(0, 1)], [14, Vector2i(2, 1)], [11, Vector2i(1, 0)], [14, Vector2i(3, 0)], [11, Vector2i(1, 1)], [14, Vector2i(3, 1)], [11, Vector2i(2, 0)], [14, Vector2i(4, 0)], [11, Vector2i(2, 1)], [14, Vector2i(4, 1)], [11, Vector2i(3, 0)], [14, Vector2i(5, 0)], [11, Vector2i(3, 1)], [14, Vector2i(5, 1)], [11, Vector2i(4, 0)], [14, Vector2i(6, 0)], [11, Vector2i(4, 1)], [14, Vector2i(6, 1)], [11, Vector2i(5, 0)], [14, Vector2i(7, 0)], [11, Vector2i(5, 1)], [14, Vector2i(7, 1)], [12, Vector2i(0, 0)], [14, Vector2i(8, 0)], [12, Vector2i(0, 1)], [14, Vector2i(8, 1)], [12, Vector2i(1, 0)], [14, Vector2i(9, 0)], [12, Vector2i(1, 1)], [14, Vector2i(9, 1)], [12, Vector2i(2, 0)], [14, Vector2i(10, 0)], [12, Vector2i(2, 1)], [14, Vector2i(10, 1)], [12, Vector2i(3, 0)], [14, Vector2i(11, 0)], [12, Vector2i(3, 1)], [14, Vector2i(11, 1)], [13, Vector2i(0, 0)], [14, Vector2i(12, 0)], [13, Vector2i(0, 1)], [14, Vector2i(12, 1)], [13, Vector2i(1, 0)], [14, Vector2i(13, 0)], [13, Vector2i(1, 1)], [14, Vector2i(13, 1)]]
 
 [node name="Node" type="Node2D"]
 self_modulate = Color(0, 0, 0, 1)
