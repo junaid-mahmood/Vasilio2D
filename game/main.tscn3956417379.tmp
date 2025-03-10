@@ -589,6 +589,19 @@ offset_bottom = 150.0
 [node name="Coin" parent="." instance=ExtResource("10_4x0mx")]
 position = Vector2(337, 505)
 
+[node name="Area2D13" parent="."]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+position = Vector2(448, 492)
+script = null
+
 [node name="barrel2" parent="." instance=ExtResource("4_5bejk")]
 position = Vector2(866, 131)
 

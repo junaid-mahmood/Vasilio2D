@@ -7,7 +7,7 @@ func _ready():
 	update_all_text()
 	highlight_current_weapon()
 
-func _process(delta):
+func _process(_delta):
 	highlight_current_weapon()
 	
 	if Input.is_key_pressed(KEY_Q):
@@ -67,7 +67,6 @@ func update_text_for_key(key):
 			rich_text_label = $GridContainer/RichTextLabel3
 		else:
 			rich_text_label = find_child("RichTextLabel3", true, false)
-
 		
 		var timer = get_tree().create_timer(0.5)
 		timer.timeout.connect(func(): reset_text(rich_text_label, key))

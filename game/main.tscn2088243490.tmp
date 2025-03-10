@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=4 uid="uid://bm2qaccjcy00b"]
+[gd_scene load_steps=36 format=4 uid="uid://bm2qaccjcy00b"]
 
 [ext_resource type="Script" uid="uid://di6camdvfumij" path="res://main.gd" id="1_f8jqy"]
 [ext_resource type="Texture2D" uid="uid://dpjfl8jiimvx3" path="res://assets/Terrain (16x16).png" id="2_i5v1g"]
@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://p7x4x15hptbq" path="res://assets/wall.png" id="11_600aq"]
 [ext_resource type="Texture2D" uid="uid://dd3oaupd8a0hf" path="res://castle.png" id="12_xcw0y"]
 [ext_resource type="PackedScene" uid="uid://sihy1oiiv6bj" path="res://hotbar.tscn" id="13_rs547"]
+[ext_resource type="Script" uid="uid://dm4r28y1yymct" path="res://enemy_bullets.gd" id="15_1u8w0"]
 [ext_resource type="PackedScene" uid="uid://jnlfurofofr7" path="res://torch.tscn" id="21_fl64f"]
 [ext_resource type="PackedScene" uid="uid://c2l4dxrnacyon" path="res://door.tscn" id="23_d13ii"]
 [ext_resource type="Texture2D" uid="uid://eaqmi8geibg8" path="res://assets/W__4_-removebg-preview.png" id="25_0odxb"]
@@ -557,6 +558,7 @@ offset_bottom = -26.0
 metadata/_edit_use_anchors_ = true
 
 [node name="EnemyBullets" type="Node2D" parent="."]
+script = ExtResource("15_1u8w0")
 
 [node name="enemy" parent="." instance=ExtResource("8_cwafa")]
 position = Vector2(762, 380)
