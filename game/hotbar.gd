@@ -32,6 +32,7 @@ func update_all_text():
 	if label3:
 		label3.text = "C"
 
+
 func highlight_current_weapon():
 	var label1 = find_child("RichTextLabel", true, false)
 	var label2 = find_child("RichTextLabel2", true, false)

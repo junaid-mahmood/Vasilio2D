@@ -12,9 +12,9 @@ var climb_r := true
 var velocity: Vector2 = Vector2.ZERO
 
 var can_shoot := true
-signal enemy_shoot(pos, player_position)
 
 func _process(delta: float) -> void:
+	player_position = Global.player_position
 	if climb_l == false or climb_r == false:
 		climbing = true
 	else:
@@ -24,9 +24,9 @@ func _process(delta: float) -> void:
 	rayCast2D.target_position = dir_to_player * 80
 	rayCast2D.force_raycast_update()
 	var collision_object = rayCast2D.get_collider()
-	if collision_object == null and can_shoot:
+	if collision_object == null and can_shoot and not Global.dead:
 		player_position.y -= 12
-		enemy_shoot.emit(position, player_position)
+		Global.enemy_shoot = [true, position, player_position]
 		can_shoot = false
 		$shoot.start()
 		
@@ -46,8 +46,7 @@ func _on_shoot_timeout() -> void:
 	can_shoot = true
 
 
-func _on_character_body_2d_player_pos(pos: Variant) -> void:
-	player_position = pos
+
 
 
 func enemy_damage(num):

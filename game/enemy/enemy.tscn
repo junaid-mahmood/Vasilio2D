@@ -490,7 +490,6 @@ script = SubResource("GDScript_l025t")
 wait_time = 0.5
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="right_climb" from="right_ray_climb" to="." method="_on_right_ray_climb_right_climb"]
 [connection signal="left_climb" from="left_ray_climb" to="." method="_on_left_ray_climb_left_climb"]
 [connection signal="is_smth_on_path" from="ray_shoot" to="." method="_on_ray_shoot_is_smth_on_path"]

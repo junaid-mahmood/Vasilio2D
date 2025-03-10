@@ -1,14 +1,14 @@
-[gd_scene load_steps=36 format=4 uid="uid://bm2qaccjcy00b"]
+[gd_scene load_steps=35 format=4 uid="uid://bm2qaccjcy00b"]
 
-[ext_resource type="Script" uid="uid://di6camdvfumij" path="res://main.gd" id="1_f8jqy"]
+[ext_resource type="Texture2D" uid="uid://c5s2hrlt2ccgm" path="res://assets/Blue.png" id="1_4fmb2"]
+[ext_resource type="Script" path="res://main.gd" id="1_f8jqy"]
 [ext_resource type="Texture2D" uid="uid://dpjfl8jiimvx3" path="res://assets/Terrain (16x16).png" id="2_i5v1g"]
 [ext_resource type="Texture2D" uid="uid://cbkql87n3ipnc" path="res://block.png" id="3_scnf6"]
 [ext_resource type="PackedScene" uid="uid://buq6m0boebfrh" path="res://barrel/barrel.tscn" id="4_5bejk"]
-[ext_resource type="Script" uid="uid://cjkx8e0pqklfw" path="res://jump_bar.gd" id="4_l3lgs"]
+[ext_resource type="Script" path="res://jump_bar.gd" id="4_l3lgs"]
 [ext_resource type="Texture2D" uid="uid://c25ogtxetuxo0" path="res://chain.png" id="4_pl1md"]
-[ext_resource type="Texture2D" uid="uid://dk2t7b7l5fq35" path="res://jungle_tileset.png" id="5_5mysn"]
 [ext_resource type="Texture2D" uid="uid://dy7twkmy73820" path="res://platform_large.png" id="5_hd58f"]
-[ext_resource type="Script" uid="uid://bqhhrylu0173q" path="res://health_bar.gd" id="5_rhnuf"]
+[ext_resource type="Script" path="res://health_bar.gd" id="5_rhnuf"]
 [ext_resource type="PackedScene" uid="uid://copjurvsoieqm" path="res://coin/coinui.tscn" id="6_j4v6r"]
 [ext_resource type="Texture2D" uid="uid://dd7d5m6dqgylc" path="res://platform_small.png" id="6_nfxbb"]
 [ext_resource type="Texture2D" uid="uid://chsu6xkaf2md8" path="res://torch.png" id="7_cijpc"]
@@ -21,14 +21,10 @@
 [ext_resource type="Texture2D" uid="uid://dd3oaupd8a0hf" path="res://castle.png" id="12_xcw0y"]
 [ext_resource type="PackedScene" uid="uid://sihy1oiiv6bj" path="res://hotbar.tscn" id="13_rs547"]
 [ext_resource type="PackedScene" uid="uid://jnlfurofofr7" path="res://torch.tscn" id="21_fl64f"]
-
+[ext_resource type="PackedScene" uid="uid://b2iijrv4a5h80" path="res://tarzan/tarzan.tscn" id="23_6egcs"]
 [ext_resource type="PackedScene" uid="uid://cj0neh7rr8bi" path="res://character/shield.tscn" id="23_c7wmr"]
-[ext_resource type="Script" path="res://canvas_modulate.gd" id="23_h8c7e"]
 
-[ext_resource type="Texture2D" uid="uid://eaqmi8geibg8" path="res://assets/W__4_-removebg-preview.png" id="25_0odxb"]
-
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_d13ii"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rkc28"]
 texture = ExtResource("2_i5v1g")
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
@@ -188,44 +184,12 @@ texture = ExtResource("2_i5v1g")
 19:10/0 = 0
 20:10/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1u8w0"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rumvp"]
 texture = ExtResource("3_scnf6")
 0:0/0 = 0
 1:0/0 = 0
 0:1/0 = 0
 1:1/0 = 0
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_v3y1d"]
-texture = ExtResource("5_5mysn")
-texture_region_size = Vector2i(32, 32)
-0:0/0 = 0
-0:1/0 = 0
-1:0/0 = 0
-1:1/0 = 0
-2:0/0 = 0
-2:1/0 = 0
-3:0/0 = 0
-3:1/0 = 0
-4:0/0 = 0
-4:1/0 = 0
-5:0/0 = 0
-5:1/0 = 0
-6:0/0 = 0
-6:1/0 = 0
-7:0/0 = 0
-7:1/0 = 0
-8:0/0 = 0
-8:1/0 = 0
-9:0/0 = 0
-9:1/0 = 0
-10:0/0 = 0
-10:1/0 = 0
-11:0/0 = 0
-11:1/0 = 0
-12:0/0 = 0
-12:1/0 = 0
-13:0/0 = 0
-13:1/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nf75j"]
 texture = ExtResource("4_pl1md")
@@ -234,7 +198,7 @@ texture = ExtResource("4_pl1md")
 0:1/0 = 0
 1:1/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lswn8"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_80cyw"]
 texture = ExtResource("5_hd58f")
 0:0/0 = 0
 1:0/0 = 0
@@ -249,7 +213,7 @@ texture = ExtResource("5_hd58f")
 4:1/0 = 0
 5:1/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_a6jrf"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_siyqr"]
 texture = ExtResource("6_nfxbb")
 0:0/0 = 0
 1:0/0 = 0
@@ -260,21 +224,21 @@ texture = ExtResource("6_nfxbb")
 2:1/0 = 0
 3:1/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xuqvo"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fo3t5"]
 texture = ExtResource("7_cijpc")
 0:0/0 = 0
 1:0/0 = 0
 0:1/0 = 0
 1:1/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qsp4k"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kkd0k"]
 texture = ExtResource("8_h83iy")
 0:0/0 = 0
 1:0/0 = 0
 0:1/0 = 0
 1:1/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kq58d"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_253kd"]
 texture = ExtResource("9_hnuy7")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
@@ -320,7 +284,7 @@ texture_region_size = Vector2i(32, 32)
 2:0/0 = 0
 2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16.2812, -16, 15.9961, -16.0469, 16.1562, 4.9375, -16.0938, 5)
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_seu75"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vjkel"]
 texture = ExtResource("11_600aq")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
@@ -328,7 +292,7 @@ texture_region_size = Vector2i(32, 32)
 0:1/0 = 0
 1:1/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_htxhm"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7s18o"]
 texture = ExtResource("12_xcw0y")
 1:0/0 = 0
 2:0/0 = 0
@@ -521,18 +485,16 @@ texture = ExtResource("12_xcw0y")
 physics_layer_0/collision_layer = 25
 physics_layer_0/collision_mask = 31
 physics_layer_1/collision_layer = 1
-sources/0 = SubResource("TileSetAtlasSource_d13ii")
-sources/1 = SubResource("TileSetAtlasSource_1u8w0")
-sources/3 = SubResource("TileSetAtlasSource_lswn8")
-sources/4 = SubResource("TileSetAtlasSource_a6jrf")
-sources/5 = SubResource("TileSetAtlasSource_xuqvo")
-sources/6 = SubResource("TileSetAtlasSource_qsp4k")
-sources/7 = SubResource("TileSetAtlasSource_kq58d")
-sources/8 = SubResource("TileSetAtlasSource_seu75")
-sources/9 = SubResource("TileSetAtlasSource_htxhm")
+sources/0 = SubResource("TileSetAtlasSource_rkc28")
+sources/1 = SubResource("TileSetAtlasSource_rumvp")
 sources/2 = SubResource("TileSetAtlasSource_nf75j")
-sources/14 = SubResource("TileSetAtlasSource_v3y1d")
-tile_proxies/coords_level = [[10, Vector2i(0, 0)], [14, Vector2i(0, 0)], [10, Vector2i(0, 1)], [14, Vector2i(0, 1)], [10, Vector2i(1, 0)], [14, Vector2i(1, 0)], [10, Vector2i(1, 1)], [14, Vector2i(1, 1)], [11, Vector2i(0, 0)], [14, Vector2i(2, 0)], [11, Vector2i(0, 1)], [14, Vector2i(2, 1)], [11, Vector2i(1, 0)], [14, Vector2i(3, 0)], [11, Vector2i(1, 1)], [14, Vector2i(3, 1)], [11, Vector2i(2, 0)], [14, Vector2i(4, 0)], [11, Vector2i(2, 1)], [14, Vector2i(4, 1)], [11, Vector2i(3, 0)], [14, Vector2i(5, 0)], [11, Vector2i(3, 1)], [14, Vector2i(5, 1)], [11, Vector2i(4, 0)], [14, Vector2i(6, 0)], [11, Vector2i(4, 1)], [14, Vector2i(6, 1)], [11, Vector2i(5, 0)], [14, Vector2i(7, 0)], [11, Vector2i(5, 1)], [14, Vector2i(7, 1)], [12, Vector2i(0, 0)], [14, Vector2i(8, 0)], [12, Vector2i(0, 1)], [14, Vector2i(8, 1)], [12, Vector2i(1, 0)], [14, Vector2i(9, 0)], [12, Vector2i(1, 1)], [14, Vector2i(9, 1)], [12, Vector2i(2, 0)], [14, Vector2i(10, 0)], [12, Vector2i(2, 1)], [14, Vector2i(10, 1)], [12, Vector2i(3, 0)], [14, Vector2i(11, 0)], [12, Vector2i(3, 1)], [14, Vector2i(11, 1)], [13, Vector2i(0, 0)], [14, Vector2i(12, 0)], [13, Vector2i(0, 1)], [14, Vector2i(12, 1)], [13, Vector2i(1, 0)], [14, Vector2i(13, 0)], [13, Vector2i(1, 1)], [14, Vector2i(13, 1)]]
+sources/3 = SubResource("TileSetAtlasSource_80cyw")
+sources/4 = SubResource("TileSetAtlasSource_siyqr")
+sources/5 = SubResource("TileSetAtlasSource_fo3t5")
+sources/6 = SubResource("TileSetAtlasSource_kkd0k")
+sources/7 = SubResource("TileSetAtlasSource_253kd")
+sources/8 = SubResource("TileSetAtlasSource_vjkel")
+sources/9 = SubResource("TileSetAtlasSource_7s18o")
 
 [node name="Node" type="Node2D"]
 self_modulate = Color(0, 0, 0, 1)
@@ -553,6 +515,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("1_4fmb2")
 stretch_mode = 1
 
 [node name="TileLayer" type="TileMapLayer" parent="."]
@@ -598,11 +561,6 @@ show_percentage = false
 script = ExtResource("5_rhnuf")
 
 [node name="hotbar" parent="CanvasLayer" instance=ExtResource("13_rs547")]
-offset_left = 46.0
-offset_top = -26.0
-offset_right = 46.0
-offset_bottom = -26.0
-metadata/_edit_use_anchors_ = true
 
 [node name="coinui" parent="CanvasLayer" instance=ExtResource("6_j4v6r")]
 offset_left = 980.0
@@ -623,44 +581,11 @@ position = Vector2(88, 447)
 
 [node name="Bullets" type="Node2D" parent="."]
 
-
 [node name="shield" parent="." instance=ExtResource("23_c7wmr")]
-visible = false
 position = Vector2(128, 588)
-
-[node name="CharacterBody2D" parent="." instance=ExtResource("3_tac4o")]
-position = Vector2(84, 609)
-
-[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
-position = Vector2(0.5, -7)
-scale = Vector2(0.5, 0.5)
-position_smoothing_enabled = true
-position_smoothing_speed = 20.0
-
-[node name="CanvasLayer" type="CanvasLayer" parent="CharacterBody2D"]
-
-[node name="coinui" parent="CharacterBody2D/CanvasLayer" instance=ExtResource("6_j4v6r")]
-offset_left = 980.0
-offset_top = 112.0
-offset_right = 1020.0
-offset_bottom = 150.0
-
 
 [node name="Coin" parent="." instance=ExtResource("10_4x0mx")]
 position = Vector2(337, 505)
-
-[node name="Area2D13" parent="."]
-_import_path = NodePath("")
-unique_name_in_owner = false
-process_mode = 0
-process_priority = 0
-process_physics_priority = 0
-process_thread_group = 0
-physics_interpolation_mode = 0
-auto_translate_mode = 0
-editor_description = ""
-position = Vector2(448, 492)
-script = null
 
 [node name="barrel2" parent="." instance=ExtResource("4_5bejk")]
 position = Vector2(866, 131)
@@ -723,7 +648,7 @@ position = Vector2(752, 528)
 position = Vector2(528, 272)
 
 [node name="Torch5" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(241, 239)
+position = Vector2(240, 240)
 
 [node name="Torch6" parent="." instance=ExtResource("21_fl64f")]
 position = Vector2(112, 48)
@@ -848,24 +773,5 @@ position = Vector2(848, -1488)
 [node name="Torch46" parent="." instance=ExtResource("21_fl64f")]
 position = Vector2(1008, -1487)
 
-
-[node name="CanvasModulate" type="CanvasModulate" parent="."]
-visible = false
-color = Color(0.605601, 0.0997618, 0.253805, 1)
-script = ExtResource("23_h8c7e")
-
-
-[node name="W4-removebg-preview" type="Sprite2D" parent="."]
-position = Vector2(-146.5, 707.75)
-scale = Vector2(0.935435, 0.924)
-texture = ExtResource("25_0odxb")
-
-[connection signal="enemy_shoot" from="enemy" to="." method="_on_enemy_enemy_shoot"]
-[connection signal="explo_damage" from="barrel" to="CharacterBody2D" method="_on_barrel_explo_damage"]
-[connection signal="new_coin" from="CharacterBody2D" to="CharacterBody2D/CanvasLayer/coinui" method="_on_character_body_2d_new_coin"]
-[connection signal="player_pos" from="CharacterBody2D" to="." method="_on_character_body_2d_player_pos"]
-[connection signal="player_pos" from="CharacterBody2D" to="enemy" method="_on_character_body_2d_player_pos"]
-[connection signal="shoot" from="CharacterBody2D" to="." method="_on_player_shoot"]
-[connection signal="explo_damage" from="barrel2" to="CharacterBody2D" method="_on_barrel_2_explo_damage"]
-[connection signal="explo_damage" from="barrel3" to="CharacterBody2D" method="_on_barrel_3_explo_damage"]
-
+[node name="tarzan" parent="." instance=ExtResource("23_6egcs")]
+position = Vector2(86, 587)
