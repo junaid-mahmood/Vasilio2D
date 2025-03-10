@@ -30,14 +30,11 @@ const DOUBLE_JUMP_COST := 40.0
 @onready var progress_bar: ProgressBar = get_node("../CanvasLayer/JumpBar")
 @onready var health_bar: ProgressBar = get_node("../CanvasLayer/HealthBar")
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-<<<<<<< Updated upstream
-var can_double_jump := false  # New variable to track double jump availability
 
-=======
 var can_double_jump := false
 var jump_timer := 0.0
 var recently_jumped := false
->>>>>>> Stashed changes
+var weapon_counter := 0
 
 func _ready() -> void:
 	progress_bar.max_value = 100
@@ -60,12 +57,7 @@ func _input(event: InputEvent) -> void:
 
 
 func _physics_process(delta: float) -> void:
-<<<<<<< Updated upstream
-	#check if game ends
-=======
-	var move_direction := Input.get_axis("ui_left", "ui_right")
-	
->>>>>>> Stashed changes
+
 	if health_bar.value <= 0:
 		game_over()
 	
@@ -88,8 +80,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		shield_body.visible = false
 		emit_signal("has_shield", false)
-<<<<<<< Updated upstream
-		
+	
 		
 	#check if changes weapon
 	if Input.is_action_just_pressed("switch"):
@@ -97,10 +88,7 @@ func _physics_process(delta: float) -> void:
 		if weapon_counter > 2:
 			weapon_counter = 0
 		Global.weapon = weapons[weapon_counter]
-		
-	
-=======
->>>>>>> Stashed changes
+
 	
 	if progress_bar.value < 100:
 		progress_bar.value = min(progress_bar.value + RECHARGE_RATE * delta, 100)
@@ -156,30 +144,25 @@ func _physics_process(delta: float) -> void:
 					if distance < kill_radius:
 						node.enemy_damage(50)
 
-<<<<<<< Updated upstream
-
-
 	var direction := Input.get_axis("ui_left", "ui_right")
 	if direction != 0:
 		if (direction < 0 and velocity.x > 0) or (direction > 0 and velocity.x < 0):
 			velocity.x = move_toward(velocity.x, 0, FRICTION * delta * 2)
 		velocity.x = move_toward(velocity.x, direction * SPEED, ACCELERATION * delta)
-=======
-	if move_direction != 0:
-		velocity.x = move_toward(velocity.x, move_direction * SPEED, ACCELERATION * delta)
->>>>>>> Stashed changes
+
+	if direction != 0:
+		velocity.x = move_toward(velocity.x, direction * SPEED, ACCELERATION * delta)
+
 	else:
 		velocity.x = move_toward(velocity.x, 0, FRICTION * delta)
 	move_and_slide()
-	get_right_direc(move_direction)
+	get_right_direc(direction)
 	
 	if velocity.x != 0:
 		sprite_2d.flip_h = velocity.x < 0
 		
 	emit_signal("player_pos", position)
-<<<<<<< Updated upstream
-		
-=======
+
 
 func switch_to_weapon(weapon_name: String) -> void:
 	if weapons.has(weapon_name):
@@ -192,7 +175,7 @@ func check_door_collision():
 			if global_position.distance_to(node.global_position) < 50:
 				print("Player has touched the door!")
 
->>>>>>> Stashed changes
+
 func get_right_direc(direction):
 	if direction != 0:
 		facing_right = direction >= 0
@@ -228,7 +211,7 @@ func coin_collected(num):
 func _on_collect_timeout() -> void:
 	$"+1".visible = false
 
-<<<<<<< Updated upstream
+
 
 func _on_barrel_2_explo_damage(num: Variant) -> void:
 	player_damage(num)
@@ -238,7 +221,5 @@ func _on_barrel_3_explo_damage(num: Variant) -> void:
 	player_damage(num)
 
 
-=======
->>>>>>> Stashed changes
 func _on_barrel_explo_damage(num: Variant) -> void:
 	player_damage(num)
