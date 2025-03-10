@@ -81,13 +81,6 @@ func _physics_process(delta: float) -> void:
 		shield_body.visible = false
 		emit_signal("has_shield", false)
 	
-		
-	#check if changes weapon
-	if Input.is_action_just_pressed("switch"):
-		weapon_counter += 1
-		if weapon_counter > 2:
-			weapon_counter = 0
-		Global.weapon = weapons[weapon_counter]
 
 	
 	if progress_bar.value < 100:
