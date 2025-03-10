@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://c5cojy2ybsw73"]
 
-[ext_resource type="Script" path="res://bow/bow.gd" id="1_ylg63"]
+[ext_resource type="Script" uid="uid://rcaacnhmuhgs" path="res://bow/bow.gd" id="1_ylg63"]
 [ext_resource type="Texture2D" uid="uid://b8hv7wpsfed5a" path="res://assets/bow.png" id="2_7w5pg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yhmsj"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://sihy1oiiv6bj"]
 
-[ext_resource type="Script" path="res://hotbar.gd" id="1_btnhd"]
+[ext_resource type="Script" uid="uid://cxji4uv26nhri" path="res://hotbar.gd" id="1_btnhd"]
 [ext_resource type="Texture2D" uid="uid://bcjh7vdw2tong" path="res://assets/sword.png" id="1_ugqnj"]
 [ext_resource type="Texture2D" uid="uid://b8hv7wpsfed5a" path="res://assets/bow.png" id="2_urx0p"]
 [ext_resource type="Texture2D" uid="uid://2xyc07n7ud6f" path="res://assets/shieldbig.png" id="4_ayf4g"]
@@ -35,16 +35,40 @@ layout_mode = 2
 focus_mode = 1
 icon = ExtResource("1_ugqnj")
 
+[node name="RichTextLabel" type="RichTextLabel" parent="GridContainer/Button"]
+layout_mode = 0
+offset_left = -0.5
+offset_top = 43.0
+offset_right = 39.5
+offset_bottom = 67.0
+text = "  Q"
+
 [node name="Button2" type="Button" parent="GridContainer"]
 layout_mode = 2
 focus_mode = 1
 icon = ExtResource("2_urx0p")
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="GridContainer/Button2"]
+layout_mode = 2
+offset_left = -0.5
+offset_top = 43.0
+offset_right = 46.5
+offset_bottom = 69.0
+text = "   R "
 
 [node name="Button3" type="Button" parent="GridContainer"]
 layout_mode = 2
 focus_mode = 1
 keep_pressed_outside = true
 icon = ExtResource("4_ayf4g")
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="GridContainer/Button3"]
+layout_mode = 0
+offset_left = 2.5
+offset_top = 43.0
+offset_right = 42.5
+offset_bottom = 67.0
+text = "  C"
 
 [connection signal="pressed" from="GridContainer/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="GridContainer/Button2" to="." method="_on_button_2_pressed"]
