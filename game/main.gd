@@ -3,10 +3,9 @@ extends Node
 const bullet_scene: PackedScene = preload("res://character/bullet.tscn")
 const enemy_bullet_scene: PackedScene = preload("res://enemy/enemy_bullet.tscn")
 const portal_bullet_scene: PackedScene = preload("res://teleport/portal.tscn")
+const bow_bullet_scene: PackedScene = preload("res://bow/bow_bullet.tscn")
 
 var player_character
-
-
 
 func _ready() -> void:
 	if Global.player == 'tarzan':
@@ -22,19 +21,72 @@ func _ready() -> void:
 		player_character.position = Vector2(79, 600)
 	
 	add_child(player_character)
-
+	
+	# Ensure Bullets node exists
+	if not has_node("Bullets"):
+		var bullets_node = Node2D.new()
+		bullets_node.name = "Bullets"
+		add_child(bullets_node)
+	
+	# Ensure EnemyBullets node exists
+	if not has_node("EnemyBullets"):
+		var enemy_bullets_node = Node2D.new()
+		enemy_bullets_node.name = "EnemyBullets"
+		add_child(enemy_bullets_node)
 
 func _process(delta: float) -> void:
 	if Global.shoot[0]:
 		var pos = Global.shoot[1]
-		var facing_right = Global.shoot[2]
-		var bullet = bullet_scene.instantiate()
-		var direction = 1 if facing_right else -1
-		bullet.direction = direction
-		$Bullets.add_child(bullet)
-		pos.y -= 20
-		bullet.position = pos + Vector2(6 * direction, 0)
-		Global.shoot[0] = false
+		
+		# Check if using bow/arrow
+		if Global.weapon == 'bow':
+			var bow_bullet = bow_bullet_scene.instantiate()
+			
+			# For bow, the third parameter is the target position
+			var target_pos = Global.shoot[2]
+			var spawn_pos = Global.shoot[1]
+			
+			# Calculate direction from spawn position to target
+			var direction = (target_pos - spawn_pos).normalized()
+			
+			# Set bullet position and velocity
+			bow_bullet.position = spawn_pos
+			bow_bullet.velocity = direction * bow_bullet.speed
+			
+			# Set rotation to match direction
+			bow_bullet.rotation = direction.angle()
+			
+			# Apply damage multiplier if provided (from charged attack)
+			if Global.shoot.size() > 3:
+				bow_bullet.damage_multiplier = Global.shoot[3]
+				
+				# Scale the arrow based on charge
+				if Global.shoot[3] > 1.0:
+					var scale_factor = 0.4 + (Global.shoot[3] - 1.0) * 0.2
+					bow_bullet.scale = Vector2(scale_factor, scale_factor)
+			
+			# Add the bullet to the scene
+			if has_node("Bullets"):
+				$Bullets.add_child(bow_bullet)
+			else:
+				# Create Bullets node if it doesn't exist
+				var bullets_node = Node2D.new()
+				bullets_node.name = "Bullets"
+				add_child(bullets_node)
+				bullets_node.add_child(bow_bullet)
+			
+			# Reset shoot flag
+			Global.shoot[0] = false
+		else:
+			# Original gun logic
+			var facing_right = Global.shoot[2]
+			var bullet = bullet_scene.instantiate()
+			var direction = 1 if facing_right else -1
+			bullet.direction = direction
+			$Bullets.add_child(bullet)
+			pos.y -= 20
+			bullet.position = pos + Vector2(6 * direction, 0)
+			Global.shoot[0] = false
 		
 	if Global.enemy_shoot[0]:
 		var pos = Global.enemy_shoot[1]
@@ -59,8 +111,6 @@ func _process(delta: float) -> void:
 		elif Global.portals == 2:
 			direction = (Global.portal2 - pos).normalized()
 			
-			
-		
 		portal_bullet.position = pos
 		portal_bullet.velocity = direction * portal_bullet.speed
 		portal_bullet.rotation = direction.angle()
