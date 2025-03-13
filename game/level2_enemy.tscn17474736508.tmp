@@ -1,0 +1,127 @@
+[gd_scene load_steps=11 format=3 uid="uid://cpkni5shkfy4j"]
+
+[ext_resource type="Script" uid="uid://bmsp1yf65wkej" path="res://level_2_enemy.gd" id="2_5exr4"]
+[ext_resource type="Shader" uid="uid://drgsxu4i1toe6" path="res://player_hurt.gdshader" id="2_shader"]
+[ext_resource type="Texture2D" uid="uid://ontfgro0oi73" path="res://enemy/lv2enemy.png" id="3_texture"]
+[ext_resource type="Script" uid="uid://s8uouua4nu1n" path="res://enemy/left_ray_climb.gd" id="4_left"]
+[ext_resource type="Script" uid="uid://cv8ejq7yibrl2" path="res://enemy/right_ray_climb.gd" id="5_right"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1iufc"]
+shader = ExtResource("2_shader")
+shader_parameter/color = Color(255, 0, 0, 1)
+shader_parameter/amount = 0.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t2rb7"]
+size = Vector2(76.1539, 58.4616)
+
+[sub_resource type="Animation" id="Animation_float"]
+resource_name = "float"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Lv2Enemy:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8, 1.5, 2.3, 3),
+"transitions": PackedFloat32Array(0.7, 0.7, 0.7, 0.7, 0.7),
+"update": 0,
+"values": [Vector2(-8.462, -1.538), Vector2(-12, -5), Vector2(-8.462, -8), Vector2(-4, -5), Vector2(-8.462, -1.538)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Lv2Enemy:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.8, 1.5, 2.3, 3),
+"transitions": PackedFloat32Array(0.7, 0.7, 0.7, 0.7, 0.7),
+"update": 0,
+"values": [0.0, 0.0523599, 0.0, -0.0523599, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Lv2Enemy:scale")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.5, 3),
+"transitions": PackedFloat32Array(0.7, 0.7, 0.7),
+"update": 0,
+"values": [Vector2(0.36, 0.263), Vector2(0.38, 0.283), Vector2(0.36, 0.263)]
+}
+
+[sub_resource type="Animation" id="Animation_shoot"]
+resource_name = "shoot"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Lv2Enemy:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(0.7, 0.7, 0.7),
+"update": 0,
+"values": [Vector2(0.36, 0.263), Vector2(0.4, 0.303), Vector2(0.36, 0.263)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ixnqj"]
+_data = {
+&"float": SubResource("Animation_float"),
+&"shoot": SubResource("Animation_shoot")
+}
+
+[node name="enemy" type="Area2D"]
+material = SubResource("ShaderMaterial_1iufc")
+scale = Vector2(1.3, 1.3)
+collision_layer = 128
+collision_mask = 20
+script = ExtResource("2_5exr4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-19.6154, -28.4615)
+shape = SubResource("RectangleShape2D_t2rb7")
+
+[node name="right_ray_climb" type="RayCast2D" parent="."]
+position = Vector2(0, -2)
+target_position = Vector2(13, 0)
+collision_mask = 16
+script = ExtResource("5_right")
+
+[node name="left_ray_climb" type="RayCast2D" parent="."]
+position = Vector2(0, -2)
+target_position = Vector2(-12, 0)
+collision_mask = 16
+script = ExtResource("4_left")
+
+[node name="ray_shoot" type="RayCast2D" parent="."]
+position = Vector2(0, -1.53846)
+collision_mask = 18
+
+[node name="shoot" type="Timer" parent="."]
+
+[node name="bow_shot_ani" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="Lv2Enemy" type="Sprite2D" parent="."]
+position = Vector2(-8.46154, -1.53846)
+scale = Vector2(0.35989, 0.262911)
+texture = ExtResource("3_texture")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ixnqj")
+}
+autoplay = "float"
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="right_climb" from="right_ray_climb" to="." method="_on_right_ray_climb_right_climb"]
+[connection signal="left_climb" from="left_ray_climb" to="." method="_on_left_ray_climb_left_climb"]
+[connection signal="timeout" from="shoot" to="." method="_on_shoot_timeout"]
+[connection signal="timeout" from="bow_shot_ani" to="." method="_on_bow_shot_ani_timeout"]

@@ -15,7 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://p7x4x15hptbq" path="res://assets/wall.png" id="10_7mylh"]
 [ext_resource type="Script" uid="uid://cjkx8e0pqklfw" path="res://jump_bar.gd" id="13_1i48b"]
 [ext_resource type="PackedScene" uid="uid://sihy1oiiv6bj" path="res://hotbar.tscn" id="15_00gqm"]
-[ext_resource type="PackedScene" uid="uid://c8yvwrxl8ygvs" path="res://static_enemy.tscn" id="16_ixnqj"]
+[ext_resource type="PackedScene" uid="uid://cpkni5shkfy4j" path="res://level2_enemy.tscn" id="17_enemy"]
 [ext_resource type="Script" uid="uid://bqhhrylu0173q" path="res://health_bar.gd" id="17_ixnqj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_idpoe"]
@@ -856,6 +856,5 @@ position = Vector2(34, -12)
 
 [node name="EnemyBullets" type="Node2D" parent="."]
 
-[node name="StaticEnemy" parent="." instance=ExtResource("16_ixnqj")]
-position = Vector2(800, 300)
-detection_radius = 500
+[node name="Level2Enemy" parent="." instance=ExtResource("17_enemy")]
+position = Vector2(901, 194)

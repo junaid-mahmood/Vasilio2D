@@ -23,7 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://cj0neh7rr8bi" path="res://character/shield.tscn" id="23_c7wmr"]
 [ext_resource type="Script" path="res://canvas_modulate.gd" id="23_h8c7e"]
 [ext_resource type="Texture2D" uid="uid://eaqmi8geibg8" path="res://assets/W__4_-removebg-preview.png" id="25_0odxb"]
-[ext_resource type="PackedScene" uid="uid://dn8gyvw8gk1tf" path="res://door.tscn" id="25_lswn8"]
+[ext_resource type="PackedScene" uid="uid://dcjtfo184nubn" path="res://door.tscn" id="25_lswn8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_d13ii"]
 texture = ExtResource("2_i5v1g")

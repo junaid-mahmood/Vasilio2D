@@ -249,7 +249,6 @@ material = SubResource("ShaderMaterial_2gcdb")
 position = Vector2(5, -12)
 scale = Vector2(0.71875, 0.765625)
 sprite_frames = SubResource("SpriteFrames_vnnyk")
-animation = &"sword"
 autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

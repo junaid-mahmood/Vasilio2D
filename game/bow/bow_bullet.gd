@@ -6,6 +6,7 @@ var damage_multiplier := 1.0  # Default damage multiplier
 var trail = null  # Reference to trail effect
 var trail_points = []  # Store points for trail
 const MAX_TRAIL_POINTS = 30  # Increased maximum trail points for longer trail
+var damage_number_scene = preload("res://damage_number.tscn")
 
 func _ready():
 	# Set the rotation based on the velocity
@@ -105,10 +106,31 @@ func _on_area_entered(area: Area2D) -> void:
 		var base_damage = 30  # Base arrow damage
 		var final_damage = base_damage * damage_multiplier
 		area.enemy_damage(final_damage)
+		
+		# Spawn damage number
+		spawn_damage_number(area.global_position, final_damage)
 	
 	# Don't destroy if hitting another bullet
 	if not area.is_in_group("bullets"):
 		queue_free()
+
+func spawn_damage_number(pos, damage):
+	# Create the damage number instance
+	var damage_number = damage_number_scene.instantiate()
+	
+	# Set the damage value
+	damage_number.set_damage(round(damage))
+	
+	# Determine if it's a critical hit (for charged shots)
+	var is_critical = damage_multiplier > 1.2
+	if is_critical:
+		damage_number.set_damage(round(damage), true)
+	
+	# Position it slightly above the hit position
+	damage_number.global_position = pos + Vector2(0, -10)
+	
+	# Add it to the scene
+	get_tree().get_root().add_child(damage_number)
 
 func _this_is_bow():
 	pass
