@@ -88,17 +88,45 @@ func _process(delta: float) -> void:
 			bullet.position = pos + Vector2(6 * direction, 0)
 			Global.shoot[0] = false
 		
+	# Handle enemy shooting with debug logging
 	if Global.enemy_shoot[0]:
+		print("Enemy shooting triggered in main.gd")
 		var pos = Global.enemy_shoot[1]
 		var player_pos = Global.enemy_shoot[2]
+		
+		# Create the bullet
 		var en_bullet = enemy_bullet_scene.instantiate()
+		print("Enemy bullet instantiated: " + str(en_bullet))
+		
+		# Position the bullet
 		pos.y -= 20
 		en_bullet.position = pos
+		
+		# Set velocity and direction
 		var direction: Vector2 = (player_pos - pos).normalized()
 		en_bullet.velocity = direction * en_bullet.speed
 		en_bullet.rotation = direction.angle()
-		$EnemyBullets.add_child(en_bullet)
+		
+		# Debug the bullet properties
+		print("Bullet position: " + str(en_bullet.position))
+		print("Bullet velocity: " + str(en_bullet.velocity))
+		print("Bullet collision layer: " + str(en_bullet.collision_layer))
+		print("Bullet collision mask: " + str(en_bullet.collision_mask))
+		
+		# Add to scene
+		if has_node("EnemyBullets"):
+			print("Adding enemy bullet to EnemyBullets node")
+			$EnemyBullets.add_child(en_bullet)
+		else:
+			print("EnemyBullets node not found, creating it")
+			var enemy_bullets_node = Node2D.new()
+			enemy_bullets_node.name = "EnemyBullets"
+			add_child(enemy_bullets_node)
+			enemy_bullets_node.add_child(en_bullet)
+		
+		# Reset the global flag
 		Global.enemy_shoot[0] = false
+		print("Enemy shooting completed")
 		
 	if Global.shoot_portal[0]:
 		await get_tree().create_timer(1)
