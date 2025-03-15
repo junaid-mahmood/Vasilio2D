@@ -391,9 +391,9 @@ size = Vector2(3.34921, 11.8119)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3abk3"]
 
-[node name="tarzan" type="CharacterBody2D"]
+[node name="tarzan" type="CharacterBody2D" groups=["player"]]
 collision_layer = 8
-collision_mask = 86
+collision_mask = 15
 script = ExtResource("1_bf6xn")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
@@ -463,5 +463,23 @@ target_position = Vector2(0, -6)
 position = Vector2(11, -12)
 target_position = Vector2(0, -6)
 
+[node name="VineSound" type="AudioStreamPlayer" parent="."]
+volume_db = -5.0
+
+[node name="head_catch" type="RayCast2D" parent="."]
+position = Vector2(0, -20)
+target_position = Vector2(0, -10)
+collision_mask = 3
+
+[node name="HotkeyLabel" type="Label" parent="."]
+offset_left = -15.0
+offset_top = -60.0
+offset_right = -15.0
+offset_bottom = -60.0
+text = "F - Vine Fury"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="timeout" from="extra+damage" to="." method="_on_extradamage_timeout"]
 [connection signal="timeout" from="collect" to="." method="_on_collect_timeout"]

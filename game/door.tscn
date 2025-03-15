@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://dcjtfo184nubn"]
+
+[ext_resource type="Texture2D" uid="uid://cs42n03r3f0d" path="res://door.png" id="1_ba8gm"]
+[ext_resource type="Script" uid="uid://bvor1aosxlwpq" path="res://door.gd" id="1_v6xrn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v6xrn"]
+size = Vector2(214.143, 423.155)
+
+[sub_resource type="Gradient" id="Gradient_s1444"]
+colors = PackedColorArray(1, 0.6, 0.2, 1, 1, 0.6, 0.2, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_v6xrn"]
+gradient = SubResource("Gradient_s1444")
+width = 300
+height = 300
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.9, 0.1)
+
+[node name="Area2D2" type="Area2D"]
+collision_layer = 8
+collision_mask = 255
+script = ExtResource("1_v6xrn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+light_mask = 1023
+position = Vector2(444.109, 109.312)
+scale = Vector2(0.363223, 0.332324)
+shape = SubResource("RectangleShape2D_v6xrn")
+
+[node name="Door" type="Sprite2D" parent="."]
+position = Vector2(444.313, 110.5)
+scale = Vector2(0.405578, 0.404358)
+texture = ExtResource("1_ba8gm")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(458, 93)
+color = Color(1, 0.6, 0.2, 1)
+energy = 1.2
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 1.0
+texture = SubResource("GradientTexture2D_v6xrn")
