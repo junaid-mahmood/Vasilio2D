@@ -84,6 +84,7 @@ end={
 2d_physics/layer_7="coin"
 2d_physics/layer_8="enemy"
 2d_physics/layer_9="shield"
+2d_physics/layer_10="vine"
 
 [rendering]
 

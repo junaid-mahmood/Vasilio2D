@@ -35,6 +35,7 @@ func _ready() -> void:
 	progress_bar.value = 100
 	health_bar.max_value = 100
 	health_bar.value = 100
+	add_to_group("player")
 	
 	var parent = get_parent()
 	shield_body = parent.get_node("shield") as StaticBody2D
