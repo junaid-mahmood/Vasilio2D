@@ -328,7 +328,7 @@ texture_region_size = Vector2i(32, 32)
 
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4k2k6"]
-texture = ExtResource("12_xcw0y")
+texture = ExtResource("TileSetAtlasSource_4k2k6")
 
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_hp87d"]
