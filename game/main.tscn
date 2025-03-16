@@ -822,6 +822,3 @@ script = ExtResource("23_h8c7e")
 position = Vector2(-146.5, 707.75)
 scale = Vector2(0.935435, 0.924)
 texture = ExtResource("25_0odxb")
-
-[node name="Area2D13" parent="." instance=ExtResource("23_c7wmr")]
-position = Vector2(149, 585)

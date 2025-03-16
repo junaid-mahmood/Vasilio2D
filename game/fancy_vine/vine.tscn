@@ -1,0 +1,141 @@
+[gd_scene load_steps=11 format=3 uid="uid://b3rqy8npdd6yy"]
+
+[ext_resource type="Texture2D" uid="uid://dlhhqfxs6cjvq" path="res://assets/log2.png" id="1_bxsr5"]
+[ext_resource type="Texture2D" uid="uid://c4d5s1fp4fwng" path="res://assets/vine_smol.png" id="2_rovuq"]
+[ext_resource type="Script" uid="uid://k5wgm5e1w6kf" path="res://fancy_vine/1.gd" id="2_rwm6o"]
+[ext_resource type="Script" uid="uid://dobhavi58dtek" path="res://fancy_vine/2.gd" id="4_myy58"]
+[ext_resource type="Script" uid="uid://b5h53pbu28tk4" path="res://fancy_vine/3.gd" id="5_qnqds"]
+[ext_resource type="Script" uid="uid://bosn2uf4nffxt" path="res://fancy_vine/4.gd" id="6_00ujh"]
+[ext_resource type="Script" uid="uid://bc3ohgiae82q3" path="res://fancy_vine/5.gd" id="7_54veb"]
+[ext_resource type="Script" uid="uid://bnlnsbclbdd4c" path="res://fancy_vine/6.gd" id="8_lejp0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rd6rn"]
+size = Vector2(32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bnjuj"]
+size = Vector2(4, 16)
+
+[node name="Node" type="Node2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(0, 13)
+collision_layer = 0
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(2.38419e-07, -29)
+texture = ExtResource("1_bxsr5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, -29)
+shape = SubResource("RectangleShape2D_rd6rn")
+
+[node name="1" type="RigidBody2D" parent="."]
+collision_layer = 512
+collision_mask = 8
+script = ExtResource("2_rwm6o")
+
+[node name="Sprite2D" type="Sprite2D" parent="1"]
+position = Vector2(0, 7)
+texture = ExtResource("2_rovuq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="1"]
+position = Vector2(-1, 6)
+shape = SubResource("RectangleShape2D_bnjuj")
+
+[node name="2" type="RigidBody2D" parent="."]
+collision_layer = 512
+collision_mask = 8
+script = ExtResource("4_myy58")
+
+[node name="Sprite2D" type="Sprite2D" parent="2"]
+position = Vector2(-1, 22)
+texture = ExtResource("2_rovuq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="2"]
+position = Vector2(-2, 21)
+shape = SubResource("RectangleShape2D_bnjuj")
+
+[node name="3" type="RigidBody2D" parent="."]
+collision_layer = 512
+collision_mask = 8
+script = ExtResource("5_qnqds")
+
+[node name="Sprite2D" type="Sprite2D" parent="3"]
+position = Vector2(-1, 37)
+texture = ExtResource("2_rovuq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="3"]
+position = Vector2(-2, 36)
+shape = SubResource("RectangleShape2D_bnjuj")
+
+[node name="4" type="RigidBody2D" parent="."]
+collision_layer = 512
+collision_mask = 8
+script = ExtResource("6_00ujh")
+
+[node name="Sprite2D" type="Sprite2D" parent="4"]
+position = Vector2(-1, 51)
+texture = ExtResource("2_rovuq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="4"]
+position = Vector2(-2, 50)
+shape = SubResource("RectangleShape2D_bnjuj")
+
+[node name="5" type="RigidBody2D" parent="."]
+position = Vector2(-2, 59)
+collision_layer = 512
+collision_mask = 8
+script = ExtResource("7_54veb")
+
+[node name="Sprite2D" type="Sprite2D" parent="5"]
+position = Vector2(1, 6)
+texture = ExtResource("2_rovuq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="5"]
+position = Vector2(0, 5)
+shape = SubResource("RectangleShape2D_bnjuj")
+
+[node name="6" type="RigidBody2D" parent="."]
+position = Vector2(-2, 72)
+collision_layer = 512
+collision_mask = 8
+script = ExtResource("8_lejp0")
+
+[node name="Sprite2D" type="Sprite2D" parent="6"]
+position = Vector2(1, 7)
+texture = ExtResource("2_rovuq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="6"]
+position = Vector2(0, 6)
+shape = SubResource("RectangleShape2D_bnjuj")
+
+[node name="0_1" type="PinJoint2D" parent="."]
+position = Vector2(-2, -1)
+node_a = NodePath("../StaticBody2D")
+node_b = NodePath("../1")
+
+[node name="1_2" type="PinJoint2D" parent="."]
+position = Vector2(-2, 14)
+node_a = NodePath("../1")
+node_b = NodePath("../2")
+
+[node name="2_3" type="PinJoint2D" parent="."]
+position = Vector2(-2, 29)
+node_a = NodePath("../2")
+node_b = NodePath("../3")
+
+[node name="3_4" type="PinJoint2D" parent="."]
+position = Vector2(-2, 43)
+node_a = NodePath("../3")
+node_b = NodePath("../4")
+
+[node name="4_5" type="PinJoint2D" parent="."]
+position = Vector2(-2, 57)
+node_a = NodePath("../4")
+node_b = NodePath("../5")
+
+[node name="5_6" type="PinJoint2D" parent="."]
+position = Vector2(-2, 71)
+node_a = NodePath("../5")
+node_b = NodePath("../6")
