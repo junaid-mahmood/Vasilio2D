@@ -1,0 +1,84 @@
+[gd_scene load_steps=8 format=3 uid="uid://c8yvwrxl8ygvs"]
+
+[ext_resource type="Script" path="res://static_enemy.gd" id="1_yvnqm"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yjnqm"]
+radius = 24.0
+
+[sub_resource type="Gradient" id="Gradient_ixnqj"]
+colors = PackedColorArray(0.8, 0.2, 0.2, 1, 0.9, 0.3, 0.3, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ixnqj"]
+gradient = SubResource("Gradient_ixnqj")
+width = 64
+height = 64
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="Animation" id="Animation_ixnqj"]
+resource_name = "idle"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.05, 1.05), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ixnqj2"]
+resource_name = "shoot"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.2, 1.2), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ixnqj"]
+_data = {
+"idle": SubResource("Animation_ixnqj"),
+"shoot": SubResource("Animation_ixnqj2")
+}
+
+[node name="StaticEnemy" type="Area2D" groups=["enemies"]]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("1_yvnqm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_yjnqm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("GradientTexture2D_ixnqj")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(300, 0)
+collision_mask = 3
+
+[node name="ShootTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ixnqj")
+}
+autoplay = "idle"
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"] 

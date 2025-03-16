@@ -7,11 +7,13 @@
 size = Vector2(8, 8)
 
 [node name="Area2D" type="Area2D"]
-collision_layer = 32
-collision_mask = 280
+collision_layer = 4
+collision_mask = 15
 script = ExtResource("1_4pqs0")
+speed = 400.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0.2, 0.2, 1)
 scale = Vector2(8, 8)
 texture = ExtResource("1_3sftf")
 

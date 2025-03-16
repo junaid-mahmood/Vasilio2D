@@ -1,6 +1,6 @@
 extends Node
 
-var weapon := 'gun'
+var weapon := 'bow'
 
 var player_position := Vector2.ZERO
 

@@ -434,7 +434,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t2rb7"]
-size = Vector2(19, 41.0769)
+size = Vector2(96.9231, 85.5385)
 
 [sub_resource type="GDScript" id="GDScript_l025t"]
 script/source = "extends RayCast2D
