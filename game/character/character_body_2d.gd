@@ -61,6 +61,7 @@ func _ready() -> void:
 	progress_bar.value = 100
 	health_bar.max_value = 100
 	health_bar.value = 100
+	add_to_group("player")
 	
 	var parent = get_parent()
 	shield_body = parent.get_node_or_null("shield")
@@ -259,6 +260,7 @@ func update_bow_position_and_rotation():
 	bow_sprite.flip_v = !facing_right
 	
 	return angle_radians
+
 
 func _physics_process(delta: float) -> void:
 	if transitioning:
