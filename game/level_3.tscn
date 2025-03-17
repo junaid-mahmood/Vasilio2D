@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=4 uid="uid://dvlf6efm1rxt4"]
+[gd_scene load_steps=35 format=4 uid="uid://dvlf6efm1rxt4"]
 
 [ext_resource type="Script" uid="uid://delqgvrwmn22c" path="res://level_3.gd" id="1_gxey3"]
 [ext_resource type="Texture2D" uid="uid://dabf0hrinl0uo" path="res://assets/jungle_platform_small.png" id="1_j8bo8"]
@@ -21,7 +21,6 @@
 [ext_resource type="PackedScene" uid="uid://cj0neh7rr8bi" path="res://character/shield.tscn" id="14_jvy75"]
 [ext_resource type="PackedScene" uid="uid://caqfcrf27ytkv" path="res://coin/coin.tscn" id="19_wnq0t"]
 [ext_resource type="PackedScene" uid="uid://jnlfurofofr7" path="res://torch.tscn" id="20_ra6nl"]
-[ext_resource type="PackedScene" uid="uid://b3rqy8npdd6yy" path="res://fancy_vine/vine.tscn" id="22_4hpui"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4hpui"]
 texture = ExtResource("1_m8gss")
@@ -273,384 +272,385 @@ position = Vector2(127, -32)
 
 [node name="Bullets" type="Node2D" parent="."]
 
-[node name="Area2D" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(422, -132)
+[node name="torches" type="Node2D" parent="."]
 
-[node name="Area2D2" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(643, -25)
-
-[node name="Area2D3" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(-208, -252)
-
-[node name="Area2D4" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(-280, -550)
-
-[node name="Area2D5" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(-203, -891)
-
-[node name="Area2D6" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(-415, -1156)
-
-[node name="Area2D7" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(143, -1288)
-
-[node name="Area2D8" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(-85, -1203)
-
-[node name="Area2D9" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(182, -859)
-
-[node name="Area2D10" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(173, -1018)
-
-[node name="Area2D11" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(501, -770)
-
-[node name="Area2D12" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(434, -273)
-
-[node name="Area2D13" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(788, -468)
-
-[node name="Area2D14" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(287, -499)
-
-[node name="Area2D15" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(76, -363)
-
-[node name="Area2D16" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(712, -681)
-
-[node name="Area2D17" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(1215, -547)
-
-[node name="Area2D18" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(773, -841)
-
-[node name="Area2D19" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(848, -947)
-
-[node name="Area2D20" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(701, -1061)
-
-[node name="Area2D21" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(1155, -1114)
-
-[node name="Area2D22" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(911, -1254)
-
-[node name="Area2D23" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(781, -1395)
-
-[node name="Area2D24" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(496, -1282)
-
-[node name="Area2D25" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(403, -933)
-
-[node name="Area2D26" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(1237, -278)
-
-[node name="Area2D27" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(1299, -403)
-
-[node name="Area2D28" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(1701, -168)
-
-[node name="Area2D29" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(1744, -272)
-
-[node name="Area2D30" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(1598, -491)
-
-[node name="Area2D31" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(1412, -241)
-
-[node name="Area2D32" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(1821, -597)
-
-[node name="Area2D33" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(1902, -461)
-
-[node name="Area2D34" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(1544, -695)
-
-[node name="Area2D35" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(1753, -902)
-
-[node name="Area2D36" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(1420, -995)
-
-[node name="Area2D37" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(1511, -1267)
-
-[node name="Area2D38" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(1848, -1266)
-
-[node name="Area2D39" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(1840, -1437)
-
-[node name="Area2D40" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(2148, -1571)
-
-[node name="Area2D41" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(2106, -1208)
-
-[node name="Area2D42" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(2361, -1317)
-
-[node name="Area2D43" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(2062, -1036)
-
-[node name="Area2D44" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(2264, -929)
-
-[node name="Area2D45" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(2134, -778)
-
-[node name="Area2D46" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(2480, -1188)
-
-[node name="Area2D47" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(2678, -1025)
-
-[node name="Area2D48" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(2513, -834)
-
-[node name="Area2D49" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(2057, -583)
-
-[node name="Area2D50" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(2389, -568)
-
-[node name="Area2D51" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(2071, -169)
-
-[node name="Area2D52" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(2296, -182)
-
-[node name="Area2D53" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(2545, -67)
-
-[node name="Area2D54" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(2754, -257)
-
-[node name="Area2D55" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(2877, -218)
-
-[node name="Area2D56" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(2896, -358)
-
-[node name="Area2D57" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(2913, -698)
-
-[node name="Area2D58" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(3268, -278)
-
-[node name="Area2D59" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(3641, -496)
-
-[node name="Area2D60" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(3239, -643)
-
-[node name="Area2D61" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(3628, -893)
-
-[node name="Area2D62" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(2993, -894)
-
-[node name="Area2D63" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(3200, -1414)
-
-[node name="Area2D64" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(2899, -1138)
-
-[node name="Area2D65" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(2802, -1534)
-
-[node name="Area2D66" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(2654, -1385)
-
-[node name="Area2D67" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(2694, -442)
-
-[node name="Torch" parent="." instance=ExtResource("20_ra6nl")]
-position = Vector2(329, -19)
-scale = Vector2(0.6, 0.6)
-
-[node name="Torch2" parent="." instance=ExtResource("20_ra6nl")]
-position = Vector2(500, -272)
-scale = Vector2(0.6, 0.6)
-
-[node name="Torch3" parent="." instance=ExtResource("20_ra6nl")]
-position = Vector2(183, -376)
-scale = Vector2(0.6, 0.6)
-
-[node name="Torch4" parent="." instance=ExtResource("20_ra6nl")]
-position = Vector2(-105, -488)
-scale = Vector2(0.6, 0.6)
-
-[node name="Torch5" parent="." instance=ExtResource("20_ra6nl")]
-position = Vector2(384, -721)
-scale = Vector2(0.6, 0.6)
-
-[node name="Torch6" parent="." instance=ExtResource("20_ra6nl")]
-position = Vector2(819, -680)
-scale = Vector2(0.6, 0.6)
-
-[node name="Torch7" parent="." instance=ExtResource("20_ra6nl")]
-position = Vector2(620, -402)
-scale = Vector2(0.6, 0.6)
-
-[node name="Torch8" parent="." instance=ExtResource("20_ra6nl")]
-position = Vector2(-254, -872)
-scale = Vector2(0.6, 0.6)
-
-[node name="Torch9" parent="." instance=ExtResource("20_ra6nl")]
-position = Vector2(-133, -1192)
-scale = Vector2(0.6, 0.6)
-
-[node name="Torch10" parent="." instance=ExtResource("20_ra6nl")]
-position = Vector2(879, -807.5)
-scale = Vector2(0.6, 0.6)
-
-[node name="Torch11" parent="." instance=ExtResource("20_ra6nl")]
-position = Vector2(759, -1256)
-scale = Vector2(0.6, 0.6)
-
-[node name="Torch12" parent="." instance=ExtResource("20_ra6nl")]
-position = Vector2(1074, -1112)
-scale = Vector2(0.6, 0.6)
-
-[node name="Torch13" parent="." instance=ExtResource("20_ra6nl")]
-position = Vector2(1218, -904)
-scale = Vector2(0.6, 0.6)
-
-[node name="Torch14" parent="." instance=ExtResource("20_ra6nl")]
-position = Vector2(1147, -728)
-scale = Vector2(0.6, 0.6)
-
-[node name="Area2D68" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(1009, -187)
-
-[node name="Torch15" parent="." instance=ExtResource("20_ra6nl")]
-position = Vector2(1112, -184)
-scale = Vector2(0.6, 0.6)
-
-[node name="Torch16" parent="." instance=ExtResource("20_ra6nl")]
-position = Vector2(1454, -201)
-scale = Vector2(0.6, 0.6)
-
-[node name="Torch17" parent="." instance=ExtResource("20_ra6nl")]
-position = Vector2(2137, -183)
-scale = Vector2(0.6, 0.6)
-
-[node name="Torch18" parent="." instance=ExtResource("20_ra6nl")]
-position = Vector2(2605, -354)
-scale = Vector2(0.6, 0.6)
-
-[node name="Torch19" parent="." instance=ExtResource("20_ra6nl")]
-position = Vector2(2704, -577)
-scale = Vector2(0.6, 0.6)
-
-[node name="Torch20" parent="." instance=ExtResource("20_ra6nl")]
-position = Vector2(2190, -648)
-scale = Vector2(0.6, 0.6)
-
-[node name="Torch21" parent="." instance=ExtResource("20_ra6nl")]
-position = Vector2(2069, -744)
-scale = Vector2(0.6, 0.6)
-
-[node name="Torch22" parent="." instance=ExtResource("20_ra6nl")]
-position = Vector2(2209, -913)
-scale = Vector2(0.6, 0.6)
-
-[node name="Torch23" parent="." instance=ExtResource("20_ra6nl")]
-position = Vector2(2424, -1064)
-scale = Vector2(0.6, 0.6)
-
-[node name="Torch24" parent="." instance=ExtResource("20_ra6nl")]
-position = Vector2(2234, -1235)
-scale = Vector2(0.6, 0.6)
-
-[node name="Torch25" parent="." instance=ExtResource("20_ra6nl")]
-position = Vector2(2594, -1319)
-scale = Vector2(0.6, 0.6)
-
-[node name="Torch26" parent="." instance=ExtResource("20_ra6nl")]
-position = Vector2(2933, -1427)
-scale = Vector2(0.6, 0.6)
-
-[node name="Torch27" parent="." instance=ExtResource("20_ra6nl")]
-position = Vector2(3025, -1143)
-scale = Vector2(0.6, 0.6)
-
-[node name="Torch28" parent="." instance=ExtResource("20_ra6nl")]
-position = Vector2(3455, -852)
-scale = Vector2(0.6, 0.6)
-
-[node name="Torch29" parent="." instance=ExtResource("20_ra6nl")]
-position = Vector2(3115, -689)
-scale = Vector2(0.6, 0.6)
-
-[node name="Torch30" parent="." instance=ExtResource("20_ra6nl")]
-position = Vector2(3058, -226)
-scale = Vector2(0.6, 0.6)
-
-[node name="Torch31" parent="." instance=ExtResource("20_ra6nl")]
-position = Vector2(3535, -418)
-scale = Vector2(0.6, 0.6)
-
-[node name="Torch32" parent="." instance=ExtResource("20_ra6nl")]
-position = Vector2(2649, -120)
-scale = Vector2(0.6, 0.6)
-
-[node name="Torch33" parent="." instance=ExtResource("20_ra6nl")]
-position = Vector2(1793, -274)
-scale = Vector2(0.6, 0.6)
-
-[node name="Torch34" parent="." instance=ExtResource("20_ra6nl")]
-position = Vector2(1377, -465)
-scale = Vector2(0.6, 0.6)
-
-[node name="Torch35" parent="." instance=ExtResource("20_ra6nl")]
-position = Vector2(1056, -519)
-scale = Vector2(0.6, 0.6)
-
-[node name="Torch36" parent="." instance=ExtResource("20_ra6nl")]
-position = Vector2(1747, -696)
-scale = Vector2(0.6, 0.6)
-
-[node name="Torch37" parent="." instance=ExtResource("20_ra6nl")]
-position = Vector2(1574, -993)
-scale = Vector2(0.6, 0.6)
-
-[node name="Torch38" parent="." instance=ExtResource("20_ra6nl")]
-position = Vector2(1650, -1282)
-scale = Vector2(0.6, 0.6)
-
-[node name="Torch39" parent="." instance=ExtResource("20_ra6nl")]
-position = Vector2(61, -647)
-scale = Vector2(0.6, 0.6)
-
-[node name="Torch40" parent="." instance=ExtResource("20_ra6nl")]
-position = Vector2(846, -216)
-scale = Vector2(0.6, 0.6)
-
-[node name="coin" parent="." instance=ExtResource("19_wnq0t")]
-position = Vector2(920, -180)
-
-[node name="Torch41" parent="." instance=ExtResource("20_ra6nl")]
-position = Vector2(252, -1009)
-scale = Vector2(0.6, 0.6)
-
-[node name="Torch42" parent="." instance=ExtResource("20_ra6nl")]
-position = Vector2(-43, -1048)
-scale = Vector2(0.6, 0.6)
-
-[node name="Torch43" parent="." instance=ExtResource("20_ra6nl")]
+[node name="Torch43" parent="torches" instance=ExtResource("20_ra6nl")]
 position = Vector2(-125, -83)
 scale = Vector2(0.6, 0.6)
 
-[node name="Node" parent="." instance=ExtResource("22_4hpui")]
-position = Vector2(199, -107)
+[node name="Torch" parent="torches" instance=ExtResource("20_ra6nl")]
+position = Vector2(329, -19)
+scale = Vector2(0.6, 0.6)
+
+[node name="Torch2" parent="torches" instance=ExtResource("20_ra6nl")]
+position = Vector2(500, -272)
+scale = Vector2(0.6, 0.6)
+
+[node name="Torch3" parent="torches" instance=ExtResource("20_ra6nl")]
+position = Vector2(183, -376)
+scale = Vector2(0.6, 0.6)
+
+[node name="Torch4" parent="torches" instance=ExtResource("20_ra6nl")]
+position = Vector2(-105, -488)
+scale = Vector2(0.6, 0.6)
+
+[node name="Torch5" parent="torches" instance=ExtResource("20_ra6nl")]
+position = Vector2(384, -721)
+scale = Vector2(0.6, 0.6)
+
+[node name="Torch6" parent="torches" instance=ExtResource("20_ra6nl")]
+position = Vector2(819, -680)
+scale = Vector2(0.6, 0.6)
+
+[node name="Torch7" parent="torches" instance=ExtResource("20_ra6nl")]
+position = Vector2(620, -402)
+scale = Vector2(0.6, 0.6)
+
+[node name="Torch8" parent="torches" instance=ExtResource("20_ra6nl")]
+position = Vector2(-254, -872)
+scale = Vector2(0.6, 0.6)
+
+[node name="Torch9" parent="torches" instance=ExtResource("20_ra6nl")]
+position = Vector2(-133, -1192)
+scale = Vector2(0.6, 0.6)
+
+[node name="Torch10" parent="torches" instance=ExtResource("20_ra6nl")]
+position = Vector2(879, -807.5)
+scale = Vector2(0.6, 0.6)
+
+[node name="Torch11" parent="torches" instance=ExtResource("20_ra6nl")]
+position = Vector2(759, -1256)
+scale = Vector2(0.6, 0.6)
+
+[node name="Torch12" parent="torches" instance=ExtResource("20_ra6nl")]
+position = Vector2(1074, -1112)
+scale = Vector2(0.6, 0.6)
+
+[node name="Torch13" parent="torches" instance=ExtResource("20_ra6nl")]
+position = Vector2(1218, -904)
+scale = Vector2(0.6, 0.6)
+
+[node name="Torch14" parent="torches" instance=ExtResource("20_ra6nl")]
+position = Vector2(1147, -728)
+scale = Vector2(0.6, 0.6)
+
+[node name="Torch15" parent="torches" instance=ExtResource("20_ra6nl")]
+position = Vector2(1112, -184)
+scale = Vector2(0.6, 0.6)
+
+[node name="Torch16" parent="torches" instance=ExtResource("20_ra6nl")]
+position = Vector2(1454, -201)
+scale = Vector2(0.6, 0.6)
+
+[node name="Torch17" parent="torches" instance=ExtResource("20_ra6nl")]
+position = Vector2(2137, -183)
+scale = Vector2(0.6, 0.6)
+
+[node name="Torch18" parent="torches" instance=ExtResource("20_ra6nl")]
+position = Vector2(2605, -354)
+scale = Vector2(0.6, 0.6)
+
+[node name="Torch19" parent="torches" instance=ExtResource("20_ra6nl")]
+position = Vector2(2704, -577)
+scale = Vector2(0.6, 0.6)
+
+[node name="Torch20" parent="torches" instance=ExtResource("20_ra6nl")]
+position = Vector2(2190, -648)
+scale = Vector2(0.6, 0.6)
+
+[node name="Torch21" parent="torches" instance=ExtResource("20_ra6nl")]
+position = Vector2(2069, -744)
+scale = Vector2(0.6, 0.6)
+
+[node name="Torch22" parent="torches" instance=ExtResource("20_ra6nl")]
+position = Vector2(2209, -913)
+scale = Vector2(0.6, 0.6)
+
+[node name="Torch23" parent="torches" instance=ExtResource("20_ra6nl")]
+position = Vector2(2424, -1064)
+scale = Vector2(0.6, 0.6)
+
+[node name="Torch24" parent="torches" instance=ExtResource("20_ra6nl")]
+position = Vector2(2234, -1235)
+scale = Vector2(0.6, 0.6)
+
+[node name="Torch25" parent="torches" instance=ExtResource("20_ra6nl")]
+position = Vector2(2594, -1319)
+scale = Vector2(0.6, 0.6)
+
+[node name="Torch26" parent="torches" instance=ExtResource("20_ra6nl")]
+position = Vector2(2933, -1427)
+scale = Vector2(0.6, 0.6)
+
+[node name="Torch27" parent="torches" instance=ExtResource("20_ra6nl")]
+position = Vector2(3025, -1143)
+scale = Vector2(0.6, 0.6)
+
+[node name="Torch28" parent="torches" instance=ExtResource("20_ra6nl")]
+position = Vector2(3455, -852)
+scale = Vector2(0.6, 0.6)
+
+[node name="Torch29" parent="torches" instance=ExtResource("20_ra6nl")]
+position = Vector2(3115, -689)
+scale = Vector2(0.6, 0.6)
+
+[node name="Torch30" parent="torches" instance=ExtResource("20_ra6nl")]
+position = Vector2(3058, -226)
+scale = Vector2(0.6, 0.6)
+
+[node name="Torch31" parent="torches" instance=ExtResource("20_ra6nl")]
+position = Vector2(3535, -418)
+scale = Vector2(0.6, 0.6)
+
+[node name="Torch32" parent="torches" instance=ExtResource("20_ra6nl")]
+position = Vector2(2649, -120)
+scale = Vector2(0.6, 0.6)
+
+[node name="Torch33" parent="torches" instance=ExtResource("20_ra6nl")]
+position = Vector2(1793, -274)
+scale = Vector2(0.6, 0.6)
+
+[node name="Torch34" parent="torches" instance=ExtResource("20_ra6nl")]
+position = Vector2(1377, -465)
+scale = Vector2(0.6, 0.6)
+
+[node name="Torch35" parent="torches" instance=ExtResource("20_ra6nl")]
+position = Vector2(1056, -519)
+scale = Vector2(0.6, 0.6)
+
+[node name="Torch36" parent="torches" instance=ExtResource("20_ra6nl")]
+position = Vector2(1747, -696)
+scale = Vector2(0.6, 0.6)
+
+[node name="Torch37" parent="torches" instance=ExtResource("20_ra6nl")]
+position = Vector2(1574, -993)
+scale = Vector2(0.6, 0.6)
+
+[node name="Torch38" parent="torches" instance=ExtResource("20_ra6nl")]
+position = Vector2(1650, -1282)
+scale = Vector2(0.6, 0.6)
+
+[node name="Torch39" parent="torches" instance=ExtResource("20_ra6nl")]
+position = Vector2(61, -647)
+scale = Vector2(0.6, 0.6)
+
+[node name="Torch40" parent="torches" instance=ExtResource("20_ra6nl")]
+position = Vector2(846, -216)
+scale = Vector2(0.6, 0.6)
+
+[node name="Torch41" parent="torches" instance=ExtResource("20_ra6nl")]
+position = Vector2(252, -1009)
+scale = Vector2(0.6, 0.6)
+
+[node name="Torch42" parent="torches" instance=ExtResource("20_ra6nl")]
+position = Vector2(-43, -1048)
+scale = Vector2(0.6, 0.6)
+
+[node name="coins" type="Node2D" parent="."]
+
+[node name="coin" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(920, -180)
+
+[node name="Area2D" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(423, -131)
+
+[node name="Area2D2" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(644, -24)
+
+[node name="Area2D3" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(-207, -251)
+
+[node name="Area2D4" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(-279, -549)
+
+[node name="Area2D5" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(-202, -890)
+
+[node name="Area2D6" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(-414, -1155)
+
+[node name="Area2D7" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(144, -1287)
+
+[node name="Area2D8" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(-84, -1202)
+
+[node name="Area2D9" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(183, -858)
+
+[node name="Area2D68" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(1009, -187)
+
+[node name="Area2D10" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(174, -1017)
+
+[node name="Area2D11" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(502, -769)
+
+[node name="Area2D12" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(435, -272)
+
+[node name="Area2D13" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(789, -467)
+
+[node name="Area2D14" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(288, -498)
+
+[node name="Area2D15" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(77, -362)
+
+[node name="Area2D16" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(713, -680)
+
+[node name="Area2D17" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(1216, -546)
+
+[node name="Area2D18" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(774, -840)
+
+[node name="Area2D19" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(849, -946)
+
+[node name="Area2D20" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(702, -1060)
+
+[node name="Area2D21" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(1156, -1113)
+
+[node name="Area2D22" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(912, -1253)
+
+[node name="Area2D23" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(782, -1394)
+
+[node name="Area2D24" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(497, -1281)
+
+[node name="Area2D25" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(404, -932)
+
+[node name="Area2D26" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(1238, -277)
+
+[node name="Area2D27" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(1300, -402)
+
+[node name="Area2D28" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(1702, -167)
+
+[node name="Area2D29" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(1745, -271)
+
+[node name="Area2D30" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(1599, -490)
+
+[node name="Area2D31" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(1413, -240)
+
+[node name="Area2D32" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(1822, -596)
+
+[node name="Area2D33" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(1903, -460)
+
+[node name="Area2D34" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(1545, -694)
+
+[node name="Area2D35" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(1754, -901)
+
+[node name="Area2D36" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(1421, -994)
+
+[node name="Area2D37" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(1512, -1266)
+
+[node name="Area2D38" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(1849, -1265)
+
+[node name="Area2D39" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(1841, -1436)
+
+[node name="Area2D40" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(2149, -1570)
+
+[node name="Area2D41" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(2107, -1207)
+
+[node name="Area2D42" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(2362, -1316)
+
+[node name="Area2D43" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(2063, -1035)
+
+[node name="Area2D44" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(2265, -928)
+
+[node name="Area2D45" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(2135, -777)
+
+[node name="Area2D46" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(2481, -1187)
+
+[node name="Area2D47" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(2679, -1024)
+
+[node name="Area2D48" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(2514, -833)
+
+[node name="Area2D49" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(2058, -582)
+
+[node name="Area2D50" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(2390, -567)
+
+[node name="Area2D51" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(2072, -168)
+
+[node name="Area2D52" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(2297, -181)
+
+[node name="Area2D53" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(2546, -66)
+
+[node name="Area2D54" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(2755, -256)
+
+[node name="Area2D55" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(2878, -217)
+
+[node name="Area2D56" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(2897, -357)
+
+[node name="Area2D57" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(2914, -697)
+
+[node name="Area2D58" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(3269, -277)
+
+[node name="Area2D59" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(3642, -495)
+
+[node name="Area2D60" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(3240, -642)
+
+[node name="Area2D61" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(3629, -892)
+
+[node name="Area2D62" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(2994, -893)
+
+[node name="Area2D63" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(3201, -1413)
+
+[node name="Area2D64" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(2900, -1137)
+
+[node name="Area2D65" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(2803, -1533)
+
+[node name="Area2D66" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(2655, -1384)
+
+[node name="Area2D67" parent="coins" instance=ExtResource("19_wnq0t")]
+position = Vector2(2695, -441)

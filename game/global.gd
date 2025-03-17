@@ -10,8 +10,8 @@ var has_shield := false
 
 var coins_collected := 0
 
-#if shooting, player_pos, facing_right
-var shoot = [false, Vector2.ZERO, false]
+#if shooting, player_pos, direction
+var shoot = [false, Vector2.ZERO, Vector2.ZERO]
 
 #if shooting, enemy_pos, target_pos
 var enemy_shoot = [false, Vector2.ZERO, Vector2.ZERO]

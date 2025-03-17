@@ -66,7 +66,7 @@ func _process(delta):
 			Global.weapon = "sword"
 		if Input.is_key_pressed(KEY_R):
 			update_text_for_key("R")
-			Global.weapon = "gun"
+			Global.weapon = "bow"
 		if Input.is_key_pressed(KEY_C):
 			update_text_for_key("C")
 			Global.weapon = "shield"
@@ -109,7 +109,7 @@ func highlight_current_weapon():
 			# Regular weapons
 			if Global.weapon == "sword":
 				label1.add_theme_color_override("font_color", Color(1, 1, 0, 1))
-			elif Global.weapon == "gun":
+			elif Global.weapon == "bow":
 				label2.add_theme_color_override("font_color", Color(1, 1, 0, 1))
 			elif Global.weapon == "shield":
 				label3.add_theme_color_override("font_color", Color(1, 1, 0, 1))
@@ -135,15 +135,12 @@ func reset_text(label, key):
 		label.text = key
 
 func _on_button_pressed():
-	print("Button 1 pressed")
 	if is_tarzan_mode:
 		Global.weapon = "vine"
-		print("Tarzan weapon set to vine")
 	else:
 		Global.weapon = "sword"
 
 func _on_button_2_pressed():
-	print("Button 2 pressed")
 	if is_tarzan_mode:
 		# Trigger Tarzan's special ability
 		var tarzan = get_node_or_null("/root/tarzan")
@@ -154,9 +151,8 @@ func _on_button_2_pressed():
 			print("Activating Tarzan's special ability")
 			tarzan.activate_special_ability()
 	else:
-		Global.weapon = "gun"
+		Global.weapon = "bow"
 
 func _on_button_3_pressed():
-	print("Button 3 pressed")
 	if not is_tarzan_mode:
 		Global.weapon = "shield"
