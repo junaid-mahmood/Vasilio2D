@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=4 uid="uid://c1ngqyc8cjk5f"]
+[gd_scene load_steps=33 format=4 uid="uid://c1ngqyc8cjk5f"]
 
 [ext_resource type="Script" uid="uid://di6camdvfumij" path="res://main.gd" id="1_7mylh"]
 [ext_resource type="Texture2D" uid="uid://balbd02i3nktn" path="res://castl1.jpg" id="2_4ou0f"]
@@ -17,6 +17,8 @@
 [ext_resource type="PackedScene" uid="uid://sihy1oiiv6bj" path="res://hotbar.tscn" id="15_00gqm"]
 [ext_resource type="PackedScene" uid="uid://cpkni5shkfy4j" path="res://level2_enemy.tscn" id="17_enemy"]
 [ext_resource type="Script" uid="uid://bqhhrylu0173q" path="res://health_bar.gd" id="17_ixnqj"]
+[ext_resource type="PackedScene" uid="uid://png7dtpi8cdm" path="res://character/bow.tscn" id="18_hp87d"]
+[ext_resource type="PackedScene" uid="uid://cj0neh7rr8bi" path="res://character/shield.tscn" id="19_gxpff"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_idpoe"]
 texture = ExtResource("2_lwvnx")
@@ -858,3 +860,11 @@ position = Vector2(34, -12)
 
 [node name="Level2Enemy" parent="." instance=ExtResource("17_enemy")]
 position = Vector2(901, 194)
+
+[node name="Node2D" parent="." instance=ExtResource("18_hp87d")]
+visible = false
+position = Vector2(-78, -35)
+
+[node name="Area2D" parent="." instance=ExtResource("19_gxpff")]
+visible = false
+position = Vector2(-71, -42)

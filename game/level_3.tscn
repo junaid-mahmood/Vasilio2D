@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=4 uid="uid://dvlf6efm1rxt4"]
+[gd_scene load_steps=36 format=4 uid="uid://dvlf6efm1rxt4"]
 
 [ext_resource type="Script" uid="uid://delqgvrwmn22c" path="res://level_3.gd" id="1_gxey3"]
 [ext_resource type="Texture2D" uid="uid://dabf0hrinl0uo" path="res://assets/jungle_platform_small.png" id="1_j8bo8"]
@@ -21,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://cj0neh7rr8bi" path="res://character/shield.tscn" id="14_jvy75"]
 [ext_resource type="PackedScene" uid="uid://caqfcrf27ytkv" path="res://coin/coin.tscn" id="19_wnq0t"]
 [ext_resource type="PackedScene" uid="uid://jnlfurofofr7" path="res://torch.tscn" id="20_ra6nl"]
+[ext_resource type="PackedScene" uid="uid://png7dtpi8cdm" path="res://character/bow.tscn" id="22_4hpui"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4hpui"]
 texture = ExtResource("1_m8gss")
@@ -266,7 +267,12 @@ offset_right = 1020.0
 offset_bottom = 150.0
 
 [node name="shield" parent="." instance=ExtResource("14_jvy75")]
+visible = false
 position = Vector2(127, -32)
+
+[node name="bow" parent="." instance=ExtResource("22_4hpui")]
+visible = false
+position = Vector2(126, -28)
 
 [node name="EnemyBullets" type="Node2D" parent="."]
 
