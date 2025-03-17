@@ -76,7 +76,6 @@ text = "F"
 horizontal_alignment = 1
 
 [node name="Button3" type="Button" parent="GridContainer"]
-visible = false
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 focus_mode = 0
