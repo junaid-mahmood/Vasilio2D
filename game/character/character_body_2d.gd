@@ -56,12 +56,16 @@ var charge_effect = null
 
 var damage_number_scene = preload("res://damage_number.tscn")
 
+var spawn_position = Vector2()
+
 func _ready() -> void:
 	progress_bar.max_value = 100
 	progress_bar.value = 100
 	health_bar.max_value = 100
 	health_bar.value = 100
 	add_to_group("player")
+	
+	spawn_position = position
 	
 	var parent = get_parent()
 	shield_body = parent.get_node_or_null("shield")
@@ -122,7 +126,6 @@ func create_static_bow_character():
 	add_child(bow_character_sprite)
 	
 	bow_character_sprite.visible = false
-	
 
 func setup_charge_effect():
 	charge_effect = ColorRect.new()
@@ -187,7 +190,6 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventKey:
 		if event.pressed and not event.echo:
 			if event.keycode == KEY_Q:
-				print("Q pressed - switching to sword")
 				weapon_counter = weapons.find("sword")
 				switch_to_weapon("sword")
 				sprite_2d.animation = "sword"
@@ -261,12 +263,12 @@ func update_bow_position_and_rotation():
 	
 	return angle_radians
 
-
 func _physics_process(delta: float) -> void:
 	if transitioning:
 		return
 		
 	check_door_collision()
+	check_teleport_triggers()
 
 	if health_bar.value <= 0:
 		game_over()
@@ -362,7 +364,6 @@ func _physics_process(delta: float) -> void:
 	elif current_weapon == 'sword':
 		sprite_2d.animation = "sword"
 		sprite_2d.visible = true
-		# Hide bow character sprite
 		if bow_character_sprite:
 			bow_character_sprite.visible = false
 	elif current_weapon == 'bow':
@@ -370,7 +371,6 @@ func _physics_process(delta: float) -> void:
 			bow_character_sprite.visible = true
 			sprite_2d.visible = false
 			
-			# EMERGENCY FIX: Force visibility every frame
 			if not bow_character_sprite.visible:
 				bow_character_sprite.visible = true
 		else:
@@ -421,7 +421,6 @@ func _physics_process(delta: float) -> void:
 		current_charge = 0.0
 	
 	if Input.is_action_just_released("ui_select"):
-		# Calculate charge percentage (0 to 1)
 		var charge_time = current_charge
 		var is_charged = charge_time >= MIN_CHARGE_TIME
 		var charge_percent = 0.0
@@ -463,7 +462,6 @@ func _physics_process(delta: float) -> void:
 			if is_charged:
 				speed_multiplier = 1.0 + charge_percent * (CHARGE_BOW_SPEED_MULTIPLIER - 1.0)
 				damage_multiplier = 1.0 + charge_percent * (CHARGE_BOW_DAMAGE_MULTIPLIER - 1.0)
-				print("Charged bow shot! Speed: " + str(speed_multiplier) + "x, Damage: " + str(damage_multiplier) + "x")
 			
 			if bow_sprite and is_instance_valid(bow_sprite):
 				var spawn_pos = global_position + bow_sprite.position
@@ -485,7 +483,6 @@ func _physics_process(delta: float) -> void:
 				var damage_multiplier = 1.0 + charge_percent * (CHARGE_SWORD_DAMAGE_MULTIPLIER - 1.0)
 				kill_radius *= radius_multiplier
 				damage *= damage_multiplier
-				print("Charged sword attack! Radius: " + str(radius_multiplier) + "x, Damage: " + str(damage_multiplier) + "x")
 				
 				var sword_slash = ColorRect.new()
 				sword_slash.color = Color(1, 0.5, 0, 0.3)  
@@ -534,14 +531,21 @@ func _physics_process(delta: float) -> void:
 	
 	Global.player_position = position
 
+func check_teleport_triggers():
+	for area in get_tree().get_nodes_in_group("teleport_trigger"):
+		if area is Area2D and global_position.distance_to(area.global_position) < 50:
+			position = spawn_position
+			break
+
+func _on_area_entered(area):
+	if area.is_in_group("teleport_trigger"):
+		position = spawn_position
+
 func switch_to_weapon(weapon_name: String) -> void:
 	if weapons.has(weapon_name):
-		print("Switching to weapon: " + weapon_name + " (index: " + str(weapons.find(weapon_name)) + ")")
-		
 		weapon_changed.emit(weapon_name)
 		weapon_counter = weapons.find(weapon_name)
 		
-		# Handle bow
 		if weapon_name == "bow":
 			if not bow_sprite or not is_instance_valid(bow_sprite):
 				var bow_texture = preload("res://assets/bow.png")
@@ -568,7 +572,6 @@ func switch_to_weapon(weapon_name: String) -> void:
 			if shield_body != null:
 				shield_body.visible = false
 				Global.has_shield = false
-			print("Sword equipped - shield visibility: " + str(shield_body.visible if shield_body != null else "no shield"))
 		elif weapon_name == "shield":
 			if bow_character_sprite:
 				bow_character_sprite.visible = false
@@ -577,7 +580,6 @@ func switch_to_weapon(weapon_name: String) -> void:
 			if shield_body != null:
 				shield_body.visible = true
 				Global.has_shield = true
-			print("Shield equipped - shield visibility: " + str(shield_body.visible if shield_body != null else "no shield"))
 		else:
 			if bow_sprite and is_instance_valid(bow_sprite):
 				bow_sprite.visible = false
@@ -673,7 +675,6 @@ func _process(delta: float) -> void:
 			sprite_2d.visible = false
 			
 			if not bow_character_sprite.visible:
-				print("EMERGENCY FIX: Bow character sprite was invisible in process, forcing visibility")
 				bow_character_sprite.visible = true
 	else:
 		if bow_character_sprite:

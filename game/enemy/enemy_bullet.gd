@@ -5,17 +5,14 @@ var velocity: Vector2 = Vector2.ZERO
 var damage: int = 20
 
 func _ready():
-	print("Enemy bullet created with collision layer: " + str(collision_layer) + ", mask: " + str(collision_mask))
 	
 	# Connect the body_entered signal
 	if not is_connected("body_entered", _on_body_entered):
 		connect("body_entered", _on_body_entered)
-		print("Connected body_entered signal")
 	
 	# Connect the area_entered signal
 	if not is_connected("area_entered", _on_area_entered):
 		connect("area_entered", _on_area_entered)
-		print("Connected area_entered signal")
 
 func _process(delta):
 	position += velocity * delta

@@ -434,7 +434,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t2rb7"]
-size = Vector2(96.9231, 85.5385)
+size = Vector2(56.2885, 80.6154)
 
 [sub_resource type="GDScript" id="GDScript_l025t"]
 script/source = "extends RayCast2D
@@ -464,7 +464,6 @@ sprite_frames = SubResource("SpriteFrames_83wdf")
 animation = &"death"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, -7.46154)
 shape = SubResource("RectangleShape2D_t2rb7")
 
 [node name="right_ray_climb" type="RayCast2D" parent="."]

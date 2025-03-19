@@ -53,11 +53,11 @@ func _ready() -> void:
 		bow_sprite.texture = bow_texture
 		bow_sprite.scale = Vector2(1.5, 1.5)
 		add_child(bow_sprite)
-		print("Created new bow sprite")
+		
 	else:
 		bow_sprite = $BowSprite
 		bow_sprite.scale = Vector2(1.5, 1.5)
-		print("Using existing bow sprite")
+		
 
 	# Start with bow as the default weapon
 	Global.weapon = "bow"
@@ -67,7 +67,7 @@ func _ready() -> void:
 	
 	# Force bow to be visible at start
 	bow_sprite.visible = true
-	print("Initial bow visibility set to: " + str(bow_sprite.visible) + " for weapon: " + Global.weapon)
+	
 
 func setup_transition_layer():
 	var canvas_layer = CanvasLayer.new()
@@ -97,7 +97,7 @@ func _input(event: InputEvent) -> void:
 				switch_to_weapon("bow")
 				# Force bow to be visible immediately
 				bow_sprite.visible = true
-				print("R key pressed - bow should be visible now: " + str(bow_sprite.visible))
+				
 			elif event.keycode == KEY_C:
 				switch_to_weapon("shield")
 
@@ -154,7 +154,7 @@ func _physics_process(delta: float) -> void:
 	# Ensure bow is visible when it's the selected weapon
 	if Global.weapon == 'bow' and not bow_sprite.visible:
 		bow_sprite.visible = true
-		print("Forcing bow visibility in _physics_process")
+		
 	
 	if shield_body != null:
 		var centered_global_position = global_position
@@ -183,7 +183,7 @@ func _physics_process(delta: float) -> void:
 	
 	# Handle weapon switching with R key for bow
 	if Input.is_action_just_pressed("bow_select"):
-		print("Bow select key pressed")
+		
 		for i in range(weapons.size()):
 			if weapons[i] == "bow":
 				weapon_counter = i
@@ -195,7 +195,7 @@ func _physics_process(delta: float) -> void:
 				# Force update the bow position and rotation
 				update_bow_position_and_rotation()
 				
-				print("Switched to bow via bow_select action - bow visibility: " + str(bow_sprite.visible))
+				
 				break
 	
 	if progress_bar.value < 100:
@@ -212,7 +212,7 @@ func _physics_process(delta: float) -> void:
 		
 		# Debug print for bow position
 		if Engine.get_process_frames() % 60 == 0:  # Print once per second at 60 FPS
-			print("Bow position: " + str(bow_sprite.position) + ", rotation: " + str(bow_sprite.rotation))
+			
 	elif abs(velocity.x) > 1 and not Global.dead:
 		sprite_2d.animation = "running"
 	else:
@@ -252,7 +252,7 @@ func _physics_process(delta: float) -> void:
 		elif Global.weapon == 'bow' and has_bow and progress_bar.value >= BOW_COST:
 			progress_bar.value -= BOW_COST
 			$Shoot.play()
-			print("Shooting bow!")
+			
 			
 			# Get the mouse position in global coordinates
 			var mouse_pos = get_viewport().get_mouse_position()
@@ -284,7 +284,7 @@ func _physics_process(delta: float) -> void:
 			# Pass the spawn position and direction for accurate aiming
 			Global.shoot = [true, spawn_pos, spawn_pos + limited_direction * 1000]  # Point far in the direction
 			
-			print("Arrow fired from: " + str(spawn_pos) + " towards: " + str(spawn_pos + limited_direction * 1000))
+			
 		elif Global.weapon == 'sword':
 			progress_bar.value -= SWORD_COST
 			sprite_2d.animation = 'sword'
@@ -332,18 +332,18 @@ func switch_to_weapon(weapon_name: String) -> void:
 			bow_sprite.visible = true
 			# Force update the bow position and rotation immediately
 			update_bow_position_and_rotation()
-			print("Bow sprite should be visible now: " + str(bow_sprite.visible))
+			
 		else:
 			bow_sprite.visible = false
 		
-		print("Switched to " + Global.weapon)
+		
 
 func check_door_collision():
 	var door = get_node_or_null("../Door")
 	if door:
 		var distance = global_position.distance_to(door.global_position)
 		if distance < 50:
-			print("Player near door! Distance: " + str(distance))
+			
 			transition_to_level("res://Level2.tscn")
 
 func transition_to_level(next_scene_path: String):
@@ -351,7 +351,7 @@ func transition_to_level(next_scene_path: String):
 		return
 		
 	transitioning = true
-	print("Starting transition to: " + next_scene_path)
+	
 	
 	update_fade_rect_size()
 	
@@ -359,7 +359,7 @@ func transition_to_level(next_scene_path: String):
 	tween.tween_property(fade_rect, "color", Color(0, 0, 0, 1), 0.5)
 	await tween.finished
 	
-	print("Fade completed, changing scene")
+	
 	get_tree().change_scene_to_file(next_scene_path)
 
 func get_right_direc(direction):
@@ -408,15 +408,10 @@ func _process(delta: float) -> void:
 	if Global.weapon == 'bow':
 		if not bow_sprite.visible:
 			bow_sprite.visible = true
-			print("Ensuring bow remains visible in _process - was hidden")
+			
 			
 			# Force update the bow position and rotation
 			update_bow_position_and_rotation()
 	else:
 		if bow_sprite.visible:
 			bow_sprite.visible = false
-			print("Hiding bow in _process as weapon is: " + Global.weapon)
-	
-	# Debug print every few seconds
-	if Engine.get_process_frames() % 60 == 0:  # Print once per second at 60 FPS
-		print("Current weapon: " + Global.weapon + ", Bow visible: " + str(bow_sprite.visible) + ", Weapon counter: " + str(weapon_counter)) 

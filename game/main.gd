@@ -6,6 +6,8 @@ const portal_bullet_scene: PackedScene = preload("res://teleport/portal.tscn")
 const bow_bullet_scene: PackedScene = preload("res://bow/bow_bullet.tscn")
 
 var player_character
+var quantum_effect_active := false
+var quantum_particles := []
 
 func _ready() -> void:
 	if Global.player == 'tarzan':
@@ -22,63 +24,63 @@ func _ready() -> void:
 	
 	add_child(player_character)
 	
-	# Ensure Bullets node exists
 	if not has_node("Bullets"):
 		var bullets_node = Node2D.new()
 		bullets_node.name = "Bullets"
 		add_child(bullets_node)
 	
-	# Ensure EnemyBullets node exists
 	if not has_node("EnemyBullets"):
 		var enemy_bullets_node = Node2D.new()
 		enemy_bullets_node.name = "EnemyBullets"
 		add_child(enemy_bullets_node)
+	
+	if Global.player == 'scientist' and not has_node("Portals"):
+		var portals_node = Node2D.new()
+		portals_node.name = "Portals"
+		add_child(portals_node)
+		
+	if Global.player == 'scientist':
+		var quantum_timer = Timer.new()
+		quantum_timer.wait_time = 0.1
+		quantum_timer.autostart = true
+		quantum_timer.name = "QuantumTimer"
+		add_child(quantum_timer)
+		quantum_timer.timeout.connect(_check_quantum_state)
 
 func _process(delta: float) -> void:
 	if Global.shoot[0]:
 		var pos = Global.shoot[1]
 		
-		# Check if using bow/arrow
 		if Global.weapon == 'bow':
 			var bow_bullet = bow_bullet_scene.instantiate()
 			
-			# For bow, the third parameter is the target position
 			var target_pos = Global.shoot[2]
 			var spawn_pos = Global.shoot[1]
 			
-			# Calculate direction from spawn position to target
 			var direction = (target_pos - spawn_pos).normalized()
 			
-			# Set bullet position and velocity
 			bow_bullet.position = spawn_pos
 			bow_bullet.velocity = direction * bow_bullet.speed
 			
-			# Set rotation to match direction
 			bow_bullet.rotation = direction.angle()
 			
-			# Apply damage multiplier if provided (from charged attack)
 			if Global.shoot.size() > 3:
 				bow_bullet.damage_multiplier = Global.shoot[3]
 				
-				# Scale the arrow based on charge
 				if Global.shoot[3] > 1.0:
 					var scale_factor = 0.4 + (Global.shoot[3] - 1.0) * 0.2
 					bow_bullet.scale = Vector2(scale_factor, scale_factor)
 			
-			# Add the bullet to the scene
 			if has_node("Bullets"):
 				$Bullets.add_child(bow_bullet)
 			else:
-				# Create Bullets node if it doesn't exist
 				var bullets_node = Node2D.new()
 				bullets_node.name = "Bullets"
 				add_child(bullets_node)
 				bullets_node.add_child(bow_bullet)
 			
-			# Reset shoot flag
 			Global.shoot[0] = false
 		else:
-			# Original gun logic
 			var facing_right = Global.shoot[2]
 			var bullet = bullet_scene.instantiate()
 			var direction = 1 if facing_right else -1
@@ -88,64 +90,135 @@ func _process(delta: float) -> void:
 			bullet.position = pos + Vector2(6 * direction, 0)
 			Global.shoot[0] = false
 		
-	# Handle enemy shooting with debug logging
 	if Global.enemy_shoot[0]:
-		print("Enemy shooting triggered in main.gd")
 		var pos = Global.enemy_shoot[1]
 		var player_pos = Global.enemy_shoot[2]
 		
-		# Create the bullet
 		var en_bullet = enemy_bullet_scene.instantiate()
-		print("Enemy bullet instantiated: " + str(en_bullet))
 		
-		# Position the bullet
 		pos.y -= 20
 		en_bullet.position = pos
 		
-		# Set velocity and direction
 		var direction: Vector2 = (player_pos - pos).normalized()
 		en_bullet.velocity = direction * en_bullet.speed
 		en_bullet.rotation = direction.angle()
 		
-		# Debug the bullet properties
-		print("Bullet position: " + str(en_bullet.position))
-		print("Bullet velocity: " + str(en_bullet.velocity))
-		print("Bullet collision layer: " + str(en_bullet.collision_layer))
-		print("Bullet collision mask: " + str(en_bullet.collision_mask))
-		
-		# Add to scene
 		if has_node("EnemyBullets"):
-			print("Adding enemy bullet to EnemyBullets node")
 			$EnemyBullets.add_child(en_bullet)
 		else:
-			print("EnemyBullets node not found, creating it")
 			var enemy_bullets_node = Node2D.new()
 			enemy_bullets_node.name = "EnemyBullets"
 			add_child(enemy_bullets_node)
 			enemy_bullets_node.add_child(en_bullet)
 		
-		# Reset the global flag
 		Global.enemy_shoot[0] = false
-		print("Enemy shooting completed")
 		
 	if Global.shoot_portal[0]:
-		await get_tree().create_timer(1)
+		await get_tree().create_timer(0.1).timeout
+		
 		var pos = Global.shoot_portal[1]
 		var portal_bullet = portal_bullet_scene.instantiate()
 		var direction := Vector2.ZERO
+		
 		if Global.portals == 1:
 			direction = (Global.portal1 - pos).normalized()
-			
+			portal_bullet.portal_number = 1
 		elif Global.portals == 2:
 			direction = (Global.portal2 - pos).normalized()
+			portal_bullet.portal_number = 2
 			
 		portal_bullet.position = pos
 		portal_bullet.velocity = direction * portal_bullet.speed
 		portal_bullet.rotation = direction.angle()
+		
 		if Global.portals == 1:
 			portal_bullet.set_pos = Global.portal1
 		else:
 			portal_bullet.set_pos = Global.portal2
-		$EnemyBullets.add_child(portal_bullet)
+		
+		if has_node("Portals"):
+			$Portals.add_child(portal_bullet)
+		else:
+			$EnemyBullets.add_child(portal_bullet)
+		
 		Global.shoot_portal[0] = false
 		
+	if Global.level_changed:
+		if player_character and player_character.has_method("_on_level_changed"):
+			player_character._on_level_changed()
+		Global.level_changed = false
+		
+	if quantum_effect_active:
+		update_quantum_world_effects(delta)
+
+func _check_quantum_state():
+	if Global.player == 'scientist' and player_character and player_character.has_method("get_special_ability_state"):
+		var ability_state = player_character.get_special_ability_state()
+		
+		if ability_state.active and not quantum_effect_active:
+			quantum_effect_active = true
+			create_quantum_world_effects()
+			
+		elif not ability_state.active and quantum_effect_active:
+			quantum_effect_active = false
+			clear_quantum_world_effects()
+
+func create_quantum_world_effects():
+	var canvas_layer = CanvasLayer.new()
+	canvas_layer.name = "QuantumEffectLayer"
+	canvas_layer.layer = 5
+	add_child(canvas_layer)
+	
+	var overlay = ColorRect.new()
+	overlay.name = "QuantumOverlay"
+	overlay.size = Vector2(1280, 720)
+	canvas_layer.add_child(overlay)
+	
+	for i in range(20):
+		var particle = ColorRect.new()
+		particle.size = Vector2(3, 3)
+		
+		var x = randf_range(0, 1280)
+		var y = randf_range(0, 720)
+		
+		particle.position = Vector2(x, y)
+		canvas_layer.add_child(particle)
+		quantum_particles.append(particle)
+	
+	var time_distortion = ColorRect.new()
+	time_distortion.name = "TimeDistortion"
+	time_distortion.size = Vector2(1280, 720)
+	canvas_layer.add_child(time_distortion)
+	
+	var tween = create_tween()
+	tween.set_loops()
+	tween.tween_property(time_distortion, "color:a", 0.15, 0.5)
+	tween.tween_property(time_distortion, "color:a", 0.0, 0.5)
+
+func update_quantum_world_effects(delta):
+	for particle in quantum_particles:
+		if is_instance_valid(particle):
+			var move_x = randf_range(-1, 1) * 100 * delta
+			var move_y = randf_range(-1, 1) * 100 * delta
+			
+			particle.position += Vector2(move_x, move_y)
+			
+			if particle.position.x < 0:
+				particle.position.x = 1280
+			elif particle.position.x > 1280:
+				particle.position.x = 0
+				
+			if particle.position.y < 0:
+				particle.position.y = 720
+			elif particle.position.y > 720:
+				particle.position.y = 0
+				
+			var size_scale = randf_range(0.8, 1.2)
+			particle.size = Vector2(3, 3) * size_scale
+
+func clear_quantum_world_effects():
+	var effect_layer = get_node_or_null("QuantumEffectLayer")
+	if effect_layer:
+		effect_layer.queue_free()
+	
+	quantum_particles.clear()
