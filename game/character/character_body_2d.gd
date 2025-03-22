@@ -107,7 +107,6 @@ func update_bow_position_and_rotation():
 
 
 
-
 func _physics_process(delta: float) -> void:
 	
 	if transitioning:
