@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=4 uid="uid://bm2qaccjcy00b"]
+[gd_scene load_steps=39 format=4 uid="uid://bm2qaccjcy00b"]
 
 [ext_resource type="Script" uid="uid://di6camdvfumij" path="res://main.gd" id="1_f8jqy"]
 [ext_resource type="Texture2D" uid="uid://dpjfl8jiimvx3" path="res://assets/Terrain (16x16).png" id="2_i5v1g"]
@@ -23,6 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://cj0neh7rr8bi" path="res://character/shield.tscn" id="23_c7wmr"]
 [ext_resource type="Script" path="res://canvas_modulate.gd" id="23_h8c7e"]
 [ext_resource type="Texture2D" uid="uid://eaqmi8geibg8" path="res://assets/W__4_-removebg-preview.png" id="25_0odxb"]
+[ext_resource type="PackedScene" uid="uid://png7dtpi8cdm" path="res://character/bow.tscn" id="25_a6jrf"]
 [ext_resource type="PackedScene" uid="uid://dcjtfo184nubn" path="res://door.tscn" id="25_lswn8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_d13ii"]
@@ -827,3 +828,7 @@ texture = ExtResource("25_0odxb")
 
 [node name="Area2D14" parent="." instance=ExtResource("25_lswn8")]
 position = Vector2(114, 418)
+
+[node name="bow" parent="." instance=ExtResource("25_a6jrf")]
+visible = false
+position = Vector2(-98, -25)

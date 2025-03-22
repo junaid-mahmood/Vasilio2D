@@ -20,6 +20,8 @@
 [ext_resource type="Script" uid="uid://bqhhrylu0173q" path="res://health_bar.gd" id="17_ixnqj"]
 [ext_resource type="Script" uid="uid://cfck82i78vluu" path="res://area_2d.gd" id="19_hp87d"]
 [ext_resource type="PackedScene" uid="uid://copjurvsoieqm" path="res://coin/coinui.tscn" id="20_gxpff"]
+[ext_resource type="PackedScene" uid="uid://png7dtpi8cdm" path="res://character/bow.tscn" id="18_hp87d"]
+[ext_resource type="PackedScene" uid="uid://cj0neh7rr8bi" path="res://character/shield.tscn" id="19_gxpff"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_idpoe"]
 texture = ExtResource("2_lwvnx")
@@ -2317,3 +2319,11 @@ offset_left = 980.0
 offset_top = 112.0
 offset_right = 1020.0
 offset_bottom = 150.0
+
+[node name="Node2D" parent="." instance=ExtResource("18_hp87d")]
+visible = false
+position = Vector2(-78, -35)
+
+[node name="Area2D" parent="." instance=ExtResource("19_gxpff")]
+visible = false
+position = Vector2(-71, -42)

@@ -24,63 +24,23 @@ func _ready() -> void:
 	
 	add_child(player_character)
 	
-	if not has_node("Bullets"):
-		var bullets_node = Node2D.new()
-		bullets_node.name = "Bullets"
-		add_child(bullets_node)
-	
-	if not has_node("EnemyBullets"):
-		var enemy_bullets_node = Node2D.new()
-		enemy_bullets_node.name = "EnemyBullets"
-		add_child(enemy_bullets_node)
-	
-	if Global.player == 'scientist' and not has_node("Portals"):
-		var portals_node = Node2D.new()
-		portals_node.name = "Portals"
-		add_child(portals_node)
-		
-	if Global.player == 'scientist':
-		var quantum_timer = Timer.new()
-		quantum_timer.wait_time = 0.1
-		quantum_timer.autostart = true
-		quantum_timer.name = "QuantumTimer"
-		add_child(quantum_timer)
-		quantum_timer.timeout.connect(_check_quantum_state)
 
 func _process(delta: float) -> void:
 	if Global.shoot[0]:
-		var pos = Global.shoot[1]
-		
 		if Global.weapon == 'bow':
 			var bow_bullet = bow_bullet_scene.instantiate()
-			
-			var target_pos = Global.shoot[2]
+			var direc_bow = Global.shoot[2]
 			var spawn_pos = Global.shoot[1]
-			
-			var direction = (target_pos - spawn_pos).normalized()
-			
+		
 			bow_bullet.position = spawn_pos
-			bow_bullet.velocity = direction * bow_bullet.speed
-			
-			bow_bullet.rotation = direction.angle()
-			
-			if Global.shoot.size() > 3:
-				bow_bullet.damage_multiplier = Global.shoot[3]
-				
-				if Global.shoot[3] > 1.0:
-					var scale_factor = 0.4 + (Global.shoot[3] - 1.0) * 0.2
-					bow_bullet.scale = Vector2(scale_factor, scale_factor)
-			
-			if has_node("Bullets"):
-				$Bullets.add_child(bow_bullet)
-			else:
-				var bullets_node = Node2D.new()
-				bullets_node.name = "Bullets"
-				add_child(bullets_node)
-				bullets_node.add_child(bow_bullet)
-			
+			bow_bullet.velocity = direc_bow * bow_bullet.speed
+			bow_bullet.rotation = direc_bow.angle()
+	
+			$Bullets.add_child(bow_bullet)
 			Global.shoot[0] = false
+			
 		else:
+			var pos = Global.shoot[1]
 			var facing_right = Global.shoot[2]
 			var bullet = bullet_scene.instantiate()
 			var direction = 1 if facing_right else -1
@@ -90,28 +50,22 @@ func _process(delta: float) -> void:
 			bullet.position = pos + Vector2(6 * direction, 0)
 			Global.shoot[0] = false
 		
+
+	
 	if Global.enemy_shoot[0]:
 		var pos = Global.enemy_shoot[1]
 		var player_pos = Global.enemy_shoot[2]
 		
-		var en_bullet = enemy_bullet_scene.instantiate()
-		
+		var en_bullet = enemy_bullet_scene.instantiate()		
 		pos.y -= 20
 		en_bullet.position = pos
-		
+		# Set velocity and direction
 		var direction: Vector2 = (player_pos - pos).normalized()
 		en_bullet.velocity = direction * en_bullet.speed
 		en_bullet.rotation = direction.angle()
-		
-		if has_node("EnemyBullets"):
-			$EnemyBullets.add_child(en_bullet)
-		else:
-			var enemy_bullets_node = Node2D.new()
-			enemy_bullets_node.name = "EnemyBullets"
-			add_child(enemy_bullets_node)
-			enemy_bullets_node.add_child(en_bullet)
-		
+		$EnemyBullets.add_child(en_bullet)
 		Global.enemy_shoot[0] = false
+
 		
 	if Global.shoot_portal[0]:
 		await get_tree().create_timer(0.1).timeout
@@ -125,8 +79,7 @@ func _process(delta: float) -> void:
 			portal_bullet.portal_number = 1
 		elif Global.portals == 2:
 			direction = (Global.portal2 - pos).normalized()
-			portal_bullet.portal_number = 2
-			
+		
 		portal_bullet.position = pos
 		portal_bullet.velocity = direction * portal_bullet.speed
 		portal_bullet.rotation = direction.angle()

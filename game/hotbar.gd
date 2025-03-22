@@ -339,7 +339,7 @@ func highlight_current_weapon():
 		else:
 			if Global.weapon == "sword":
 				label1.add_theme_color_override("font_color", Color(1, 1, 0, 1))
-			elif Global.weapon == "gun":
+			elif Global.weapon == "bow":
 				label2.add_theme_color_override("font_color", Color(1, 1, 0, 1))
 			elif Global.weapon == "shield":
 				label3.add_theme_color_override("font_color", Color(1, 1, 0, 1))
@@ -373,7 +373,6 @@ func reset_text(label, key):
 		label.text = key
 
 func _on_button_pressed():
-	print("Button 1 pressed")
 	if is_tarzan_mode:
 		Global.weapon = "vine"
 		print("Tarzan weapon set to vine")
@@ -387,7 +386,6 @@ func _on_button_pressed():
 		Global.weapon = "sword"
 
 func _on_button_2_pressed():
-	print("Button 2 pressed")
 	if is_tarzan_mode:
 		var tarzan = get_node_or_null("../tarzan")
 		if tarzan and tarzan.has_method("activate_special_ability"):
@@ -403,7 +401,7 @@ func _on_button_2_pressed():
 			else:
 				print("Maximum portals reached")
 	else:
-		Global.weapon = "gun"
+		Global.weapon = "bow"
 
 func _on_button_3_pressed():
 	print("Button 3 pressed")

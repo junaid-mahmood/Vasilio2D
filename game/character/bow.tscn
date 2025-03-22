@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://png7dtpi8cdm"]
+
+[ext_resource type="Texture2D" uid="uid://b8hv7wpsfed5a" path="res://assets/bow.png" id="1_0n85a"]
+
+[node name="Node2D" type="Area2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("1_0n85a")

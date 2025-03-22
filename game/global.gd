@@ -4,7 +4,11 @@ var player_position := Vector2.ZERO
 var dead := false
 var has_shield := false
 var coins_collected := 0
-var shoot = [false, Vector2.ZERO, false]
+
+#if shooting, player_pos, direction
+var shoot = [false, Vector2.ZERO, Vector2.ZERO]
+
+#if shooting, enemy_pos, target_pos
 var enemy_shoot = [false, Vector2.ZERO, Vector2.ZERO]
 var shoot_portal = [false, Vector2.ZERO]
 var player = ''
