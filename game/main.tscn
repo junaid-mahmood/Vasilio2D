@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=4 uid="uid://bm2qaccjcy00b"]
+[gd_scene load_steps=40 format=4 uid="uid://bm2qaccjcy00b"]
 
 [ext_resource type="Script" uid="uid://di6camdvfumij" path="res://main.gd" id="1_f8jqy"]
 [ext_resource type="Texture2D" uid="uid://dpjfl8jiimvx3" path="res://assets/Terrain (16x16).png" id="2_i5v1g"]
@@ -18,12 +18,12 @@
 [ext_resource type="Texture2D" uid="uid://bpr60nwsbbsqs" path="res://tilemap.png" id="9_hnuy7"]
 [ext_resource type="PackedScene" uid="uid://caqfcrf27ytkv" path="res://coin/coin.tscn" id="10_4x0mx"]
 [ext_resource type="Texture2D" uid="uid://p7x4x15hptbq" path="res://assets/wall.png" id="11_600aq"]
-[ext_resource type="PackedScene" uid="uid://sihy1oiiv6bj" path="res://hotbar.tscn" id="13_rs547"]
 [ext_resource type="PackedScene" uid="uid://jnlfurofofr7" path="res://torch.tscn" id="21_fl64f"]
 [ext_resource type="PackedScene" uid="uid://cj0neh7rr8bi" path="res://character/shield.tscn" id="23_c7wmr"]
 [ext_resource type="Script" uid="uid://cmm6g45nehydl" path="res://canvas_modulate.gd" id="23_h8c7e"]
+[ext_resource type="PackedScene" uid="uid://ue2wspitukfb" path="res://jungle_enemy/jungle_enemy.tscn" id="24_1u8w0"]
 [ext_resource type="Texture2D" uid="uid://eaqmi8geibg8" path="res://assets/W__4_-removebg-preview.png" id="25_0odxb"]
-[ext_resource type="PackedScene" uid="uid://png7dtpi8cdm" path="res://character/bow.tscn" id="25_a6jrf"]
+[ext_resource type="Texture2D" uid="uid://c1stof3usra12" path="res://icon.svg" id="25_a6jrf"]
 [ext_resource type="PackedScene" uid="uid://dcjtfo184nubn" path="res://door.tscn" id="25_lswn8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_d13ii"]
@@ -534,7 +534,10 @@ sources/2 = SubResource("TileSetAtlasSource_nf75j")
 sources/14 = SubResource("TileSetAtlasSource_v3y1d")
 tile_proxies/coords_level = [[10, Vector2i(0, 0)], [14, Vector2i(0, 0)], [10, Vector2i(0, 1)], [14, Vector2i(0, 1)], [10, Vector2i(1, 0)], [14, Vector2i(1, 0)], [10, Vector2i(1, 1)], [14, Vector2i(1, 1)], [11, Vector2i(0, 0)], [14, Vector2i(2, 0)], [11, Vector2i(0, 1)], [14, Vector2i(2, 1)], [11, Vector2i(1, 0)], [14, Vector2i(3, 0)], [11, Vector2i(1, 1)], [14, Vector2i(3, 1)], [11, Vector2i(2, 0)], [14, Vector2i(4, 0)], [11, Vector2i(2, 1)], [14, Vector2i(4, 1)], [11, Vector2i(3, 0)], [14, Vector2i(5, 0)], [11, Vector2i(3, 1)], [14, Vector2i(5, 1)], [11, Vector2i(4, 0)], [14, Vector2i(6, 0)], [11, Vector2i(4, 1)], [14, Vector2i(6, 1)], [11, Vector2i(5, 0)], [14, Vector2i(7, 0)], [11, Vector2i(5, 1)], [14, Vector2i(7, 1)], [12, Vector2i(0, 0)], [14, Vector2i(8, 0)], [12, Vector2i(0, 1)], [14, Vector2i(8, 1)], [12, Vector2i(1, 0)], [14, Vector2i(9, 0)], [12, Vector2i(1, 1)], [14, Vector2i(9, 1)], [12, Vector2i(2, 0)], [14, Vector2i(10, 0)], [12, Vector2i(2, 1)], [14, Vector2i(10, 1)], [12, Vector2i(3, 0)], [14, Vector2i(11, 0)], [12, Vector2i(3, 1)], [14, Vector2i(11, 1)], [13, Vector2i(0, 0)], [14, Vector2i(12, 0)], [13, Vector2i(0, 1)], [14, Vector2i(12, 1)], [13, Vector2i(1, 0)], [14, Vector2i(13, 0)], [13, Vector2i(1, 1)], [14, Vector2i(13, 1)]]
 
-[node name="Node" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xuqvo"]
+size = Vector2(55, 43)
+
+[node name="level1" type="Node2D"]
 self_modulate = Color(0, 0, 0, 1)
 texture_filter = 1
 script = ExtResource("1_f8jqy")
@@ -597,13 +600,6 @@ grow_horizontal = 0
 show_percentage = false
 script = ExtResource("5_rhnuf")
 
-[node name="hotbar" parent="CanvasLayer" instance=ExtResource("13_rs547")]
-offset_left = 46.0
-offset_top = -26.0
-offset_right = 46.0
-offset_bottom = -26.0
-metadata/_edit_use_anchors_ = true
-
 [node name="coinui" parent="CanvasLayer" instance=ExtResource("6_j4v6r")]
 offset_left = 980.0
 offset_top = 112.0
@@ -641,180 +637,8 @@ position = Vector2(250, 99)
 
 [node name="StaticBody2D2" parent="." instance=ExtResource("8_ln4fk")]
 position = Vector2(250, 99)
-
-[node name="Area2D" parent="." instance=ExtResource("10_4x0mx")]
-position = Vector2(90, 92)
-
-[node name="Area2D2" parent="." instance=ExtResource("10_4x0mx")]
-position = Vector2(188, 89)
-
-[node name="Area2D3" parent="." instance=ExtResource("10_4x0mx")]
-position = Vector2(320, 90)
-
-[node name="Area2D4" parent="." instance=ExtResource("10_4x0mx")]
-position = Vector2(395, 250)
-
-[node name="Area2D5" parent="." instance=ExtResource("10_4x0mx")]
-position = Vector2(242, 255)
-
-[node name="Area2D6" parent="." instance=ExtResource("10_4x0mx")]
-position = Vector2(80, 250)
-
-[node name="Area2D7" parent="." instance=ExtResource("10_4x0mx")]
-position = Vector2(936, 121)
-
-[node name="Area2D8" parent="." instance=ExtResource("10_4x0mx")]
-position = Vector2(1094, 439)
-
-[node name="Area2D9" parent="." instance=ExtResource("10_4x0mx")]
-position = Vector2(840, 376)
-
-[node name="Area2D10" parent="." instance=ExtResource("10_4x0mx")]
-position = Vector2(714, 374)
-
-[node name="Area2D11" parent="." instance=ExtResource("10_4x0mx")]
-position = Vector2(856, 508)
-
-[node name="Area2D12" parent="." instance=ExtResource("10_4x0mx")]
-position = Vector2(131, 450)
-
-[node name="Torch" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(144, 400)
-
-[node name="Torch2" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(560, 528)
-
-[node name="Torch3" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(752, 528)
-
-[node name="Torch4" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(528, 272)
-
-[node name="Torch5" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(241, 239)
-
-[node name="Torch6" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(112, 48)
-
-[node name="Torch7" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(304, 48)
-
-[node name="Torch8" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(464, 48)
-
-[node name="Torch9" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(784, -16)
-
-[node name="Torch10" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(912, -16)
-
-[node name="Torch11" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(1072, -112)
-
-[node name="Torch12" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(624, -112)
-
-[node name="Torch13" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(368, -112)
-
-[node name="Torch14" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(208, -176)
-
-[node name="Torch15" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(368, -272)
-
-[node name="Torch16" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(976, -240)
-
-[node name="Torch17" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(688, -304)
-
-[node name="Torch18" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(144, -432)
-
-[node name="Torch19" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(240, -432)
-
-[node name="Torch20" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(592, -464)
-
-[node name="Torch21" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(720, -464)
-
-[node name="Torch22" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(1072, -496)
-
-[node name="Torch23" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(944, -528)
-
-[node name="Torch24" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(784, -592)
-
-[node name="Torch25" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(624, -657)
-
-[node name="Torch26" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(272, -688)
-
-[node name="Torch27" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(368, -688)
-
-[node name="Torch28" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(208, -816)
-
-[node name="Torch29" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(656, -784)
-
-[node name="Torch30" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(880, -848)
-
-[node name="Torch31" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(1008, -847)
-
-[node name="Torch32" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(80, -1007)
-
-[node name="Torch33" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(528, -1072)
-
-[node name="Torch34" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(784, -1072)
-
-[node name="Torch35" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(976, -1072)
-
-[node name="Torch36" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(208, -1200)
-
-[node name="Torch37" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(784, -1296)
-
-[node name="Torch38" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(592, -1296)
-
-[node name="Torch39" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(400, -1296)
-
-[node name="Torch40" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(80, -1392)
-
-[node name="Torch41" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(208, -1488)
-
-[node name="Torch42" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(368, -1488)
-
-[node name="Torch43" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(528, -1487)
-
-[node name="Torch44" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(688, -1488)
-
-[node name="Torch45" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(848, -1488)
-
-[node name="Torch46" parent="." instance=ExtResource("21_fl64f")]
-position = Vector2(1008, -1487)
+collision_layer = 18
+collision_mask = 0
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 visible = false
@@ -827,8 +651,218 @@ scale = Vector2(0.935435, 0.924)
 texture = ExtResource("25_0odxb")
 
 [node name="Area2D14" parent="." instance=ExtResource("25_lswn8")]
-position = Vector2(128, 433)
+position = Vector2(177, 412)
 
-[node name="bow" parent="." instance=ExtResource("25_a6jrf")]
-visible = false
-position = Vector2(-98, -25)
+[node name="torches" type="Node2D" parent="."]
+
+[node name="Torch" parent="torches" instance=ExtResource("21_fl64f")]
+position = Vector2(144, 400)
+
+[node name="Torch2" parent="torches" instance=ExtResource("21_fl64f")]
+position = Vector2(560, 528)
+
+[node name="Torch3" parent="torches" instance=ExtResource("21_fl64f")]
+position = Vector2(752, 528)
+
+[node name="Torch4" parent="torches" instance=ExtResource("21_fl64f")]
+position = Vector2(528, 272)
+
+[node name="Torch5" parent="torches" instance=ExtResource("21_fl64f")]
+position = Vector2(241, 239)
+
+[node name="Torch6" parent="torches" instance=ExtResource("21_fl64f")]
+position = Vector2(112, 48)
+
+[node name="Torch7" parent="torches" instance=ExtResource("21_fl64f")]
+position = Vector2(304, 48)
+
+[node name="Torch8" parent="torches" instance=ExtResource("21_fl64f")]
+position = Vector2(464, 48)
+
+[node name="Torch9" parent="torches" instance=ExtResource("21_fl64f")]
+position = Vector2(784, -16)
+
+[node name="Torch10" parent="torches" instance=ExtResource("21_fl64f")]
+position = Vector2(912, -16)
+
+[node name="Torch11" parent="torches" instance=ExtResource("21_fl64f")]
+position = Vector2(1072, -112)
+
+[node name="Torch12" parent="torches" instance=ExtResource("21_fl64f")]
+position = Vector2(624, -112)
+
+[node name="Torch13" parent="torches" instance=ExtResource("21_fl64f")]
+position = Vector2(368, -112)
+
+[node name="Torch14" parent="torches" instance=ExtResource("21_fl64f")]
+position = Vector2(208, -176)
+
+[node name="Torch15" parent="torches" instance=ExtResource("21_fl64f")]
+position = Vector2(368, -272)
+
+[node name="Torch16" parent="torches" instance=ExtResource("21_fl64f")]
+position = Vector2(976, -240)
+
+[node name="Torch17" parent="torches" instance=ExtResource("21_fl64f")]
+position = Vector2(688, -304)
+
+[node name="Torch18" parent="torches" instance=ExtResource("21_fl64f")]
+position = Vector2(144, -432)
+
+[node name="Torch19" parent="torches" instance=ExtResource("21_fl64f")]
+position = Vector2(240, -432)
+
+[node name="Torch20" parent="torches" instance=ExtResource("21_fl64f")]
+position = Vector2(592, -464)
+
+[node name="Torch21" parent="torches" instance=ExtResource("21_fl64f")]
+position = Vector2(720, -464)
+
+[node name="Torch22" parent="torches" instance=ExtResource("21_fl64f")]
+position = Vector2(1072, -496)
+
+[node name="Torch23" parent="torches" instance=ExtResource("21_fl64f")]
+position = Vector2(944, -528)
+
+[node name="Torch24" parent="torches" instance=ExtResource("21_fl64f")]
+position = Vector2(784, -592)
+
+[node name="Torch25" parent="torches" instance=ExtResource("21_fl64f")]
+position = Vector2(624, -657)
+
+[node name="Torch26" parent="torches" instance=ExtResource("21_fl64f")]
+position = Vector2(272, -688)
+
+[node name="Torch27" parent="torches" instance=ExtResource("21_fl64f")]
+position = Vector2(368, -688)
+
+[node name="Torch28" parent="torches" instance=ExtResource("21_fl64f")]
+position = Vector2(208, -816)
+
+[node name="Torch29" parent="torches" instance=ExtResource("21_fl64f")]
+position = Vector2(656, -784)
+
+[node name="Torch30" parent="torches" instance=ExtResource("21_fl64f")]
+position = Vector2(880, -848)
+
+[node name="Torch31" parent="torches" instance=ExtResource("21_fl64f")]
+position = Vector2(1008, -847)
+
+[node name="Torch32" parent="torches" instance=ExtResource("21_fl64f")]
+position = Vector2(80, -1007)
+
+[node name="Torch33" parent="torches" instance=ExtResource("21_fl64f")]
+position = Vector2(528, -1072)
+
+[node name="Torch34" parent="torches" instance=ExtResource("21_fl64f")]
+position = Vector2(784, -1072)
+
+[node name="Torch35" parent="torches" instance=ExtResource("21_fl64f")]
+position = Vector2(976, -1072)
+
+[node name="Torch36" parent="torches" instance=ExtResource("21_fl64f")]
+position = Vector2(208, -1200)
+
+[node name="Torch37" parent="torches" instance=ExtResource("21_fl64f")]
+position = Vector2(784, -1296)
+
+[node name="Torch38" parent="torches" instance=ExtResource("21_fl64f")]
+position = Vector2(592, -1296)
+
+[node name="Torch39" parent="torches" instance=ExtResource("21_fl64f")]
+position = Vector2(400, -1296)
+
+[node name="Torch40" parent="torches" instance=ExtResource("21_fl64f")]
+position = Vector2(80, -1392)
+
+[node name="Torch41" parent="torches" instance=ExtResource("21_fl64f")]
+position = Vector2(208, -1488)
+
+[node name="Torch42" parent="torches" instance=ExtResource("21_fl64f")]
+position = Vector2(368, -1488)
+
+[node name="Torch43" parent="torches" instance=ExtResource("21_fl64f")]
+position = Vector2(528, -1487)
+
+[node name="Torch44" parent="torches" instance=ExtResource("21_fl64f")]
+position = Vector2(688, -1488)
+
+[node name="Torch45" parent="torches" instance=ExtResource("21_fl64f")]
+position = Vector2(848, -1488)
+
+[node name="Torch46" parent="torches" instance=ExtResource("21_fl64f")]
+position = Vector2(1008, -1487)
+
+[node name="coins" type="Node2D" parent="."]
+
+[node name="Area2D" parent="coins" instance=ExtResource("10_4x0mx")]
+position = Vector2(90, 92)
+
+[node name="Area2D2" parent="coins" instance=ExtResource("10_4x0mx")]
+position = Vector2(188, 89)
+
+[node name="Area2D3" parent="coins" instance=ExtResource("10_4x0mx")]
+position = Vector2(320, 90)
+
+[node name="Area2D4" parent="coins" instance=ExtResource("10_4x0mx")]
+position = Vector2(395, 250)
+
+[node name="Area2D5" parent="coins" instance=ExtResource("10_4x0mx")]
+position = Vector2(242, 255)
+
+[node name="Area2D6" parent="coins" instance=ExtResource("10_4x0mx")]
+position = Vector2(80, 250)
+
+[node name="Area2D7" parent="coins" instance=ExtResource("10_4x0mx")]
+position = Vector2(936, 121)
+
+[node name="Area2D8" parent="coins" instance=ExtResource("10_4x0mx")]
+position = Vector2(1094, 439)
+
+[node name="Area2D9" parent="coins" instance=ExtResource("10_4x0mx")]
+position = Vector2(840, 376)
+
+[node name="Area2D10" parent="coins" instance=ExtResource("10_4x0mx")]
+position = Vector2(714, 374)
+
+[node name="Area2D11" parent="coins" instance=ExtResource("10_4x0mx")]
+position = Vector2(856, 508)
+
+[node name="Area2D12" parent="coins" instance=ExtResource("10_4x0mx")]
+position = Vector2(131, 450)
+
+[node name="markers" type="Node2D" parent="."]
+
+[node name="0" type="Marker2D" parent="markers"]
+position = Vector2(59, 80)
+
+[node name="1" type="Marker2D" parent="markers"]
+position = Vector2(498, 80)
+
+[node name="2" type="Marker2D" parent="markers"]
+position = Vector2(714, 112)
+
+[node name="3" type="Marker2D" parent="markers"]
+position = Vector2(977, 112)
+
+[node name="4" type="Marker2D" parent="markers"]
+position = Vector2(711, -16)
+
+[node name="5" type="Marker2D" parent="markers"]
+position = Vector2(976, -16)
+
+[node name="jungle_enemy" parent="markers" instance=ExtResource("24_1u8w0")]
+position = Vector2(282, 79)
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="markers"]
+position = Vector2(382, 89)
+collision_layer = 16
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="markers/StaticBody2D3"]
+scale = Vector2(0.2, 0.26)
+texture = ExtResource("25_a6jrf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="markers/StaticBody2D3"]
+position = Vector2(-0.5, -5.5)
+shape = SubResource("RectangleShape2D_xuqvo")

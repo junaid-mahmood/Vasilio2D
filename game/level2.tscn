@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=4 uid="uid://c1ngqyc8cjk5f"]
+[gd_scene load_steps=31 format=4 uid="uid://c1ngqyc8cjk5f"]
 
 [ext_resource type="Script" uid="uid://di6camdvfumij" path="res://main.gd" id="1_7mylh"]
 [ext_resource type="Texture2D" uid="uid://balbd02i3nktn" path="res://castl1.jpg" id="2_4ou0f"]
@@ -14,11 +14,9 @@
 [ext_resource type="Texture2D" uid="uid://bpr60nwsbbsqs" path="res://tilemap.png" id="9_iakae"]
 [ext_resource type="Texture2D" uid="uid://p7x4x15hptbq" path="res://assets/wall.png" id="10_7mylh"]
 [ext_resource type="Script" uid="uid://cjkx8e0pqklfw" path="res://jump_bar.gd" id="13_1i48b"]
-[ext_resource type="PackedScene" uid="uid://sihy1oiiv6bj" path="res://hotbar.tscn" id="15_00gqm"]
 [ext_resource type="PackedScene" uid="uid://cpkni5shkfy4j" path="res://level2_enemy.tscn" id="17_enemy"]
 [ext_resource type="Script" uid="uid://bqhhrylu0173q" path="res://health_bar.gd" id="17_ixnqj"]
-[ext_resource type="PackedScene" uid="uid://png7dtpi8cdm" path="res://character/bow.tscn" id="18_hp87d"]
-[ext_resource type="PackedScene" uid="uid://cj0neh7rr8bi" path="res://character/shield.tscn" id="19_gxpff"]
+[ext_resource type="PackedScene" uid="uid://dcjtfo184nubn" path="res://door.tscn" id="18_4k5bj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_idpoe"]
 texture = ExtResource("2_lwvnx")
@@ -772,7 +770,7 @@ sources/8 = SubResource("TileSetAtlasSource_nv8dg")
 sources/9 = SubResource("TileSetAtlasSource_wooj1")
 sources/10 = SubResource("TileSetAtlasSource_4ou0f")
 
-[node name="Node2" type="Node2D"]
+[node name="level2" type="Node2D"]
 self_modulate = Color(0, 0, 0, 1)
 texture_filter = 1
 script = ExtResource("1_7mylh")
@@ -846,13 +844,6 @@ grow_horizontal = 0
 show_percentage = false
 script = ExtResource("17_ixnqj")
 
-[node name="hotbar" parent="CanvasLayer" instance=ExtResource("15_00gqm")]
-offset_left = 8.99988
-offset_top = 10.9999
-offset_right = -3.00012
-offset_bottom = -21.0001
-rotation = 0.000340638
-
 [node name="Bullets" type="Node2D" parent="."]
 position = Vector2(34, -12)
 
@@ -861,10 +852,5 @@ position = Vector2(34, -12)
 [node name="Level2Enemy" parent="." instance=ExtResource("17_enemy")]
 position = Vector2(901, 194)
 
-[node name="Node2D" parent="." instance=ExtResource("18_hp87d")]
-visible = false
-position = Vector2(-78, -35)
-
-[node name="Area2D" parent="." instance=ExtResource("19_gxpff")]
-visible = false
-position = Vector2(-71, -42)
+[node name="door" parent="." instance=ExtResource("18_4k5bj")]
+position = Vector2(3014, 43)

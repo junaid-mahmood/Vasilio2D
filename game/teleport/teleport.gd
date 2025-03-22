@@ -26,12 +26,36 @@ var portal2 = Vector2.ZERO
 var can_teleport := true
 var can_teleport_timer := true
 
+var weapons = ['portal', 'punch']
+var weapon_counter := 0
+
 @onready var sprite_2d: AnimatedSprite2D = $Sprite2D
 @onready var progress_bar: ProgressBar = get_node("../CanvasLayer/JumpBar")
 @onready var health_bar: ProgressBar = get_node("../CanvasLayer/HealthBar")
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey:
+		if event.pressed and not event.echo:
+			if event.keycode == KEY_Q:
+				switch_to_weapon("portal")
+			elif event.keycode == KEY_R:
+				switch_to_weapon("punch")
+
+				
+func switch_to_weapon(weapon_name: String) -> void:
+	if weapons.has(weapon_name):
+		Global.weapon = weapon_name
+		match weapon_name:
+			'portal':
+				weapon_counter = 0
+			'punch':
+				weapon_counter = 1
+
+
 func _ready() -> void:
+	add_to_group("player")
+	
 	progress_bar.max_value = 100
 	progress_bar.value = 100
 	health_bar.max_value = 100
@@ -57,7 +81,7 @@ func _process(delta: float) -> void:
 	if velocity.x != 0:
 		$Sprite2D.flip_h = velocity.x < 0
 		
-	if Input.is_action_just_pressed("ui_accept"):
+	if Input.is_action_just_pressed("ui_accept") and weapons[weapon_counter] == 'portal':
 		progress_bar.value -= 100
 		mouse_pos = get_global_mouse_position()
 		var dir_to_portal = global_position.direction_to(mouse_pos)
@@ -82,7 +106,7 @@ func _process(delta: float) -> void:
 			Global.portal2 = portal2
 			Global.shoot_portal = [true, global_position]
 			
-	if Input.is_action_just_pressed("switch"):
+	if Input.is_action_just_pressed("ui_accept") and weapons[weapon_counter] == 'punch':
 		var kill_radius: float = 70.0   
 			
 		for node in get_parent().get_children():

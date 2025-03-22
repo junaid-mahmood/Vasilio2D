@@ -13,6 +13,12 @@ var velocity: Vector2 = Vector2.ZERO
 
 var can_shoot := true
 
+func _ready() -> void:
+	add_to_group("enemies")
+	
+	
+	
+
 func _process(delta: float) -> void:
 	player_position = Global.player_position
 	if climb_l == false or climb_r == false:
