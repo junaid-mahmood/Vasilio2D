@@ -2,7 +2,6 @@ extends Area2D
 
 @onready var rayCast2D = $ray_shoot
 @export var if_in_radius := 80
-# Instead of preloading a scene, get the actual node instance
 var player_position
 var health := 100
 

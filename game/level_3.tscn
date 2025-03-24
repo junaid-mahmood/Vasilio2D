@@ -1,6 +1,7 @@
-[gd_scene load_steps=32 format=4 uid="uid://dvlf6efm1rxt4"]
+[gd_scene load_steps=36 format=4 uid="uid://cmw8v35ftmt1w"]
 
-[ext_resource type="Script" uid="uid://delqgvrwmn22c" path="res://level_3.gd" id="1_gxey3"]
+
+[ext_resource type="Script" path="res://level_3.gd" id="1_gxey3"]
 [ext_resource type="Texture2D" uid="uid://dabf0hrinl0uo" path="res://assets/jungle_platform_small.png" id="1_j8bo8"]
 [ext_resource type="Texture2D" uid="uid://cm8nmtq8417ox" path="res://assets/leaf2.png" id="1_m8gss"]
 [ext_resource type="Texture2D" uid="uid://dk2t7b7l5fq35" path="res://jungle_tileset.png" id="2_1jdk1"]

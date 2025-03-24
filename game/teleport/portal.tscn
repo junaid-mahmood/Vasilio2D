@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://vfr7ynpbvr73"]
 
-[ext_resource type="Script" path="res://teleport/portal.gd" id="1_71nra"]
+[ext_resource type="Script" uid="uid://ch3brqaig2rmh" path="res://teleport/portal.gd" id="1_71nra"]
 [ext_resource type="Texture2D" uid="uid://bfl6k7ka5wkcp" path="res://assets/bullet.png" id="1_j4m12"]
 [ext_resource type="Texture2D" uid="uid://uebrkwjf6ipu" path="res://assets/portal-animation.png" id="3_5ponc"]
 
