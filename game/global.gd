@@ -24,3 +24,5 @@ var player = ''
 var portal1 = Vector2.ZERO
 var portal2 = Vector2.ZERO
 var portals = 0
+
+var see_player = null

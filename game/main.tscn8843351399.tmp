@@ -665,7 +665,7 @@ position = Vector2(560, 528)
 position = Vector2(752, 528)
 
 [node name="Torch4" parent="torches" instance=ExtResource("21_fl64f")]
-position = Vector2(529, 272)
+position = Vector2(528, 272)
 
 [node name="Torch5" parent="torches" instance=ExtResource("21_fl64f")]
 position = Vector2(241, 239)
@@ -837,80 +837,27 @@ position = Vector2(131, 450)
 position = Vector2(282, 79)
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="markers"]
-position = Vector2(268, 89)
-collision_layer = 2
+position = Vector2(382, 89)
+collision_layer = 16
+collision_mask = 0
 
 [node name="Sprite2D" type="Sprite2D" parent="markers/StaticBody2D3"]
-position = Vector2(-178, 4)
+position = Vector2(27, 7)
 scale = Vector2(0.2, 0.26)
 texture = ExtResource("25_a6jrf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="markers/StaticBody2D3"]
-position = Vector2(-175, 4)
+position = Vector2(26.5, 6)
 shape = SubResource("RectangleShape2D_xuqvo")
 
 [node name="1_2" type="Marker2D" parent="markers"]
-position = Vector2(367, 93)
+position = Vector2(487, 96)
 
-[node name="2_5,1" type="Marker2D" parent="markers"]
-position = Vector2(589, 98)
+[node name="2_13" type="Marker2D" parent="markers"]
+position = Vector2(599, 97)
 
-[node name="3_4,9" type="Marker2D" parent="markers"]
-position = Vector2(402, 250)
+[node name="3_24" type="Marker2D" parent="markers"]
+position = Vector2(411, 251)
 
-[node name="4_3,6,7" type="Marker2D" parent="markers"]
-position = Vector2(240, 254)
-
-[node name="5_10,2" type="Marker2D" parent="markers"]
-position = Vector2(698, 125)
-
-[node name="6_7,4" type="Marker2D" parent="markers"]
-position = Vector2(84, 251)
-
-[node name="7_20" type="Marker2D" parent="markers"]
-position = Vector2(153, 438)
-
-[node name="8_20,18,19" type="Marker2D" parent="markers"]
-position = Vector2(335, 513)
-
-[node name="9_21,3" type="Marker2D" parent="markers"]
-position = Vector2(484, 315)
-
-[node name="10_5,11,21" type="Marker2D" parent="markers"]
-position = Vector2(632, 224)
-
-[node name="11_10,12" type="Marker2D" parent="markers"]
-position = Vector2(803, 227)
-
-[node name="12_21,13" type="Marker2D" parent="markers"]
-position = Vector2(887, 370)
-
-[node name="13_15,12" type="Marker2D" parent="markers"]
-position = Vector2(1033, 448)
-
-[node name="15_17,13" type="Marker2D" parent="markers"]
-position = Vector2(973, 514)
-
-[node name="16_17" type="Marker2D" parent="markers"]
-position = Vector2(740, 598)
-
-[node name="17_16,15" type="Marker2D" parent="markers"]
-position = Vector2(828, 513)
-
-[node name="18_8" type="Marker2D" parent="markers"]
-position = Vector2(266, 588)
-
-[node name="19_8,16" type="Marker2D" parent="markers"]
-position = Vector2(404, 588)
-
-[node name="20_7,8" type="Marker2D" parent="markers"]
-position = Vector2(225, 441)
-
-[node name="21_10,9" type="Marker2D" parent="markers"]
-position = Vector2(572, 316)
-
-[node name="22_21,12" type="Marker2D" parent="markers"]
-position = Vector2(674, 370)
-
-[node name="23_18" type="Marker2D" parent="markers"]
-position = Vector2(48, 589)
+[node name="4_3" type="Marker2D" parent="markers"]
+position = Vector2(210, 574)

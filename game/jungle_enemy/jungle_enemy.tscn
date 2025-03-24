@@ -4,19 +4,19 @@
 [ext_resource type="Texture2D" uid="uid://u7x05k0ojooi" path="res://jungle_enemy/ugabuga.png" id="1_py8na"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0nq40"]
-size = Vector2(30, 83.3333)
+size = Vector2(30, 62.6666)
 
 [node name="jungle_enemy" type="CharacterBody2D"]
 scale = Vector2(0.75, 0.75)
-collision_layer = 17
-collision_mask = 17
+collision_layer = 128
+collision_mask = 24
 script = ExtResource("1_0nq40")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_py8na")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, -0.333332)
+position = Vector2(1, 9.99999)
 shape = SubResource("RectangleShape2D_0nq40")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
