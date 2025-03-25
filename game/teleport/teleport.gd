@@ -51,17 +51,37 @@ var jump_multiplier := 1.0
 var attack_multiplier := 1.0
 var portal_range_multiplier := 1.0
 
+var weapons = ['portal', 'punch']
+var weapon_counter := 0
+
 @onready var sprite_2d: AnimatedSprite2D = $Sprite2D
 @onready var progress_bar: ProgressBar = get_node("../CanvasLayer/JumpBar")
 @onready var health_bar: ProgressBar = get_node("../CanvasLayer/HealthBar")
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey:
+		if event.pressed and not event.echo:
+			if event.keycode == KEY_Q:
+				switch_to_weapon("portal")
+			elif event.keycode == KEY_R:
+				switch_to_weapon("punch")
+
+				
+func switch_to_weapon(weapon_name: String) -> void:
+	if weapons.has(weapon_name):
+		Global.weapon = weapon_name
+		match weapon_name:
+			'portal':
+				weapon_counter = 0
+			'punch':
+				weapon_counter = 1
+
+
 func _ready() -> void:
 	add_to_group("player")
 	
-	collision_layer = 8
-	collision_mask = 15
-	
+
 	progress_bar.max_value = 100
 	progress_bar.value = 100
 	health_bar.max_value = 100
@@ -105,6 +125,15 @@ func _process(delta: float) -> void:
 		quantum_acceleration_timer -= delta
 		update_quantum_particles(delta)
 		
+
+	if Input.is_action_just_pressed("ui_accept") and weapons[weapon_counter] == 'portal':
+		progress_bar.value -= 100
+		mouse_pos = get_global_mouse_position()
+		var dir_to_portal = global_position.direction_to(mouse_pos)
+		ray_cast.target_position = dir_to_portal * max_portal_distance
+		ray_cast.force_raycast_update()
+		var collision_object = ray_cast.get_collider()
+
 		if quantum_acceleration_timer <= 0:
 			deactivate_quantum_acceleration()
 	
@@ -197,6 +226,7 @@ func create_quantum_field():
 		var angle = randf() * 2 * PI
 		var distance = randf_range(30, 50)
 		var pos = Vector2(cos(angle) * distance, sin(angle) * distance)
+
 		
 		particle.position = pos
 		add_child(particle)
@@ -209,7 +239,12 @@ func update_quantum_particles(delta):
 			var angle = current_pos.angle() + delta * 2
 			var distance = current_pos.length()
 			
+
+	if Input.is_action_just_pressed("ui_accept") and weapons[weapon_counter] == 'punch':
+		var kill_radius: float = 70.0   
+
 			particle.position = Vector2(cos(angle) * distance, sin(angle) * distance)
+
 			
 			var size_scale = randf_range(0.8, 1.2)
 			particle.size = Vector2(5, 5) * size_scale

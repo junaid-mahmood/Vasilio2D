@@ -36,14 +36,26 @@ var has_gun = false
 var has_bow = true
 
 func _ready() -> void:
+	add_to_group("player")
+	
 	progress_bar.max_value = 100
 	progress_bar.value = 100
 	health_bar.max_value = 100
 	health_bar.value = 100
 	
 	var parent = get_parent()
+	var shield_body_scene : PackedScene = preload("res://character/shield.tscn")
+	var shield_body_instance = shield_body_scene.instantiate()
+	shield_body_instance.name = "shield"
+	parent.add_child(shield_body_instance)
 	shield_body = parent.get_node_or_null("shield")
-
+	
+	
+	
+	var bow_sprite_scene:PackedScene = preload("res://character/bow.tscn")
+	var bow_instance = bow_sprite_scene.instantiate()
+	bow_instance.name = "bow"
+	get_parent().add_child(bow_instance)
 	bow_sprite = parent.get_node_or_null("bow")
 	
 	Global.weapon = "bow"

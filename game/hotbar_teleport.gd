@@ -13,44 +13,37 @@ func _process(delta):
 
 	if Input.is_key_pressed(KEY_Q):
 		update_text_for_key("Q")
-		Global.weapon = "sword"
+		Global.weapon = "portal"
 	if Input.is_key_pressed(KEY_R):
 		update_text_for_key("R")
-		Global.weapon = "bow"
-	if Input.is_key_pressed(KEY_C):
-		update_text_for_key("C")
-		Global.weapon = "shield"
+		Global.weapon = "punch"
+
 
 func update_all_text():
 	var label1 = find_child("RichTextLabel", true, false)
 	var label2 = find_child("RichTextLabel2", true, false)
-	var label3 = find_child("RichTextLabel3", true, false)
 	
 	if label1:
 		label1.text = "Q"
 	if label2:
 		label2.text = "R"
-	if label3:
-		label3.text = "C"
+
 
 
 func highlight_current_weapon():
 	var label1 = find_child("RichTextLabel", true, false)
 	var label2 = find_child("RichTextLabel2", true, false)
-	var label3 = find_child("RichTextLabel3", true, false)
 	
-	if label1 and label2 and label3:
+	if label1 and label2:
 		label1.add_theme_color_override("font_color", Color(1, 1, 1, 1))
 		label2.add_theme_color_override("font_color", Color(1, 1, 1, 1))
-		label3.add_theme_color_override("font_color", Color(1, 1, 1, 1))
 		
 
-		if Global.weapon == "sword":
+		if Global.weapon == "portal":
 			label1.add_theme_color_override("font_color", Color(1, 1, 0, 1))
-		elif Global.weapon == "bow":
+		elif Global.weapon == "punch":
 			label2.add_theme_color_override("font_color", Color(1, 1, 0, 1))
-		elif Global.weapon == "shield":
-			label3.add_theme_color_override("font_color", Color(1, 1, 0, 1))
+
 
 func update_text_for_key(key):
 	var label = null
@@ -59,18 +52,13 @@ func update_text_for_key(key):
 		label = find_child("RichTextLabel", true, false)
 	elif key == "R":
 		label = find_child("RichTextLabel2", true, false)
-	elif key == "C":
-		label = find_child("RichTextLabel3", true, false)
+
 
 
 
 
 func _on_button_pressed():
-	Global.weapon = "sword"
+	Global.weapon = "portal"
 
 func _on_button_2_pressed():
-	Global.weapon = "bow"
-
-func _on_button_3_pressed():
-	Global.weapon = "shield"
-
+	Global.weapon = "punch"

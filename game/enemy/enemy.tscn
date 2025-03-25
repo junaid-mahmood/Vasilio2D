@@ -434,7 +434,8 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t2rb7"]
-size = Vector2(56.2885, 80.6154)
+size = Vector2(35.3846, 76.1538)
+
 
 [sub_resource type="GDScript" id="GDScript_l025t"]
 script/source = "extends RayCast2D
@@ -457,13 +458,15 @@ collision_layer = 128
 collision_mask = 20
 script = ExtResource("1_alyje")
 
-[node name="Jump(32x32)" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_cdxep")
 position = Vector2(1, -16)
 sprite_frames = SubResource("SpriteFrames_83wdf")
 animation = &"death"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-3.07692, -2.69229)
+
 shape = SubResource("RectangleShape2D_t2rb7")
 
 [node name="right_ray_climb" type="RayCast2D" parent="."]

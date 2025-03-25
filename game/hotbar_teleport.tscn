@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://sihy1oiiv6bj"]
+[gd_scene load_steps=4 format=3 uid="uid://csjgboi37mqqb"]
 
-[ext_resource type="Script" uid="uid://cxji4uv26nhri" path="res://hotbar.gd" id="1_btnhd"]
-[ext_resource type="Texture2D" uid="uid://bcjh7vdw2tong" path="res://assets/sword.png" id="1_ugqnj"]
-[ext_resource type="Texture2D" uid="uid://b8hv7wpsfed5a" path="res://assets/bow.png" id="2_urx0p"]
-[ext_resource type="Texture2D" uid="uid://2xyc07n7ud6f" path="res://assets/shieldbig.png" id="4_ayf4g"]
+[ext_resource type="Script" uid="uid://dvilv4oqgpbqx" path="res://hotbar_teleport.gd" id="1_87i2n"]
+[ext_resource type="Texture2D" uid="uid://dt1u5nebsdgoe" path="res://assets/portal.png" id="2_87i2n"]
+[ext_resource type="Texture2D" uid="uid://dcxqhc4rlfdke" path="res://assets/melee.png" id="3_eee7r"]
 
 [node name="hotbar" type="Control"]
 layout_mode = 3
@@ -12,7 +11,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_btnhd")
+script = ExtResource("1_87i2n")
 
 [node name="GridContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
@@ -31,7 +30,7 @@ alignment = 1
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 focus_mode = 0
-icon = ExtResource("1_ugqnj")
+icon = ExtResource("2_87i2n")
 icon_alignment = 1
 expand_icon = true
 
@@ -55,7 +54,7 @@ horizontal_alignment = 1
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 focus_mode = 0
-icon = ExtResource("2_urx0p")
+icon = ExtResource("3_eee7r")
 icon_alignment = 1
 expand_icon = true
 
@@ -75,30 +74,5 @@ grow_vertical = 0
 text = "R"
 horizontal_alignment = 1
 
-[node name="Button3" type="Button" parent="GridContainer"]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-focus_mode = 0
-icon = ExtResource("4_ayf4g")
-icon_alignment = 1
-expand_icon = true
-
-[node name="RichTextLabel3" type="Label" parent="GridContainer/Button3"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -20.0
-offset_top = 5.0
-offset_right = 20.0
-offset_bottom = 31.0
-grow_horizontal = 2
-grow_vertical = 0
-text = "C"
-horizontal_alignment = 1
-
 [connection signal="pressed" from="GridContainer/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="GridContainer/Button2" to="." method="_on_button_2_pressed"]
-[connection signal="pressed" from="GridContainer/Button3" to="." method="_on_button_3_pressed"]

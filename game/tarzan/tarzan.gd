@@ -25,6 +25,9 @@ var facing_right := false
 var coyote := true
 var jumping := false
 
+var weapons = ['hook', 'grapple', 'punch']
+var weapon_counter := 0
+
 var is_invulnerable := false
 const INVULNERABILITY_TIME := 1.0
 
@@ -32,22 +35,57 @@ var can_change_ani := true
 
 var coins := 0
 
+var speed_multiplier := 1.0
+var jump_multiplier:= 1.0
+var rope_length_multiplier := 1.0
+var acceleration_multiplier := 1.0
+
 
 func _ready() -> void:
+	add_to_group("player")
+	
 	progress_bar.max_value = 100
 	progress_bar.value = 100
 	health_bar.max_value = 100
 	health_bar.value = 100
 	Global.has_shield = false
+	Global.weapon = 'hook'
 
 
 func coyote_change():
 	await get_tree().create_timer(0.2).timeout
 	coyote = false
 
-
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey:
+		if event.pressed and not event.echo:
+			if event.keycode == KEY_Q:
+				switch_to_weapon("hook")
+			elif event.keycode == KEY_R:
+				switch_to_weapon("grapple")
+			elif event.keycode == KEY_C:
+				switch_to_weapon("punch")
+				
+func switch_to_weapon(weapon_name: String) -> void:
+	if weapons.has(weapon_name):
+		Global.weapon = weapon_name
+		match weapon_name:
+			'hook':
+				weapon_counter = 0
+			'grapple':
+				weapon_counter = 1
+			'punch':
+				weapon_counter = 2
 
 func _process(delta: float) -> void:
+	match Global.weapon:
+		'hook':
+			weapon_counter = 0
+		'grapple':
+			weapon_counter = 1
+		'punch':
+			weapon_counter = 2
+	
 	Global.player_position = position
 	if is_on_floor():
 		coyote = true
@@ -55,28 +93,29 @@ func _process(delta: float) -> void:
 	else:
 		coyote_change()
 		jump_catch()
+
 		
-	if not is_on_floor():
-		head_catch()
-		
-	
 	if health_bar.value <= 0:
 		game_over()
 		
-	if Input.is_action_just_released("start") and hooked: 
+	if Input.is_action_just_released("ui_accept") and hooked: 
 		hooked = false
 		motion = Vector2.ZERO
 		$"extra+damage".start()
 	
+	if Input.is_action_just_pressed("KEY_F") and progress_bar.value >= 50:
+		activate_special_ability()
+	
+	
 	#hook
-	if Input.is_action_just_pressed("start") and progress_bar.value >= 10:
+	if Input.is_action_just_pressed("ui_accept") and progress_bar.value >= 10 and weapons[weapon_counter] == "hook":
 		progress_bar.value -= 10
 		mouse_pos = get_global_mouse_position()
 		var dir_to_grapple = global_position.direction_to(mouse_pos)
-		ray_cast.target_position = dir_to_grapple * rope_length 
+		ray_cast.target_position = dir_to_grapple * rope_length * rope_length_multiplier
 		ray_cast.force_raycast_update()
 		var collision_object = ray_cast.get_collider()
-		
+
 		if ray_cast.is_colliding():
 			GRAPPLE_POS = ray_cast.get_collision_point()
 			DISTANCE_GRAPPLE = global_position.distance_to(GRAPPLE_POS)
@@ -88,13 +127,44 @@ func _process(delta: float) -> void:
 			create_hit_effect(GRAPPLE_POS)
 			
 		
-	if Input.is_action_pressed("ui_accept") and progress_bar.value == 100:
-		create_special_ability_effects()
+	#attack move
+	if Input.is_action_just_pressed("ui_accept") and weapons[weapon_counter] == "punch": 
+		mouse_pos = get_global_mouse_position()
+		var centered_global_position = global_position
 
+		var direc_to_mouse = (mouse_pos - centered_global_position).normalized()
+		var angle_radians = atan2(direc_to_mouse.y, direc_to_mouse.x)
+		var shield_pos = centered_global_position + Vector2(cos(angle_radians), sin(angle_radians)) * 150	# 150 is distance from player
+		$attack_ray.target_position = to_local(shield_pos)
+		$attack_ray.force_raycast_update()
+		var collision_object = $attack_ray.get_collider()
+		
+		var hit_effect2 = ColorRect.new()
+		hit_effect2.color = Color(1.0, 0.5, 0.0, 0.7)
+		hit_effect2.size = Vector2(4, 4)
+		get_parent().add_child(hit_effect2)
+		hit_effect2.global_position = to_global($attack_ray.target_position)
+		var hit_tween2 = create_tween()
+		hit_tween2.tween_property(hit_effect2, "color:a", 0.0, 0.3)
+		hit_tween2.tween_callback(hit_effect2.queue_free)
+
+		if $attack_ray.is_colliding():
+			attack_ani(shield_pos)
+			if collision_object != null:
+				if collision_object.is_in_group("enemies"):
+					collision_object.enemy_damage(34)
+		else:
+			attack_ani(shield_pos)
+
+		
+		
+		
+	#grapping - getting pulled towards a point
+	if Input.is_action_pressed("ui_accept") and progress_bar.value >= 100 and weapons[weapon_counter] == "grapple":
 		progress_bar.value -= 100
 		mouse_pos = get_global_mouse_position()
 		var dir_to_grapple = global_position.direction_to(mouse_pos)
-		ray_cast.target_position = dir_to_grapple * rope_length 
+		ray_cast.target_position = dir_to_grapple * rope_length * rope_length_multiplier
 		ray_cast.force_raycast_update()
 		var collision_object = ray_cast.get_collider()
 		
@@ -102,6 +172,8 @@ func _process(delta: float) -> void:
 			current_grappling_point = ray_cast.get_collision_point()
 			current_rope_length = global_position.distance_to(current_grappling_point)
 			is_grappling = true
+		
+			
 			
 	
 		
@@ -124,8 +196,6 @@ func _process(delta: float) -> void:
 	if velocity.x != 0:
 		$Sprite2D.flip_h = velocity.x < 0
 		
-	if Input.is_action_just_pressed("switch"):
-		print($stab/ShapeCast2D.get_collider(0))
 		
 		
 	if $Sprite2D.animation != 'die' and $Sprite2D.animation != 'hit':
@@ -144,7 +214,7 @@ func _process(delta: float) -> void:
 
 func handle_normal_movement(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_up") and (is_on_floor() or coyote):
-		velocity.y = JUMP_VELOCITY
+		velocity.y = JUMP_VELOCITY * jump_multiplier
 		jumping = true
 		
 	if Input.is_action_just_released('ui_up') and jumping:
@@ -155,15 +225,52 @@ func handle_normal_movement(delta: float) -> void:
 	if direction != 0:
 		if (direction < 0 and velocity.x > 0) or (direction > 0 and velocity.x < 0):
 			velocity.x = move_toward(velocity.x, 0, FRICTION * delta * 2)
-		velocity.x = move_toward(velocity.x, direction * SPEED, ACCELERATION * delta)
+		velocity.x = move_toward(velocity.x, direction * SPEED * speed_multiplier, (ACCELERATION * delta) * acceleration_multiplier)
 	else:
 		velocity.x = move_toward(velocity.x, 0, FRICTION * delta)
 	
 	if not is_on_floor():
 		velocity.y += gravity * delta
-		
-	
+
 	move_and_slide()
+
+
+func activate_special_ability():
+	progress_bar.value -= 50
+	create_special_ability_effects()
+	play_special_ability_sound()
+
+	speed_multiplier = 1.5
+	jump_multiplier = 1.2
+	rope_length_multiplier = 1.5
+	acceleration_multiplier = 1.5
+	is_invulnerable = true
+
+	await get_tree().create_timer(3.0).timeout
+
+	speed_multiplier = 1.0
+	jump_multiplier = 1.0
+	rope_length_multiplier = 1.0
+	acceleration_multiplier = 1.0
+	
+	await get_tree().create_timer(0.5).timeout
+	is_invulnerable = false
+
+
+
+func play_special_ability_sound():
+	var sound = get_node_or_null("VineSound")
+	if sound and sound is AudioStreamPlayer:
+		sound.pitch_scale = 0.7
+		sound.volume_db = 0.0
+		sound.play()
+		
+		var tween = create_tween()
+		tween.tween_interval(0.5)
+		tween.tween_property(sound, "volume_db", -5.0, 0.5)
+
+
+
 
 func game_over() -> void:
 	$Sprite2D.animation = 'die'
@@ -201,9 +308,44 @@ func swing(delta: float) -> void:
 
 func _draw() -> void:
 	if hooked:
-		draw_line(Vector2(0, -16), to_local(GRAPPLE_POS), Color(0.35, 0.7, 0.9), 3, true)
+		var line = Line2D.new()
+		line.width = 5.0
+		line.default_color = Color(0.2, 0.8, 0.2, 0.8)
+		line.add_point(Vector2.ZERO)
+		line.add_point(to_local(GRAPPLE_POS))
+		add_child(line)
+		
+		var tween = create_tween()
+		tween.tween_property(line, "width", 3.0, 0.03)
+		tween.parallel().tween_property(line, "default_color:a", 0.0, 0.06)
+		tween.tween_callback(line.queue_free)
 	elif is_grappling:
-		draw_line(Vector2(0, -16), to_local(current_grappling_point), Color(0.35, 0.7, 0.9), 3, true)
+		var line = Line2D.new()
+		line.width = 5.0
+		line.default_color = Color(0.2, 0.8, 0.2, 0.8)
+		line.add_point(Vector2.ZERO)
+		line.add_point(to_local(current_grappling_point))
+		add_child(line)
+		
+		var tween = create_tween()
+		tween.tween_property(line, "width", 3.0, 0.08)
+		tween.parallel().tween_property(line, "default_color:a", 0.0, 0.1)
+		tween.tween_callback(line.queue_free)
+
+
+func attack_ani(attack_pos):
+	var line = Line2D.new()
+	line.width = 5.0
+	line.default_color = Color(0.2, 0.8, 0.2, 0.8)
+	line.add_point(Vector2.ZERO)
+	line.add_point(to_local(attack_pos))
+	add_child(line)
+	
+	var tween = create_tween()
+	tween.tween_property(line, "width", 3.0, 0.08)
+	tween.parallel().tween_property(line, "default_color:a", 0.0, 0.1)
+	tween.tween_callback(line.queue_free)
+
 
 func swing_grapple(delta: float) -> void:
 	var radius = global_position - current_grappling_point
@@ -252,19 +394,13 @@ func jump_catch():
 	if ($catch_jump/right.is_colliding() or $catch_jump/left.is_colliding()) and jumping:
 		position.y -= 3
 		
-func head_catch():
-	if $"catch head/left_stop".is_colliding() and not $"catch head/left_stop".is_colliding():
-		position.x -= 30
-	elif $"catch head/right_stop".is_colliding() and not $"catch head/right_go".is_colliding():
-		position.x += 30
-		
+
 
 func _on_collect_timeout() -> void:
 	$"+1".visible = false
 
 
 func create_special_ability_effects():
-	print('special bs')
 	var particles = CPUParticles2D.new()
 	particles.name = "SpecialParticles"
 	particles.amount = 30
@@ -300,6 +436,7 @@ func create_special_ability_effects():
 	var glow_tween = create_tween()
 	glow_tween.tween_property(glow, "energy", 0.0, 3.0)
 	glow_tween.tween_callback(glow.queue_free)
+	
 	
 	
 func create_swing_trail():

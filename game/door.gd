@@ -4,24 +4,24 @@ extends Area2D
 
 func _ready():
 	connect("body_entered", _on_body_entered)
-	print("Door script loaded")
 
 func _process(delta):
 	var is_unlocked = Global.is_level_complete()
 	modulate = Color(1, 1, 1, 1) if is_unlocked else Color(0.5, 0.5, 0.5, 1)
 
 func _on_body_entered(body):
-	print("Door body entered by: " + body.name)
-	
-	if body.name == "CharacterBody2D" or body.name == "tarzan" or body.name == "teleport":
-		if Global.is_level_complete():
-			print("Player entered door, changing to next level")
+
+	# Check if it's the player (either classic character or tarzan)
+  if body.is_in_group("player") and Global.is_level_complete():
+		
+		
+	  if get_tree().current_scene.name == "level1":
+		  get_tree().change_scene_to_file("res://level2.tscn")
+     elif get_tree().current_scene.name == "level2":
+      get_tree().change_scene_to_file("res://level_3.tscn")
+     Global.level_changed = true
+     Global.coins_collected = 0
 			
-			Global.level_changed = true
-			Global.coins_collected = 0
-			
-			get_tree().change_scene_to_file(next_level)
-		else:
-			print("Player entered door, but not all coins collected yet")
+
 			if body.has_method("show_message"):
 				body.show_message("Collect all coins first!")

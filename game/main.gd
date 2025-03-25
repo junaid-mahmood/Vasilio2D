@@ -5,23 +5,40 @@ const enemy_bullet_scene: PackedScene = preload("res://enemy/enemy_bullet.tscn")
 const portal_bullet_scene: PackedScene = preload("res://teleport/portal.tscn")
 const bow_bullet_scene: PackedScene = preload("res://bow/bow_bullet.tscn")
 
+const teleport_hotbar: PackedScene = preload("res://hotbar_teleport.tscn")
+const tarzan_hotbar: PackedScene = preload("res://hotbar_tarzan.tscn")
+const classic_hotbar: PackedScene = preload("res://hotbar.tscn")
+
 var player_character
 var quantum_effect_active := false
 var quantum_particles := []
 
 func _ready() -> void:
+	var hotbar_instance
+	var canvas
+	canvas = get_node("CanvasLayer")
 	if Global.player == 'tarzan':
 		player_character = load("res://tarzan/tarzan.tscn").instantiate() 
 		player_character.position = Vector2(79, 600)
+		hotbar_instance = tarzan_hotbar.instantiate()
+		hotbar_instance.name = 'hotbar'
+		
+		
 		
 	elif Global.player == 'classic':
 		player_character = load("res://character/character_body_2d.tscn").instantiate()
 		player_character.position = Vector2(79, 611)
+		hotbar_instance = classic_hotbar.instantiate()
+		hotbar_instance.name = 'hotbar'
+		
 		
 	elif Global.player == 'scientist':
 		player_character = load("res://teleport/teleport.tscn").instantiate()
 		player_character.position = Vector2(79, 600)
+		hotbar_instance = teleport_hotbar.instantiate()
+		hotbar_instance.name = 'hotbar'
 	
+	canvas.add_child(hotbar_instance)
 	add_child(player_character)
 	
 

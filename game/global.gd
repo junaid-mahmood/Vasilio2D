@@ -15,6 +15,9 @@ var player = ''
 var portal1 = Vector2.ZERO
 var portal2 = Vector2.ZERO
 var portals = 0
+
+var see_player = null
+
 var level_changed = false
 var quantum_acceleration_active = false
 var quantum_acceleration_cooldown = 0.0
@@ -35,3 +38,4 @@ func get_required_coins():
 	
 func is_level_complete():
 	return coins_collected >= get_required_coins()
+

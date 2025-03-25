@@ -1,18 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://sihy1oiiv6bj"]
+[gd_scene load_steps=5 format=3 uid="uid://cyxex3x3o5stq"]
 
-[ext_resource type="Script" uid="uid://cxji4uv26nhri" path="res://hotbar.gd" id="1_btnhd"]
-[ext_resource type="Texture2D" uid="uid://bcjh7vdw2tong" path="res://assets/sword.png" id="1_ugqnj"]
-[ext_resource type="Texture2D" uid="uid://b8hv7wpsfed5a" path="res://assets/bow.png" id="2_urx0p"]
-[ext_resource type="Texture2D" uid="uid://2xyc07n7ud6f" path="res://assets/shieldbig.png" id="4_ayf4g"]
+[ext_resource type="Script" uid="uid://du8aixxfkxh3w" path="res://hotbar_tarzan.gd" id="1_fnicm"]
+[ext_resource type="Texture2D" uid="uid://bvqlhgp1gvukf" path="res://assets/vine_hook.png" id="2_fnicm"]
+[ext_resource type="Texture2D" uid="uid://bpdw5dntwggms" path="res://assets/vine_grapple.png" id="3_xchw0"]
+[ext_resource type="Texture2D" uid="uid://dkqmhr4q0agnp" path="res://assets/vine_grapple_attack.png" id="4_yoe2r"]
 
-[node name="hotbar" type="Control"]
+[node name="hotbar_tarzan" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_btnhd")
+script = ExtResource("1_fnicm")
 
 [node name="GridContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
@@ -31,7 +31,7 @@ alignment = 1
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 focus_mode = 0
-icon = ExtResource("1_ugqnj")
+icon = ExtResource("2_fnicm")
 icon_alignment = 1
 expand_icon = true
 
@@ -55,7 +55,7 @@ horizontal_alignment = 1
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 focus_mode = 0
-icon = ExtResource("2_urx0p")
+icon = ExtResource("3_xchw0")
 icon_alignment = 1
 expand_icon = true
 
@@ -79,7 +79,7 @@ horizontal_alignment = 1
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 focus_mode = 0
-icon = ExtResource("4_ayf4g")
+icon = ExtResource("4_yoe2r")
 icon_alignment = 1
 expand_icon = true
 

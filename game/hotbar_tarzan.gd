@@ -13,13 +13,13 @@ func _process(delta):
 
 	if Input.is_key_pressed(KEY_Q):
 		update_text_for_key("Q")
-		Global.weapon = "sword"
+		Global.weapon = "hook"
 	if Input.is_key_pressed(KEY_R):
 		update_text_for_key("R")
-		Global.weapon = "bow"
+		Global.weapon = "grapple"
 	if Input.is_key_pressed(KEY_C):
 		update_text_for_key("C")
-		Global.weapon = "shield"
+		Global.weapon = "punch"
 
 func update_all_text():
 	var label1 = find_child("RichTextLabel", true, false)
@@ -45,11 +45,11 @@ func highlight_current_weapon():
 		label3.add_theme_color_override("font_color", Color(1, 1, 1, 1))
 		
 
-		if Global.weapon == "sword":
+		if Global.weapon == "hook":
 			label1.add_theme_color_override("font_color", Color(1, 1, 0, 1))
-		elif Global.weapon == "bow":
+		elif Global.weapon == "grapple":
 			label2.add_theme_color_override("font_color", Color(1, 1, 0, 1))
-		elif Global.weapon == "shield":
+		elif Global.weapon == "punch":
 			label3.add_theme_color_override("font_color", Color(1, 1, 0, 1))
 
 func update_text_for_key(key):
@@ -66,11 +66,10 @@ func update_text_for_key(key):
 
 
 func _on_button_pressed():
-	Global.weapon = "sword"
+	Global.weapon = "hook"
 
 func _on_button_2_pressed():
-	Global.weapon = "bow"
+	Global.weapon = "grapple"
 
 func _on_button_3_pressed():
-	Global.weapon = "shield"
-
+	Global.weapon = "punch"
