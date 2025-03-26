@@ -38,4 +38,3 @@ func get_required_coins():
 	
 func is_level_complete():
 	return coins_collected >= get_required_coins()
-

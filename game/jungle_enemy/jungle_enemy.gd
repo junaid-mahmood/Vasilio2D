@@ -229,8 +229,7 @@ func bfs_all_shit(delta):
 				elif not path_to_player:
 					current_target = end_marker
 
-			print(current_target)
-			print(path_to_player)
+
 			
 			var direction = current_target.global_position - global_position
 			direction = direction.normalized()

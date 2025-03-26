@@ -16,6 +16,7 @@ var jumping := false
 var coyote := false
 var facing_right := false
 var coins := 0
+var spawn_pos = Vector2.ZERO
 
 var mouse_pos = Vector2.ZERO
 var max_portal_distance = 350
@@ -32,9 +33,10 @@ var max_portals_per_level := 4
 var portal_timer := 0.0
 var damage_number_scene = preload("res://damage_number.tscn")
 var portal_scene = preload("res://teleport/portal.tscn")
+var weapons = ['teleport', 'melee']
 
 var attack_damage := 40
-var attack_radius := 100.0
+var attack_radius := 500.0
 var attack_cooldown := 0.0
 var attack_cooldown_time := 0.5
 
@@ -51,37 +53,18 @@ var jump_multiplier := 1.0
 var attack_multiplier := 1.0
 var portal_range_multiplier := 1.0
 
-var weapons = ['portal', 'punch']
-var weapon_counter := 0
-
 @onready var sprite_2d: AnimatedSprite2D = $Sprite2D
 @onready var progress_bar: ProgressBar = get_node("../CanvasLayer/JumpBar")
 @onready var health_bar: ProgressBar = get_node("../CanvasLayer/HealthBar")
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
-func _input(event: InputEvent) -> void:
-	if event is InputEventKey:
-		if event.pressed and not event.echo:
-			if event.keycode == KEY_Q:
-				switch_to_weapon("portal")
-			elif event.keycode == KEY_R:
-				switch_to_weapon("punch")
-
-				
-func switch_to_weapon(weapon_name: String) -> void:
-	if weapons.has(weapon_name):
-		Global.weapon = weapon_name
-		match weapon_name:
-			'portal':
-				weapon_counter = 0
-			'punch':
-				weapon_counter = 1
-
-
 func _ready() -> void:
 	add_to_group("player")
+	spawn_pos = global_position
 	
-
+	collision_layer = 8
+	collision_mask = 15
+	
 	progress_bar.max_value = 100
 	progress_bar.value = 100
 	health_bar.max_value = 100
@@ -89,6 +72,7 @@ func _ready() -> void:
 	
 	Global.has_shield = false
 	Global.player_position = position
+	
 	
 	create_portal_indicator()
 
@@ -125,15 +109,6 @@ func _process(delta: float) -> void:
 		quantum_acceleration_timer -= delta
 		update_quantum_particles(delta)
 		
-
-	if Input.is_action_just_pressed("ui_accept") and weapons[weapon_counter] == 'portal':
-		progress_bar.value -= 100
-		mouse_pos = get_global_mouse_position()
-		var dir_to_portal = global_position.direction_to(mouse_pos)
-		ray_cast.target_position = dir_to_portal * max_portal_distance
-		ray_cast.force_raycast_update()
-		var collision_object = ray_cast.get_collider()
-
 		if quantum_acceleration_timer <= 0:
 			deactivate_quantum_acceleration()
 	
@@ -144,11 +119,11 @@ func _process(delta: float) -> void:
 	
 	update_portal_indicator()
 	
-	if Input.is_action_just_pressed("ui_accept") and progress_bar.value >= PORTAL_COST and portal_count < max_portals_per_level:
+	if Input.is_action_just_pressed("ui_accept") and Global.weapon == 'portal' and progress_bar.value >= PORTAL_COST and portal_count < max_portals_per_level:
 		progress_bar.value -= PORTAL_COST
 		create_portal()
 	
-	if Input.is_action_just_pressed("switch") and progress_bar.value >= ATTACK_COST and attack_cooldown <= 0:
+	if Input.is_action_just_pressed("ui_accept") and Global.weapon == 'punch' and progress_bar.value >= ATTACK_COST and attack_cooldown <= 0:
 		progress_bar.value -= ATTACK_COST
 		energy_attack()
 		attack_cooldown = attack_cooldown_time
@@ -195,6 +170,8 @@ func activate_quantum_acceleration():
 	flash_tween.tween_property(flash, "color:a", 0.0, 0.5)
 	flash_tween.tween_callback(flash.queue_free)
 
+
+
 func deactivate_quantum_acceleration():
 	if not quantum_acceleration_active:
 		return
@@ -217,6 +194,8 @@ func deactivate_quantum_acceleration():
 	
 	quantum_particles.clear()
 
+
+
 func create_quantum_field():
 	for i in range(10):
 		var particle = ColorRect.new()
@@ -226,11 +205,12 @@ func create_quantum_field():
 		var angle = randf() * 2 * PI
 		var distance = randf_range(30, 50)
 		var pos = Vector2(cos(angle) * distance, sin(angle) * distance)
-
 		
 		particle.position = pos
 		add_child(particle)
 		quantum_particles.append(particle)
+
+
 
 func update_quantum_particles(delta):
 	for particle in quantum_particles:
@@ -239,15 +219,12 @@ func update_quantum_particles(delta):
 			var angle = current_pos.angle() + delta * 2
 			var distance = current_pos.length()
 			
-
-	if Input.is_action_just_pressed("ui_accept") and weapons[weapon_counter] == 'punch':
-		var kill_radius: float = 70.0   
-
 			particle.position = Vector2(cos(angle) * distance, sin(angle) * distance)
-
 			
 			var size_scale = randf_range(0.8, 1.2)
 			particle.size = Vector2(5, 5) * size_scale
+
+
 
 func get_special_ability_state():
 	return {
@@ -255,6 +232,8 @@ func get_special_ability_state():
 		"cooldown": quantum_acceleration_cooldown,
 		"duration": quantum_acceleration_timer if quantum_acceleration_active else 0
 	}
+
+
 
 func update_portal_indicator():
 	var indicator = get_node_or_null("PortalIndicator")
@@ -281,7 +260,20 @@ func update_portal_indicator():
 		else:
 			indicator.visible = false
 
+
+
 func create_portal() -> void:
+	if portal_count >= max_portals_per_level:
+		var warning = Label.new()
+		warning.text = "Portal limit reached!"
+		warning.position = Vector2(-50, -50)
+		warning.modulate = Color(1, 0.3, 0.3)
+		add_child(warning)
+		
+		var warning_tween = create_tween()
+		warning_tween.tween_property(warning, "modulate:a", 0, 1.0)
+		warning_tween.tween_callback(warning.queue_free)
+		return
 	mouse_pos = get_global_mouse_position()
 	var dir_to_portal = global_position.direction_to(mouse_pos)
 	
@@ -316,6 +308,8 @@ func create_portal() -> void:
 		
 		portal_timer = portal_lifetime
 
+
+
 func reset_portals():
 	portal1 = Vector2.ZERO
 	portal2 = Vector2.ZERO
@@ -332,7 +326,7 @@ func energy_attack() -> void:
 	var hit_enemy := false
 	
 	var current_attack_damage = attack_damage * attack_multiplier
-	var current_attack_radius = attack_radius * (quantum_acceleration_active if 1.2 else 1.0)
+	var current_attack_radius = attack_radius * (1.2 if quantum_acceleration_active else 1.0)
 	
 	var attack_effect = ColorRect.new()
 	attack_effect.color = Color(0.2, 0.6, 1.0, 0.4)
@@ -350,6 +344,7 @@ func energy_attack() -> void:
 	
 	for node in get_parent().get_children():
 		if node is Area2D and node.has_method("enemy_damage"):
+
 			var direction = node.global_position - global_position
 			var distance = direction.length()
 			if distance < current_attack_radius:
@@ -360,19 +355,9 @@ func energy_attack() -> void:
 	if has_node("AttackSound"):
 		$AttackSound.play()
 
+
+
 func teleport_to(destination: Vector2) -> void:
-	if portal_count >= max_portals_per_level:
-		var warning = Label.new()
-		warning.text = "Portal limit reached!"
-		warning.position = Vector2(-50, -50)
-		warning.modulate = Color(1, 0.3, 0.3)
-		add_child(warning)
-		
-		var warning_tween = create_tween()
-		warning_tween.tween_property(warning, "modulate:a", 0, 1.0)
-		warning_tween.tween_callback(warning.queue_free)
-		return
-	
 	var teleport_out_effect = ColorRect.new()
 	teleport_out_effect.color = Color(0.2, 0.6, 1.0, 0.7)
 	
@@ -521,3 +506,7 @@ func _on_level_changed():
 	if quantum_acceleration_active:
 		deactivate_quantum_acceleration()
 	quantum_acceleration_cooldown = 0.0
+	
+	
+func teleport_to_spawn():
+	return spawn_pos

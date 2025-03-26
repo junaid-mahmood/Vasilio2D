@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 var facing_right = true
 var coins := 0
+var spawn_pos = Vector2.ZERO
 
 var is_invulnerable := false
 const INVULNERABILITY_TIME := 1.0
@@ -37,6 +38,7 @@ var has_bow = true
 
 func _ready() -> void:
 	add_to_group("player")
+	spawn_pos = global_position
 	
 	progress_bar.max_value = 100
 	progress_bar.value = 100
@@ -327,3 +329,6 @@ func _on_barrel_3_explo_damage(num: Variant) -> void:
 
 func _on_barrel_explo_damage(num: Variant) -> void:
 	player_damage(num)
+
+func teleport_to_spawn():
+	return spawn_pos

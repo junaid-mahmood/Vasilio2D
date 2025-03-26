@@ -24,6 +24,7 @@ var previous_pos := Vector2.ZERO
 var facing_right := false
 var coyote := true
 var jumping := false
+var spawn_pos = Vector2.ZERO
 
 var weapons = ['hook', 'grapple', 'punch']
 var weapon_counter := 0
@@ -43,6 +44,7 @@ var acceleration_multiplier := 1.0
 
 func _ready() -> void:
 	add_to_group("player")
+	spawn_pos = global_position
 	
 	progress_bar.max_value = 100
 	progress_bar.value = 100
@@ -474,3 +476,6 @@ func create_hit_effect(new_hit_effect_pos):
 	hit_tween.tween_property(hit_effect, "color:a", 0.0, 0.3)
 	hit_tween.tween_callback(hit_effect.queue_free)
 	
+	
+func teleport_to_spawn():
+	return spawn_pos

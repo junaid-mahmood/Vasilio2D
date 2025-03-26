@@ -5,6 +5,7 @@ func _ready():
 	set_process_input(true)
 	update_all_text()
 	highlight_current_weapon()
+	Global.weapon = 'portal'
 
 
 func _process(delta):
