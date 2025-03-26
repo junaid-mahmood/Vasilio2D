@@ -52,6 +52,7 @@ var speed_multiplier := 1.0
 var jump_multiplier := 1.0
 var attack_multiplier := 1.0
 var portal_range_multiplier := 1.0
+var portal_shoot_timeout := false
 
 @onready var sprite_2d: AnimatedSprite2D = $Sprite2D
 @onready var progress_bar: ProgressBar = get_node("../CanvasLayer/JumpBar")
@@ -119,9 +120,23 @@ func _process(delta: float) -> void:
 	
 	update_portal_indicator()
 	
-	if Input.is_action_just_pressed("ui_accept") and Global.weapon == 'portal' and progress_bar.value >= PORTAL_COST and portal_count < max_portals_per_level:
-		progress_bar.value -= PORTAL_COST
-		create_portal()
+	if Input.is_action_just_pressed("ui_accept") and Global.weapon == 'portal' and progress_bar.value >= PORTAL_COST:
+		if not portal_shoot_timeout:
+			progress_bar.value -= PORTAL_COST
+			if Global.portals == 1:
+				portal_shoot_timeout = true
+				portal_shoot_timeout_func()
+			create_portal()
+		else:
+			var warning = Label.new()
+			warning.text = "Portal shoot timeout!"
+			warning.position = Vector2(-50, -50)
+			warning.modulate = Color(1, 0.3, 0.3)
+			add_child(warning)
+			
+			var warning_tween = create_tween()
+			warning_tween.tween_property(warning, "modulate:a", 0, 1.0)
+			warning_tween.tween_callback(warning.queue_free)
 	
 	if Input.is_action_just_pressed("ui_accept") and Global.weapon == 'punch' and progress_bar.value >= ATTACK_COST and attack_cooldown <= 0:
 		progress_bar.value -= ATTACK_COST
@@ -170,7 +185,9 @@ func activate_quantum_acceleration():
 	flash_tween.tween_property(flash, "color:a", 0.0, 0.5)
 	flash_tween.tween_callback(flash.queue_free)
 
-
+func portal_shoot_timeout_func():
+	await get_tree().create_timer(15).timeout
+	portal_shoot_timeout = false
 
 func deactivate_quantum_acceleration():
 	if not quantum_acceleration_active:
@@ -263,17 +280,7 @@ func update_portal_indicator():
 
 
 func create_portal() -> void:
-	if portal_count >= max_portals_per_level:
-		var warning = Label.new()
-		warning.text = "Portal limit reached!"
-		warning.position = Vector2(-50, -50)
-		warning.modulate = Color(1, 0.3, 0.3)
-		add_child(warning)
-		
-		var warning_tween = create_tween()
-		warning_tween.tween_property(warning, "modulate:a", 0, 1.0)
-		warning_tween.tween_callback(warning.queue_free)
-		return
+
 	mouse_pos = get_global_mouse_position()
 	var dir_to_portal = global_position.direction_to(mouse_pos)
 	
@@ -299,7 +306,7 @@ func create_portal() -> void:
 				portal2 = Vector2.ZERO
 				Global.portals = 1
 				portal_count += 1
-		
+
 		Global.portal1 = portal1
 		Global.portal2 = portal2
 		Global.shoot_portal = [true, global_position]
