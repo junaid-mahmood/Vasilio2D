@@ -9,10 +9,15 @@ const tarzan_hotbar: PackedScene = preload("res://hotbar_tarzan.tscn")
 const classic_hotbar: PackedScene = preload("res://hotbar.tscn")
 
 var player_character
+var music_player: AudioStreamPlayer
 
 @export var interact_distance: float = 50.0
 
 func _ready() -> void:
+	stop_all_audio()
+	music_player = $AudioStreamPlayer
+	setup_music()
+	
 	var hotbar_instance
 	var canvas
 	canvas = get_node("CanvasLayer")
@@ -39,6 +44,30 @@ func _ready() -> void:
 	
 	add_child(player_character)
 	Vector2(110.0, -6.0)
+	
+	play_music()
+
+func setup_music() -> void:
+	music_player.stream = load("res://mainlv3.mp3")
+	music_player.volume_db = -15.0
+	music_player.mix_target = AudioStreamPlayer.MIX_TARGET_SURROUND
+	
+	if not music_player.is_in_group("audio_players"):
+		music_player.add_to_group("audio_players")
+
+func play_music() -> void:
+	if music_player and not music_player.playing:
+		music_player.play()
+
+func stop_music() -> void:
+	if music_player and music_player.playing:
+		music_player.stop()
+		
+func stop_all_audio() -> void:
+	var audio_nodes = get_tree().get_nodes_in_group("audio_players")
+	for audio_node in audio_nodes:
+		if audio_node is AudioStreamPlayer and audio_node.playing:
+			audio_node.stop()
 
 func _process(delta: float) -> void:
 	if Global.shoot[0]:
@@ -72,7 +101,6 @@ func _process(delta: float) -> void:
 		var en_bullet = enemy_bullet_scene.instantiate()		
 		pos.y -= 20
 		en_bullet.position = pos
-		# Set velocity and direction
 		var direction: Vector2 = (player_pos - pos).normalized()
 		en_bullet.velocity = direction * en_bullet.speed
 		en_bullet.rotation = direction.angle()
@@ -105,6 +133,9 @@ func _process(delta: float) -> void:
 		var nearest_torch = get_nearest_torch()
 		if nearest_torch:
 			nearest_torch.toggle_torch()
+
+func _exit_tree() -> void:
+	stop_music()
 		
 		
 func get_nearest_torch():

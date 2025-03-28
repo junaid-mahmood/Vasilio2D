@@ -1,7 +1,6 @@
-[gd_scene load_steps=36 format=4 uid="uid://cmw8v35ftmt1w"]
+[gd_scene load_steps=33 format=4 uid="uid://cmw8v35ftmt1w"]
 
-
-[ext_resource type="Script" path="res://level_3.gd" id="1_gxey3"]
+[ext_resource type="Script" uid="uid://delqgvrwmn22c" path="res://level_3.gd" id="1_gxey3"]
 [ext_resource type="Texture2D" uid="uid://dabf0hrinl0uo" path="res://assets/jungle_platform_small.png" id="1_j8bo8"]
 [ext_resource type="Texture2D" uid="uid://cm8nmtq8417ox" path="res://assets/leaf2.png" id="1_m8gss"]
 [ext_resource type="Texture2D" uid="uid://dk2t7b7l5fq35" path="res://jungle_tileset.png" id="2_1jdk1"]
@@ -17,6 +16,7 @@
 [ext_resource type="Script" uid="uid://cjkx8e0pqklfw" path="res://jump_bar.gd" id="10_ghrvs"]
 [ext_resource type="Script" uid="uid://bqhhrylu0173q" path="res://health_bar.gd" id="11_jvy75"]
 [ext_resource type="PackedScene" uid="uid://copjurvsoieqm" path="res://coin/coinui.tscn" id="13_keufu"]
+[ext_resource type="AudioStream" uid="uid://dhg6ixw1wp68l" path="res://mainlv3.mp3" id="19_ra6nl"]
 [ext_resource type="PackedScene" uid="uid://caqfcrf27ytkv" path="res://coin/coin.tscn" id="19_wnq0t"]
 [ext_resource type="PackedScene" uid="uid://jnlfurofofr7" path="res://torch.tscn" id="20_ra6nl"]
 
@@ -639,3 +639,6 @@ position = Vector2(2655, -1384)
 
 [node name="Area2D67" parent="coins" instance=ExtResource("19_wnq0t")]
 position = Vector2(2695, -441)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("19_ra6nl")

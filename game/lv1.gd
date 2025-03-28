@@ -48,7 +48,7 @@ func _ready() -> void:
 	play_music()
 
 func setup_music() -> void:
-	music_player.stream = load("res://mainlv1.mp3")
+	music_player.stream = load("res://mainlv2.mp3")
 	music_player.volume_db = -15.0
 	music_player.mix_target = AudioStreamPlayer.MIX_TARGET_SURROUND
 	
