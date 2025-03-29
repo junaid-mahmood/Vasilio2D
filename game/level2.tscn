@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=4 uid="uid://c1ngqyc8cjk5f"]
+[gd_scene load_steps=38 format=4 uid="uid://c1ngqyc8cjk5f"]
 
 [ext_resource type="Script" uid="uid://di6camdvfumij" path="res://main.gd" id="1_7mylh"]
 [ext_resource type="Texture2D" uid="uid://balbd02i3nktn" path="res://castl1.jpg" id="2_4ou0f"]
@@ -15,12 +15,12 @@
 [ext_resource type="Texture2D" uid="uid://bpr60nwsbbsqs" path="res://tilemap.png" id="9_iakae"]
 [ext_resource type="Texture2D" uid="uid://p7x4x15hptbq" path="res://assets/wall.png" id="10_7mylh"]
 [ext_resource type="Script" uid="uid://cjkx8e0pqklfw" path="res://jump_bar.gd" id="13_1i48b"]
-[ext_resource type="PackedScene" uid="uid://sihy1oiiv6bj" path="res://hotbar.tscn" id="15_00gqm"]
 [ext_resource type="PackedScene" uid="uid://cpkni5shkfy4j" path="res://level2_enemy.tscn" id="17_enemy"]
 [ext_resource type="Script" uid="uid://bqhhrylu0173q" path="res://health_bar.gd" id="17_ixnqj"]
 [ext_resource type="PackedScene" uid="uid://dcjtfo184nubn" path="res://door.tscn" id="18_4k5bj"]
 [ext_resource type="Script" uid="uid://cfck82i78vluu" path="res://area_2d.gd" id="19_hp87d"]
 [ext_resource type="PackedScene" uid="uid://copjurvsoieqm" path="res://coin/coinui.tscn" id="20_gxpff"]
+[ext_resource type="PackedScene" uid="uid://caqfcrf27ytkv" path="res://coin/coin.tscn" id="21_2x2vu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_idpoe"]
 texture = ExtResource("2_lwvnx")
@@ -2316,4 +2316,7 @@ offset_bottom = 150.0
 position = Vector2(34, -12)
 
 [node name="door" parent="." instance=ExtResource("18_4k5bj")]
-position = Vector2(3014, 43)
+position = Vector2(23, 424)
+
+[node name="coin" parent="." instance=ExtResource("21_2x2vu")]
+position = Vector2(310, 582)

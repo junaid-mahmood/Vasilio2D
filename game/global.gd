@@ -16,7 +16,7 @@ var portal1 = Vector2.ZERO
 var portal2 = Vector2.ZERO
 var portals = 0
 
-var see_player = null
+var see_player = []
 
 var level_changed = false
 var quantum_acceleration_active = false
