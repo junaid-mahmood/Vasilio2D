@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=4 uid="uid://bm2qaccjcy00b"]
+[gd_scene load_steps=37 format=4 uid="uid://bm2qaccjcy00b"]
 
 [ext_resource type="Script" uid="uid://di6camdvfumij" path="res://main.gd" id="1_f8jqy"]
 [ext_resource type="Texture2D" uid="uid://dpjfl8jiimvx3" path="res://assets/Terrain (16x16).png" id="2_i5v1g"]
@@ -21,7 +21,6 @@
 [ext_resource type="PackedScene" uid="uid://jnlfurofofr7" path="res://torch.tscn" id="21_fl64f"]
 [ext_resource type="PackedScene" uid="uid://cj0neh7rr8bi" path="res://character/shield.tscn" id="23_c7wmr"]
 [ext_resource type="Script" uid="uid://cmm6g45nehydl" path="res://canvas_modulate.gd" id="23_h8c7e"]
-[ext_resource type="PackedScene" uid="uid://ue2wspitukfb" path="res://jungle_enemy/jungle_enemy.tscn" id="24_1u8w0"]
 [ext_resource type="Texture2D" uid="uid://eaqmi8geibg8" path="res://assets/W__4_-removebg-preview.png" id="25_0odxb"]
 [ext_resource type="PackedScene" uid="uid://dcjtfo184nubn" path="res://door.tscn" id="25_lswn8"]
 
@@ -826,74 +825,3 @@ position = Vector2(856, 508)
 
 [node name="Area2D12" parent="coins" instance=ExtResource("10_4x0mx")]
 position = Vector2(131, 450)
-
-[node name="markers" type="Node2D" parent="."]
-
-[node name="jungle_enemy" parent="markers" instance=ExtResource("24_1u8w0")]
-position = Vector2(282, 79)
-
-[node name="1_2" type="Marker2D" parent="markers"]
-position = Vector2(367, 93)
-
-[node name="2_5,1" type="Marker2D" parent="markers"]
-position = Vector2(589, 98)
-
-[node name="3_4,9" type="Marker2D" parent="markers"]
-position = Vector2(402, 250)
-
-[node name="4_3,6,7" type="Marker2D" parent="markers"]
-position = Vector2(240, 254)
-
-[node name="5_10,2" type="Marker2D" parent="markers"]
-position = Vector2(698, 125)
-
-[node name="6_7,4" type="Marker2D" parent="markers"]
-position = Vector2(84, 251)
-
-[node name="7_20" type="Marker2D" parent="markers"]
-position = Vector2(153, 438)
-
-[node name="8_20,18,19" type="Marker2D" parent="markers"]
-position = Vector2(335, 513)
-
-[node name="9_21,3" type="Marker2D" parent="markers"]
-position = Vector2(484, 315)
-
-[node name="10_5,11,21" type="Marker2D" parent="markers"]
-position = Vector2(632, 224)
-
-[node name="11_10,12" type="Marker2D" parent="markers"]
-position = Vector2(803, 227)
-
-[node name="12_21,13" type="Marker2D" parent="markers"]
-position = Vector2(887, 370)
-
-[node name="13_15,12" type="Marker2D" parent="markers"]
-position = Vector2(1033, 448)
-
-[node name="15_17,13" type="Marker2D" parent="markers"]
-position = Vector2(973, 514)
-
-[node name="16_17" type="Marker2D" parent="markers"]
-position = Vector2(740, 598)
-
-[node name="17_16,15" type="Marker2D" parent="markers"]
-position = Vector2(828, 513)
-
-[node name="18_8" type="Marker2D" parent="markers"]
-position = Vector2(266, 588)
-
-[node name="19_8,16" type="Marker2D" parent="markers"]
-position = Vector2(404, 588)
-
-[node name="20_7,8" type="Marker2D" parent="markers"]
-position = Vector2(225, 441)
-
-[node name="21_10,9" type="Marker2D" parent="markers"]
-position = Vector2(572, 316)
-
-[node name="22_21,12" type="Marker2D" parent="markers"]
-position = Vector2(674, 370)
-
-[node name="23_18" type="Marker2D" parent="markers"]
-position = Vector2(48, 589)

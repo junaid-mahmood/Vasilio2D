@@ -153,8 +153,8 @@ func _process(delta: float) -> void:
 		if $attack_ray.is_colliding():
 			attack_ani(shield_pos)
 			if collision_object != null:
-				if collision_object.is_in_group("enemies"):
-					collision_object.enemy_damage(34)
+				if collision_object.is_in_group("enemies") or collision_object.has_method('im_jungle_enemy'):
+					collision_object.enemy_damage(25)
 		else:
 			attack_ani(shield_pos)
 

@@ -23,8 +23,10 @@ var speed_multiplier = 1.0
 const ACCELERATION = 3000.0
 const FRICTION = 2000.0
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+var health
 
 func _ready() -> void:
+	health = 100
 	add_to_group('jungle_enemies')
 	#choose markers belonging to the level of this enemy
 	x = get_parent()
@@ -117,6 +119,8 @@ func find_bfs_path(start_id: int, target_id: int) -> Array:
 
 
 func raycasts():
+	if Global.player_position.distance_to(global_position) > 150:
+		return null
 	var q = $"Node2D/1"
 	var w = $"Node2D/2"
 	var e = $"Node2D/3"
@@ -146,6 +150,9 @@ func raycasts():
 
 
 func _process(delta: float) -> void:
+	if health <= 0:
+		queue_free()
+	
 	old_positions.append(global_position)
 	if len(old_positions) > 5:
 		old_positions.pop_front()
@@ -207,7 +214,6 @@ func bfs_all_shit(delta):
 		player_node = coll_object
 		
 	if he_knows:
-		print('i see')
 		is_attacking = true # override to attack
 
 		if is_attacking and not close: # melee attack
@@ -252,7 +258,6 @@ func bfs_all_shit(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
 	
-	print(old_positions)
 	if old_positions.all(func(x): return x == old_positions[0]) and he_knows and is_on_floor():
 		velocity.y = -450.0
 		
@@ -307,4 +312,11 @@ func cover():
 				else:
 					cover_direc = [true, node.global_position]
 	
-					
+func enemy_damage(num):
+	health -= num
+	var tween = create_tween()
+	tween.tween_property($"Jump(32x32)", "material:shader_parameter/amount", 1.0, 0.1)
+	tween.tween_property($"Jump(32x32)", "material:shader_parameter/amount", 0.0, 0.1)
+
+func im_jungle_enemy():
+	pass
