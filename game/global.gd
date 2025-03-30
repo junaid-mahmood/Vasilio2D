@@ -16,7 +16,7 @@ var portal1 = Vector2.ZERO
 var portal2 = Vector2.ZERO
 var portals = 0
 
-var see_player = null
+var see_player = []
 
 var level_changed = false
 var quantum_acceleration_active = false
@@ -27,7 +27,7 @@ var quantum_acceleration_max_cooldown = 5.0
 var coins_required = {
 	"res://main.tscn": 1,
 	"res://level2.tscn": 2,
-	"res://level_3.tscn": 5
+	"res://level_3.tscn": 67
 }
 
 func get_required_coins():

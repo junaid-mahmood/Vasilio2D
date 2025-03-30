@@ -17,13 +17,16 @@ var he_knows = false
 var player_node
 var is_in_cover = [false, Vector2.ZERO]
 var can_shoot = true
+var old_positions = []
 
 var speed_multiplier = 1.0
 const ACCELERATION = 3000.0
 const FRICTION = 2000.0
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+var health
 
 func _ready() -> void:
+	health = 100
 	add_to_group('jungle_enemies')
 	#choose markers belonging to the level of this enemy
 	x = get_parent()
@@ -116,6 +119,8 @@ func find_bfs_path(start_id: int, target_id: int) -> Array:
 
 
 func raycasts():
+	if Global.player_position.distance_to(global_position) > 150:
+		return null
 	var q = $"Node2D/1"
 	var w = $"Node2D/2"
 	var e = $"Node2D/3"
@@ -145,6 +150,13 @@ func raycasts():
 
 
 func _process(delta: float) -> void:
+	if health <= 0:
+		queue_free()
+	
+	old_positions.append(global_position)
+	if len(old_positions) > 5:
+		old_positions.pop_front()
+		
 
 	if ($jump.is_colliding() or $jump2.is_colliding()) and is_on_floor():
 		velocity.y = -450.0
@@ -177,6 +189,7 @@ func _process(delta: float) -> void:
 			shoot_coll.player_damage(30)
 			can_shoot = false
 			shoot_timeout()
+			
 	
 	
 		
@@ -187,32 +200,20 @@ func _process(delta: float) -> void:
 		
 func bfs_all_shit(delta):
 	var coll_object
-	if Global.see_player != null:
-		coll_object = Global.see_player
-		he_knows = true
-	elif not he_knows:
+	
+	if global_position.distance_to(Global.player_position) > 300:
+		he_knows = false
+		coll_object = null
+		
+	if not he_knows:
 		coll_object = raycasts()
-	else:
-		coll_object = player_node
 	
 	var close = false
 	if coll_object != null:
-		#basically always focusing on player
-		Global.see_player = coll_object	
-		
-		player_node = coll_object
 		he_knows = true
+		player_node = coll_object
 		
-
-		#checks if is_alone
-		'''
-		for node in get_parent().get_children():
-			if node is CharacterBody2D and node != self and node.global_position.distance_to(global_position) < 200:
-				if node.is_in_group("jungle_enemies"):
-					attack()
-					is_attacking = true
-					break
-		'''
+	if he_knows:
 		is_attacking = true # override to attack
 
 		if is_attacking and not close: # melee attack
@@ -256,7 +257,10 @@ func bfs_all_shit(delta):
 		velocity.x = move_toward(velocity.x, 0, FRICTION * delta)
 	if not is_on_floor():
 		velocity.y += gravity * delta
-
+	
+	if old_positions.all(func(x): return x == old_positions[0]) and he_knows and is_on_floor():
+		velocity.y = -450.0
+		
 	move_and_slide()
 	
 		
@@ -308,4 +312,11 @@ func cover():
 				else:
 					cover_direc = [true, node.global_position]
 	
-					
+func enemy_damage(num):
+	health -= num
+	var tween = create_tween()
+	tween.tween_property($"Jump(32x32)", "material:shader_parameter/amount", 1.0, 0.1)
+	tween.tween_property($"Jump(32x32)", "material:shader_parameter/amount", 0.0, 0.1)
+
+func im_jungle_enemy():
+	pass

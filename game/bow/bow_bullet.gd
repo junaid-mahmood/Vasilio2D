@@ -97,19 +97,23 @@ func _process(delta):
 
 func _on_body_entered(body: Node2D) -> void:
 	# Destroy the arrow when it hits something
+	if body.has_method("im_jungle_enemy"):
+		body.enemy_damage(5)
+		
 	queue_free()
+
+
 
 func _on_area_entered(area: Area2D) -> void:
 	# Check if area has enemy_damage method
 	if area.has_method("enemy_damage"):
 		# Apply damage with multiplier
-		var base_damage = 30  # Base arrow damage
+		var base_damage = 32  # Base arrow damage
 		var final_damage = base_damage * damage_multiplier
 		area.enemy_damage(final_damage)
 		
 		# Spawn damage number
 		spawn_damage_number(area.global_position, final_damage)
-	
 	# Don't destroy if hitting another bullet
 	if not area.is_in_group("bullets"):
 		queue_free()

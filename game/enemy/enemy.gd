@@ -29,7 +29,7 @@ func _process(delta: float) -> void:
 	rayCast2D.target_position = dir_to_player * 80
 	rayCast2D.force_raycast_update()
 	var collision_object = rayCast2D.get_collider()
-	if collision_object == null and can_shoot and not Global.dead:
+	if collision_object == null and can_shoot and not Global.dead and Global.player_position.distance_to(global_position) < 350:
 		player_position.y -= 12
 		Global.enemy_shoot = [true, position, player_position]
 		can_shoot = false
@@ -71,13 +71,3 @@ func _on_left_ray_climb_left_climb(nope: Variant) -> void:
 
 func _on_right_ray_climb_right_climb(nope2: Variant) -> void:
 	climb_r = nope2
-
-
-
-
-
-func _on_area_entered(area: Area2D) -> void:
-	if area.has_method("_this_is_bow"):
-		enemy_damage(40)
-	elif area.has_method("_this_is_bullet"):
-		enemy_damage(10)

@@ -1,22 +1,29 @@
-[gd_scene load_steps=4 format=3 uid="uid://ue2wspitukfb"]
+[gd_scene load_steps=6 format=3 uid="uid://ue2wspitukfb"]
 
 [ext_resource type="Script" uid="uid://cg8lp56vvyg0i" path="res://jungle_enemy/jungle_enemy.gd" id="1_0nq40"]
 [ext_resource type="Texture2D" uid="uid://u7x05k0ojooi" path="res://jungle_enemy/ugabuga.png" id="1_py8na"]
+[ext_resource type="Shader" uid="uid://drgsxu4i1toe6" path="res://player_hurt.gdshader" id="2_lsras"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4blqp"]
+shader = ExtResource("2_lsras")
+shader_parameter/color = Color(255, 0, 0, 1)
+shader_parameter/amount = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0nq40"]
-size = Vector2(30, 62.6666)
+size = Vector2(60, 81.3333)
 
 [node name="jungle_enemy" type="CharacterBody2D"]
-scale = Vector2(0.75, 0.75)
+scale = Vector2(0.5, 0.5)
 collision_layer = 128
 collision_mask = 24
 script = ExtResource("1_0nq40")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_4blqp")
 texture = ExtResource("1_py8na")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, 9.99999)
+position = Vector2(4, 0.666644)
 shape = SubResource("RectangleShape2D_0nq40")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
