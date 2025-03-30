@@ -2313,12 +2313,6 @@ grow_horizontal = 0
 show_percentage = false
 script = ExtResource("17_ixnqj")
 
-[node name="hotbar" parent="CanvasLayer" instance=ExtResource("15_00gqm")]
-offset_left = 46.0
-offset_top = -26.0
-offset_right = 46.0
-offset_bottom = -26.0
-metadata/_edit_use_anchors_ = true
 
 [node name="coinui" parent="CanvasLayer" instance=ExtResource("20_gxpff")]
 offset_left = 980.0
