@@ -1,6 +1,6 @@
-[gd_scene load_steps=41 format=4 uid="uid://bm2qaccjcy00b"]
+[gd_scene load_steps=40 format=4 uid="uid://bm2qaccjcy00b"]
 
-[ext_resource type="Script" uid="uid://c8o0xx7svg8ue" path="res://lv1.gd" id="1_lswn8"]
+[ext_resource type="Script" uid="uid://di6camdvfumij" path="res://main.gd" id="1_f8jqy"]
 [ext_resource type="Texture2D" uid="uid://dpjfl8jiimvx3" path="res://assets/Terrain (16x16).png" id="2_i5v1g"]
 [ext_resource type="Texture2D" uid="uid://cbkql87n3ipnc" path="res://block.png" id="3_scnf6"]
 [ext_resource type="PackedScene" uid="uid://buq6m0boebfrh" path="res://barrel/barrel.tscn" id="4_5bejk"]
@@ -25,7 +25,6 @@
 [ext_resource type="Texture2D" uid="uid://eaqmi8geibg8" path="res://assets/W__4_-removebg-preview.png" id="25_0odxb"]
 [ext_resource type="Texture2D" uid="uid://c1stof3usra12" path="res://icon.svg" id="25_a6jrf"]
 [ext_resource type="PackedScene" uid="uid://dcjtfo184nubn" path="res://door.tscn" id="25_lswn8"]
-[ext_resource type="AudioStream" uid="uid://cjovoycnldij5" path="res://mainlv1.mp3" id="26_lswn8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_d13ii"]
 texture = ExtResource("2_i5v1g")
@@ -541,7 +540,7 @@ size = Vector2(25, 33)
 [node name="level1" type="Node2D"]
 self_modulate = Color(0, 0, 0, 1)
 texture_filter = 1
-script = ExtResource("1_lswn8")
+script = ExtResource("1_f8jqy")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = 8.0
@@ -610,28 +609,28 @@ offset_bottom = 150.0
 [node name="EnemyBullets" type="Node2D" parent="."]
 
 [node name="enemy" parent="." instance=ExtResource("8_cwafa")]
-position = Vector2(777, 396)
+position = Vector2(777, 371)
 
 [node name="enemy2" parent="." instance=ExtResource("8_cwafa")]
-position = Vector2(356, 108)
+position = Vector2(336, 86)
 
 [node name="enemy3" parent="." instance=ExtResource("8_cwafa")]
-position = Vector2(183, -149)
+position = Vector2(187, -171)
 
 [node name="enemy4" parent="." instance=ExtResource("8_cwafa")]
-position = Vector2(526, -1017)
+position = Vector2(536, -1028)
 
 [node name="enemy5" parent="." instance=ExtResource("8_cwafa")]
-position = Vector2(174, -1299)
+position = Vector2(215, -1327)
 
 [node name="enemy8" parent="." instance=ExtResource("8_cwafa")]
-position = Vector2(321, -1425)
+position = Vector2(322, -1460)
 
 [node name="enemy6" parent="." instance=ExtResource("8_cwafa")]
-position = Vector2(446, -499)
+position = Vector2(466, -510)
 
 [node name="enemy7" parent="." instance=ExtResource("8_cwafa")]
-position = Vector2(558, -883)
+position = Vector2(555, -917)
 
 [node name="barrel" parent="." instance=ExtResource("4_5bejk")]
 position = Vector2(88, 448)
@@ -978,7 +977,3 @@ position = Vector2(674, 370)
 
 [node name="23_18" type="Marker2D" parent="markers"]
 position = Vector2(48, 589)
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("26_lswn8")
-autoplay = true
