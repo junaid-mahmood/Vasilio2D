@@ -10,7 +10,7 @@ shader_parameter/color = Color(255, 0, 0, 1)
 shader_parameter/amount = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0nq40"]
-size = Vector2(30, 62.6666)
+size = Vector2(60, 81.3333)
 
 [node name="jungle_enemy" type="CharacterBody2D"]
 scale = Vector2(0.5, 0.5)
@@ -23,7 +23,7 @@ material = SubResource("ShaderMaterial_4blqp")
 texture = ExtResource("1_py8na")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, 9.99999)
+position = Vector2(4, 0.666644)
 shape = SubResource("RectangleShape2D_0nq40")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]

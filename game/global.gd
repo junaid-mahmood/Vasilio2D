@@ -25,9 +25,9 @@ var quantum_acceleration_max_cooldown = 5.0
 
 # New variables for level coin requirements
 var coins_required = {
-	"res://main.tscn": 12,
+	"res://main.tscn": 40,
 	"res://level2.tscn": 1,
-	"res://level_3.tscn": 5
+	"res://level_3.tscn": 67
 }
 
 func get_required_coins():

@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dryyj6s6e6qmr"]
+
+[ext_resource type="Texture2D" uid="uid://c1stof3usra12" path="res://icon.svg" id="1_cxol7"]
+[ext_resource type="Script" uid="uid://ckq2clw7561by" path="res://kingkong/kingkong.gd" id="1_norpl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_norpl"]
+size = Vector2(125, 128)
+
+[node name="kingkong" type="CharacterBody2D"]
+script = ExtResource("1_norpl")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_cxol7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_norpl")
+
+[node name="1" type="RayCast2D" parent="."]
