@@ -1,7 +1,6 @@
-[gd_scene load_steps=41 format=4 uid="uid://bm2qaccjcy00b"]
+[gd_scene load_steps=40 format=4 uid="uid://bm2qaccjcy00b"]
 
-
-[ext_resource type="Script" uid="uid://c8o0xx7svg8ue" path="res://lv1.gd" id="1_lswn8"]
+[ext_resource type="Script" uid="uid://di6camdvfumij" path="res://main.gd" id="1_f8jqy"]
 [ext_resource type="Texture2D" uid="uid://dpjfl8jiimvx3" path="res://assets/Terrain (16x16).png" id="2_i5v1g"]
 [ext_resource type="Texture2D" uid="uid://cbkql87n3ipnc" path="res://block.png" id="3_scnf6"]
 [ext_resource type="PackedScene" uid="uid://buq6m0boebfrh" path="res://barrel/barrel.tscn" id="4_5bejk"]
@@ -22,9 +21,10 @@
 [ext_resource type="PackedScene" uid="uid://jnlfurofofr7" path="res://torch.tscn" id="21_fl64f"]
 [ext_resource type="PackedScene" uid="uid://cj0neh7rr8bi" path="res://character/shield.tscn" id="23_c7wmr"]
 [ext_resource type="Script" uid="uid://cmm6g45nehydl" path="res://canvas_modulate.gd" id="23_h8c7e"]
+[ext_resource type="PackedScene" uid="uid://ue2wspitukfb" path="res://jungle_enemy/jungle_enemy.tscn" id="24_1u8w0"]
 [ext_resource type="Texture2D" uid="uid://eaqmi8geibg8" path="res://assets/W__4_-removebg-preview.png" id="25_0odxb"]
+[ext_resource type="Texture2D" uid="uid://c1stof3usra12" path="res://icon.svg" id="25_a6jrf"]
 [ext_resource type="PackedScene" uid="uid://dcjtfo184nubn" path="res://door.tscn" id="25_lswn8"]
-[ext_resource type="AudioStream" uid="uid://cjovoycnldij5" path="res://mainlv1.mp3" id="26_lswn8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_d13ii"]
 texture = ExtResource("2_i5v1g")
@@ -534,10 +534,13 @@ sources/2 = SubResource("TileSetAtlasSource_nf75j")
 sources/14 = SubResource("TileSetAtlasSource_v3y1d")
 tile_proxies/coords_level = [[10, Vector2i(0, 0)], [14, Vector2i(0, 0)], [10, Vector2i(0, 1)], [14, Vector2i(0, 1)], [10, Vector2i(1, 0)], [14, Vector2i(1, 0)], [10, Vector2i(1, 1)], [14, Vector2i(1, 1)], [11, Vector2i(0, 0)], [14, Vector2i(2, 0)], [11, Vector2i(0, 1)], [14, Vector2i(2, 1)], [11, Vector2i(1, 0)], [14, Vector2i(3, 0)], [11, Vector2i(1, 1)], [14, Vector2i(3, 1)], [11, Vector2i(2, 0)], [14, Vector2i(4, 0)], [11, Vector2i(2, 1)], [14, Vector2i(4, 1)], [11, Vector2i(3, 0)], [14, Vector2i(5, 0)], [11, Vector2i(3, 1)], [14, Vector2i(5, 1)], [11, Vector2i(4, 0)], [14, Vector2i(6, 0)], [11, Vector2i(4, 1)], [14, Vector2i(6, 1)], [11, Vector2i(5, 0)], [14, Vector2i(7, 0)], [11, Vector2i(5, 1)], [14, Vector2i(7, 1)], [12, Vector2i(0, 0)], [14, Vector2i(8, 0)], [12, Vector2i(0, 1)], [14, Vector2i(8, 1)], [12, Vector2i(1, 0)], [14, Vector2i(9, 0)], [12, Vector2i(1, 1)], [14, Vector2i(9, 1)], [12, Vector2i(2, 0)], [14, Vector2i(10, 0)], [12, Vector2i(2, 1)], [14, Vector2i(10, 1)], [12, Vector2i(3, 0)], [14, Vector2i(11, 0)], [12, Vector2i(3, 1)], [14, Vector2i(11, 1)], [13, Vector2i(0, 0)], [14, Vector2i(12, 0)], [13, Vector2i(0, 1)], [14, Vector2i(12, 1)], [13, Vector2i(1, 0)], [14, Vector2i(13, 0)], [13, Vector2i(1, 1)], [14, Vector2i(13, 1)]]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xuqvo"]
+size = Vector2(25, 33)
+
 [node name="level1" type="Node2D"]
 self_modulate = Color(0, 0, 0, 1)
 texture_filter = 1
-script = ExtResource("1_lswn8")
+script = ExtResource("1_f8jqy")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = 8.0
@@ -606,28 +609,28 @@ offset_bottom = 150.0
 [node name="EnemyBullets" type="Node2D" parent="."]
 
 [node name="enemy" parent="." instance=ExtResource("8_cwafa")]
-position = Vector2(777, 396)
+position = Vector2(777, 371)
 
 [node name="enemy2" parent="." instance=ExtResource("8_cwafa")]
-position = Vector2(356, 108)
+position = Vector2(336, 86)
 
 [node name="enemy3" parent="." instance=ExtResource("8_cwafa")]
-position = Vector2(183, -149)
+position = Vector2(187, -171)
 
 [node name="enemy4" parent="." instance=ExtResource("8_cwafa")]
-position = Vector2(526, -1017)
+position = Vector2(536, -1028)
 
 [node name="enemy5" parent="." instance=ExtResource("8_cwafa")]
-position = Vector2(174, -1299)
+position = Vector2(215, -1327)
 
 [node name="enemy8" parent="." instance=ExtResource("8_cwafa")]
-position = Vector2(321, -1425)
+position = Vector2(322, -1460)
 
 [node name="enemy6" parent="." instance=ExtResource("8_cwafa")]
-position = Vector2(446, -499)
+position = Vector2(466, -510)
 
 [node name="enemy7" parent="." instance=ExtResource("8_cwafa")]
-position = Vector2(558, -883)
+position = Vector2(555, -917)
 
 [node name="barrel" parent="." instance=ExtResource("4_5bejk")]
 position = Vector2(88, 448)
@@ -851,7 +854,7 @@ position = Vector2(1008, -1487)
 metadata/_edit_lock_ = true
 
 [node name="Area2D15" parent="." instance=ExtResource("25_lswn8")]
-position = Vector2(570, -1606)
+position = Vector2(114, 418)
 
 [node name="coins" type="Node2D" parent="."]
 
@@ -891,110 +894,86 @@ position = Vector2(819, -1024)
 [node name="Area2D12" parent="coins" instance=ExtResource("10_4x0mx")]
 position = Vector2(601, -1242)
 
-[node name="coin" parent="coins" instance=ExtResource("10_4x0mx")]
-position = Vector2(242, -168)
+[node name="markers" type="Node2D" parent="."]
 
-[node name="coin2" parent="coins" instance=ExtResource("10_4x0mx")]
-position = Vector2(86, -235)
+[node name="jungle_enemy" parent="markers" instance=ExtResource("24_1u8w0")]
+position = Vector2(282, 79)
 
-[node name="coin3" parent="coins" instance=ExtResource("10_4x0mx")]
-position = Vector2(496, -139)
+[node name="StaticBody2D3" type="StaticBody2D" parent="markers"]
+position = Vector2(268, 89)
+collision_layer = 2
 
-[node name="coin4" parent="coins" instance=ExtResource("10_4x0mx")]
-position = Vector2(536, -267)
+[node name="Sprite2D" type="Sprite2D" parent="markers/StaticBody2D3"]
+position = Vector2(-178, 4)
+scale = Vector2(0.2, 0.26)
+texture = ExtResource("25_a6jrf")
 
-[node name="coin5" parent="coins" instance=ExtResource("10_4x0mx")]
-position = Vector2(984, -203)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="markers/StaticBody2D3"]
+position = Vector2(-175, 4)
+shape = SubResource("RectangleShape2D_xuqvo")
 
-[node name="coin6" parent="coins" instance=ExtResource("10_4x0mx")]
-position = Vector2(1102, -455)
+[node name="1_2" type="Marker2D" parent="markers"]
+position = Vector2(367, 93)
 
-[node name="coin7" parent="coins" instance=ExtResource("10_4x0mx")]
-position = Vector2(111, -591)
+[node name="2_5,1" type="Marker2D" parent="markers"]
+position = Vector2(589, 98)
 
-[node name="coin8" parent="coins" instance=ExtResource("10_4x0mx")]
-position = Vector2(84, -423)
-
-[node name="coin9" parent="coins" instance=ExtResource("10_4x0mx")]
-position = Vector2(744, -575)
-
-
-[node name="coin10" parent="coins" instance=ExtResource("10_4x0mx")]
-position = Vector2(820, -426)
+[node name="3_4,9" type="Marker2D" parent="markers"]
+position = Vector2(402, 250)
 
 [node name="4_3,6,7" type="Marker2D" parent="markers"]
 position = Vector2(370, -123)
 
+[node name="5_10,2" type="Marker2D" parent="markers"]
+position = Vector2(698, 125)
 
-[node name="coin11" parent="coins" instance=ExtResource("10_4x0mx")]
-position = Vector2(1084, -840)
+[node name="6_7,4" type="Marker2D" parent="markers"]
+position = Vector2(84, 251)
 
-[node name="coin12" parent="coins" instance=ExtResource("10_4x0mx")]
-position = Vector2(823, -840)
+[node name="7_20" type="Marker2D" parent="markers"]
+position = Vector2(153, 438)
 
-[node name="coin13" parent="coins" instance=ExtResource("10_4x0mx")]
-position = Vector2(625, -772)
+[node name="8_20,18,19" type="Marker2D" parent="markers"]
+position = Vector2(335, 513)
 
-[node name="coin14" parent="coins" instance=ExtResource("10_4x0mx")]
-position = Vector2(504, -908)
+[node name="9_21,3" type="Marker2D" parent="markers"]
+position = Vector2(484, 315)
 
-[node name="coin15" parent="coins" instance=ExtResource("10_4x0mx")]
-position = Vector2(212, -1060)
+[node name="10_5,11,21" type="Marker2D" parent="markers"]
+position = Vector2(632, 224)
 
-[node name="coin16" parent="coins" instance=ExtResource("10_4x0mx")]
-position = Vector2(84, -867)
+[node name="11_10,12" type="Marker2D" parent="markers"]
+position = Vector2(803, 227)
 
-[node name="coin17" parent="coins" instance=ExtResource("10_4x0mx")]
-position = Vector2(84, -1252)
-
-[node name="coin18" parent="coins" instance=ExtResource("10_4x0mx")]
-position = Vector2(84, -1384)
-
-
-[node name="coin19" parent="coins" instance=ExtResource("10_4x0mx")]
-position = Vector2(524, -1033)
+[node name="12_21,13" type="Marker2D" parent="markers"]
+position = Vector2(887, 370)
 
 [node name="13_15,12" type="Marker2D" parent="markers"]
 position = Vector2(1039, 448)
 
+[node name="15_17,13" type="Marker2D" parent="markers"]
+position = Vector2(973, 514)
 
-[node name="coin20" parent="coins" instance=ExtResource("10_4x0mx")]
-position = Vector2(933, -1033)
+[node name="16_17" type="Marker2D" parent="markers"]
+position = Vector2(740, 598)
 
-[node name="coin21" parent="coins" instance=ExtResource("10_4x0mx")]
-position = Vector2(394, -1261)
+[node name="17_16,15" type="Marker2D" parent="markers"]
+position = Vector2(828, 513)
 
-[node name="coin22" parent="coins" instance=ExtResource("10_4x0mx")]
-position = Vector2(641, -1260)
+[node name="18_8" type="Marker2D" parent="markers"]
+position = Vector2(266, 588)
 
-[node name="coin23" parent="coins" instance=ExtResource("10_4x0mx")]
-position = Vector2(905, -1255)
+[node name="19_8,16" type="Marker2D" parent="markers"]
+position = Vector2(404, 588)
 
-[node name="coin24" parent="coins" instance=ExtResource("10_4x0mx")]
-position = Vector2(978, -351)
-
-[node name="coin25" parent="coins" instance=ExtResource("10_4x0mx")]
-position = Vector2(326, -836)
-
-
-[node name="coin26" parent="coins" instance=ExtResource("10_4x0mx")]
-position = Vector2(322, -1455)
+[node name="20_7,8" type="Marker2D" parent="markers"]
+position = Vector2(225, 441)
 
 [node name="21_10,9" type="Marker2D" parent="markers"]
 position = Vector2(845, 6)
 
-
-[node name="coin27" parent="coins" instance=ExtResource("10_4x0mx")]
-position = Vector2(519, -1455)
-
-
-[node name="coin28" parent="coins" instance=ExtResource("10_4x0mx")]
-position = Vector2(786, -1457)
+[node name="22_21,12" type="Marker2D" parent="markers"]
+position = Vector2(674, 370)
 
 [node name="23_18" type="Marker2D" parent="markers"]
 position = Vector2(48, 589)
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("26_lswn8")
-autoplay = true
-

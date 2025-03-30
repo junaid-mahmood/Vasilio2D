@@ -14,7 +14,7 @@ const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 const ACCELERATION = 3000.0
 const FRICTION = 2000.0
-const RECHARGE_RATE := 50.0 
+const RECHARGE_RATE := 50.0
 const SHOOT_COST := 20.0
 const SWORD_COST := 40.0
 const DOUBLE_JUMP_COST := 40.0
@@ -52,8 +52,6 @@ func _ready() -> void:
 	parent.add_child(shield_body_instance)
 	shield_body = parent.get_node_or_null("shield")
 	
-	
-	
 	var bow_sprite_scene:PackedScene = preload("res://character/bow.tscn")
 	var bow_instance = bow_sprite_scene.instantiate()
 	bow_instance.name = "bow"
@@ -67,7 +65,8 @@ func _ready() -> void:
 
 	bow_sprite.visible = true
 
-
+	Global.player = self # Added this line!
+	
 
 
 
@@ -113,7 +112,7 @@ func update_bow_position_and_rotation():
 	var mouse_pos = get_global_mouse_position()
 	var direc_to_mouse = (mouse_pos - centered_global_position).normalized()
 	var angle_radians = atan2(direc_to_mouse.y, direc_to_mouse.x)
-	var bow_pos = centered_global_position + Vector2(cos(angle_radians), sin(angle_radians)) * DISTANCE_SHIELD # currently 40; but is changable
+	var bow_pos = centered_global_position + Vector2(cos(angle_radians), sin(angle_radians)) * DISTANCE_SHIELD
 	bow_sprite.position = bow_pos
 	if angle_radians:
 		bow_sprite.rotation = angle_radians
@@ -132,7 +131,6 @@ func _physics_process(delta: float) -> void:
 		game_over()
 	
 	
-	#direct shield angle towards mouse
 	var centered_global_position = global_position
 	centered_global_position.y -= 20
 	centered_global_position.x += 9
@@ -224,7 +222,6 @@ func _physics_process(delta: float) -> void:
 						node.enemy_damage(50)
 
 
-	# movement
 	var direction := Input.get_axis("ui_left", "ui_right")
 	if direction != 0:
 		if (direction < 0 and velocity.x > 0) or (direction > 0 and velocity.x < 0):
@@ -315,6 +312,7 @@ func game_over() -> void:
 func coin_collected(num):
 	coins += num
 	Global.coins_collected = coins
+	$CoinCollect.play()
 	$"+1".visible = true
 	$collect.start()
 
