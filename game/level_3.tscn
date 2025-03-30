@@ -1,6 +1,4 @@
-
-[gd_scene load_steps=34 format=4 uid="uid://cmw8v35ftmt1w"]
-
+[gd_scene load_steps=35 format=4 uid="uid://cmw8v35ftmt1w"]
 
 [ext_resource type="Script" uid="uid://delqgvrwmn22c" path="res://level_3.gd" id="1_gxey3"]
 [ext_resource type="Texture2D" uid="uid://dabf0hrinl0uo" path="res://assets/jungle_platform_small.png" id="1_j8bo8"]
@@ -18,11 +16,8 @@
 [ext_resource type="Script" uid="uid://cjkx8e0pqklfw" path="res://jump_bar.gd" id="10_ghrvs"]
 [ext_resource type="Script" uid="uid://bqhhrylu0173q" path="res://health_bar.gd" id="11_jvy75"]
 [ext_resource type="PackedScene" uid="uid://copjurvsoieqm" path="res://coin/coinui.tscn" id="13_keufu"]
-
-[ext_resource type="PackedScene" uid="uid://ue2wspitukfb" path="res://jungle_enemy/jungle_enemy.tscn" id="19_ra6nl"]
-
 [ext_resource type="AudioStream" uid="uid://dhg6ixw1wp68l" path="res://mainlv3.mp3" id="19_ra6nb"]
-
+[ext_resource type="PackedScene" uid="uid://ue2wspitukfb" path="res://jungle_enemy/jungle_enemy.tscn" id="19_ra6nl"]
 [ext_resource type="PackedScene" uid="uid://caqfcrf27ytkv" path="res://coin/coin.tscn" id="19_wnq0t"]
 [ext_resource type="PackedScene" uid="uid://dryyj6s6e6qmr" path="res://kingkong/kingkong.tscn" id="20_gxey3"]
 [ext_resource type="PackedScene" uid="uid://jnlfurofofr7" path="res://torch.tscn" id="20_ra6nl"]
@@ -646,7 +641,6 @@ position = Vector2(2655, -1384)
 
 [node name="Area2D67" parent="coins" instance=ExtResource("19_wnq0t")]
 position = Vector2(2695, -441)
-
 
 [node name="markers-left" type="Node2D" parent="."]
 
@@ -1588,7 +1582,7 @@ position = Vector2(3804, -862)
 [node name="2" type="Marker2D" parent="kingkong"]
 position = Vector2(4265, -855)
 
-[node name="kingkong2" parent="." instance=ExtResource("20_gxey3")]
+[node name="kingkong2" parent="kingkong" instance=ExtResource("20_gxey3")]
 position = Vector2(3982, -906)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

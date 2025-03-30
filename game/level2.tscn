@@ -1,5 +1,4 @@
-[gd_scene load_steps=42 format=4 uid="uid://c1ngqyc8cjk5f"]
-
+[gd_scene load_steps=41 format=4 uid="uid://c1ngqyc8cjk5f"]
 
 [ext_resource type="Script" uid="uid://di6camdvfumij" path="res://main.gd" id="1_7mylh"]
 [ext_resource type="Texture2D" uid="uid://balbd02i3nktn" path="res://castl1.jpg" id="2_4ou0f"]
@@ -22,12 +21,9 @@
 [ext_resource type="PackedScene" uid="uid://cj0neh7rr8bi" path="res://character/shield.tscn" id="19_gxpff"]
 [ext_resource type="Script" uid="uid://cfck82i78vluu" path="res://area_2d.gd" id="19_hp87d"]
 [ext_resource type="PackedScene" uid="uid://copjurvsoieqm" path="res://coin/coinui.tscn" id="20_gxpff"]
-
-
-[ext_resource type="PackedScene" uid="uid://cvbjw10lyc2ti" path="res://area_2ddoor.tscn" id="23_iakae"]
+[ext_resource type="PackedScene" uid="uid://dcjtfo184nubn" path="res://door.tscn" id="24_3k4dh"]
 [ext_resource type="PackedScene" uid="uid://caqfcrf27ytkv" path="res://coin/coin.tscn" id="24_7mylh"]
 [ext_resource type="AudioStream" uid="uid://dpv36yp8ukr6j" path="res://mainlv2.mp3" id="25_3k4dh"]
-
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_idpoe"]
 texture = ExtResource("2_lwvnx")
@@ -2313,7 +2309,6 @@ grow_horizontal = 0
 show_percentage = false
 script = ExtResource("17_ixnqj")
 
-
 [node name="coinui" parent="CanvasLayer" instance=ExtResource("20_gxpff")]
 offset_left = 980.0
 offset_top = 112.0
@@ -2327,9 +2322,6 @@ position = Vector2(-78, -35)
 [node name="Area2D2" parent="." instance=ExtResource("19_gxpff")]
 visible = false
 position = Vector2(-71, -42)
-
-[node name="Area2D3" parent="." instance=ExtResource("23_iakae")]
-position = Vector2(-795, 40)
 
 [node name="Area2D4" parent="." instance=ExtResource("24_7mylh")]
 position = Vector2(1562, -139)
@@ -2347,7 +2339,7 @@ position = Vector2(4023, 743)
 position = Vector2(4205, 116)
 
 [node name="Area2D9" parent="." instance=ExtResource("24_7mylh")]
-position = Vector2(1042, 197)
+position = Vector2(391, 571)
 
 [node name="Area2D10" parent="." instance=ExtResource("24_7mylh")]
 position = Vector2(3057, -1)
@@ -2391,8 +2383,8 @@ position = Vector2(3187, -497)
 [node name="Area2D23" parent="." instance=ExtResource("24_7mylh")]
 position = Vector2(4889, 169)
 
-
-
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("25_3k4dh")
 
+[node name="Area2D3" parent="." instance=ExtResource("24_3k4dh")]
+position = Vector2(-533, 425)

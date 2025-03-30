@@ -1,5 +1,4 @@
-[gd_scene load_steps=41 format=4 uid="uid://bm2qaccjcy00b"]
-
+[gd_scene load_steps=38 format=4 uid="uid://bm2qaccjcy00b"]
 
 [ext_resource type="Script" uid="uid://c8o0xx7svg8ue" path="res://lv1.gd" id="1_lswn8"]
 [ext_resource type="Texture2D" uid="uid://dpjfl8jiimvx3" path="res://assets/Terrain (16x16).png" id="2_i5v1g"]
@@ -918,13 +917,8 @@ position = Vector2(84, -423)
 [node name="coin9" parent="coins" instance=ExtResource("10_4x0mx")]
 position = Vector2(744, -575)
 
-
 [node name="coin10" parent="coins" instance=ExtResource("10_4x0mx")]
 position = Vector2(820, -426)
-
-[node name="4_3,6,7" type="Marker2D" parent="markers"]
-position = Vector2(370, -123)
-
 
 [node name="coin11" parent="coins" instance=ExtResource("10_4x0mx")]
 position = Vector2(1084, -840)
@@ -950,13 +944,8 @@ position = Vector2(84, -1252)
 [node name="coin18" parent="coins" instance=ExtResource("10_4x0mx")]
 position = Vector2(84, -1384)
 
-
 [node name="coin19" parent="coins" instance=ExtResource("10_4x0mx")]
 position = Vector2(524, -1033)
-
-[node name="13_15,12" type="Marker2D" parent="markers"]
-position = Vector2(1039, 448)
-
 
 [node name="coin20" parent="coins" instance=ExtResource("10_4x0mx")]
 position = Vector2(933, -1033)
@@ -976,25 +965,27 @@ position = Vector2(978, -351)
 [node name="coin25" parent="coins" instance=ExtResource("10_4x0mx")]
 position = Vector2(326, -836)
 
-
 [node name="coin26" parent="coins" instance=ExtResource("10_4x0mx")]
 position = Vector2(322, -1455)
-
-[node name="21_10,9" type="Marker2D" parent="markers"]
-position = Vector2(845, 6)
-
 
 [node name="coin27" parent="coins" instance=ExtResource("10_4x0mx")]
 position = Vector2(519, -1455)
 
-
 [node name="coin28" parent="coins" instance=ExtResource("10_4x0mx")]
 position = Vector2(786, -1457)
 
-[node name="23_18" type="Marker2D" parent="markers"]
+[node name="markers#4_3,6,7" type="Marker2D" parent="."]
+position = Vector2(370, -123)
+
+[node name="markers#13_15,12" type="Marker2D" parent="."]
+position = Vector2(1039, 448)
+
+[node name="markers#21_10,9" type="Marker2D" parent="."]
+position = Vector2(845, 6)
+
+[node name="markers#23_18" type="Marker2D" parent="."]
 position = Vector2(48, 589)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("26_lswn8")
 autoplay = true
-

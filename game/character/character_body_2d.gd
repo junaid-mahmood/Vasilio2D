@@ -65,7 +65,6 @@ func _ready() -> void:
 
 	bow_sprite.visible = true
 
-	Global.player = self # Added this line!
 	
 
 
@@ -121,7 +120,6 @@ func update_bow_position_and_rotation():
 
 
 func _physics_process(delta: float) -> void:
-	
 	if transitioning:
 		return
 		

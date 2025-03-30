@@ -15,7 +15,7 @@ func _on_body_entered(body):
 			
 			Global.level_changed = true
 			Global.coins_collected = 0
-			
+			print(get_tree().current_scene.name)
 			if get_tree().current_scene.name == "level1":
 				get_tree().change_scene_to_file("res://level2.tscn")
 			elif get_tree().current_scene.name == "level2":

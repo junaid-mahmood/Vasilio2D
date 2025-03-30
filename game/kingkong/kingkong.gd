@@ -13,9 +13,11 @@ func _ready() -> void:
 	for node in x.get_children():
 		if node is Marker2D:
 			markers.append(node)
+	get_closest_marker()
 	
 	
 func _process(delta: float) -> void:
+
 	if end_marker.global_position.distance_to(global_position) < 100:
 		pass
 	elif Global.player_position.distance_to(global_position) < 400:
@@ -24,6 +26,7 @@ func _process(delta: float) -> void:
 		move_toward(velocity.x, direction.x * 120.0, ACCELERATION * delta)
 	
 	move_and_slide()
+	get_closest_marker()
 	
 	
 func raycasts():

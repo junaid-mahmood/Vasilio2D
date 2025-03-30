@@ -30,6 +30,7 @@ var coins_required = {
 	"res://level_3.tscn": 67
 }
 
+
 func get_required_coins():
 	var current_scene = get_tree().current_scene.scene_file_path
 	if coins_required.has(current_scene):
