@@ -2273,6 +2273,39 @@ position = Vector2(34, -12)
 [node name="Level2Enemy" parent="." instance=ExtResource("17_enemy")]
 position = Vector2(604, 316)
 
+[node name="Level2Enemy2" parent="." instance=ExtResource("17_enemy")]
+position = Vector2(1711, 895)
+
+[node name="Level2Enemy3" parent="." instance=ExtResource("17_enemy")]
+position = Vector2(704, 858)
+
+[node name="Level2Enemy4" parent="." instance=ExtResource("17_enemy")]
+position = Vector2(2330, 150)
+
+[node name="Level2Enemy5" parent="." instance=ExtResource("17_enemy")]
+position = Vector2(1999, -484)
+
+[node name="Level2Enemy6" parent="." instance=ExtResource("17_enemy")]
+position = Vector2(3463, 295)
+
+[node name="Level2Enemy7" parent="." instance=ExtResource("17_enemy")]
+position = Vector2(2753, -398)
+
+[node name="Level2Enemy8" parent="." instance=ExtResource("17_enemy")]
+position = Vector2(4097, 387)
+
+[node name="Level2Enemy9" parent="." instance=ExtResource("17_enemy")]
+position = Vector2(3826, -463)
+
+[node name="Level2Enemy10" parent="." instance=ExtResource("17_enemy")]
+position = Vector2(2856, -1031)
+
+[node name="Level2Enemy11" parent="." instance=ExtResource("17_enemy")]
+position = Vector2(2805, 886)
+
+[node name="Level2Enemy12" parent="." instance=ExtResource("17_enemy")]
+position = Vector2(4691, 1074)
+
 [node name="Area2D" type="Area2D" parent="."]
 collision_mask = 8
 script = ExtResource("19_hp87d")

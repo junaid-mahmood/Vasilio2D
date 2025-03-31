@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=4 uid="uid://cmw8v35ftmt1w"]
+[gd_scene load_steps=37 format=4 uid="uid://cmw8v35ftmt1w"]
 
 [ext_resource type="Script" uid="uid://delqgvrwmn22c" path="res://level_3.gd" id="1_gxey3"]
 [ext_resource type="Texture2D" uid="uid://dabf0hrinl0uo" path="res://assets/jungle_platform_small.png" id="1_j8bo8"]
@@ -21,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://caqfcrf27ytkv" path="res://coin/coin.tscn" id="19_wnq0t"]
 [ext_resource type="PackedScene" uid="uid://dryyj6s6e6qmr" path="res://kingkong/kingkong.tscn" id="20_gxey3"]
 [ext_resource type="PackedScene" uid="uid://jnlfurofofr7" path="res://torch.tscn" id="20_ra6nl"]
+[ext_resource type="Script" uid="uid://cfck82i78vluu" path="res://area_2d.gd" id="22_4hpui"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4hpui"]
 texture = ExtResource("1_m8gss")
@@ -212,6 +213,9 @@ sources/0 = SubResource("TileSetAtlasSource_4hpui")
 sources/1 = SubResource("TileSetAtlasSource_g005c")
 sources/2 = SubResource("TileSetAtlasSource_dhf26")
 sources/3 = SubResource("TileSetAtlasSource_ox7xt")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g005c"]
+size = Vector2(5704, 75)
 
 [node name="level3" type="Node2D"]
 script = ExtResource("1_gxey3")
@@ -1587,3 +1591,11 @@ position = Vector2(3982, -906)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("19_ra6nb")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 8
+script = ExtResource("22_4hpui")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(2017, 46)
+shape = SubResource("RectangleShape2D_g005c")

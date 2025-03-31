@@ -39,3 +39,21 @@ func get_required_coins():
 	
 func is_level_complete():
 	return coins_collected >= get_required_coins()
+
+func reset_game_state() -> void:
+	dead = false
+	weapon = 'bow'
+	player_position = Vector2.ZERO
+	has_shield = false
+	# Don't reset coins on death
+	# coins_collected = 0
+	shoot = [false, Vector2.ZERO, Vector2.ZERO]
+	enemy_shoot = [false, Vector2.ZERO, Vector2.ZERO]
+	shoot_portal = [false, Vector2.ZERO]
+	portal1 = Vector2.ZERO
+	portal2 = Vector2.ZERO
+	portals = 0
+	see_player = []
+	level_changed = false
+	quantum_acceleration_active = false
+	quantum_acceleration_cooldown = 0.0

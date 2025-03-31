@@ -13,6 +13,8 @@ var player_character
 var quantum_effect_active := false
 var quantum_particles := []
 var music_player: AudioStreamPlayer
+var fade_rect = null
+var transitioning = false
 
 func _ready() -> void:
 	stop_all_audio()
@@ -45,6 +47,9 @@ func _ready() -> void:
 	canvas.add_child(hotbar_instance)
 	add_child(player_character)
 	
+	# Initialize the transition layer
+	setup_transition_layer()
+	
 	play_music()
 
 func setup_music() -> void:
@@ -71,9 +76,11 @@ func stop_all_audio() -> void:
 
 func _process(delta: float) -> void:
 	if Global.shoot[0]:
-		if Global.weapon == 'bow':
+		var weapon_str = str(Global.weapon)
+
+		if weapon_str == 'bow':
 			var bow_bullet = bow_bullet_scene.instantiate()
-			var direc_bow = Global.shoot[2]
+			var direc_bow = Global.shoot[2] if typeof(Global.shoot[2]) == TYPE_VECTOR2 else Vector2.RIGHT
 			var spawn_pos = Global.shoot[1]
 		
 			bow_bullet.position = spawn_pos
@@ -221,3 +228,31 @@ func clear_quantum_world_effects():
 		effect_layer.queue_free()
 	
 	quantum_particles.clear()
+
+func setup_transition_layer():
+	var canvas_layer = CanvasLayer.new()
+	canvas_layer.layer = 100
+	canvas_layer.name = "TransitionLayer"
+	add_child(canvas_layer)
+	
+	fade_rect = ColorRect.new()
+	fade_rect.name = "FadeRect"
+	fade_rect.color = Color(0, 0, 0, 0)
+	fade_rect.size = get_viewport().get_visible_rect().size
+	fade_rect.position = Vector2.ZERO
+	canvas_layer.add_child(fade_rect)
+	
+	get_viewport().size_changed.connect(update_fade_rect_size)
+
+func update_fade_rect_size():
+	if fade_rect:
+		fade_rect.size = get_viewport().get_visible_rect().size
+		fade_rect.position = Vector2.ZERO
+
+func direct_scene_change(next_scene_path: String):
+	Global.level_changed = true
+	Global.coins_collected = 0
+	call_deferred("_deferred_change_scene", next_scene_path)
+
+func _deferred_change_scene(next_scene_path):
+	get_tree().change_scene_to_file(next_scene_path)

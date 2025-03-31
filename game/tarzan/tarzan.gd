@@ -277,7 +277,10 @@ func play_special_ability_sound():
 func game_over() -> void:
 	$Sprite2D.animation = 'die'
 	Global.dead = true
-	Global.coins_collected = 0
+	
+	# Ensure player type is correct before scene reload
+	Global.set_player("tarzan")
+	
 	await get_tree().create_timer(3.0).timeout
 	get_tree().reload_current_scene()
 	Global.dead = false

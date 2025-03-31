@@ -8,6 +8,10 @@ var player_in_sight = false
 var player_position = Vector2.ZERO
 
 func _ready():
+	# Keep original scale - important!
+	scale = Vector2(1, 1)
+	
+	# Configure shooting timer
 	$shoot_cooldown.wait_time = shoot_cooldown
 	$shoot_cooldown.start()
 
@@ -27,26 +31,33 @@ func _process(delta):
 			var result = space_state.intersect_ray(query)
 			
 			# If no collision or collision is with player, we have line of sight
-			if result.is_empty() or (result.has("collider") and result["collider"].name.begins_with("tarzan")):
+			var has_line_of_sight = result.is_empty() or (result.has("collider") and is_player(result["collider"]))
+			
+			if has_line_of_sight:
 				player_in_sight = true
 				
 				# If we can shoot, do so
 				if can_shoot:
-					print("Enemy can see player and is shooting")
 					shoot()
 			else:
 				player_in_sight = false
 		else:
 			player_in_sight = false
 
+# Helper function to check if a node is a player
+func is_player(node):
+	return node.is_in_group("player") or node.name.begins_with("tarzan") or node.name.begins_with("CharacterBody2D") or node.name.begins_with("teleport")
+
 func shoot():
 	if can_shoot:
-		print("Enemy shooting at: " + str(player_position))
 		can_shoot = false
 		$shoot_cooldown.start()
 		
-		# Set up the global shoot parameters
-		Global.enemy_shoot = [true, global_position, player_position]
+		# Exact targeting - get latest position
+		var exact_target_pos = Global.player_position
+		
+		# Set up the global shoot parameters with precise aiming
+		Global.enemy_shoot = [true, global_position, exact_target_pos]
 		
 		# Visual feedback for shooting
 		$AnimatedSprite2D.play("attack")
@@ -58,8 +69,6 @@ func _on_shoot_cooldown_timeout():
 
 # Add enemy_damage method to handle Tarzan's attacks
 func enemy_damage(damage_amount):
-	print("Enemy taking damage: " + str(damage_amount))
-	
 	# Actually use the damage amount instead of just reducing by 1
 	health -= damage_amount / 10  # Divide by 10 to make it take multiple hits
 	
@@ -80,9 +89,6 @@ func enemy_damage(damage_amount):
 	tween.tween_property($AnimatedSprite2D, "modulate", Color(1, 0.3, 0.3, 1.0), 0.1)
 	tween.tween_property($AnimatedSprite2D, "modulate", Color(1, 1, 1, 1.0), 0.1)
 	
-	print("Enemy health after damage: " + str(health))
-	
 	if health <= 0:
-		print("Enemy defeated")
 		# Play death animation if available, otherwise just free
 		queue_free() 

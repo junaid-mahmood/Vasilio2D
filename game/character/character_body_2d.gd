@@ -261,25 +261,73 @@ func switch_to_weapon(weapon_name: String) -> void:
 		
 		
 func check_door_collision():
+	# Look for door using different methods to ensure we find it
 	var door = get_node_or_null("../Door")
+	
+	if not door:
+		# If we can't find the door directly, try to find it by class
+		for node in get_parent().get_children():
+			if node is Area2D and (node.name.begins_with("Door") or node.name.begins_with("door")):
+				door = node
+				break
+	
 	if door:
 		var distance = global_position.distance_to(door.global_position)
+		
 		if distance < 50:
-			print("Player near door! Distance: " + str(distance))
-			transition_to_level("res://Level2.tscn")
+			if Global.is_level_complete():
+				var current_path = get_tree().current_scene.scene_file_path.to_lower()
+				var next_scene = ""
+				
+				if "main.tscn" in current_path:
+					next_scene = "res://level2.tscn"
+				elif "level2.tscn" in current_path:
+					next_scene = "res://level_3.tscn"
+				
+				if next_scene:
+					direct_scene_change(next_scene)
 
+func direct_scene_change(next_scene_path: String):
+	# This is a simplified scene change method as a backup
+	Global.level_changed = true
+	Global.coins_collected = 0
+	call_deferred("_deferred_change_scene", next_scene_path)
 
+func _deferred_change_scene(next_scene_path):
+	get_tree().change_scene_to_file(next_scene_path)
 
 func transition_to_level(next_scene_path: String):
-	if transitioning or fade_rect == null:
+	if transitioning:
 		return
+		
+	if fade_rect == null:
+		setup_transition_layer()
+		
+	if fade_rect == null:
+		direct_scene_change(next_scene_path)
+		return
+		
+	# Ensure we're not already in this scene
+	if get_tree().current_scene.scene_file_path == next_scene_path:
+		return
+		
+	# Prepare for transition
 	transitioning = true
 	update_fade_rect_size()
 	
+	# Reset coins for next level
+	Global.level_changed = true
+	Global.coins_collected = 0
+	
+	# Fade out effect
 	var tween = create_tween()
 	tween.tween_property(fade_rect, "color", Color(0, 0, 0, 1), 0.5)
+	
+	# This is critical - we need to wait for the tween to finish
+	# before changing scenes
 	await tween.finished
-	get_tree().change_scene_to_file(next_scene_path)
+	
+	call_deferred("_deferred_change_scene", next_scene_path)
 
 
 
@@ -302,7 +350,6 @@ func player_damage(number):
 
 func game_over() -> void:
 	Global.dead = true
-	Global.coins_collected = 0
 	await get_tree().create_timer(3.0).timeout
 	get_tree().reload_current_scene()
 	Global.dead = false

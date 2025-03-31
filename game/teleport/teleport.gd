@@ -464,7 +464,9 @@ func coyote_change():
 
 func game_over() -> void:
 	Global.dead = true
-	Global.coins_collected = 0
+	
+	Global.set_player("scientist")
+	
 	await get_tree().create_timer(3.0).timeout
 	get_tree().reload_current_scene()
 	Global.dead = false
