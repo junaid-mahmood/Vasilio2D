@@ -466,7 +466,8 @@ func game_over() -> void:
 	Global.dead = true
 	Global.coins_collected = 0
 	await get_tree().create_timer(3.0).timeout
-	get_tree().reload_current_scene()
+	global_position = spawn_pos
+	health_bar.value = health_bar.max_value
 	Global.dead = false
 
 func get_right_direc(direction):

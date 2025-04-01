@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cdgxms4blwbt6"]
+
+[ext_resource type="Script" uid="uid://cov3fs0lewhyt" path="res://shop/shop_initializer.gd" id="1_u5vf8"]
+
+[node name="ShopInitializer" type="Node"]
+script = ExtResource("1_u5vf8")

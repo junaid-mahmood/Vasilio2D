@@ -10,6 +10,8 @@ const classic_hotbar: PackedScene = preload("res://hotbar.tscn")
 
 var player_character
 var music_player: AudioStreamPlayer
+var required_coins := 1  # Set to 1 for debugging
+var celebration_shown := false
 
 @export var interact_distance: float = 50.0
 
@@ -107,7 +109,6 @@ func _process(delta: float) -> void:
 		$EnemyBullets.add_child(en_bullet)
 		Global.enemy_shoot[0] = false
 
-		
 	if Global.shoot_portal[0]:
 		await get_tree().create_timer(1)
 		var pos = Global.shoot_portal[1]
@@ -134,6 +135,14 @@ func _process(delta: float) -> void:
 		if nearest_torch:
 			nearest_torch.toggle_torch()
 
+	# Get required coins for level 3 from global configuration
+	var required_coins = Global.coins_required["res://level_3.tscn"]
+	
+	# Check if all required coins are collected and celebration hasn't been shown yet
+	if Global.coins_collected >= required_coins and not celebration_shown:
+		show_celebration()
+		celebration_shown = true
+
 func _exit_tree() -> void:
 	stop_music()
 		
@@ -148,3 +157,85 @@ func get_nearest_torch():
 			nearest = torch
 			nearest_dist = distance
 	return nearest
+
+func show_celebration():
+	# Lock player movement by setting Global.dead to true
+	Global.dead = true
+	
+	# Create a dark overlay background
+	var background = ColorRect.new()
+	background.color = Color(0, 0, 0, 0.8)  # Semi-transparent black
+	
+	# Create canvas layer for celebration elements
+	var canvas_layer = CanvasLayer.new()
+	canvas_layer.layer = 100
+	canvas_layer.add_child(background)
+	
+	# Make background fill screen
+	background.set_anchors_preset(Control.PRESET_FULL_RECT)
+	
+	# Create the celebration sprite
+	var celebration_sprite = Sprite2D.new()
+	celebration_sprite.texture = load("res://vas.png")
+	
+	# Center the sprite
+	var viewport_size = get_viewport().get_visible_rect().size
+	celebration_sprite.position = viewport_size / 2
+	canvas_layer.add_child(celebration_sprite)
+	
+	# Create particle effects
+	var particles = GPUParticles2D.new()
+	var particle_material = ParticleProcessMaterial.new()
+	
+	# Configure particle material
+	particle_material.emission_shape = ParticleProcessMaterial.EMISSION_SHAPE_SPHERE
+	particle_material.emission_sphere_radius = 50.0
+	particle_material.particle_flag_disable_z = true
+	particle_material.gravity = Vector3(0, 98, 0)
+	particle_material.initial_velocity_min = 100.0
+	particle_material.initial_velocity_max = 200.0
+	particle_material.scale_min = 4.0
+	particle_material.scale_max = 8.0
+	particle_material.color = Color(1, 0.8, 0.2, 1)  # Golden color
+	
+	# Configure particles
+	particles.process_material = particle_material
+	particles.amount = 50
+	particles.lifetime = 2.0
+	particles.explosiveness = 0.5
+	particles.randomness = 0.5
+	particles.position = viewport_size / 2
+	particles.emitting = true
+	canvas_layer.add_child(particles)
+	
+	# Create return to title button
+	var button = Button.new()
+	button.text = "Return to Title Screen"
+	button.custom_minimum_size = Vector2(200, 50)  # Set minimum size
+	button.position = Vector2(
+		viewport_size.x / 2 - button.custom_minimum_size.x / 2,
+		viewport_size.y * 0.7
+	)
+	
+	# Style the button
+	var button_theme = Theme.new()
+	var button_style = StyleBoxFlat.new()
+	button_style.bg_color = Color(0.2, 0.2, 0.8, 1)  # Blue color
+	button_style.corner_radius_top_left = 10
+	button_style.corner_radius_top_right = 10
+	button_style.corner_radius_bottom_left = 10
+	button_style.corner_radius_bottom_right = 10
+	button.add_theme_stylebox_override("normal", button_style)
+	
+	# Connect button press to return to title
+	button.pressed.connect(func():
+		# Reset any necessary game state
+		Global.dead = false
+		Global.coins_collected = 0
+		get_tree().change_scene_to_file("res://title.tscn")
+	)
+	
+	canvas_layer.add_child(button)
+	
+	# Add to scene
+	add_child(canvas_layer)
