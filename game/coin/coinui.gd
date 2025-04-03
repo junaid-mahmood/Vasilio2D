@@ -43,7 +43,6 @@ func _process(delta):
 	# Check if level changed
 	var new_level = get_tree().current_scene.scene_file_path
 	if new_level != current_level:
-		# Level changed - reset everything
 		hide_key()
 		current_level = new_level
 		update_required_coins()
@@ -55,13 +54,6 @@ func _process(delta):
 			key_icon = null
 		create_key_icon()
 		
-		# Save completion status for previous level
-		if Global.coins_collected >= required_coins:
-			level_completion_status[current_level] = true
-		else:
-			level_completion_status[current_level] = false
-			
-		# Reset coins for new level check
 		previously_completed = false
 	
 	if required_coins == 0:
@@ -70,8 +62,8 @@ func _process(delta):
 	# Check if current level's coins requirement is met
 	var currently_completed = (coins >= required_coins)
 	
-	# Only show key if current level's requirement is met
-	if currently_completed and not previously_completed:
+	# Only show key if current level's requirement is met AND it's not level 3
+	if currently_completed and not previously_completed and not current_level.ends_with("level_3.tscn"):
 		show_key_above_player()
 	elif not currently_completed and key_visible:
 		hide_key()

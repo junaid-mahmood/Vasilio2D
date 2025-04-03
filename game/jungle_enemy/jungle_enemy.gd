@@ -26,14 +26,20 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var health
 
 func _ready() -> void:
-	health = 100
+	health = 75  # Reduced from 100 for better balance
 	add_to_group('jungle_enemies')
 	#choose markers belonging to the level of this enemy
 	x = get_parent()
 	for node in x.get_children():
 		if node is Marker2D:
 			markers.append(node)
-
+			
+	# Connect the HitArea signals
+	if has_node("HitArea"):
+		var hit_area = get_node("HitArea")
+		hit_area.add_to_group("enemies")
+		hit_area.connect("area_entered", Callable(self, "_on_hit_area_area_entered"))
+		hit_area.connect("body_entered", Callable(self, "_on_hit_area_body_entered"))
 
 func get_closest_marker():
 	start_marker = markers[0]
@@ -312,11 +318,42 @@ func cover():
 				else:
 					cover_direc = [true, node.global_position]
 	
-func enemy_damage(num):
-	health -= num
+func enemy_damage(damage_amount):
+	print("Jungle enemy received damage: ", damage_amount)
+	health -= damage_amount
+	
+	# Visual feedback for taking damage
 	var tween = create_tween()
-	tween.tween_property($"Jump(32x32)", "material:shader_parameter/amount", 1.0, 0.1)
-	tween.tween_property($"Jump(32x32)", "material:shader_parameter/amount", 0.0, 0.1)
+	tween.tween_property($Sprite2D, "material:shader_parameter/amount", 1.0, 0.1)
+	tween.tween_property($Sprite2D, "material:shader_parameter/amount", 0.0, 0.1)
+	
+	# Create damage number
+	var damage_number = preload("res://damage_number.tscn").instantiate()
+	damage_number.position = global_position + Vector2(0, -20)
+	
+	# Set the damage value
+	if damage_number.has_method("set_damage"):
+		damage_number.set_damage(damage_amount)
+	
+	get_parent().add_child(damage_number)
+	
+	if health <= 0:
+		queue_free()
 
 func im_jungle_enemy():
+	# This method exists to identify this enemy as a jungle enemy
+	return true
+
+func _on_hit_area_area_entered(area):
+	print("Jungle enemy hit area entered by: ", area.name)
+	# Handle sword attacks
+	if area.has_method("_this_is_sword") or (area.get_parent() and area.get_parent().name == "sword"):
+		enemy_damage(150)
+	# Handle bow attacks
+	elif area.has_method("_this_is_bow"):
+		enemy_damage(8)  # Reduced damage for bow attacks
+		
+func _on_hit_area_body_entered(body):
+	print("Jungle enemy hit by body: ", body.name)
+	# Handle player body collisions if needed
 	pass

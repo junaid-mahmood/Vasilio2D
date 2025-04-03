@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 [gd_scene load_steps=35 format=4 uid="uid://cmw8v35ftmt1w"]
+=======
+[gd_scene load_steps=38 format=4 uid="uid://cmw8v35ftmt1w"]
+>>>>>>> Stashed changes
 
 [ext_resource type="Script" uid="uid://delqgvrwmn22c" path="res://level_3.gd" id="1_gxey3"]
 [ext_resource type="Texture2D" uid="uid://dabf0hrinl0uo" path="res://assets/jungle_platform_small.png" id="1_j8bo8"]
@@ -16,6 +20,7 @@
 [ext_resource type="Script" uid="uid://cjkx8e0pqklfw" path="res://jump_bar.gd" id="10_ghrvs"]
 [ext_resource type="Script" uid="uid://bqhhrylu0173q" path="res://health_bar.gd" id="11_jvy75"]
 [ext_resource type="PackedScene" uid="uid://copjurvsoieqm" path="res://coin/coinui.tscn" id="13_keufu"]
+[ext_resource type="PackedScene" uid="uid://c4q7v0rvq4s2j" path="res://shop/shop_button.tscn" id="17_g005c"]
 [ext_resource type="AudioStream" uid="uid://dhg6ixw1wp68l" path="res://mainlv3.mp3" id="19_ra6nb"]
 [ext_resource type="PackedScene" uid="uid://ue2wspitukfb" path="res://jungle_enemy/jungle_enemy.tscn" id="19_ra6nl"]
 [ext_resource type="PackedScene" uid="uid://caqfcrf27ytkv" path="res://coin/coin.tscn" id="19_wnq0t"]
@@ -213,6 +218,12 @@ sources/1 = SubResource("TileSetAtlasSource_g005c")
 sources/2 = SubResource("TileSetAtlasSource_dhf26")
 sources/3 = SubResource("TileSetAtlasSource_ox7xt")
 
+<<<<<<< Updated upstream
+=======
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g005c"]
+size = Vector2(5614, 75)
+
+>>>>>>> Stashed changes
 [node name="level3" type="Node2D"]
 script = ExtResource("1_gxey3")
 
@@ -254,6 +265,16 @@ offset_left = 980.0
 offset_top = 112.0
 offset_right = 1020.0
 offset_bottom = 150.0
+
+[node name="ShopButton" parent="CanvasLayer" instance=ExtResource("17_g005c")]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -160.0
+offset_top = 123.0
+offset_right = -112.0
+offset_bottom = 171.0
+grow_horizontal = 0
 
 [node name="EnemyBullets" type="Node2D" parent="."]
 
@@ -1587,3 +1608,14 @@ position = Vector2(3982, -906)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("19_ra6nb")
+<<<<<<< Updated upstream
+=======
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 8
+script = ExtResource("22_4hpui")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(2062, 46)
+shape = SubResource("RectangleShape2D_g005c")
+>>>>>>> Stashed changes

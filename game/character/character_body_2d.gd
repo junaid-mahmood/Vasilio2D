@@ -11,14 +11,19 @@ var DISTANCE_SHIELD := 40
 var weapons = ["sword", "bow", "shield"]
 
 const SPEED = 300.0
-const JUMP_VELOCITY = -400.0
+const BASE_JUMP_VELOCITY = -400.0  # Base jump strength
+var current_jump_velocity = -400.0  # Current jump strength that can be modified
 const ACCELERATION = 3000.0
 const FRICTION = 2000.0
-const RECHARGE_RATE := 50.0
+const RECHARGE_RATE := 20.0
 const SHOOT_COST := 20.0
-const SWORD_COST := 40.0
+const SWORD_COST := 20.0
 const DOUBLE_JUMP_COST := 40.0
-const BOW_COST := 25.0
+const BOW_COST := 30.0
+
+var bow_cooldown_active = false
+var bow_cooldown_timer = 0.0
+const BOW_COOLDOWN_TIME = 0.2
 
 @onready var sprite_2d: AnimatedSprite2D = $Sprite2D
 @onready var progress_bar: ProgressBar = get_node("../CanvasLayer/JumpBar")
@@ -35,6 +40,7 @@ var transitioning = false
 var fade_rect = null
 var has_gun = false
 var has_bow = true
+var coyote = false
 
 func _ready() -> void:
 	add_to_group("player")
@@ -64,8 +70,8 @@ func _ready() -> void:
 	setup_transition_layer()
 
 	bow_sprite.visible = true
+	current_jump_velocity = BASE_JUMP_VELOCITY  # Initialize with base value
 
-	
 
 
 
@@ -128,6 +134,13 @@ func _physics_process(delta: float) -> void:
 	if health_bar.value <= 0:
 		game_over()
 	
+	if bow_cooldown_active:
+		bow_cooldown_timer -= delta
+		if bow_cooldown_timer <= 0:
+			bow_cooldown_active = false
+	
+	if progress_bar.value < 100:
+		progress_bar.value = min(progress_bar.value + RECHARGE_RATE * delta, 100)
 	
 	var centered_global_position = global_position
 	centered_global_position.y -= 20
@@ -156,41 +169,38 @@ func _physics_process(delta: float) -> void:
 		bow_sprite.visible = false
 
 
-	if progress_bar.value < 100:
-		progress_bar.value = min(progress_bar.value + RECHARGE_RATE * delta, 100)
-	
-	
 	if Global.weapon == 'sword':
 		sprite_2d.animation = "sword"
 	elif abs(velocity.x) > 1 and not Global.dead and velocity.y == 0:
 		sprite_2d.animation = "running"
 	elif is_on_floor():
 		sprite_2d.animation = "default"
-		
-		
+	
+	
 	if is_on_floor():
 		can_double_jump = true
 		recently_jumped = false
-	
+		coyote = true
+
 	if not is_on_floor():
 		velocity.y += gravity * delta
 		sprite_2d.animation = "jumping"
 
 
 	if Input.is_action_just_pressed("ui_up"):
-		if is_on_floor():
-			$Jump1.play()
-			velocity.y = JUMP_VELOCITY
-
+		if is_on_floor() or coyote:
+			velocity.y = current_jump_velocity * Global.jump_boost  # Apply jump boost multiplier
+			recently_jumped = true
+			jump_timer = 0.2
+			coyote = false
 		elif can_double_jump and progress_bar.value >= DOUBLE_JUMP_COST:
-			$Jump2.play()
-			velocity.y = JUMP_VELOCITY * 1.1
+			velocity.y = current_jump_velocity * Global.jump_boost  # Apply jump boost to double jump too
 			progress_bar.value -= DOUBLE_JUMP_COST
 			can_double_jump = false
-	
-	
-	
-	
+
+
+
+
 	if Input.is_action_just_pressed("ui_select"):
 		if Global.weapon == 'gun' and has_gun:
 			progress_bar.value -= SHOOT_COST
@@ -199,6 +209,13 @@ func _physics_process(delta: float) -> void:
 			
 		elif Global.weapon == 'bow' and has_bow and progress_bar.value >= BOW_COST:
 			progress_bar.value -= BOW_COST
+			bow_cooldown_active = true
+			bow_cooldown_timer = BOW_COOLDOWN_TIME
+			
+			var energy_flash = create_tween()
+			energy_flash.tween_property(progress_bar, "modulate", Color(1.0, 0.3, 0.3), 0.2)
+			energy_flash.tween_property(progress_bar, "modulate", Color(1.0, 1.0, 1.0), 0.2)
+			
 			$Shoot.play()
 			centered_global_position = global_position
 			centered_global_position.y -= 20
@@ -212,12 +229,46 @@ func _physics_process(delta: float) -> void:
 			sprite_2d.animation = 'sword'
 			var kill_radius: float = 70.0
 			
+			print("Using sword attack, creating sword hitbox")
+			
+			# Create a temporary sword Area2D for collision detection
+			var sword_area = Area2D.new()
+			sword_area.name = "sword"
+			sword_area.set_script(load("res://character/sword.gd"))
+			var sword_collision = CollisionShape2D.new()
+			var sword_shape = CircleShape2D.new()
+			sword_shape.radius = kill_radius
+			sword_collision.shape = sword_shape
+			sword_area.add_child(sword_collision)
+			
+			# Add to scene tree temporarily
+			get_parent().add_child(sword_area)
+			sword_area.global_position = global_position
+			
+			# The sword will be deleted after a short animation time
+			await get_tree().create_timer(0.2).timeout
+			sword_area.queue_free()
+			
+			# This code still runs for backward compatibility
+			print("Using sword attack, checking all nodes")
 			for node in get_parent().get_children():
-				if node is Area2D and node.has_method("enemy_damage"):
+				print("Checking node: ", node.name, ", type: ", node.get_class())
+				
+				# Check both Area2D and CharacterBody2D nodes
+				if (node is Area2D or node is CharacterBody2D) and node.has_method("enemy_damage"):
+					print("Found node with enemy_damage method: ", node.name)
 					var direction = node.global_position - global_position
 					var distance = direction.length()
+					print("Distance to enemy: ", distance, ", kill radius: ", kill_radius)
+					
 					if distance < kill_radius:
-						node.enemy_damage(50)
+						print("Enemy within kill radius")
+						if node.has_method("im_jungle_enemy"):
+							print("Applying jungle enemy damage: 150")
+							node.enemy_damage(150)
+						else:
+							print("Applying standard enemy damage: 50")
+							node.enemy_damage(50)
 
 
 	var direction := Input.get_axis("ui_left", "ui_right")
@@ -304,7 +355,9 @@ func game_over() -> void:
 	Global.dead = true
 	Global.coins_collected = 0
 	await get_tree().create_timer(3.0).timeout
-	get_tree().reload_current_scene()
+	# Reset player position and health instead of reloading scene
+	global_position = spawn_pos
+	health_bar.value = health_bar.max_value
 	Global.dead = false
 
 func coin_collected(num):

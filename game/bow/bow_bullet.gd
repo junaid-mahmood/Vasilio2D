@@ -8,6 +8,11 @@ var trail_points = []  # Store points for trail
 const MAX_TRAIL_POINTS = 30  # Increased maximum trail points for longer trail
 var damage_number_scene = preload("res://damage_number.tscn")
 
+# Base damage values adjusted for enemy types
+const BASE_DAMAGE_NORMAL = 32  # Standard damage for most enemies
+const BASE_DAMAGE_JUNGLE = 8   # Significantly reduced damage for jungle enemies - barely effective
+const BASE_DAMAGE_FLYING = 45  # Increased damage for flying enemies
+
 func _ready():
 	# Set the rotation based on the velocity
 	rotation = velocity.angle()
@@ -96,24 +101,36 @@ func _process(delta):
 		queue_free()
 
 func _on_body_entered(body: Node2D) -> void:
-	# Destroy the arrow when it hits something
+	# Handle collision with different bodies based on type
 	if body.has_method("im_jungle_enemy"):
-		body.enemy_damage(5)
+		# Apply reduced damage to jungle enemies
+		var damage = BASE_DAMAGE_JUNGLE * damage_multiplier
+		body.enemy_damage(round(damage))
+		spawn_damage_number(body.global_position, damage)
+	elif body is StaticBody2D:
+		# Just destroy the arrow on static objects
+		pass
 		
+	# Destroy the arrow when it hits something
 	queue_free()
-
-
 
 func _on_area_entered(area: Area2D) -> void:
 	# Check if area has enemy_damage method
 	if area.has_method("enemy_damage"):
-		# Apply damage with multiplier
-		var base_damage = 32  # Base arrow damage
-		var final_damage = base_damage * damage_multiplier
-		area.enemy_damage(final_damage)
+		var final_damage = BASE_DAMAGE_NORMAL * damage_multiplier
+		
+		# Apply different damage based on enemy type
+		if area.has_method("im_jungle_enemy"):
+			final_damage = BASE_DAMAGE_JUNGLE * damage_multiplier
+		elif area.has_method("im_flying_enemy"):
+			final_damage = BASE_DAMAGE_FLYING * damage_multiplier
+		
+		# Apply damage
+		area.enemy_damage(round(final_damage))
 		
 		# Spawn damage number
 		spawn_damage_number(area.global_position, final_damage)
+		
 	# Don't destroy if hitting another bullet
 	if not area.is_in_group("bullets"):
 		queue_free()
